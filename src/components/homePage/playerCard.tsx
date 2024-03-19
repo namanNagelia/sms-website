@@ -25,31 +25,33 @@ export default function PlayerCard(props: playerProps) {
       style={{ borderRadius: "60px" }}
     >
       {/* Using an img tag for simplicity and alignment */}
-      <div className="flex items-end justify-start">
-        <img src={props.imageURL} alt={props.name} width="200" height="200" />
-      </div>
-
-      <div className="mt-3 ml-4 text-left">
-        <div className="flex justify-between ">
-          <h1 className="text-2xl text-white font-dinAlternate mb-6">{name}</h1>
+      <div className="flex justify-between">
+        <div className="flex items-end justify-start">
+          <img src={props.imageURL} alt={props.name} width="200" height="200" />
         </div>
-        <p className="text-lg text-white font-dinCondensed mb-2">
-          Position | {position}
-        </p>
-        <p className="text-lg text-white font-dinCondensed mb-2">
-          Number | {number}
-        </p>
-        <p className="text-lg text-white font-dinCondensed mb-2">
-          School | {school}
-        </p>
-      </div>
-      <div className="mt-3 ml-4 text-right flex">
-        <h1 className="text-2xl text-white font-dinAlternate ml-8">
-          {ranking}
-        </h1>{" "}
-        {change > 0 && <span className="text-green-500 ml-2">↑</span>}
-        {change < 0 && <span className="text-red-500 ml-2">↓</span>}
-        {change === 0 && <span className="text-yellow-500 ml-2">—</span>}
+
+        <div className="mt-3 ml-4 text-left">
+          <div className="flex justify-between ">
+            <h1 className="text-2xl text-white font-dinAlternate mb-3">
+              {name}
+            </h1>
+          </div>
+          <p className="text-lg text-white font-dinCondensed mb-2">
+            Position | {position}
+          </p>
+          <p className="text-lg text-white font-dinCondensed mb-2">
+            Number | {number}
+          </p>
+          <p className="text-lg text-white font-dinCondensed mb-2">
+            School | {school}
+          </p>
+        </div>
+        <div className="mt-3 text-right flex">
+          <h1 className="text-2xl text-white font-dinAlternate">{ranking}</h1>{" "}
+          {change > 0 && <span className="text-green-500">↑</span>}
+          {change < 0 && <span className="text-red-500">↓</span>}
+          {change === 0 && <span className="text-yellow-500">—</span>}
+        </div>
       </div>
     </div>
   );

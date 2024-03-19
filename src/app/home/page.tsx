@@ -5,6 +5,9 @@ import NewsArticles from "@/components/homePage/newsArticles";
 import GameCard from "@/components/gameCards";
 import { GameCardProps } from "@/components/gameCards";
 import PlayerCard from "@/components/homePage/playerCard";
+import EmblaCarousel from "@/components/homePage/carousel";
+import { EmblaOptionsType } from "embla-carousel";
+import "../../components/homePage/embla.css";
 
 type newsProp = {
   title: string;
@@ -13,6 +16,72 @@ type newsProp = {
   imageURL: string;
   redirectURL: string;
 };
+const OPTIONS: EmblaOptionsType = { dragFree: true };
+const SLIDE_COUNT = 5;
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
+
+const playerDataDefault = [
+  {
+    name: "Zach Edey",
+    position: "Center",
+    number: 15,
+    school: "Purdue",
+    imageURL:
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254",
+    ranking: 1,
+    change: 0,
+  },
+  {
+    name: "Tyler Kolek",
+    position: "Guard",
+    number: 11,
+    school: "Marquette",
+    imageURL:
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433225.png&w=350&h=254",
+    ranking: 2,
+    change: 3,
+  },
+  {
+    name: "Aaliyah Edwards",
+    position: "Forward",
+    number: 3,
+    school: "UConn",
+    imageURL:
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/womens-college-basketball/players/full/4433408.png",
+    ranking: 20,
+    change: -2,
+  },
+  {
+    name: "Ryan Nembhard",
+    position: "Guard",
+    number: 2,
+    school: "Gonzaga",
+    imageURL:
+      "https://gocreighton.com/images/2022/6/9/Ryan_Nembhard_2023mug_cropped.jpg",
+    ranking: 19,
+    change: 0,
+  },
+  {
+    name: "Hunter Dickinson",
+    position: "Forward",
+    number: 1,
+    school: "Kansas",
+    imageURL:
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4432180.png&w=350&h=254",
+    ranking: 15,
+    change: 0,
+  },
+  {
+    name: "DaRon Holmes II",
+    position: "Forward",
+    number: 35,
+    school: "Dayton",
+    imageURL:
+      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433607.png&w=350&h=254",
+    ranking: 75,
+    change: 0,
+  },
+];
 
 export default function Home() {
   // this will be changed to a State
@@ -184,18 +253,11 @@ export function Games(props: { numOfGames: number }) {
 export function TopPlayers() {
   return (
     <div className="flex flex-col items-center justify-center">
-      <div className="title"> Top Players </div>
+      <div className="title">Top Players</div>
       <div className="divider"></div>
-      <div className="mt-8">
-        <PlayerCard
-          name="Zach Edey"
-          position="Center"
-          number={15}
-          school="Purdue"
-          imageURL="https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254"
-          ranking={1}
-          change={0}
-        />
+      <div className="mt-8 w-[100%]">
+        {/* Pass the playerDataDefault array to EmblaCarousel */}
+        <EmblaCarousel players={playerDataDefault} options={OPTIONS} />
       </div>
     </div>
   );
