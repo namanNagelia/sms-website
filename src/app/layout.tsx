@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 const DinBold = localFont({
   src: [
     {
-      path: "../app/fonts/D-DIN-Bold.ttf",
+      path: "../../public/D-DIN-Bold.ttf",
     },
   ],
   variable: "--font-dinBold",
@@ -23,7 +23,7 @@ const DinBold = localFont({
 const DinAlternate = localFont({
   src: [
     {
-      path: "../app/fonts/DINAlternate-Bold.ttf",
+      path: "../../public/DINAlternate-Bold.ttf",
     },
   ],
   variable: "--font-dinAlternate",
@@ -31,7 +31,7 @@ const DinAlternate = localFont({
 const DinCondensed = localFont({
   src: [
     {
-      path: "../app/fonts/D-DINCondensed.ttf",
+      path: "../../public/D-DINCondensed.ttf",
     },
   ],
   variable: "--font-dinCondensed",
@@ -44,12 +44,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
-      <body className="">
+      <body
+        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable}`}
+      >
         {children}
         <Header />
-        
-
-
       </body>
     </html>
   );

@@ -17,7 +17,7 @@
 }
 
 body {
-  background: #131F21;
+  background: #131f21;
 }
 
 @layer utilities {
@@ -29,7 +29,7 @@ body {
 header {
   /* Header */
 
-/* Auto layout */
+  /* Auto layout */
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -40,5 +40,4 @@ header {
   position: sticky;
 
   background: rgba(19, 31, 33, 0.62);
-
 }
