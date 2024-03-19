@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
+import GameCard from "@/components/gameCards";
 
 type newsProp = {
   title: string;
@@ -34,11 +35,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-row w-full h-full justify-center items-center text-center">
-      <div id="Padding" className="h-20"></div>
+    <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
+      <div id="Padding" className="h-24"></div>
       <NewsLetter news={newsDataDefault}/>
+      
       <Games />
-      <TopPlayers />
+      <TopPlayers /> 
     </div>
   );
 }
@@ -77,7 +79,7 @@ export function Games() {
       <div className="divider"></div>
 
       <div>
-
+        <GameCard leftTeamScore={0} rightTeamScore={0} leftTeamURL="" rightTeamURL="" />
 
       </div>
 
@@ -89,7 +91,7 @@ export function TopPlayers() {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="title"> Top Players </div>
-      <div className="divider"></div>
+      <div className="divider"></div> 
 
 
     </div>
