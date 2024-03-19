@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
+import PlayerCard from "@/components/homePage/playerCard";
 
 type newsProp = {
   title: string;
@@ -50,6 +51,69 @@ export default function Home() {
         "https://ca-times.brightspotcdn.com/dims4/default/fb0d63c/2147483647/strip/false/crop/4532x3022+0+0/resize/1486x991!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2F0e%2Fd5%2F76a7e15945edbffbb75917cbcb77%2F2023-hoophall-classic-60951.jpg",
       redirectURL:
         "https://www.latimes.com/sports/highschool/story/2023-11-21/bryce-james-leaves-sherman-oaks-notre-dame-returns-to-sierra-canyon",
+    },
+  ];
+
+  const playerDataDefault = [
+    {
+      name: "Zach Edey",
+      position: "Center",
+      number: 15,
+      school: "Purdue",
+      imageURL:
+        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254",
+      ranking: 1,
+      change: 0,
+    },
+    {
+      name: "Tyler Kolek",
+      position: "Guard",
+      number: 11,
+      school: "Marquette",
+      imageURL:
+        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433225.png&w=350&h=254",
+      ranking: 2,
+      change: 0,
+    },
+    {
+      name: "Aaliyah Edwards",
+      position: "Forward",
+      number: 3,
+      school: "UConn",
+      imageURL:
+        "https://a.espncdn.com/combiner/i?img=/i/headshots/womens-college-basketball/players/full/4433408.png",
+      ranking: 20,
+      change: 0,
+    },
+    {
+      name: "Ryan Nembhard",
+      position: "Guard",
+      number: 2,
+      school: "Gonzaga",
+      imageURL:
+        "https://gocreighton.com/images/2022/6/9/Ryan_Nembhard_2023mug_cropped.jpg",
+      ranking: 19,
+      change: 0,
+    },
+    {
+      name: "Hunter Dickinson",
+      position: "Forward",
+      number: 1,
+      school: "Kansas",
+      imageURL:
+        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4432180.png&w=350&h=254",
+      ranking: 15,
+      change: 0,
+    },
+    {
+      name: "DaRon Holmes II",
+      position: "Forward",
+      number: 35,
+      school: "Dayton",
+      imageURL:
+        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433607.png&w=350&h=254",
+      ranking: 75,
+      change: 0,
     },
   ];
 
@@ -107,6 +171,17 @@ export function TopPlayers() {
     <div className="flex flex-col items-center justify-center">
       <div className="title"> Top Players </div>
       <div className="divider"></div>
+      <div className="mt-8">
+        <PlayerCard
+          name="Zach Edey"
+          position="Center"
+          number={15}
+          school="Purdue"
+          imageURL="https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254"
+          ranking={1}
+          change={0}
+        />
+      </div>
     </div>
   );
 }
