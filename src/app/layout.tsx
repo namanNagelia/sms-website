@@ -47,10 +47,15 @@ export default function RootLayout({
       <body
         className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-screen h-screen`}
       >
+        
         <Header />
+        
         <Decor />
         {children}
         
+        
+        
+
 
       </body>
     </html>
