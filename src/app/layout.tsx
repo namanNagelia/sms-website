@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "./home/header";
+import Header from "./header";
 import Decor from "./decor";
 
 import localFont from "next/font/local";
@@ -51,6 +51,7 @@ export default function RootLayout({
         <Decor />
         {children}
         
+
       </body>
     </html>
   );

@@ -1,14 +1,18 @@
 import React from "react";
 import Image from "next/image";
-import Logo from "@/../public/logoRed.png"
+import Logo from "@/../public/SMSLogo.png"
 import Search from "@/../public/search.svg"
 
 function Header() {
 
 
     return (
-        <header className="w-screen p-4 space-x-10 fixed items-center">
-            <Image src={Logo} alt="asd" className=" w-64 mr-auto" />
+        <header className="w-screen p-6 space-x-10 fixed items-center">
+            <div className=" flex mr-auto items-center space-x-6">
+                <Image src={Logo} alt="asd" className="w-12" />
+                <text className="text-brandWhite text-4xl font-dinCondensed" style={{ fontWeight: 700 }}>Spark My Sport</text>
+            </div>
+
 
             <div id="Buttons" className="flex space-x-6">
                 <SearchButton />
@@ -17,19 +21,19 @@ function Header() {
         </header>
     );
 }
-export function SearchButton(){
-    return(
+export function SearchButton() {
+    return (
         <button className="hover:scale-110">
-            <Image src={Search} alt=""  />
+            <Image src={Search} alt="" />
         </button>
 
     )
 }
 
-export function LoginButton(){
+export function LoginButton() {
 
 
-    return(
+    return (
         <button className="login font-dinCondensed text-brandWhite text-2xl justify-center hover:scale-110">
             Login
         </button>

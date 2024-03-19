@@ -16,7 +16,7 @@ export default function NewsArticles(props: newsProps) {
   const imageURL = props.imageURL;
   const redirectURL = props.redirectURL;
   return (
-    <div className="relative mx-48 mt-4 w-[500px] h-[300px] rounded-3xl">
+    <div className="relative mt-4 w-[500px] h-[300px] rounded-3xl">
       <Image
         src={imageURL}
         alt={title}

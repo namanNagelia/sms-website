@@ -1,7 +1,9 @@
-import React from "react";
+"use client"
+import Image from "next/image";
+import { useState } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
 
-const newsData = [
+const newsDataDefault = [
   {
     title: "Golden Bears Add Two Signees in 2023 Class",
     date: "2022-11-09",
@@ -22,28 +24,62 @@ const newsData = [
   },
 ];
 
-export default function HomePage() {
-  console.log(newsData[0].title);
+
+export default function Home() {
   return (
-    <div className="mt-12">
-      <h1 className="text-4xl font-dinAlternate text-white text-center underline">
-        Newsletter
-      </h1>
-      <div className="grid grid-cols-2 gap-2 justify-center">
-        {Array(4)
-          .fill(null)
-          .map((_, index) => (
-            <div className="justify-center items-center">
-              <NewsArticles
-                title={newsData[0].title}
-                date={newsData[0].date}
-                premium={false}
-                imageURL={newsData[0].imageURL}
-                redirectURL={newsData[0].redirectURL}
-              />
-            </div>
-          ))}
-      </div>
+    <div className="flex-row w-full h-full justify-center items-center text-center">
+      <div id="Padding" className="h-20"></div>
+      <NewsLetter />
+      <Games />
+      <TopPlayers />
     </div>
   );
+}
+
+export function NewsLetter() {
+  const newsData = Array(4).fill(null).map((_, index) => (
+    <div className="justify-center items-center">
+      <NewsArticles
+        title={newsDataDefault[0].title}
+        date={newsDataDefault[0].date}
+        premium={false}
+        imageURL={newsDataDefault[0].imageURL}
+        redirectURL={newsDataDefault[0].redirectURL}
+      />
+    </div>
+  ));
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <div className="title"> Newsletter </div>
+      <div className="divider"></div>
+
+      <div className="grid grid-cols-2 gap-x-16 gap-y-4 justify-center">
+        {newsData}
+      </div>
+
+    </div>
+  )
+}
+
+export function Games() {
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <div className="title"> Game </div>
+      <div className="divider"></div>
+
+
+    </div>
+  )
+}
+
+export function TopPlayers() {
+  return (
+    <div className="flex flex-col items-center justify-center">
+      <div className="title"> Top Players </div>
+      <div className="divider"></div>
+
+
+    </div>
+  )
 }
