@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 
-interface GameCardProps {
+export type GameCardProps = {
     leftTeamURL: string,
     rightTeamURL: string,
     leftTeamScore: number,
@@ -21,7 +21,7 @@ export default function GameCard(props: GameCardProps) {
                 <text>{props.rightTeamScore}</text>
                 <Image src={props.leftTeamURL} alt="" />
             </div>
-            
+
         </div>
     );
 }

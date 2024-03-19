@@ -18,7 +18,6 @@
 
 body {
   background: #131f21;
-  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -79,18 +78,23 @@ header {
 }
 
 .game-card {
-/* Games */
+  /* Games */
 
-/* Border */
+  /* Border */
 
-box-sizing: border-box;
-width: 327px;
-height: 171px;
-
-
-background: #131F21;
-border: 4px solid #C5D7DD;
-border-radius: 60px;
+  box-sizing: border-box;
+  width: 327px;
+  height: 171px;
 
 
+  background: #131F21;
+  border: 4px solid #C5D7DD;
+  border-radius: 60px;
+
+
+}
+
+.carousel {
+  overflow-y: hidden;
+  overflow-x: scroll;
 }

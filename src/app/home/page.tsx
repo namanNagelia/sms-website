@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
 import GameCard from "@/components/gameCards";
+import { GameCardProps } from "@/components/gameCards";
 
 type newsProp = {
   title: string;
@@ -11,6 +12,7 @@ type newsProp = {
   imageURL: string;
   redirectURL: string;
 };
+
 
 export default function Home() {
   // this will be changed to a State
@@ -57,10 +59,10 @@ export default function Home() {
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
       <div id="Padding" className="h-24"></div>
-      <NewsLetter news={newsDataDefault}/>
-      
-      <Games />
-      <TopPlayers /> 
+      <NewsLetter news={newsDataDefault} />
+
+      <Games numOfGames={9} />
+      <TopPlayers />
     </div>
   );
 }
@@ -93,14 +95,19 @@ export function NewsLetter(props: { news: newsProp[] }) {
   );
 }
 
-export function Games() {
+export function Games(props: { numOfGames: number }) {
+  const dispGames = Array(props.numOfGames)
+    .fill(null)
+    .map((_, index) => (
+      <GameCard leftTeamScore={0} rightTeamScore={0} leftTeamURL="" rightTeamURL="" />
+    ));
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center static">
       <div className="title"> Game </div>
       <div className="divider"></div>
 
-      <div>
-        <GameCard leftTeamScore={0} rightTeamScore={0} leftTeamURL="" rightTeamURL="" />
+      <div className="flex flex-row overflow-x-visible space-x-4 carousel">
+        {dispGames}
 
       </div>
 
@@ -112,7 +119,7 @@ export function TopPlayers() {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="title"> Top Players </div>
-      <div className="divider"></div> 
+      <div className="divider"></div>
 
 
     </div>

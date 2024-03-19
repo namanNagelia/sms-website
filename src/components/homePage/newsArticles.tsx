@@ -37,7 +37,6 @@ export default function NewsArticles(props: newsProps) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            position: "absolute",
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-brandBlack text-white p-2 flex justify-between items-center">

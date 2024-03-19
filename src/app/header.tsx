@@ -7,7 +7,7 @@ function Header() {
 
 
     return (
-        <header className="w-screen p-6 space-x-10 fixed items-center">
+        <header className="w-screen p-6 space-x-10 fixed items-center z-50">
             <div className=" flex mr-auto items-center space-x-6">
                 <Image src={Logo} alt="asd" className="w-12" />
                 <text className="text-brandWhite text-4xl font-dinCondensed" style={{ fontWeight: 700 }}>Spark My Sport</text>
