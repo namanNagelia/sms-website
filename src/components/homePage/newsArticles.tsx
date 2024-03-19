@@ -16,8 +16,14 @@ export default function NewsArticles(props: newsProps) {
   const imageURL = props.imageURL;
   const redirectURL = props.redirectURL;
   return (
-    <div className="relative w-[500px] h-[350px] rounded-xl">
-      <Image src={imageURL} alt={title} layout="fill" objectFit="cover" />{" "}
+    <div className="relative mx-48 mt-4 w-[500px] h-[300px] rounded-3xl">
+      <Image
+        src={imageURL}
+        alt={title}
+        layout="fill"
+        objectFit="cover"
+        className="rounded-3xl"
+      />{" "}
       <div className="absolute bottom-0 left-0 right-0 bg-brandBlack text-white p-2 bg">
         <h2 className="text-lg text-brandWhite font-dinBold">{title}</h2>
       </div>

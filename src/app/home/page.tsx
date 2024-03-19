@@ -25,18 +25,25 @@ const newsData = [
 export default function HomePage() {
   console.log(newsData[0].title);
   return (
-    <div className="grid grid-cols-2 gap-4">
-      {Array(4)
-        .fill(null)
-        .map((_, index) => (
-          <NewsArticles
-            title={newsData[0].title}
-            date={newsData[0].date}
-            premium={false}
-            imageURL={newsData[0].imageURL}
-            redirectURL={newsData[0].redirectURL}
-          />
-        ))}
+    <div className="mt-12">
+      <h1 className="text-4xl font-dinAlternate text-white text-center underline">
+        Newsletter
+      </h1>
+      <div className="grid grid-cols-2 gap-2 justify-center">
+        {Array(4)
+          .fill(null)
+          .map((_, index) => (
+            <div className="justify-center items-center">
+              <NewsArticles
+                title={newsData[0].title}
+                date={newsData[0].date}
+                premium={false}
+                imageURL={newsData[0].imageURL}
+                redirectURL={newsData[0].redirectURL}
+              />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }
