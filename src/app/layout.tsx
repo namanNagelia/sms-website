@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "./home/header";
-import Background from "./background";
+import Decor from "./decor";
 
 import localFont from "next/font/local";
 
@@ -45,10 +45,12 @@ export default function RootLayout({
   return (
     <html lang="en" className="relative">
       <body
-        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable}`}
+        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-screen h-screen`}
       >
-        {children}
         <Header />
+        <Decor />
+        {children}
+        
       </body>
     </html>
   );

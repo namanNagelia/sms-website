@@ -32,7 +32,6 @@ header {
   /* Auto layout */
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: flex-start;
   padding: 12px 8px;
   gap: 10px;
@@ -40,4 +39,40 @@ header {
   position: sticky;
 
   background: rgba(19, 31, 33, 0.62);
+}
+
+.login {
+  /* Log In Button */
+
+  width: 128px;
+  height: 48px;
+  font-size: 36px;
+  font-weight: 500;
+
+  background: #134149;
+  border-radius: 33px;
+
+}
+
+.title {
+
+  font-style: normal;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 74px;
+  /* identical to box height */
+  letter-spacing: -0.01em;
+  font-family: var(--font-dinCondensed);
+
+  color: #FFFFFF;
+
+}
+
+.divider {
+  height: 8px;
+  width: 468px;
+
+  border-radius: 0.75rem;
+  background-color: white;
+
 }
