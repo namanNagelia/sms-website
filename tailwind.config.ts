@@ -16,6 +16,17 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
+      colors: {
+        brandRed: "#CF6C57",
+        brandWhite: "#EAE6DC",
+        brandBlue: "#99B0BD",
+        brandBlack: "#162126",
+      },
+      fontFamily: {
+        dinBold: ["var(--font-dinBold)"],
+        dinAlternate: ["var(--font-dinAlternate)"],
+        dinCondensed: ["var(--font-dinCondensed)"],
+      },
     },
   },
   plugins: [],
