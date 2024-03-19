@@ -297,7 +297,7 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
       <div className="divider"></div>
       <div className="mt-8 w-[90%]">
         {/* Pass the playerDataDefault array to EmblaCarousel */}
-        <EmblaCarousel items={playerData} options={OPTIONS} cardType={PlayerCard} spacing={2.5} />
+        <EmblaCarousel items={playerData} options={OPTIONS} cardType={PlayerCard} spacing={2.75} />
       </div>
     </div>
   );

@@ -31,6 +31,7 @@ const EmblaCarousel: React.FC<any> = (
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
+          <div className="embla__slide" style={{flex: `0 0 .01`}} />
           {items.map((item: any, index: any) => (
             <div className="embla__slide" key={index} style={{flex: `0 0 calc(100%/${spacing})`}}>
               {
@@ -38,6 +39,7 @@ const EmblaCarousel: React.FC<any> = (
               }
             </div>
           ))}
+          <div className="embla__slide" style={{flex: `0 0 .01`}} />
         </div>
       </div>
     </section>

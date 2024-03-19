@@ -11,7 +11,7 @@ export type GameCardProps = {
 
 const GameCard = (props: GameCardProps) => {
     return (
-        <div className="game-card flex-col text-center justify-center py-6">
+        <div className="m-4 game-card flex-col text-center justify-center py-6 hover:z-30 hover:scale-110 transition duration-150">
             <text className="text-brandWhite my-8 font-dinCondensed text-3xl ">Live</text>
 
             <div className="w-full flex flex-row justify-center items-center space-x-3">
