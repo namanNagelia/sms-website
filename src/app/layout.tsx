@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Header from "./home/header";
+import Background from "./background";
+
 import localFont from "next/font/local";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -40,11 +43,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${DinBold.variable} ${DinCondensed.variable} ${DinAlternate.variable}`}
-      >
+    <html lang="en" className="relative">
+      <body className="">
         {children}
+        <Header />
+        
+
+
       </body>
     </html>
   );

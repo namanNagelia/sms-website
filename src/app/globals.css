@@ -17,17 +17,28 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background: #131F21;
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+header {
+  /* Header */
+
+/* Auto layout */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12px 8px;
+  gap: 10px;
+
+  position: sticky;
+
+  background: rgba(19, 31, 33, 0.62);
+
 }
