@@ -10,8 +10,8 @@ type newsProp = {
   imageURL: string;
   redirectURL: string;
 }
-
 export default function Home() {
+  // this will be changed to a State
   const newsDataDefault = [
     {
       title: "Golden Bears Add Two Signees in 2023 Class",
@@ -76,6 +76,10 @@ export function Games() {
       <div className="title"> Game </div>
       <div className="divider"></div>
 
+      <div>
+
+
+      </div>
 
     </div>
   )
