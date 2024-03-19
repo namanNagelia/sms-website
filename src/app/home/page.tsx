@@ -7,6 +7,7 @@ import PlayerCard from "@/components/homePage/playerCard";
 import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 import "../../components/homePage/embla.css";
+import Datepicker from "react-tailwindcss-datepicker";
 
 type newsProp = {
   title: string;
@@ -18,69 +19,6 @@ type newsProp = {
 const OPTIONS: EmblaOptionsType = { dragFree: true };
 const SLIDE_COUNT = 5;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
-
-const playerDataDefault = [
-  {
-    name: "Zach Edey",
-    position: "Center",
-    number: 15,
-    school: "Purdue",
-    imageURL:
-      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254",
-    ranking: 1,
-    change: 0,
-  },
-  {
-    name: "Tyler Kolek",
-    position: "Guard",
-    number: 11,
-    school: "Marquette",
-    imageURL:
-      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433225.png&w=350&h=254",
-    ranking: 2,
-    change: 3,
-  },
-  {
-    name: "Aaliyah Edwards",
-    position: "Forward",
-    number: 3,
-    school: "UConn",
-    imageURL:
-      "https://a.espncdn.com/combiner/i?img=/i/headshots/womens-college-basketball/players/full/4433408.png",
-    ranking: 20,
-    change: -2,
-  },
-  {
-    name: "Ryan Nembhard",
-    position: "Guard",
-    number: 2,
-    school: "Gonzaga",
-    imageURL:
-      "https://gocreighton.com/images/2022/6/9/Ryan_Nembhard_2023mug_cropped.jpg",
-    ranking: 19,
-    change: 0,
-  },
-  {
-    name: "Hunter Dickinson",
-    position: "Forward",
-    number: 1,
-    school: "Kansas",
-    imageURL:
-      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4432180.png&w=350&h=254",
-    ranking: 15,
-    change: 0,
-  },
-  {
-    name: "DaRon Holmes II",
-    position: "Forward",
-    number: 35,
-    school: "Dayton",
-    imageURL:
-      "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433607.png&w=350&h=254",
-    ranking: 75,
-    change: 0,
-  },
-];
 
 export default function Home() {
   // this will be changed to a State
@@ -133,7 +71,7 @@ export default function Home() {
       imageURL:
         "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254",
       ranking: 1,
-      change: 0,
+      change: 1,
     },
     {
       name: "Tyler Kolek",
@@ -143,7 +81,7 @@ export default function Home() {
       imageURL:
         "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433225.png&w=350&h=254",
       ranking: 2,
-      change: 0,
+      change: -1,
     },
     {
       name: "Aaliyah Edwards",
@@ -163,7 +101,7 @@ export default function Home() {
       imageURL:
         "https://gocreighton.com/images/2022/6/9/Ryan_Nembhard_2023mug_cropped.jpg",
       ranking: 19,
-      change: 0,
+      change: 4,
     },
     {
       name: "Hunter Dickinson",
@@ -183,7 +121,7 @@ export default function Home() {
       imageURL:
         "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433607.png&w=350&h=254",
       ranking: 75,
-      change: 0,
+      change: -2,
     },
   ];
 
@@ -223,8 +161,8 @@ export default function Home() {
       rightTeamScore: 0,
       leftTeamURL: "",
       rightTeamURL: "",
-    }
-  ]
+    },
+  ];
 
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
@@ -266,25 +204,48 @@ export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
 }
 
 export function Games({ gameData }: { gameData: any[] }) {
+  const [date, setdate] = useState({
+    startDate: null,
+    endDate: null,
+  });
+  const handleDateChange = (newDate: any) => {
+    console.log("newValue:", newDate);
+    setdate(newDate);
+  };
   return (
     <div className="flex flex-col items-center justify-center relative">
-      <div className="title relative">
+      <div className="title ">
         Game
-        <input
+        {/* <input
           className="w-16 h-14 ml-10 scale-75 hover:scale-100 transition duration-200 ease-in-out"
-          type="date" id="start"
+          type="date"
+          id="start"
           name="trip-start"
           value="2018-07-22"
           min="2018-01-01"
           max="2018-12-31"
-          style={{ background: "rgba(19, 31, 33, 0.62)", color: "#FFFFFF" }}
-        />
+          style={{ background: "rgba(19, 31, 33, 0.62)", color: "#000000" }}
+        /> */}
+      </div>
+      <div className="items-center justify-center w-[20%] mb-3">
+        <Datepicker
+          value={date}
+          onChange={handleDateChange}
+          showShortcuts={false}
+          asSingle={true}
+          useRange={false}
+          placeholder={"Today"}
+        />{" "}
       </div>
 
       <div className="divider"></div>
-
       <div className="mt-8 w-[90%]">
-        <EmblaCarousel items={gameData} options={OPTIONS} cardType={GameCard} spacing={4} />
+        <EmblaCarousel
+          items={gameData}
+          options={OPTIONS}
+          cardType={GameCard}
+          spacing={4}
+        />
       </div>
     </div>
   );
@@ -297,7 +258,12 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
       <div className="divider"></div>
       <div className="mt-8 w-[90%]">
         {/* Pass the playerDataDefault array to EmblaCarousel */}
-        <EmblaCarousel items={playerData} options={OPTIONS} cardType={PlayerCard} spacing={2.75} />
+        <EmblaCarousel
+          items={playerData}
+          options={OPTIONS}
+          cardType={PlayerCard}
+          spacing={2.75}
+        />
       </div>
     </div>
   );
