@@ -2,8 +2,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
-import GameCard from "@/components/gameCards";
-import { GameCardProps } from "@/components/gameCards";
+import GameCard from "@/components/homePage/gameCards";
 import PlayerCard from "@/components/homePage/playerCard";
 import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
@@ -188,29 +187,68 @@ export default function Home() {
     },
   ];
 
+  const gameDataDefault = [
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    },
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    },
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    },
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    },
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    },
+    {
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "",
+      rightTeamURL: "",
+    }
+  ]
+
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
       <div id="Padding" className="h-24"></div>
-      <NewsLetter news={newsDataDefault} />
-
-      <Games numOfGames={9} />
-      <TopPlayers />
+      <NewsLetter newsData={newsDataDefault} />
+      <Games gameData={gameDataDefault} />
+      <TopPlayers playerData={playerDataDefault} />
+      <div id="Padding" className="h-24"></div>
     </div>
   );
 }
 
-export function NewsLetter(props: { news: newsProp[] }) {
+export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
   // Change this later, Cause this is giving me a stroke
-  const newsData = Array(4)
+  const news = Array(4)
     .fill(null)
     .map((_, index) => (
       <div className="justify-center items-center">
         <NewsArticles
-          title={props.news[index].title}
-          date={props.news[index].date}
-          premium={props.news[index].premium}
-          imageURL={props.news[index].imageURL}
-          redirectURL={props.news[index].redirectURL}
+          title={newsData[index].title}
+          date={newsData[index].date}
+          premium={newsData[index].premium}
+          imageURL={newsData[index].imageURL}
+          redirectURL={newsData[index].redirectURL}
         />
       </div>
     ));
@@ -221,43 +259,45 @@ export function NewsLetter(props: { news: newsProp[] }) {
       <div className="divider"></div>
 
       <div className="grid grid-cols-2 gap-x-16 gap-y-4 justify-center">
-        {newsData}
+        {news}
       </div>
     </div>
   );
 }
 
-export function Games(props: { numOfGames: number }) {
-  const dispGames = Array(props.numOfGames)
-    .fill(null)
-    .map((_, index) => (
-      <GameCard
-        leftTeamScore={0}
-        rightTeamScore={0}
-        leftTeamURL=""
-        rightTeamURL=""
-      />
-    ));
+export function Games({ gameData }: { gameData: any[] }) {
   return (
-    <div className="flex flex-col items-center justify-center static">
-      <div className="title"> Game </div>
+    <div className="flex flex-col items-center justify-center relative">
+      <div className="title relative">
+        Game
+        <input
+          className="w-16 h-14 ml-10 scale-75 hover:scale-100 transition duration-200 ease-in-out"
+          type="date" id="start"
+          name="trip-start"
+          value="2018-07-22"
+          min="2018-01-01"
+          max="2018-12-31"
+          style={{ background: "rgba(19, 31, 33, 0.62)", color: "#FFFFFF" }}
+        />
+      </div>
+
       <div className="divider"></div>
 
-      <div className="flex flex-row overflow-x-visible space-x-4 carousel">
-        {dispGames}
+      <div className="mt-8 w-[90%]">
+        <EmblaCarousel items={gameData} options={OPTIONS} cardType={GameCard} spacing={4} />
       </div>
     </div>
   );
 }
 
-export function TopPlayers() {
+export function TopPlayers({ playerData }: { playerData: any[] }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="title">Top Players</div>
       <div className="divider"></div>
-      <div className="mt-8 w-[100%]">
+      <div className="mt-8 w-[90%]">
         {/* Pass the playerDataDefault array to EmblaCarousel */}
-        <EmblaCarousel players={playerDataDefault} options={OPTIONS} />
+        <EmblaCarousel items={playerData} options={OPTIONS} cardType={PlayerCard} spacing={2.5} />
       </div>
     </div>
   );

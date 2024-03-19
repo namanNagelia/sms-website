@@ -11,7 +11,7 @@ interface playerProps {
   change: number;
 }
 
-export default function PlayerCard(props: playerProps) {
+const PlayerCard = (props: playerProps) => {
   const name = props.name;
   const position = props.position;
   const number = props.number;
@@ -56,3 +56,5 @@ export default function PlayerCard(props: playerProps) {
     </div>
   );
 }
+
+export default PlayerCard;
