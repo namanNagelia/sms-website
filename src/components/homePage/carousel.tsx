@@ -39,7 +39,7 @@ const EmblaCarousel: React.FC<any> = (
               }
             </div>
           ))}
-          <div className="embla__slide max-w-10"/>
+          <div className="embla__slide max-w-20"/>
         </div>
         
       </div>
