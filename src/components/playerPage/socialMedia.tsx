@@ -19,7 +19,7 @@ export default function SocialMedia(props: SocialMediaProps) {
 
   return (
     <div
-      className="w-[17%] h-[150px] bg-layerTwoGrey rounded-3xl"
+      className="w-[17%] h-[150px] bg-layerTwoGrey rounded-2xl mt-24 ml-[70%]"
       style={{ borderRadius: "50px" }}
     >
       <div className="flex-row"></div>

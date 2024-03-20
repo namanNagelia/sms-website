@@ -1,11 +1,12 @@
 import React from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
+import SocialMedia from "@/components/playerPage/socialMedia";
 
 
 export default function PlayerPage() {
   return (
-    <div className="h-full w-full flex flex-col text-center">
+    <div className="h-full w-full flex flex-col text-center items-center">
       <PlayerNameBanner />
       <SocialMedia
         instagram="https://www.instagram.com/"
