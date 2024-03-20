@@ -7,7 +7,58 @@ import VideoPlayer from "@/components/playerPage/videoPlayer";
 import VideoSelector from "@/components/playerPage/videoSelector";
 import StatsCard from "@/components/playerPage/statsCard";
 import GraphsBox from "@/components/playerPage/graphs";
+// Example JSON data for season and game stats
+const seasonStats = {
+  archetype: "Slasher",
+  stats: {
+    PTS: "22.3",
+    REB: "5.4",
+    AST: "7.1",
+    STL: "1.5",
+    BLK: "0.4",
+    FG: "47%",
+    TP: "38%",
+    FT: "82%",
+    TO: "3.1",
+    PER: "21.2",
+  },
+};
 
+const gameStats = [
+  {
+    date: "2023-03-15",
+    details: {
+      PTS: "30",
+      REB: "7",
+      AST: "9",
+      STL: "2",
+      BLK: "0",
+      FG: "50%",
+      TP: "40%",
+      FT: "85%",
+      TO: "2",
+      PER: "25",
+    },
+  },
+  // More game entries could be added here
+  {
+    date: "2023-03-17",
+    details: {
+      PTS: "33",
+      REB: "7",
+      AST: "9",
+      STL: "2",
+      BLK: "0",
+      FG: "50%",
+      TP: "40%",
+      FT: "85%",
+      TO: "2",
+      PER: "25",
+    },
+  },
+];
+//What weneed: Player details (unchanging)
+//Videos: Put a default video for them, then in the same page make a state variable for current video, and that state changes if a video on the side is selected
 export default function PlayerPage() {
   return (
     <>
@@ -31,7 +82,7 @@ export default function PlayerPage() {
             <VideoPlayerLive />
           </div>
           <div className="flex flex-row space-x-10 my-10">
-            <StatsCard />
+            <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
             <GraphsBox />
           </div>
         </div>
