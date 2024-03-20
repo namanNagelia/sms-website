@@ -48,7 +48,7 @@ header {
 
 input[type="date"]::-webkit-calendar-picker-indicator {
 
-  color:Cornsilk
+  color: Cornsilk
 }
 
 .login {
@@ -107,4 +107,19 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .carousel {
   overflow-y: hidden;
   overflow-x: scroll;
+}
+
+.player-header {
+  position: absolute;
+  width: 400px;
+  height: auto;
+  left: 59px;
+  top: 97px;
+
+  border-radius: 124px;
+
+}
+
+.player-card {
+  background: rgba(19, 31, 33, .66)
 }
