@@ -27,7 +27,7 @@ export default function NewsArticles(props: newsProps) {
         </span>
       )}
       <div
-        className="relative w-[500px] h-[281px] rounded-3xl overflow-hidden"
+        className="relative md:w-[500px] md:h-[280px] sm:w-[300] sm:h-[168px] rounded-3xl overflow-hidden"
         onClick={handleClick}
       >
         <img

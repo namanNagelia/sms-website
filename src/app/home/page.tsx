@@ -214,7 +214,7 @@ export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
       <div className="title"> Newsletter </div>
       <div className="divider"></div>
 
-      <div className="grid grid-cols-2 gap-x-16 gap-y-4 justify-center">
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-x-16 gap-y-4 justify-center">
         {news}
       </div>
     </div>
