@@ -169,7 +169,7 @@ export default function Home() {
     },
   ];
 
-  
+
 
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
@@ -204,7 +204,7 @@ export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
       <div className="title"> Newsletter </div>
       <div className="divider"></div>
 
-      <div className="grid grid-cols-2 gap-x-16 gap-y-4 justify-center">
+      <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-x-16 gap-y-4 justify-center">
         {news}
       </div>
     </div>
@@ -224,7 +224,7 @@ export function Games({ gameData }: { gameData: any[] }) {
     <div className="flex flex-col items-center justify-center relative">
       <div className="title ">
         Game
-        
+
       </div>
       <div className="items-center justify-center w-[20%] mb-3">
         <Datepicker
