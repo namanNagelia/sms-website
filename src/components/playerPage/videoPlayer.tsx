@@ -21,10 +21,7 @@ export default function VideoPlayer(props: Props) {
       <MediaPlayer title="Highlights" src={videoLink}>
         <MediaProvider />
 
-        <DefaultVideoLayout
-          thumbnails="https://image.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/storyboard.vtt"
-          icons={defaultLayoutIcons}
-        />
+        <DefaultVideoLayout icons={defaultLayoutIcons} />
       </MediaPlayer>
     </div>
   );
