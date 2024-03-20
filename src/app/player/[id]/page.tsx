@@ -16,7 +16,7 @@ export default function PlayerPage() {
         instagramViews={1000}
         twitterViews={1000}
       />
-      <PlayerGrade />
+      <PlayerGrade coachability={34} performance={91} intangibles={0} />
     </div>
   );
 }

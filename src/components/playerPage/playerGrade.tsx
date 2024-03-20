@@ -1,13 +1,47 @@
 import React from "react";
 import StatusProgressRing from "./circleGraphs";
 
-export default function PlayerGrade() {
+interface Props {
+  coachability: number;
+  performance: number;
+  intangibles: number;
+}
+
+export default function PlayerGrade(props: Props) {
+  const coachability = props.coachability;
+  const performance = props.performance;
+  const intangibles = props.intangibles;
+
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h2 className="font text-cyan-100 text-left text-s mb-0 w-[20vw] px-2">
-        Grade:
-      </h2>
-      <StatusProgressRing completed={40} />
+    <div className="w-[400px] h-[300px] bg-layerTwoGrey rounded-3xl flex flex-col justify-end p-4">
+      {/* Adjust layout to ensure content fits, consider flex-col for stacking if needed */}
+      <div className="flex justify-between space-x-2">
+        {" "}
+        {/* Adjusted justify-between and added spacing */}
+        <div className="flex flex-col items-center">
+          {" "}
+          {/* Center aligned each progress ring + text */}
+          <StatusProgressRing percentage={coachability} />{" "}
+          {/* Example size adjustment */}
+          <p className="text-white font-dinCondensed text-lg mt-2">
+            Coachability
+          </p>
+        </div>
+        <div className="flex flex-col items-center">
+          <StatusProgressRing percentage={performance} />{" "}
+          {/* Adjust size as needed */}
+          <p className="text-white font-dinCondensed text-lg mt-2">
+            Performance
+          </p>
+        </div>
+        <div className="flex flex-col items-center">
+          <StatusProgressRing percentage={intangibles} />{" "}
+          {/* Adjust size as needed */}
+          <p className="text-white font-dinCondensed text-lg mt-2">
+            Intangibles
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

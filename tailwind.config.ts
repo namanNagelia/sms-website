@@ -18,6 +18,9 @@ const config: Config = {
         brandBlack: "#282828",
         brandGrey: "#929292",
         layerTwoGrey: "#2D3D43",
+        graphYellow: "#F4AC3F",
+        graphGreen: "#10B981",
+        graphRed: "#CE2828",
         ...colors,
       },
       backgroundImage: {
