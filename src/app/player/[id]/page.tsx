@@ -6,13 +6,13 @@ import PlayerGrade from "@/components/playerPage/playerGrade";
 import VideoPlayer from "@/components/playerPage/videoPlayer";
 import VideoSelector from "@/components/playerPage/videoSelector";
 import StatsCard from "@/components/playerPage/statsCard";
+import GraphsBox from "@/components/playerPage/graphs";
 
 export default function PlayerPage() {
   return (
     <>
       <PlayerNameBanner />
       <div className="-translate-y-32">
-
         <SocialMedia
           instagram="https://www.instagram.com/"
           twitter="https://www.twitter.com/"
@@ -30,7 +30,10 @@ export default function PlayerPage() {
           <div className="flex items-center">
             <VideoPlayerLive />
           </div>
-          <StatsCard />
+          <div className="flex flex-row space-x-10 my-10">
+            <StatsCard />
+            <GraphsBox />
+          </div>
         </div>
       </div>
     </>
