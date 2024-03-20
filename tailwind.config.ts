@@ -17,6 +17,7 @@ const config: Config = {
         brandBlue: "#99B0BD",
         brandBlack: "#282828",
         brandGrey: "#929292",
+        layerTwoGrey: "#2D3D43",
         ...colors,
       },
       backgroundImage: {
