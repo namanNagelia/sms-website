@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import SocialMedia from "@/components/playerPage/socialMedia";
-
+import PlayerGrade from "@/components/playerPage/playerGrade";
 
 export default function PlayerPage() {
   return (
@@ -20,6 +20,7 @@ export default function PlayerPage() {
         <BiometricCard />
       </div>
 
+      <PlayerGrade coachability={34} performance={91} intangibles={0} />
     </div>
   );
 }
@@ -31,7 +32,6 @@ const PlayerNameBanner = () => {
       <div className="flex flex-col mb-5 items-start text-brandWhite">
         <div className="font-dinCondensed text-3xl">Jamal DonTiqualous</div>
         <div className="font-dinCondensed text-lg">Data Points</div>
-
       </div>
     </div>
   );
