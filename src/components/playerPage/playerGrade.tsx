@@ -13,9 +13,9 @@ export default function PlayerGrade(props: Props) {
   const intangibles = props.intangibles;
 
   return (
-    <div className="w-[400px] h-[300px] bg-layerTwoGrey rounded-3xl flex flex-col justify-end p-4">
+    <div className="default-card bg-layerTwoGrey rounded-3xl flex flex-col justify-end p-4">
       {/* Adjust layout to ensure content fits, consider flex-col for stacking if needed */}
-      <div className="flex justify-between space-x-2">
+      <div className="flex justify-between space-x-3 mx-20">
         {" "}
         {/* Adjusted justify-between and added spacing */}
         <div className="flex flex-col items-center">

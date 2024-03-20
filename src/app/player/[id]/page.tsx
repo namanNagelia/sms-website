@@ -16,11 +16,12 @@ export default function PlayerPage() {
         instagramViews={1000}
         twitterViews={1000}
       />
-      <div className="flex flex-row">
+      <div className="flex flex-row space-x-10 my-10">
         <BiometricCard />
+        <PlayerGrade coachability={34} performance={91} intangibles={0} />
       </div>
 
-      <PlayerGrade coachability={34} performance={91} intangibles={0} />
+
     </div>
   );
 }
@@ -75,7 +76,7 @@ const BiometricCard = () => {
 
 
       </div>
-      
+
     </div>
   );
 }
