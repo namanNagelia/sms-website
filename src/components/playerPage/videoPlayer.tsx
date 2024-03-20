@@ -20,11 +20,7 @@ export default function VideoPlayer(props: Props) {
       {/* Added this div */}
       <MediaPlayer title="Highlights" src={videoLink}>
         <MediaProvider />
-        {/* <Poster
-          className="vds-poster"
-          src="https://media-files.vidstack.io/sprite-fight/poster.webp"
-          alt="Girl walks into campfire with gnomes surrounding her friend ready for their next meal!"
-        /> */}
+
         <DefaultVideoLayout
           thumbnails="https://image.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/storyboard.vtt"
           icons={defaultLayoutIcons}

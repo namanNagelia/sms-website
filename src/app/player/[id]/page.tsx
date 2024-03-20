@@ -5,6 +5,7 @@ import SocialMedia from "@/components/playerPage/socialMedia";
 import PlayerGrade from "@/components/playerPage/playerGrade";
 import VideoPlayer from "@/components/playerPage/videoPlayer";
 import VideoSelector from "@/components/playerPage/videoSelector";
+import StatsCard from "@/components/playerPage/statsCard";
 
 export default function PlayerPage() {
   return (
@@ -25,6 +26,7 @@ export default function PlayerPage() {
       <div className="flex items-center">
         <VideoPlayerLive />
       </div>
+      <StatsCard />
     </div>
   );
 }
@@ -58,7 +60,7 @@ const VideoPlayerLive = () => {
       </div>
       <div className="w-3/4 p-6">
         {" "}
-        <VideoPlayer videoLink="NA" />
+        <VideoPlayer videoLink="https://skillteck-v2.s3.us-west-1.amazonaws.com/videos/2527/library/2527_4841.mp4" />
       </div>
     </div>
   );
