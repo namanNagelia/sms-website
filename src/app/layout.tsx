@@ -45,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="relative">
       <body
-        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-screen h-screen`}
+        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-screen h-screen relative`}
       >
         
         <Header />
