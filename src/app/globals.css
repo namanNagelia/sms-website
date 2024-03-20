@@ -123,3 +123,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .player-card {
   background: rgba(19, 31, 33, .66)
 }
+
+.default-card {
+  /* Player Grade */
+
+  width: 608px;
+  height: 450px;
+  left: 2413px;
+  top: 191px;
+
+  background: rgba(90, 128, 135, 0.39);
+  border-radius: 25px;
+
+}
+
+.bold {
+  font-weight: bold;
+}

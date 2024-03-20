@@ -16,6 +16,10 @@ export default function PlayerPage() {
         instagramViews={1000}
         twitterViews={1000}
       />
+      <div className="flex flex-row">
+        <BiometricCard />
+      </div>
+
     </div>
   );
 }
@@ -29,6 +33,49 @@ const PlayerNameBanner = () => {
         <div className="font-dinCondensed text-lg">Data Points</div>
 
       </div>
+    </div>
+  );
+}
+
+const BiometricCard = () => {
+  return (
+    <div className="default-card flex flex-col items-center py-8 space-y-3">
+      <div className=" font-dinCondensed text-brandWhite text-5xl bold">
+        Biometerics
+      </div>
+      <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
+      <div className="text-brandGrey font-dinCondensed text-2xl mb-4">Selesian, Los Angeles</div>
+
+      <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
+
+        <div className=" w-full flex flex-row text-3xl">
+          <div className="text-brandGrey mr-auto px-2 text-end">Height</div>
+          <div className="text-brandWhite">6'2"</div>
+        </div>
+
+        <div className=" w-full flex flex-row text-3xl">
+          <div className="text-brandGrey mr-auto px-2">Bench Press</div>
+          <div className="text-brandWhite">135lbs</div>
+        </div>
+
+        <div className=" w-full flex flex-row text-3xl">
+          <div className="text-brandGrey mr-auto px-2">Weight</div>
+          <div className="text-brandWhite">160lbs</div>
+        </div>
+
+        <div className=" w-full flex flex-row text-3xl">
+          <div className="text-brandGrey mr-auto px-2">Wing Span</div>
+          <div className="text-brandWhite">6'8"</div>
+        </div>
+
+        <div className=" w-full flex flex-row text-3xl">
+          <div className="text-brandGrey mr-auto px-2">Vertical</div>
+          <div className="text-brandWhite">33"</div>
+        </div>
+
+
+      </div>
+      
     </div>
   );
 }
