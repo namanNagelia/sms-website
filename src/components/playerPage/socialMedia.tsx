@@ -23,12 +23,12 @@ export default function SocialMedia(props: SocialMediaProps) {
 
   return (
     <div
-      className="w-[280px] h-[150px] bg-layerTwoGrey rounded-2xl ml-[70%] pb-4"
-      style={{ borderRadius: "50px" }}
+      className="w-[280px] h-[120px] bg-layerTwoGrey rounded-lg ml-[70%] py-4"
+      style={{ borderRadius: "24px" }}
     >
       <div className="items-center justify-center h-full w-full">
         <div className="flex items-start justify-center">
-          <div className="mt-6 flex">
+          <div className="mt-2 flex">
             <Image
               src={instagramImage}
               alt="Instagram Icon"
@@ -55,7 +55,7 @@ export default function SocialMedia(props: SocialMediaProps) {
             <p className="font-dinBold text-xl text-white">{instagramViews}</p>
           </div>
         </div>
-        <div className="flex items-center justify-center mt-6">
+        <div className="flex items-center justify-center mt-2">
           <Image src={xIcon} alt="X Icon" width={30} height={30} />
           <Image
             src={barIcon}

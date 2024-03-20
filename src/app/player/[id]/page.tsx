@@ -11,7 +11,7 @@ export default function PlayerPage() {
   return (
     <>
       <PlayerNameBanner />
-      <div className="-translate-y-24 py-1">
+      <div className="-translate-y-32">
 
         <SocialMedia
           instagram="https://www.instagram.com/"
@@ -39,7 +39,7 @@ export default function PlayerPage() {
 
 const PlayerNameBanner = () => {
   return (
-    <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50">
+    <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
       <Image src={Logo} alt={"Broski"} width={108} height={108} />
       <div className="flex flex-col mb-5 items-start text-brandWhite">
         <div className="font-dinCondensed text-3xl">Jamal DonTiqualous</div>
