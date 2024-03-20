@@ -61,7 +61,6 @@ export default function Home() {
         "https://www.latimes.com/sports/highschool/story/2023-11-21/bryce-james-leaves-sherman-oaks-notre-dame-returns-to-sierra-canyon",
     },
   ];
-
   const playerDataDefault = [
     {
       name: "Zach Edey",
@@ -124,45 +123,53 @@ export default function Home() {
       change: -2,
     },
   ];
-
   const gameDataDefault = [
     {
+      gameId: 0,
+      leftTeamScore: 0,
+      rightTeamScore: 0,
+      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+
+    },
+    {
+      gameId: 1,
       leftTeamScore: 0,
       rightTeamScore: 0,
       leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
       rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
+      gameId: 2,
       leftTeamScore: 0,
       rightTeamScore: 0,
       leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
       rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
+      gameId: 3,
       leftTeamScore: 0,
       rightTeamScore: 0,
       leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
       rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
+      gameId: 4,
       leftTeamScore: 0,
       rightTeamScore: 0,
       leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
       rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
+      gameId: 5,
       leftTeamScore: 0,
       rightTeamScore: 0,
       leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
       rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
   ];
+
+  
 
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
@@ -182,6 +189,7 @@ export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
     .map((_, index) => (
       <div className="justify-center items-center">
         <NewsArticles
+          key={index}
           title={newsData[index].title}
           date={newsData[index].date}
           premium={newsData[index].premium}
@@ -216,16 +224,7 @@ export function Games({ gameData }: { gameData: any[] }) {
     <div className="flex flex-col items-center justify-center relative">
       <div className="title ">
         Game
-        {/* <input
-          className="w-16 h-14 ml-10 scale-75 hover:scale-100 transition duration-200 ease-in-out"
-          type="date"
-          id="start"
-          name="trip-start"
-          value="2018-07-22"
-          min="2018-01-01"
-          max="2018-12-31"
-          style={{ background: "rgba(19, 31, 33, 0.62)", color: "#000000" }}
-        /> */}
+        
       </div>
       <div className="items-center justify-center w-[20%] mb-3">
         <Datepicker
