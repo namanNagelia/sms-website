@@ -27,7 +27,7 @@ export default function PlayerPage() {
         <VideoPlayerLive />
       </div>
       <StatsCard />
-    </div>
+    </>
   );
 }
 
