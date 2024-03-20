@@ -10,7 +10,7 @@ export default function PlayerPage() {
   return (
     <>
       <PlayerNameBanner />
-      <div className="h-full w-full flex flex-col text-center items-center -translate-y-1">
+      <div className="h-full w-full flex flex-col text-center items-center -translate-y-28 py-1">
 
         <SocialMedia
           instagram="https://www.instagram.com/"
