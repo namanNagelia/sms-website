@@ -67,10 +67,8 @@ const GameCard = (props: GameCardProps) => {
                     select-none
                     text-white
                     font-dinCondensed 
-
                     xl:text-4xl 
                     md:text-xl
-                    
                 ">
                     3{props.leftTeamScore} - 1{props.rightTeamScore}2
                 </text>
