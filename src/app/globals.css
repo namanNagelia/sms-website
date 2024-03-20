@@ -47,8 +47,7 @@ header {
 /* regular text style */
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-
-  color: Cornsilk
+  color: Cornsilk;
 }
 
 .login {
@@ -61,11 +60,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   background: #134149;
   border-radius: 33px;
-
 }
 
 .title {
-
   font-style: normal;
   font-weight: 700;
   font-size: 64px;
@@ -74,8 +71,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   letter-spacing: -0.01em;
   font-family: var(--font-dinCondensed);
 
-  color: #FFFFFF;
-
+  color: #ffffff;
 }
 
 .divider {
@@ -84,7 +80,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   border-radius: 0.75rem;
   background-color: white;
-
 }
 
 .game-card {
@@ -96,12 +91,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   width: 327px;
   height: 171px;
 
-
-  background: #131F21;
-  border: 4px solid #C5D7DD;
+  background: #131f21;
+  border: 4px solid #c5d7dd;
   border-radius: 60px;
-
-
 }
 
 .carousel {
@@ -117,11 +109,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   top: 97px;
 
   border-radius: 124px;
-
 }
 
 .player-card {
-  background: rgba(19, 31, 33, .66)
+  background: rgba(19, 31, 33, 0.66);
 }
 
 .default-card {
@@ -134,7 +125,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
   background: rgba(90, 128, 135, 0.39);
   border-radius: 25px;
+}
+.video-card {
+  /* Player Grade */
 
+  width: 80vw;
+  height: auto;
+  left: 2413px;
+  top: 191px;
+
+  background: rgba(90, 128, 135, 0.39);
+  border-radius: 25px;
 }
 
 .bold {

@@ -23,7 +23,7 @@ export default function SocialMedia(props: SocialMediaProps) {
 
   return (
     <div
-      className="w-[280px] h-[150px] bg-layerTwoGrey rounded-2xl mt-24 ml-[70%]"
+      className="w-[280px] h-[150px] bg-layerTwoGrey rounded-2xl mt-24 ml-[70%] py-4"
       style={{ borderRadius: "50px" }}
     >
       <div className="items-center justify-center">

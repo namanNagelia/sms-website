@@ -3,6 +3,8 @@ import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import SocialMedia from "@/components/playerPage/socialMedia";
 import PlayerGrade from "@/components/playerPage/playerGrade";
+import VideoPlayer from "@/components/playerPage/videoPlayer";
+import VideoSelector from "@/components/playerPage/videoSelector";
 
 export default function PlayerPage() {
   return (
@@ -20,8 +22,9 @@ export default function PlayerPage() {
         <BiometricCard />
         <PlayerGrade coachability={34} performance={91} intangibles={0} />
       </div>
-
-
+      <div className="flex items-center">
+        <VideoPlayerLive />
+      </div>
     </div>
   );
 }
@@ -36,7 +39,30 @@ const PlayerNameBanner = () => {
       </div>
     </div>
   );
-}
+};
+
+const VideoPlayerLive = () => {
+  return (
+    <div className="flex w-screen video-card">
+      <div className="w-1/4 p-6">
+        {" "}
+        <h1 className="font-dinCondensed text-center text-white text-4xl">
+          Highlights
+        </h1>
+        <VideoSelector
+          videoLinks={
+            "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+          }
+          title="Highlights"
+        />
+      </div>
+      <div className="w-3/4 p-6">
+        {" "}
+        <VideoPlayer videoLink="NA" />
+      </div>
+    </div>
+  );
+};
 
 const BiometricCard = () => {
   return (
@@ -45,10 +71,11 @@ const BiometricCard = () => {
         Biometerics
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
-      <div className="text-brandGrey font-dinCondensed text-2xl mb-4">Selesian, Los Angeles</div>
+      <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
+        Selesian, Los Angeles
+      </div>
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
-
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2 text-end">Height</div>
           <div className="text-brandWhite">6'2"</div>
@@ -73,10 +100,7 @@ const BiometricCard = () => {
           <div className="text-brandGrey mr-auto px-2">Vertical</div>
           <div className="text-brandWhite">33"</div>
         </div>
-
-
       </div>
-
     </div>
   );
-}
+};
