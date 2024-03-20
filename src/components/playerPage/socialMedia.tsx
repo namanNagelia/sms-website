@@ -23,11 +23,11 @@ export default function SocialMedia(props: SocialMediaProps) {
 
   return (
     <div
-      className="w-[280px] h-[150px] bg-layerTwoGrey rounded-2xl mt-24 ml-[70%] py-4"
+      className="w-[280px] h-[150px] bg-layerTwoGrey rounded-2xl ml-[70%] pb-4"
       style={{ borderRadius: "50px" }}
     >
-      <div className="items-center justify-center">
-        <div className="flex items-center justify-center">
+      <div className="items-center justify-center h-full w-full">
+        <div className="flex items-start justify-center">
           <div className="mt-6 flex">
             <Image
               src={instagramImage}

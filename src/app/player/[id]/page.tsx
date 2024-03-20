@@ -9,7 +9,7 @@ import StatsCard from "@/components/playerPage/statsCard";
 
 export default function PlayerPage() {
   return (
-    <div className="h-full w-full flex flex-col text-center items-center">
+    <>
       <PlayerNameBanner />
       <SocialMedia
         instagram="https://www.instagram.com/"
@@ -33,7 +33,7 @@ export default function PlayerPage() {
 
 const PlayerNameBanner = () => {
   return (
-    <div className="flex player-header absolute flex-row bg-primary items-end space-x-4 player-card">
+    <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50">
       <Image src={Logo} alt={"Broski"} width={108} height={108} />
       <div className="flex flex-col mb-5 items-start text-brandWhite">
         <div className="font-dinCondensed text-3xl">Jamal DonTiqualous</div>
@@ -46,7 +46,7 @@ const PlayerNameBanner = () => {
 const VideoPlayerLive = () => {
   return (
     <div className="flex w-screen video-card">
-      <div className="w-1/4 p-6">
+      <div className="w-1/4 p-6 h-screen">
         {" "}
         <h1 className="font-dinCondensed text-center text-white text-4xl">
           Highlights
