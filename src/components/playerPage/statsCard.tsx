@@ -23,12 +23,14 @@ const StatsCard = () => {
       <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
         Archetype: Slasher
       </div>
-      <button
-        onClick={toggleMode}
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-      >
-        Switch to {mode === "Season" ? "Game" : "Season"}
-      </button>
+      <div>
+        <button
+          onClick={toggleMode}
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer" // Added cursor-pointer
+        >
+          Switch to: {mode === "Season" ? "Game" : "Season"}
+        </button>
+      </div>
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         <div className=" w-full flex flex-row text-3xl">
