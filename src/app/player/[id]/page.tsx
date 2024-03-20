@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import SocialMedia from "@/components/playerPage/socialMedia";
-
+import PlayerGrade from "@/components/playerPage/playerGrade";
 
 export default function PlayerPage() {
   return (
@@ -16,6 +16,7 @@ export default function PlayerPage() {
         instagramViews={1000}
         twitterViews={1000}
       />
+      <PlayerGrade />
     </div>
   );
 }
@@ -27,8 +28,7 @@ const PlayerNameBanner = () => {
       <div className="flex flex-col mb-5 items-start text-brandWhite">
         <div className="font-dinCondensed text-3xl">Jamal Marshal</div>
         <div className="font-dinCondensed text-lg">Data Points</div>
-
       </div>
     </div>
   );
-}
+};
