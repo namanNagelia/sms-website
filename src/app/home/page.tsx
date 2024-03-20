@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewsArticles from "@/components/homePage/newsArticles";
 import GameCard from "@/components/homePage/gameCards";
 import PlayerCard from "@/components/homePage/playerCard";
@@ -8,6 +8,7 @@ import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 import "../../components/homePage/embla.css";
 import Datepicker from "react-tailwindcss-datepicker";
+import { useMediaQuery } from "react-responsive";
 
 type newsProp = {
   title: string;
@@ -128,48 +129,57 @@ export default function Home() {
       gameId: 0,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
       gameId: 1,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
       gameId: 2,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
       gameId: 3,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
       gameId: 4,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
     {
       gameId: 5,
       leftTeamScore: 0,
       rightTeamScore: 0,
-      leftTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL: "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      leftTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
+      rightTeamURL:
+        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
     },
   ];
-
-  
 
   return (
     <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
@@ -222,10 +232,7 @@ export function Games({ gameData }: { gameData: any[] }) {
   };
   return (
     <div className="flex flex-col items-center justify-center relative">
-      <div className="title ">
-        Game
-        
-      </div>
+      <div className="title ">Game</div>
       <div className="items-center justify-center w-[20%] mb-3">
         <Datepicker
           value={date}
@@ -251,6 +258,17 @@ export function Games({ gameData }: { gameData: any[] }) {
 }
 
 export function TopPlayers({ playerData }: { playerData: any[] }) {
+  const isLargeScreen = useMediaQuery({ query: "(max-width: 1200px)" });
+  const [spacing, setSpacing] = useState(3);
+  console.log("spacing", spacing);
+  console.log(isLargeScreen);
+
+  useEffect(() => {
+    setSpacing(isLargeScreen ? 2 : 3);
+    console.log("spacing", spacing);
+    console.log(isLargeScreen);
+  }, [isLargeScreen]);
+
   return (
     <div className="flex flex-col items-center justify-center">
       <div className="title">Top Players</div>
@@ -258,10 +276,11 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
       <div className="mt-8 w-[90%]">
         {/* Pass the playerDataDefault array to EmblaCarousel */}
         <EmblaCarousel
+          key={isLargeScreen ? "large" : "small"}
           items={playerData}
           options={OPTIONS}
           cardType={PlayerCard}
-          spacing={2.75}
+          spacing={spacing}
         />
       </div>
     </div>
