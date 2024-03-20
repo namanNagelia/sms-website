@@ -9,28 +9,31 @@ import StatsCard from "@/components/playerPage/statsCard";
 
 export default function PlayerPage() {
   return (
-    <div>
+    <>
       <PlayerNameBanner />
-      <SocialMedia
-        instagram="https://www.instagram.com/"
-        twitter="https://www.twitter.com/"
-        instagramFollowers={1000}
-        twitterFollowers={1000}
-        instagramViews={1000}
-        twitterViews={1000}
-      />
+      <div className="-translate-y-24 py-1">
 
-      <div className="h-full w-full flex flex-col text-center items-center">
-        <div className="flex flex-row space-x-10 my-10">
-          <BiometricCard />
-          <PlayerGrade coachability={34} performance={91} intangibles={0} />
+        <SocialMedia
+          instagram="https://www.instagram.com/"
+          twitter="https://www.twitter.com/"
+          instagramFollowers={1000}
+          twitterFollowers={1000}
+          instagramViews={1000}
+          twitterViews={1000}
+        />
+
+        <div className="h-full w-full flex flex-col text-center items-center">
+          <div className="flex flex-row space-x-10 my-10">
+            <BiometricCard />
+            <PlayerGrade coachability={34} performance={91} intangibles={0} />
+          </div>
+          <div className="flex items-center">
+            <VideoPlayerLive />
+          </div>
+          <StatsCard />
         </div>
-        <div className="flex items-center">
-          <VideoPlayerLive />
-        </div>
-        <StatsCard />
       </div>
-    </div>
+    </>
   );
 }
 
