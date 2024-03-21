@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
@@ -10,6 +10,10 @@ import StatsCard from "@/components/playerPage/statsCard";
 import GraphsBox from "@/components/playerPage/graphs";
 import { useMediaQuery } from "react-responsive";
 import { active } from "d3";
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
 // Example JSON data for season and game stats
 const seasonStats = {
   archetype: "Slasher",
@@ -63,26 +67,26 @@ const gameStats = [
 
 const videoHighlights = [
   {
-    title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    title: "Basketball",
+    link: "https://skilltech-v2-public.s3.us-west-1.amazonaws.com/videos/B648BD33-CB18-4D55-900E-BB86A1D70E12-512-00000016D78691A6.mp4",
   },
   {
     title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4",
   },
   {
     title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4",
   },
   {
     title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4",
   },
   {
     title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4",
   },
-]
+];
 
 //What weneed: Player details (unchanging)
 //Videos: Put a default video for them, then in the same page make a state variable for current video, and that state changes if a video on the side is selected
@@ -132,14 +136,22 @@ const PlayerNameBanner = () => {
   );
 };
 
-const VideoPlayerLive = ({ active, handle }: { active: string, handle: React.Dispatch<React.SetStateAction<string>> }) => {
+const VideoPlayerLive = ({
+  active,
+  handle,
+}: {
+  active: string;
+  handle: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   return (
-    <div className="flex flex-row items-center video-card 
+    <div
+      className="flex flex-row items-center video-card 
       xl:w-[1140px] xl:h-[600px]
       lg:w-[900px]  lg:h-[500px]
       md:w-[700px]  md:h-[420px]
       
-    ">
+    "
+    >
       <div className="w-1/4 p-6 h-[95%]">
         <VideoSelector
           videoLinks={videoHighlights}
