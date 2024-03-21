@@ -182,12 +182,12 @@ export default function Home() {
   ];
 
   return (
-    <div className="flex-row w-full h-full justify-center items-center text-center space-y-10">
+    <>
       <NewsLetter newsData={newsDataDefault} />
       <Games gameData={gameDataDefault} />
       <TopPlayers playerData={playerDataDefault} />
       <div id="Padding" className="h-24"></div>
-    </div>
+    </>
   );
 }
 

@@ -114,7 +114,7 @@ export default function PlayerPage() {
   const [activeVideo, setVideo] = useState<string>(videoHighlights[0].link);
 
   return (
-    <>
+    <div>
       <PlayerNameBanner />
       <div className="-translate-y-32">
         <SocialMedia
@@ -141,7 +141,7 @@ export default function PlayerPage() {
           <ShotChart data={shotData} width={"100px"} height={"100px"} />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
