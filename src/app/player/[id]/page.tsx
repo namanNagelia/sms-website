@@ -67,8 +67,8 @@ const videoHighlights = [
     link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
   },
   {
-    title: "Dunk",
-    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+    title: "Follow",
+    link: "https://stream.mux.com/v69RSHhFelSm4701snP22dYz2jICy4E4FUyk02rW4gxRM.m3u8"
   },
   {
     title: "Dunk",
@@ -140,14 +140,14 @@ const VideoPlayerLive = ({ active, handle }: { active: string, handle: React.Dis
       md:w-[700px]  md:h-[420px]
       
     ">
-      <div className="w-1/4 p-6 h-[95%]">
+      <div className="w-[30%] p-6 h-[95%]">
         <VideoSelector
           videoLinks={videoHighlights}
           title="Highlights"
           handleChange={handle}
         />
       </div>
-      <div className="w-3/4 p-6">
+      <div className="w-[70%] p-6">
         {" "}
         <VideoPlayer videoLink={active} />
       </div>
