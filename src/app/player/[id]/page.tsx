@@ -11,6 +11,7 @@ import GraphsBox from "@/components/playerPage/graphs";
 import { useMediaQuery } from "react-responsive";
 import { active } from "d3";
 const { PrismaClient } = require("@prisma/client");
+import { ShotChart } from "@/components/playerPage/graphs/shotChart";
 
 const prisma = new PrismaClient();
 
@@ -88,6 +89,25 @@ const videoHighlights = [
   },
 ];
 
+const shotData = [
+  { x: 29.69, y: 26.18, shotType: "ThreePointMiss" },
+  { x: 8.37, y: 6.25, shotType: "TwoPointMake" },
+  { x: 18.34, y: 16.65, shotType: "TwoPointMake" },
+  { x: 20.36, y: 17.67, shotType: "TwoPointMake" },
+  { x: 23.74, y: 6.4, shotType: "TwoPointMake" },
+  { x: 24.57, y: 6.71, shotType: "TwoPointMake" },
+  { x: 26.52, y: 5.56, shotType: "TwoPointMake" },
+  { x: 27.54, y: 5.45, shotType: "TwoPointMake" },
+  { x: 13.17, y: 16.19, shotType: "TwoPointMiss" },
+  { x: 22.2, y: 5.34, shotType: "TwoPointMiss" },
+  { x: 22.4, y: 6.58, shotType: "TwoPointMiss" },
+  { x: 22.98, y: 7.77, shotType: "TwoPointMiss" },
+  { x: 22.98, y: 5.93, shotType: "TwoPointMiss" },
+  { x: 23.11, y: 6.03, shotType: "TwoPointMiss" },
+  { x: 23.39, y: 6.47, shotType: "TwoPointMiss" },
+  { x: 34.31, y: 5.84, shotType: "TwoPointMiss" },
+];
+
 //What weneed: Player details (unchanging)
 //Videos: Put a default video for them, then in the same page make a state variable for current video, and that state changes if a video on the side is selected
 export default function PlayerPage() {
@@ -118,6 +138,7 @@ export default function PlayerPage() {
             <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
             <GraphsBox />
           </div>
+          <ShotChart data={shotData} width={"100px"} height={"100px"} />
         </div>
       </div>
     </div>

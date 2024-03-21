@@ -1,198 +1,43 @@
 -- CreateTable
-CREATE TABLE `Assessment` (
-    `Assessment_Id` INTEGER NOT NULL,
-    `Assessment_Match_Id` INTEGER NULL,
-    `Assessment_Team_Id` INTEGER NULL,
-    `Assessment_Player_Id` INTEGER NULL,
-    `Summary` TEXT NULL,
-    `Strength` TEXT NULL,
-    `Weakness` TEXT NULL,
-
-    PRIMARY KEY (`Assessment_Id`)
+CREATE TABLE `Match_Table_Phase1` (
+    `Team1Team2Scores` VARCHAR(255) NULL,
+    `Date` DATE NULL,
+    `Team1` VARCHAR(255) NULL,
+    `Team1LogoPic` VARCHAR(255) NULL,
+    `Team1ShotChartUrl` VARCHAR(255) NULL,
+    `Team2` VARCHAR(255) NULL,
+    `Team2LogoPic` VARCHAR(255) NULL,
+    `Team2ShotChartUrl` VARCHAR(255) NULL,
+    `GameName` VARCHAR(255) NULL,
+    `FinalScores` VARCHAR(255) NULL,
+    `VideoLinkUrl` VARCHAR(255) NULL
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Event` (
-    `Event_id` INTEGER NOT NULL,
-    `Event_Host_Id` INTEGER NULL,
-    `Event_Name` VARCHAR(255) NULL,
-    `Event_Logo_Picture` VARCHAR(255) NULL,
-    `Event_Start_Date` DATE NULL,
-    `Event_End_Date` DATE NULL,
-    `Event_Director` VARCHAR(255) NULL,
-    `Event_Contact_Email` VARCHAR(255) NULL,
-    `Event_Instagram` VARCHAR(255) NULL,
-    `Event_Twitter` VARCHAR(255) NULL,
-    `Event_YouTube` VARCHAR(255) NULL,
-    `Event_Facebook` VARCHAR(255) NULL,
-    `Event_Affiliation_Flag` INTEGER NULL,
+CREATE TABLE `Player_Roster_Phase1` (
+    `SchoolNamePlayerJerseyNo` VARCHAR(255) NOT NULL,
+    `SchoolName` VARCHAR(255) NULL,
+    `PlayerJerseyNo` INTEGER NULL,
+    `PlayerFirstName` VARCHAR(255) NULL,
+    `PlayerLastName` VARCHAR(255) NULL,
+    `Height` DECIMAL(5, 2) NULL,
+    `YearOfGraduation` YEAR NULL,
+    `Position` VARCHAR(50) NULL,
+    `PlayerPictureURL` VARCHAR(255) NULL,
 
-    PRIMARY KEY (`Event_id`)
+    PRIMARY KEY (`SchoolNamePlayerJerseyNo`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Match_Game` (
-    `Match_Id` INTEGER NOT NULL,
-    `Match_Event_Id` INTEGER NULL,
-    `Match_Team_ONE_Id` INTEGER NULL,
-    `Match_Team_TWO_Id` INTEGER NULL,
-    `Match_Name` VARCHAR(255) NULL,
-    `Match_Date` DATE NULL,
-    `Match_Time` DATE NULL,
-    `Match_Location` VARCHAR(255) NULL,
-    `Match_Address1` VARCHAR(255) NULL,
-    `Match_Address2` VARCHAR(255) NULL,
-    `Match_City` VARCHAR(255) NULL,
-    `Match_State` CHAR(4) NULL,
-    `Match_Zip_Code` VARCHAR(10) NULL,
-
-    PRIMARY KEY (`Match_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `News` (
-    `News_Id` INTEGER NOT NULL,
-    `News_Match_Id` INTEGER NULL,
-    `News_Team_Id` INTEGER NULL,
-    `News_Player_Id` INTEGER NULL,
-    `News_Name` TEXT NULL,
-
-    PRIMARY KEY (`News_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Org_Table` (
-    `Org_Id` INTEGER NOT NULL,
-    `Org_Type` VARCHAR(255) NULL,
-    `Org_name` VARCHAR(255) NULL,
-    `Org_Address` VARCHAR(255) NULL,
-    `Org_City` VARCHAR(255) NULL,
-    `Org_State` CHAR(2) NULL,
-    `Org_Zip` VARCHAR(10) NULL,
-    `Org_Phone_Number` VARCHAR(15) NULL,
-    `Org_Director_First_Name` VARCHAR(255) NULL,
-    `Org_Director_Last_Name` VARCHAR(255) NULL,
-
-    PRIMARY KEY (`Org_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Player_Stats` (
-    `Player_Stat_Id` INTEGER NOT NULL,
-    `Player_Stat_Match_Id` INTEGER NULL,
-    `Player_Stat_Team_Id` INTEGER NULL,
-    `Player_Stat_Player_Id` INTEGER NULL,
-    `Match_Player_Score` INTEGER NULL,
-    `Match_Player_1point` INTEGER NULL,
-    `Match_Player_3point` INTEGER NULL,
-    `Match_Player_2point` INTEGER NULL,
-    `Match_Player_Points_Per_Game_Cal` DECIMAL(5, 2) NULL,
-    `Match_Player_Off_Rebounds` INTEGER NULL,
-    `Match_Player_Def_Rebounds` INTEGER NULL,
-    `Match_Player_Fouls` INTEGER NULL,
-    `Match_Player_Steals` INTEGER NULL,
-    `Match_Player_Blocks` INTEGER NULL,
-    `Match_Player_Assist` INTEGER NULL,
-    `Match_Player_Turnover` INTEGER NULL,
-    `Match_Player_Minutes_Played` INTEGER NULL,
-    `Match_Player_Field_Goals_Cal` INTEGER NULL,
-    `Match_Player_Field_Goal_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_Player_3Point_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_Player_Field_Throw_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_Player_Rebounds_Cal` INTEGER NULL,
-    `Match_Player_Game_Url` VARCHAR(255) NULL,
-    `Match_Player_Team_Shot_Chart_Url` VARCHAR(255) NULL,
-
-    PRIMARY KEY (`Player_Stat_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Tag` (
-    `Tag_Id` INTEGER NOT NULL,
-    `Tag_Match_Id` INTEGER NULL,
-    `Tag_Team_Id` INTEGER NULL,
-    `Tag_Player_Id` INTEGER NULL,
-    `Tag_Name` VARCHAR(255) NULL,
-    `Tag_Description` TEXT NULL,
-
-    PRIMARY KEY (`Tag_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Team` (
-    `Team_Id` INTEGER NOT NULL,
-    `Team_Org_Id` INTEGER NULL,
-    `Team_Name` VARCHAR(255) NULL,
-    `Team_Logo_picture` VARCHAR(255) NULL,
-    `Team_Instagram` VARCHAR(255) NULL,
-    `Team_Twitter` VARCHAR(255) NULL,
-    `Team_YouTube` VARCHAR(255) NULL,
-    `Team_Facebook` VARCHAR(255) NULL,
-    `Team_Coach_Id` INTEGER NULL,
-    `Team_Player_Id` INTEGER NULL,
-    `Team_Affiliation_Flag` INTEGER NULL,
-
-    PRIMARY KEY (`Team_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Team_Stats` (
-    `Match_Stat_Id` INTEGER NOT NULL,
-    `Match_Stat_Match_Id` INTEGER NULL,
-    `Match_Stat_Team_Id` INTEGER NULL,
-    `Match_Team_Score` INTEGER NULL,
-    `Match_1point` INTEGER NULL,
-    `Match_3point` INTEGER NULL,
-    `Match_2point` INTEGER NULL,
-    `Match_Points_Per_Game_Cal` DECIMAL(5, 2) NULL,
-    `Match_Off_Rebounds` INTEGER NULL,
-    `Match_Def_Rebounds` INTEGER NULL,
-    `Match_Fouls` INTEGER NULL,
-    `Match_Steals` INTEGER NULL,
-    `Match_Blocks` INTEGER NULL,
-    `Match_Assist` INTEGER NULL,
-    `Match_Turnover` INTEGER NULL,
-    `Match_Minutes_Played` INTEGER NULL,
-    `Match_Field_Goals_Cal` INTEGER NULL,
-    `Match_Field_Goal_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_3Point_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_Field_Throw_Percentage_Cal` DECIMAL(5, 2) NULL,
-    `Match_Rebounds_Cal` INTEGER NULL,
-    `Match_Game_Url` VARCHAR(255) NULL,
-    `Match_Team_Shot_Chart_Url` VARCHAR(255) NULL,
-
-    PRIMARY KEY (`Match_Stat_Id`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `User_WEB` (
-    `User_Id` INTEGER NOT NULL,
-    `User_Type_Id` INTEGER NULL,
-    `User_First_Name` VARCHAR(255) NULL,
-    `User_Last_Name` VARCHAR(255) NULL,
-    `User_Profile_Picture` VARCHAR(255) NULL,
-    `User_About_Me` TEXT NULL,
-    `User_Name` VARCHAR(255) NULL,
-    `User_Password` VARCHAR(255) NULL,
-    `User_emailVerified_Flag` INTEGER NULL,
-    `User_Address1` VARCHAR(255) NULL,
-    `User_Address2` VARCHAR(255) NULL,
-    `User_City` VARCHAR(255) NULL,
-    `User_State` CHAR(2) NULL,
-    `User_Zip` VARCHAR(10) NULL,
-    `User_Phone_Number` VARCHAR(15) NULL,
-    `User_Instagram` VARCHAR(255) NULL,
-    `User_Twitter` VARCHAR(255) NULL,
-    `User_YouTube` VARCHAR(255) NULL,
-    `User_Facebook` VARCHAR(255) NULL,
-    `Player_Jersey_number` INTEGER NULL,
-    `Player_Jersey_Size` VARCHAR(255) NULL,
-    `Player_Grad_Year` YEAR NULL,
-    `Player_Height` VARCHAR(255) NULL,
-    `Player_Position` VARCHAR(255) NULL,
-    `Player_GPA` DECIMAL(3, 2) NULL,
-
-    PRIMARY KEY (`User_Id`)
+CREATE TABLE `Player_Stats_Phase1` (
+    `Team1Team1PlayerJerseyNumber` VARCHAR(255) NULL,
+    `Team1` VARCHAR(255) NULL,
+    `Team1PlayerJerseyNumber` INTEGER NULL,
+    `Team2` VARCHAR(255) NULL,
+    `Stats` TEXT NULL,
+    `Action_Flag` VARCHAR(50) NULL,
+    `Court_Position_X` DECIMAL(10, 2) NULL,
+    `Court_Position_Y` DECIMAL(10, 2) NULL
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

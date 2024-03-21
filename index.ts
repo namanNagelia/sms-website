@@ -2,16 +2,15 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-async function main() {
-  const row = await prisma.showcases.findUnique({
-    where: {
-      id: 30,
-    },
+async function getFirstFiveRows() {
+  const rows = await prisma.Player_Roster_Phase1.findMany({
+    take: 5,
   });
-  console.log(row);
+  console.log(rows);
+  return rows;
 }
 
-main()
+getFirstFiveRows()
   .catch((e) => {
     throw e;
   })
