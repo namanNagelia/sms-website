@@ -7,171 +7,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Assessment {
-  Assessment_Id        Int     @id
-  Assessment_Match_Id  Int?
-  Assessment_Team_Id   Int?
-  Assessment_Player_Id Int?
-  Summary              String? @db.Text
-  Strength             String? @db.Text
-  Weakness             String? @db.Text
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Match_Table_Phase1 {
+  Team1Team2Scores  String?   @db.VarChar(255)
+  Date              DateTime? @db.Date
+  Team1             String?   @db.VarChar(255)
+  Team1LogoPic      String?   @db.VarChar(255)
+  Team1ShotChartUrl String?   @db.VarChar(255)
+  Team2             String?   @db.VarChar(255)
+  Team2LogoPic      String?   @db.VarChar(255)
+  Team2ShotChartUrl String?   @db.VarChar(255)
+  GameName          String?   @db.VarChar(255)
+  FinalScores       String?   @db.VarChar(255)
+  VideoLinkUrl      String?   @db.VarChar(255)
+
+  @@ignore
 }
 
-model Event {
-  Event_id               Int       @id
-  Event_Host_Id          Int?
-  Event_Name             String?   @db.VarChar(255)
-  Event_Logo_Picture     String?   @db.VarChar(255)
-  Event_Start_Date       DateTime? @db.Date
-  Event_End_Date         DateTime? @db.Date
-  Event_Director         String?   @db.VarChar(255)
-  Event_Contact_Email    String?   @db.VarChar(255)
-  Event_Instagram        String?   @db.VarChar(255)
-  Event_Twitter          String?   @db.VarChar(255)
-  Event_YouTube          String?   @db.VarChar(255)
-  Event_Facebook         String?   @db.VarChar(255)
-  Event_Affiliation_Flag Int?
+model Player_Roster_Phase1 {
+  SchoolNamePlayerJerseyNo String   @id @db.VarChar(255)
+  SchoolName               String?  @db.VarChar(255)
+  PlayerJerseyNo           Int?
+  PlayerFirstName          String?  @db.VarChar(255)
+  PlayerLastName           String?  @db.VarChar(255)
+  Height                   Decimal? @db.Decimal(5, 2)
+  YearOfGraduation         Int?     @db.Year
+  Position                 String?  @db.VarChar(50)
+  PlayerPictureURL         String?  @db.VarChar(255)
 }
 
-model Match_Game {
-  Match_Id          Int       @id
-  Match_Event_Id    Int?
-  Match_Team_ONE_Id Int?
-  Match_Team_TWO_Id Int?
-  Match_Name        String?   @db.VarChar(255)
-  Match_Date        DateTime? @db.Date
-  Match_Time        DateTime? @db.Date
-  Match_Location    String?   @db.VarChar(255)
-  Match_Address1    String?   @db.VarChar(255)
-  Match_Address2    String?   @db.VarChar(255)
-  Match_City        String?   @db.VarChar(255)
-  Match_State       String?   @db.Char(4)
-  Match_Zip_Code    String?   @db.VarChar(10)
-}
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model Player_Stats_Phase1 {
+  Team1Team1PlayerJerseyNumber String?  @db.VarChar(255)
+  Team1                        String?  @db.VarChar(255)
+  Team1PlayerJerseyNumber      Int?
+  Team2                        String?  @db.VarChar(255)
+  Stats                        String?  @db.Text
+  Action_Flag                  String?  @db.VarChar(50)
+  Court_Position_X             Decimal? @db.Decimal(10, 2)
+  Court_Position_Y             Decimal? @db.Decimal(10, 2)
 
-model News {
-  News_Id        Int     @id
-  News_Match_Id  Int?
-  News_Team_Id   Int?
-  News_Player_Id Int?
-  News_Name      String? @db.Text
-}
-
-model Org_Table {
-  Org_Id                  Int     @id
-  Org_Type                String? @db.VarChar(255)
-  Org_name                String? @db.VarChar(255)
-  Org_Address             String? @db.VarChar(255)
-  Org_City                String? @db.VarChar(255)
-  Org_State               String? @db.Char(2)
-  Org_Zip                 String? @db.VarChar(10)
-  Org_Phone_Number        String? @db.VarChar(15)
-  Org_Director_First_Name String? @db.VarChar(255)
-  Org_Director_Last_Name  String? @db.VarChar(255)
-}
-
-model Player_Stats {
-  Player_Stat_Id                          Int      @id
-  Player_Stat_Match_Id                    Int?
-  Player_Stat_Team_Id                     Int?
-  Player_Stat_Player_Id                   Int?
-  Match_Player_Score                      Int?
-  Match_Player_1point                     Int?
-  Match_Player_3point                     Int?
-  Match_Player_2point                     Int?
-  Match_Player_Points_Per_Game_Cal        Decimal? @db.Decimal(5, 2)
-  Match_Player_Off_Rebounds               Int?
-  Match_Player_Def_Rebounds               Int?
-  Match_Player_Fouls                      Int?
-  Match_Player_Steals                     Int?
-  Match_Player_Blocks                     Int?
-  Match_Player_Assist                     Int?
-  Match_Player_Turnover                   Int?
-  Match_Player_Minutes_Played             Int?
-  Match_Player_Field_Goals_Cal            Int?
-  Match_Player_Field_Goal_Percentage_Cal  Decimal? @db.Decimal(5, 2)
-  Match_Player_3Point_Percentage_Cal      Decimal? @db.Decimal(5, 2)
-  Match_Player_Field_Throw_Percentage_Cal Decimal? @db.Decimal(5, 2)
-  Match_Player_Rebounds_Cal               Int?
-  Match_Player_Game_Url                   String?  @db.VarChar(255)
-  Match_Player_Team_Shot_Chart_Url        String?  @db.VarChar(255)
-}
-
-model Tag {
-  Tag_Id          Int     @id
-  Tag_Match_Id    Int?
-  Tag_Team_Id     Int?
-  Tag_Player_Id   Int?
-  Tag_Name        String? @db.VarChar(255)
-  Tag_Description String? @db.Text
-}
-
-model Team {
-  Team_Id               Int     @id
-  Team_Org_Id           Int?
-  Team_Name             String? @db.VarChar(255)
-  Team_Logo_picture     String? @db.VarChar(255)
-  Team_Instagram        String? @db.VarChar(255)
-  Team_Twitter          String? @db.VarChar(255)
-  Team_YouTube          String? @db.VarChar(255)
-  Team_Facebook         String? @db.VarChar(255)
-  Team_Coach_Id         Int?
-  Team_Player_Id        Int?
-  Team_Affiliation_Flag Int?
-}
-
-model Team_Stats {
-  Match_Stat_Id                    Int      @id
-  Match_Stat_Match_Id              Int?
-  Match_Stat_Team_Id               Int?
-  Match_Team_Score                 Int?
-  Match_1point                     Int?
-  Match_3point                     Int?
-  Match_2point                     Int?
-  Match_Points_Per_Game_Cal        Decimal? @db.Decimal(5, 2)
-  Match_Off_Rebounds               Int?
-  Match_Def_Rebounds               Int?
-  Match_Fouls                      Int?
-  Match_Steals                     Int?
-  Match_Blocks                     Int?
-  Match_Assist                     Int?
-  Match_Turnover                   Int?
-  Match_Minutes_Played             Int?
-  Match_Field_Goals_Cal            Int?
-  Match_Field_Goal_Percentage_Cal  Decimal? @db.Decimal(5, 2)
-  Match_3Point_Percentage_Cal      Decimal? @db.Decimal(5, 2)
-  Match_Field_Throw_Percentage_Cal Decimal? @db.Decimal(5, 2)
-  Match_Rebounds_Cal               Int?
-  Match_Game_Url                   String?  @db.VarChar(255)
-  Match_Team_Shot_Chart_Url        String?  @db.VarChar(255)
-}
-
-model User_WEB {
-  User_Id                 Int      @id
-  User_Type_Id            Int?
-  User_First_Name         String?  @db.VarChar(255)
-  User_Last_Name          String?  @db.VarChar(255)
-  User_Profile_Picture    String?  @db.VarChar(255)
-  User_About_Me           String?  @db.Text
-  User_Name               String?  @db.VarChar(255)
-  User_Password           String?  @db.VarChar(255)
-  User_emailVerified_Flag Int?
-  User_Address1           String?  @db.VarChar(255)
-  User_Address2           String?  @db.VarChar(255)
-  User_City               String?  @db.VarChar(255)
-  User_State              String?  @db.Char(2)
-  User_Zip                String?  @db.VarChar(10)
-  User_Phone_Number       String?  @db.VarChar(15)
-  User_Instagram          String?  @db.VarChar(255)
-  User_Twitter            String?  @db.VarChar(255)
-  User_YouTube            String?  @db.VarChar(255)
-  User_Facebook           String?  @db.VarChar(255)
-  Player_Jersey_number    Int?
-  Player_Jersey_Size      String?  @db.VarChar(255)
-  Player_Grad_Year        Int?     @db.Year
-  Player_Height           String?  @db.VarChar(255)
-  Player_Position         String?  @db.VarChar(255)
-  Player_GPA              Decimal? @db.Decimal(3, 2)
+  @@ignore
 }
 
 model access_tokens {
