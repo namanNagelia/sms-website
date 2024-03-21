@@ -117,13 +117,38 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .default-card {
   /* Player Grade */
 
-  width: 608px;
+  width: 40vw;
   height: auto;
   left: 2413px;
   top: 191px;
 
   background: rgba(90, 128, 135, 0.39);
   border-radius: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .default-card {
+    width: 75vw;
+    height: auto;
+  }
+}
+.default-card {
+  /* Player Grade */
+
+  width: 40vw;
+  height: auto;
+  left: 2413px;
+  top: 191px;
+
+  background: rgba(90, 128, 135, 0.39);
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .default-card {
+    width: 75vw;
+    height: auto;
+  }
 }
 .video-card {
   /* Player Grade */
@@ -139,4 +164,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .bold {
   font-weight: bold;
+}
+
+.graph-card {
+  /* Player Grade */
+
+  width: 40vw;
+  height: auto;
+  left: 2413px;
+  top: 191px;
+
+  background: rgba(90, 128, 135, 0.39);
+  border-radius: 25px;
+}
+
+@media screen and (max-width: 1024px) {
+  .graph-card {
+    width: 75vw;
+    height: 500px;
+  }
 }

@@ -7,6 +7,7 @@ import VideoPlayer from "@/components/playerPage/videoPlayer";
 import VideoSelector from "@/components/playerPage/videoSelector";
 import StatsCard from "@/components/playerPage/statsCard";
 import GraphsBox from "@/components/playerPage/graphs";
+import { useMediaQuery } from "react-responsive";
 // Example JSON data for season and game stats
 const seasonStats = {
   archetype: "Slasher",
@@ -73,15 +74,15 @@ export default function PlayerPage() {
           twitterViews={1000}
         />
 
-        <div className="h-full w-full flex flex-col text-center items-center">
-          <div className="flex flex-row space-x-10 my-10">
+        <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
+          <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0">
             <BiometricCard />
             <PlayerGrade coachability={34} performance={91} intangibles={0} />
           </div>
-          <div className="flex items-center">
+          <div className="lg:flex items-center">
             <VideoPlayerLive />
           </div>
-          <div className="flex flex-row space-x-10 my-10">
+          <div className="lg:flex  lg:space-x-10 my-10">
             <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
             <GraphsBox />
           </div>

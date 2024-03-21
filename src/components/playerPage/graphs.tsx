@@ -70,11 +70,11 @@ const GraphsBox = () => {
     throw new Error("Bad Hex");
   }
 
-  const [shotChart, setShotChart] = useState(true);
-  const [ratingsChart, setRatingsChart] = useState(false);
+  const [shotChart, setShotChart] = useState(false);
+  const [ratingsChart, setRatingsChart] = useState(true);
   const [hustleChart, setHustleChart] = useState(false);
   return (
-    <div className="default-card flex flex-col items-center py-8 space-y-3 mt-8">
+    <div className="graph-card flex flex-col items-center py-8 space-y-3 mt-8">
       <div className=" font-dinCondensed text-brandWhite text-5xl bold">
         Graphs
       </div>
