@@ -134,8 +134,13 @@ const PlayerNameBanner = () => {
 
 const VideoPlayerLive = ({ active, handle }: { active: string, handle: React.Dispatch<React.SetStateAction<string>> }) => {
   return (
-    <div className="flex w-screen video-card h-[540px]">
-      <div className="w-1/4 p-6">
+    <div className="flex flex-row items-center video-card 
+      xl:w-[1140px] xl:h-[600px]
+      lg:w-[900px]  lg:h-[500px]
+      md:w-[700px]  md:h-[420px]
+      
+    ">
+      <div className="w-1/4 p-6 h-[95%]">
         <VideoSelector
           videoLinks={videoHighlights}
           title="Highlights"
