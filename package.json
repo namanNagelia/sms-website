@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@prisma/client": "^5.11.0",
     "@vidstack/react": "^1.10.9",
     "datepicker": "^0.0.0",
     "embla-carousel": "^8.0.0",

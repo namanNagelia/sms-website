@@ -1,0 +1,716 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Assessment {
+  Assessment_Id        Int     @id
+  Assessment_Match_Id  Int?
+  Assessment_Team_Id   Int?
+  Assessment_Player_Id Int?
+  Summary              String? @db.Text
+  Strength             String? @db.Text
+  Weakness             String? @db.Text
+}
+
+model Event {
+  Event_id               Int       @id
+  Event_Host_Id          Int?
+  Event_Name             String?   @db.VarChar(255)
+  Event_Logo_Picture     String?   @db.VarChar(255)
+  Event_Start_Date       DateTime? @db.Date
+  Event_End_Date         DateTime? @db.Date
+  Event_Director         String?   @db.VarChar(255)
+  Event_Contact_Email    String?   @db.VarChar(255)
+  Event_Instagram        String?   @db.VarChar(255)
+  Event_Twitter          String?   @db.VarChar(255)
+  Event_YouTube          String?   @db.VarChar(255)
+  Event_Facebook         String?   @db.VarChar(255)
+  Event_Affiliation_Flag Int?
+}
+
+model Match_Game {
+  Match_Id          Int       @id
+  Match_Event_Id    Int?
+  Match_Team_ONE_Id Int?
+  Match_Team_TWO_Id Int?
+  Match_Name        String?   @db.VarChar(255)
+  Match_Date        DateTime? @db.Date
+  Match_Time        DateTime? @db.Date
+  Match_Location    String?   @db.VarChar(255)
+  Match_Address1    String?   @db.VarChar(255)
+  Match_Address2    String?   @db.VarChar(255)
+  Match_City        String?   @db.VarChar(255)
+  Match_State       String?   @db.Char(4)
+  Match_Zip_Code    String?   @db.VarChar(10)
+}
+
+model News {
+  News_Id        Int     @id
+  News_Match_Id  Int?
+  News_Team_Id   Int?
+  News_Player_Id Int?
+  News_Name      String? @db.Text
+}
+
+model Org_Table {
+  Org_Id                  Int     @id
+  Org_Type                String? @db.VarChar(255)
+  Org_name                String? @db.VarChar(255)
+  Org_Address             String? @db.VarChar(255)
+  Org_City                String? @db.VarChar(255)
+  Org_State               String? @db.Char(2)
+  Org_Zip                 String? @db.VarChar(10)
+  Org_Phone_Number        String? @db.VarChar(15)
+  Org_Director_First_Name String? @db.VarChar(255)
+  Org_Director_Last_Name  String? @db.VarChar(255)
+}
+
+model Player_Stats {
+  Player_Stat_Id                          Int      @id
+  Player_Stat_Match_Id                    Int?
+  Player_Stat_Team_Id                     Int?
+  Player_Stat_Player_Id                   Int?
+  Match_Player_Score                      Int?
+  Match_Player_1point                     Int?
+  Match_Player_3point                     Int?
+  Match_Player_2point                     Int?
+  Match_Player_Points_Per_Game_Cal        Decimal? @db.Decimal(5, 2)
+  Match_Player_Off_Rebounds               Int?
+  Match_Player_Def_Rebounds               Int?
+  Match_Player_Fouls                      Int?
+  Match_Player_Steals                     Int?
+  Match_Player_Blocks                     Int?
+  Match_Player_Assist                     Int?
+  Match_Player_Turnover                   Int?
+  Match_Player_Minutes_Played             Int?
+  Match_Player_Field_Goals_Cal            Int?
+  Match_Player_Field_Goal_Percentage_Cal  Decimal? @db.Decimal(5, 2)
+  Match_Player_3Point_Percentage_Cal      Decimal? @db.Decimal(5, 2)
+  Match_Player_Field_Throw_Percentage_Cal Decimal? @db.Decimal(5, 2)
+  Match_Player_Rebounds_Cal               Int?
+  Match_Player_Game_Url                   String?  @db.VarChar(255)
+  Match_Player_Team_Shot_Chart_Url        String?  @db.VarChar(255)
+}
+
+model Tag {
+  Tag_Id          Int     @id
+  Tag_Match_Id    Int?
+  Tag_Team_Id     Int?
+  Tag_Player_Id   Int?
+  Tag_Name        String? @db.VarChar(255)
+  Tag_Description String? @db.Text
+}
+
+model Team {
+  Team_Id               Int     @id
+  Team_Org_Id           Int?
+  Team_Name             String? @db.VarChar(255)
+  Team_Logo_picture     String? @db.VarChar(255)
+  Team_Instagram        String? @db.VarChar(255)
+  Team_Twitter          String? @db.VarChar(255)
+  Team_YouTube          String? @db.VarChar(255)
+  Team_Facebook         String? @db.VarChar(255)
+  Team_Coach_Id         Int?
+  Team_Player_Id        Int?
+  Team_Affiliation_Flag Int?
+}
+
+model Team_Stats {
+  Match_Stat_Id                    Int      @id
+  Match_Stat_Match_Id              Int?
+  Match_Stat_Team_Id               Int?
+  Match_Team_Score                 Int?
+  Match_1point                     Int?
+  Match_3point                     Int?
+  Match_2point                     Int?
+  Match_Points_Per_Game_Cal        Decimal? @db.Decimal(5, 2)
+  Match_Off_Rebounds               Int?
+  Match_Def_Rebounds               Int?
+  Match_Fouls                      Int?
+  Match_Steals                     Int?
+  Match_Blocks                     Int?
+  Match_Assist                     Int?
+  Match_Turnover                   Int?
+  Match_Minutes_Played             Int?
+  Match_Field_Goals_Cal            Int?
+  Match_Field_Goal_Percentage_Cal  Decimal? @db.Decimal(5, 2)
+  Match_3Point_Percentage_Cal      Decimal? @db.Decimal(5, 2)
+  Match_Field_Throw_Percentage_Cal Decimal? @db.Decimal(5, 2)
+  Match_Rebounds_Cal               Int?
+  Match_Game_Url                   String?  @db.VarChar(255)
+  Match_Team_Shot_Chart_Url        String?  @db.VarChar(255)
+}
+
+model User_WEB {
+  User_Id                 Int      @id
+  User_Type_Id            Int?
+  User_First_Name         String?  @db.VarChar(255)
+  User_Last_Name          String?  @db.VarChar(255)
+  User_Profile_Picture    String?  @db.VarChar(255)
+  User_About_Me           String?  @db.Text
+  User_Name               String?  @db.VarChar(255)
+  User_Password           String?  @db.VarChar(255)
+  User_emailVerified_Flag Int?
+  User_Address1           String?  @db.VarChar(255)
+  User_Address2           String?  @db.VarChar(255)
+  User_City               String?  @db.VarChar(255)
+  User_State              String?  @db.Char(2)
+  User_Zip                String?  @db.VarChar(10)
+  User_Phone_Number       String?  @db.VarChar(15)
+  User_Instagram          String?  @db.VarChar(255)
+  User_Twitter            String?  @db.VarChar(255)
+  User_YouTube            String?  @db.VarChar(255)
+  User_Facebook           String?  @db.VarChar(255)
+  Player_Jersey_number    Int?
+  Player_Jersey_Size      String?  @db.VarChar(255)
+  Player_Grad_Year        Int?     @db.Year
+  Player_Height           String?  @db.VarChar(255)
+  Player_Position         String?  @db.VarChar(255)
+  Player_GPA              Decimal? @db.Decimal(3, 2)
+}
+
+model access_tokens {
+  id             String           @id @db.VarChar(255)
+  userId         Int?             @db.UnsignedInt
+  revoked        Boolean?         @default(false)
+  createdAt      DateTime?        @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime?        @default(now()) @db.Timestamp(0)
+  expiresAt      DateTime?        @db.Timestamp(0)
+  users          users?           @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "access_tokens_userid_foreign")
+  refresh_tokens refresh_tokens[]
+
+  @@index([userId], map: "access_tokens_userid_foreign")
+}
+
+model app_versions {
+  id            Int       @id @default(autoincrement()) @db.UnsignedInt
+  minVersion    String?   @db.VarChar(255)
+  latestVersion String?   @db.VarChar(255)
+  type          String?   @db.VarChar(255)
+  appLink       String?   @db.VarChar(255)
+  createdAt     DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt     DateTime? @db.Timestamp(0)
+  bundleId      String?   @db.VarChar(255)
+}
+
+model basketball_active_player {
+  id                 BigInt              @id @default(autoincrement()) @db.UnsignedBigInt
+  userId             Int?                @db.UnsignedInt
+  playerId           BigInt?             @db.UnsignedBigInt
+  matchId            BigInt?             @db.UnsignedBigInt
+  teamId             BigInt?             @db.UnsignedBigInt
+  position           Int?
+  createdAt          DateTime?           @default(now()) @db.Timestamp(0)
+  updatedAt          DateTime?           @default(now()) @db.Timestamp(0)
+  basketball_match   basketball_match?   @relation(fields: [matchId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_active_player_matchid_foreign")
+  basketball_players basketball_players? @relation(fields: [playerId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_active_player_playerid_foreign")
+  basketball_teams   basketball_teams?   @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_active_player_teamid_foreign")
+  users              users?              @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_active_player_userid_foreign")
+
+  @@index([matchId], map: "basketball_active_player_matchid_index")
+  @@index([playerId], map: "basketball_active_player_playerid_index")
+  @@index([teamId], map: "basketball_active_player_teamid_index")
+  @@index([userId], map: "basketball_active_player_userid_index")
+}
+
+model basketball_match {
+  id                                                        BigInt                     @id @default(autoincrement()) @db.UnsignedBigInt
+  userId                                                    Int?                       @db.UnsignedInt
+  name                                                      String?                    @db.VarChar(255)
+  team1                                                     BigInt?                    @db.UnsignedBigInt
+  team2                                                     BigInt?                    @db.UnsignedBigInt
+  sport                                                     String?                    @db.VarChar(255)
+  matchDateTime                                             DateTime?                  @db.Timestamp(0)
+  createdAt                                                 DateTime?                  @default(now()) @db.Timestamp(0)
+  updatedAt                                                 DateTime?                  @default(now()) @db.Timestamp(0)
+  status                                                    String?                    @db.VarChar(255)
+  matchSecond                                               Int?
+  basketball_active_player                                  basketball_active_player[]
+  basketball_teams_basketball_match_team1Tobasketball_teams basketball_teams?          @relation("basketball_match_team1Tobasketball_teams", fields: [team1], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_team1_foreign")
+  basketball_teams_basketball_match_team2Tobasketball_teams basketball_teams?          @relation("basketball_match_team2Tobasketball_teams", fields: [team2], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_team2_foreign")
+  users                                                     users?                     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_userid_foreign")
+
+  @@index([team1], map: "basketball_match_team1_index")
+  @@index([team2], map: "basketball_match_team2_index")
+  @@index([userId], map: "basketball_match_userid_index")
+}
+
+model basketball_players {
+  id                       BigInt                     @id @default(autoincrement()) @db.UnsignedBigInt
+  teamId                   BigInt?                    @db.UnsignedBigInt
+  firstName                String?                    @db.VarChar(255)
+  lastName                 String?                    @db.VarChar(255)
+  jerseyNumber             String?                    @db.VarChar(255)
+  position                 String?                    @db.VarChar(255)
+  image                    String?                    @db.VarChar(255)
+  createdAt                DateTime?                  @default(now()) @db.Timestamp(0)
+  updatedAt                DateTime?                  @default(now()) @db.Timestamp(0)
+  priority                 String?                    @db.VarChar(255)
+  basketball_active_player basketball_active_player[]
+  basketball_teams         basketball_teams?          @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_players_teamid_foreign")
+
+  @@index([teamId], map: "basketball_players_teamid_index")
+}
+
+model basketball_scoreboard {
+  id              BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  userId          Int?      @db.UnsignedInt
+  matchId         Int?      @db.UnsignedInt
+  teamId          BigInt?   @db.UnsignedBigInt
+  playerId        BigInt?   @db.UnsignedBigInt
+  position        String?   @db.VarChar(255)
+  score           Int?
+  attemptType     String?   @db.VarChar(255)
+  action          String?   @db.VarChar(255)
+  type            String?   @db.VarChar(255)
+  playerPositionX String?   @db.VarChar(255)
+  playerPositionY String?   @db.VarChar(255)
+  createdAt       DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime? @default(now()) @db.Timestamp(0)
+  scoreTime       Int?
+  users           users?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_scoreboard_userid_foreign")
+
+  @@index([matchId], map: "basketball_scoreboard_matchid_index")
+  @@index([userId], map: "basketball_scoreboard_userid_index")
+}
+
+model basketball_teams {
+  id                                                        BigInt                     @id @default(autoincrement()) @db.UnsignedBigInt
+  userId                                                    Int?                       @db.UnsignedInt
+  name                                                      String?                    @db.VarChar(255)
+  logo                                                      String?                    @db.VarChar(255)
+  createdAt                                                 DateTime?                  @default(now()) @db.Timestamp(0)
+  updatedAt                                                 DateTime?                  @default(now()) @db.Timestamp(0)
+  basketball_active_player                                  basketball_active_player[]
+  basketball_match_basketball_match_team1Tobasketball_teams basketball_match[]         @relation("basketball_match_team1Tobasketball_teams")
+  basketball_match_basketball_match_team2Tobasketball_teams basketball_match[]         @relation("basketball_match_team2Tobasketball_teams")
+  basketball_players                                        basketball_players[]
+  users                                                     users?                     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_teams_userid_foreign")
+
+  @@index([userId], map: "basketball_teams_userid_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model connections {
+  id                                   Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId                               Int?      @db.UnsignedInt
+  invitedUser                          Int?      @db.UnsignedInt
+  status                               Int?
+  createdAt                            DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt                            DateTime? @default(now()) @db.Timestamp(0)
+  users_connections_invitedUserTousers users?    @relation("connections_invitedUserTousers", fields: [invitedUser], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "connections_inviteduser_foreign")
+  users_connections_userIdTousers      users?    @relation("connections_userIdTousers", fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "connections_userid_foreign")
+
+  @@index([invitedUser], map: "connections_inviteduser_index")
+  @@index([userId], map: "connections_userid_index")
+}
+
+model delete_account_after_subscription_ends {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId    Int       @db.UnsignedInt
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @default(now()) @db.Timestamp(0)
+  users     users     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "delete_account_after_subscription_ends_userid_foreign")
+
+  @@index([userId], map: "delete_account_after_subscription_ends_userid_index")
+}
+
+model event {
+  id        Int         @id @default(autoincrement()) @db.UnsignedInt
+  image     String?     @db.VarChar(255)
+  gameName  String?     @db.VarChar(255)
+  url       String?     @db.VarChar(255)
+  isdefault Int?
+  createdAt DateTime?   @default(now()) @db.Timestamp(0)
+  updatedAt DateTime?   @db.Timestamp(0)
+  date      DateTime?   @db.Timestamp(0)
+  showcases showcases[]
+}
+
+model fcm_tokens {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId    Int?      @db.UnsignedInt
+  token     String?   @db.VarChar(255)
+  deviceId  String?   @db.VarChar(255)
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @default(now()) @db.Timestamp(0)
+  users     users?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fcm_tokens_userid_foreign")
+
+  @@index([userId], map: "fcm_tokens_userid_index")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model group_backup {
+  id        Int       @default(0) @db.UnsignedInt
+  name      String?   @db.VarChar(255)
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @default(now()) @db.Timestamp(0)
+  createdby Int?      @db.UnsignedInt
+
+  @@ignore
+}
+
+model group_members {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId    Int?      @db.UnsignedInt
+  groupId   Int?      @db.UnsignedInt
+  isAdmin   Boolean?  @default(false)
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @default(now()) @db.Timestamp(0)
+  groups    groups?   @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "group_members_groupid_foreign")
+  users     users?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "group_members_userid_foreign")
+
+  @@index([groupId], map: "group_members_groupid_index")
+  @@index([userId], map: "group_members_userid_index")
+}
+
+model groups {
+  id                    Int                     @id @default(autoincrement()) @db.UnsignedInt
+  name                  String?                 @db.VarChar(255)
+  createdAt             DateTime?               @default(now()) @db.Timestamp(0)
+  updatedAt             DateTime?               @default(now()) @db.Timestamp(0)
+  createdby             Int?                    @db.UnsignedInt
+  group_members         group_members[]
+  users                 users?                  @relation(fields: [createdby], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "groups_createdby_foreign")
+  shared_library_medias shared_library_medias[]
+  shared_playlists      shared_playlists[]
+
+  @@index([createdby], map: "groups_createdby_index")
+}
+
+model intros {
+  id        Int       @id @default(autoincrement()) @db.UnsignedInt
+  title     String?   @db.VarChar(255)
+  link      String?   @db.VarChar(255)
+  createdAt DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt DateTime? @db.Timestamp(0)
+}
+
+model knex_migrations {
+  id             Int       @id @default(autoincrement()) @db.UnsignedInt
+  name           String?   @db.VarChar(255)
+  batch          Int?
+  migration_time DateTime? @db.Timestamp(0)
+}
+
+model knex_migrations_lock {
+  index     Int  @id @default(autoincrement()) @db.UnsignedInt
+  is_locked Int?
+}
+
+model library_media_comments {
+  id             Int            @id @default(autoincrement()) @db.UnsignedInt
+  libraryMediaId Int            @db.UnsignedInt
+  authorId       Int            @db.UnsignedInt
+  comment        String?        @db.Text
+  createdAt      DateTime?      @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime?      @default(now()) @db.Timestamp(0)
+  users          users          @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_media_comments_authorid_foreign")
+  library_medias library_medias @relation(fields: [libraryMediaId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_media_comments_librarymediaid_foreign")
+
+  @@index([authorId], map: "library_media_comments_authorid_index")
+  @@index([libraryMediaId], map: "library_media_comments_librarymediaid_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model library_medias {
+  id                     Int                      @id @default(autoincrement()) @db.UnsignedInt
+  userId                 Int?                     @db.UnsignedInt
+  title                  String?                  @db.VarChar(255)
+  media                  String?                  @db.VarChar(255)
+  mediaType              Int?
+  mediaThumbnail         String?                  @db.VarChar(255)
+  seconds                Int?                     @default(0)
+  playlistId             Int?                     @db.UnsignedInt
+  deletedAt              DateTime?                @db.Timestamp(0)
+  createdAt              DateTime?                @default(now()) @db.Timestamp(0)
+  updatedAt              DateTime?                @default(now()) @db.Timestamp(0)
+  description            String?                  @db.Text
+  isEdited               Boolean?                 @default(false)
+  editedMediasJson       String?                  @db.LongText
+  library_media_comments library_media_comments[]
+  playlists              playlists?               @relation(fields: [playlistId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_medias_playlistid_foreign")
+  users                  users?                   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_medias_userid_foreign")
+  library_tags           library_tags[]
+  shared_library_medias  shared_library_medias[]
+
+  @@index([playlistId], map: "library_medias_playlistid_index")
+  @@index([userId], map: "library_medias_userid_index")
+}
+
+model library_tags {
+  id             Int             @id @default(autoincrement()) @db.UnsignedInt
+  libraryMediaId Int?            @db.UnsignedInt
+  tagId          Int?            @db.UnsignedInt
+  createdAt      DateTime?       @default(now()) @db.Timestamp(0)
+  updatedAt      DateTime?       @default(now()) @db.Timestamp(0)
+  library_medias library_medias? @relation(fields: [libraryMediaId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_tags_librarymediaid_foreign")
+  tags           tags?           @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "library_tags_tagid_foreign")
+
+  @@index([libraryMediaId], map: "library_tags_librarymediaid_index")
+  @@index([tagId], map: "library_tags_tagid_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model media_weblinks {
+  id          Int       @id @default(autoincrement()) @db.UnsignedInt
+  createdBy   Int?      @db.UnsignedInt
+  slug        String?   @unique(map: "media_weblinks_slug_unique") @db.VarChar(255)
+  title       String?   @db.VarChar(255)
+  media       String?   @db.VarChar(255)
+  mediaType   Int?
+  seconds     Int?      @default(0)
+  description String?   @db.Text
+  createdAt   DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime? @default(now()) @db.Timestamp(0)
+  users       users?    @relation(fields: [createdBy], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "media_weblinks_createdby_foreign")
+
+  @@index([createdBy], map: "media_weblinks_createdby_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model notifications {
+  id                                    Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId                                Int       @db.UnsignedInt
+  authUserId                            Int       @db.UnsignedInt
+  message                               String?   @db.Text
+  notificationType                      Int?
+  readAt                                DateTime? @db.Timestamp(0)
+  referenceId                           Int?
+  createdAt                             DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt                             DateTime? @default(now()) @db.Timestamp(0)
+  users_notifications_authUserIdTousers users     @relation("notifications_authUserIdTousers", fields: [authUserId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notifications_authuserid_foreign")
+  users_notifications_userIdTousers     users     @relation("notifications_userIdTousers", fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "notifications_userid_foreign")
+
+  @@index([authUserId], map: "notifications_authuserid_index")
+  @@index([userId], map: "notifications_userid_index")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model password_resets {
+  email      String?   @db.VarChar(255)
+  token      String?   @db.Text
+  created_at DateTime? @default(now()) @db.Timestamp(0)
+
+  @@ignore
+}
+
+model playlist_tags {
+  id         Int        @id @default(autoincrement()) @db.UnsignedInt
+  playlistId Int?       @db.UnsignedInt
+  tagId      Int?       @db.UnsignedInt
+  createdAt  DateTime?  @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime?  @default(now()) @db.Timestamp(0)
+  playlists  playlists? @relation(fields: [playlistId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "playlist_tags_playlistid_foreign")
+  tags       tags?      @relation(fields: [tagId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "playlist_tags_tagid_foreign")
+
+  @@index([playlistId], map: "playlist_tags_playlistid_index")
+  @@index([tagId], map: "playlist_tags_tagid_index")
+}
+
+model playlists {
+  id               Int                @id @default(autoincrement()) @db.UnsignedInt
+  userId           Int?               @db.UnsignedInt
+  name             String?            @db.VarChar(255)
+  createdAt        DateTime?          @default(now()) @db.Timestamp(0)
+  updatedAt        DateTime?          @default(now()) @db.Timestamp(0)
+  library_medias   library_medias[]
+  playlist_tags    playlist_tags[]
+  users            users?             @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "playlists_userid_foreign")
+  shared_playlists shared_playlists[]
+
+  @@index([userId], map: "playlists_userid_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model products {
+  id                          Int                  @id @default(autoincrement()) @db.UnsignedInt
+  productKey                  String?              @db.VarChar(255)
+  title                       String?              @db.VarChar(255)
+  price                       Decimal?             @db.Decimal(15, 2)
+  duration                    Int?                 @default(1)
+  currency                    String?              @default("$") @db.VarChar(255)
+  planType                    products_planType?
+  platform                    products_platform?
+  isAllowRecordingAndUpload   Boolean?             @default(false)
+  isAllowAutoRecord           Boolean?             @default(false)
+  isAllowConnectAndShare      Boolean?             @default(false)
+  isAllowEditTool             Boolean?             @default(false)
+  isAllowToStitchClips        Boolean?             @default(false)
+  isAllowToDownloadClips      Boolean?             @default(false)
+  isAllowToShareOnSocialMedia Boolean?             @default(false)
+  isAllowPostureAnalysis      Boolean?             @default(false)
+  createdAt                   DateTime?            @default(now()) @db.Timestamp(0)
+  updatedAt                   DateTime?            @default(now()) @db.Timestamp(0)
+  user_subscriptions          user_subscriptions[]
+}
+
+model refresh_tokens {
+  id            String         @id @db.VarChar(255)
+  accessTokenId String?        @db.VarChar(255)
+  revoked       Boolean?       @default(false)
+  expiresAt     DateTime?      @db.Timestamp(0)
+  access_tokens access_tokens? @relation(fields: [accessTokenId], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "refresh_tokens_accesstokenid_foreign")
+
+  @@index([accessTokenId], map: "refresh_tokens_accesstokenid_foreign")
+}
+
+model shared_library_medias {
+  id                     Int             @id @default(autoincrement()) @db.UnsignedInt
+  libraryMediaId         Int?            @db.UnsignedInt
+  userId                 Int             @db.UnsignedInt
+  groupId                Int?            @db.UnsignedInt
+  createdAt              DateTime?       @default(now()) @db.Timestamp(0)
+  updatedAt              DateTime?       @default(now()) @db.Timestamp(0)
+  isAllowedToEditByOwner Boolean?        @default(false)
+  groups                 groups?         @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_library_medias_groupid_foreign")
+  library_medias         library_medias? @relation(fields: [libraryMediaId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_library_medias_librarymediaid_foreign")
+  users                  users           @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_library_medias_userid_foreign")
+
+  @@index([groupId], map: "shared_library_medias_groupid_index")
+  @@index([libraryMediaId], map: "shared_library_medias_librarymediaid_index")
+  @@index([userId], map: "shared_library_medias_userid_index")
+}
+
+model shared_playlists {
+  id                     Int        @id @default(autoincrement()) @db.UnsignedInt
+  playlistId             Int?       @db.UnsignedInt
+  userId                 Int        @db.UnsignedInt
+  groupId                Int?       @db.UnsignedInt
+  createdAt              DateTime?  @default(now()) @db.Timestamp(0)
+  updatedAt              DateTime?  @default(now()) @db.Timestamp(0)
+  isAllowedToEditByOwner Boolean?   @default(false)
+  groups                 groups?    @relation(fields: [groupId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_playlists_groupid_foreign")
+  playlists              playlists? @relation(fields: [playlistId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_playlists_playlistid_foreign")
+  users                  users      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "shared_playlists_userid_foreign")
+
+  @@index([groupId], map: "shared_playlists_groupid_index")
+  @@index([playlistId], map: "shared_playlists_playlistid_index")
+  @@index([userId], map: "shared_playlists_userid_index")
+}
+
+model showcases {
+  id        BigInt          @id @default(autoincrement()) @db.UnsignedBigInt
+  userId    Int?            @db.UnsignedInt
+  image     String?         @db.VarChar(255)
+  gameName  String?         @db.VarChar(255)
+  url       String?         @db.VarChar(255)
+  type      showcases_type?
+  createdAt DateTime?       @default(now()) @db.Timestamp(0)
+  updatedAt DateTime?       @db.Timestamp(0)
+  eventId   Int?            @db.UnsignedInt
+  event     event?          @relation(fields: [eventId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "showcases_eventid_foreign")
+  users     users?          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "showcases_userid_foreign")
+
+  @@index([eventId], map: "showcases_eventid_index")
+  @@index([userId], map: "showcases_userid_index")
+}
+
+model stitch_hist {
+  id            Int       @id @default(autoincrement()) @db.UnsignedInt
+  userId        Int?      @db.UnsignedInt
+  playlistId    Int?      @db.UnsignedInt
+  group_id      Int?      @db.UnsignedInt
+  createdAt     DateTime? @default(now()) @db.Timestamp(0)
+  stitch_status String?   @db.VarChar(255)
+
+  @@unique([userId, playlistId, group_id], map: "stitch_hist_unique_userId_playlistId_group_id_index")
+  @@index([createdAt, stitch_status], map: "stitch_hist_createdby_index")
+}
+
+model tags {
+  id            Int             @id @default(autoincrement()) @db.UnsignedInt
+  name          String?         @db.VarChar(255)
+  library_tags  library_tags[]
+  playlist_tags playlist_tags[]
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model user_subscriptions {
+  id                    Int       @id @default(autoincrement()) @db.UnsignedInt
+  productId             Int?      @db.UnsignedInt
+  userId                Int?      @db.UnsignedInt
+  purchaseToken         String?   @db.Text
+  orderId               String?   @db.VarChar(255)
+  originalTransactionId String?   @db.VarChar(255)
+  purchasedAt           DateTime? @db.Timestamp(0)
+  expireAt              DateTime? @db.Timestamp(0)
+  purchaseState         String?   @db.VarChar(255)
+  autoRenewing          String?   @db.VarChar(255)
+  isTrial               Boolean?  @default(true)
+  receipt               Json?
+  isTestEnvironment     Boolean?
+  cancelledAt           DateTime? @db.Timestamp(0)
+  createdAt             DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt             DateTime? @default(now()) @db.Timestamp(0)
+  products              products? @relation(fields: [productId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_subscriptions_productid_foreign")
+  users                 users?    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "user_subscriptions_userid_foreign")
+
+  @@index([productId], map: "user_subscriptions_productid_index")
+  @@index([userId], map: "user_subscriptions_userid_index")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model users {
+  id                                            Int                                      @id @default(autoincrement()) @db.UnsignedInt
+  email                                         String?                                  @unique(map: "users_email_unique") @db.VarChar(255)
+  phone                                         String?                                  @unique(map: "users_phone_unique") @db.VarChar(255)
+  password                                      String?                                  @db.VarChar(255)
+  emailVerifiedAt                               DateTime?                                @db.Timestamp(0)
+  firstName                                     String?                                  @db.VarChar(255)
+  lastName                                      String?                                  @db.VarChar(255)
+  profilePicture                                String?                                  @db.VarChar(255)
+  aboutMe                                       String?                                  @db.VarChar(255)
+  backgroundMedia                               String?                                  @db.VarChar(1000)
+  backgroundMediaType                           Int?
+  backgroundMediaThumbnail                      String?                                  @db.VarChar(1000)
+  socialEmail                                   String?                                  @db.VarChar(255)
+  providerType                                  String?                                  @db.VarChar(255)
+  providerId                                    String?                                  @db.VarChar(255)
+  createdAt                                     DateTime?                                @default(now()) @db.Timestamp(0)
+  updatedAt                                     DateTime?                                @db.Timestamp(0)
+  lastAppAccessTime                             DateTime?                                @default(now()) @db.Timestamp(0)
+  skillteckUserId                               Int?
+  isShowSubscriptionPopUp                       Boolean?                                 @default(false)
+  access_tokens                                 access_tokens[]
+  basketball_active_player                      basketball_active_player[]
+  basketball_match                              basketball_match[]
+  basketball_scoreboard                         basketball_scoreboard[]
+  basketball_teams                              basketball_teams[]
+  connections_connections_invitedUserTousers    connections[]                            @relation("connections_invitedUserTousers")
+  connections_connections_userIdTousers         connections[]                            @relation("connections_userIdTousers")
+  delete_account_after_subscription_ends        delete_account_after_subscription_ends[]
+  fcm_tokens                                    fcm_tokens[]
+  group_members                                 group_members[]
+  groups                                        groups[]
+  library_media_comments                        library_media_comments[]
+  library_medias                                library_medias[]
+  media_weblinks                                media_weblinks[]
+  notifications_notifications_authUserIdTousers notifications[]                          @relation("notifications_authUserIdTousers")
+  notifications_notifications_userIdTousers     notifications[]                          @relation("notifications_userIdTousers")
+  playlists                                     playlists[]
+  shared_library_medias                         shared_library_medias[]
+  shared_playlists                              shared_playlists[]
+  showcases                                     showcases[]
+  user_subscriptions                            user_subscriptions[]
+}
+
+enum showcases_type {
+  stats
+  video
+}
+
+enum products_planType {
+  basic
+  pro
+}
+
+enum products_platform {
+  Android
+  iOS
+}
