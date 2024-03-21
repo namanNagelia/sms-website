@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import SocialMedia from "@/components/playerPage/socialMedia";
@@ -8,6 +9,7 @@ import VideoSelector from "@/components/playerPage/videoSelector";
 import StatsCard from "@/components/playerPage/statsCard";
 import GraphsBox from "@/components/playerPage/graphs";
 import { useMediaQuery } from "react-responsive";
+import { active } from "d3";
 // Example JSON data for season and game stats
 const seasonStats = {
   archetype: "Slasher",
@@ -58,9 +60,35 @@ const gameStats = [
     },
   },
 ];
+
+const videoHighlights = [
+  {
+    title: "Dunk",
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+  },
+  {
+    title: "Dunk",
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+  },
+  {
+    title: "Dunk",
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+  },
+  {
+    title: "Dunk",
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+  },
+  {
+    title: "Dunk",
+    link: "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
+  },
+]
+
 //What weneed: Player details (unchanging)
 //Videos: Put a default video for them, then in the same page make a state variable for current video, and that state changes if a video on the side is selected
 export default function PlayerPage() {
+  const [activeVideo, setVideo] = useState<string>(videoHighlights[0].link);
+
   return (
     <>
       <PlayerNameBanner />
@@ -80,7 +108,7 @@ export default function PlayerPage() {
             <PlayerGrade coachability={34} performance={91} intangibles={0} />
           </div>
           <div className="lg:flex items-center">
-            <VideoPlayerLive />
+            <VideoPlayerLive active={activeVideo} handle={setVideo} />
           </div>
           <div className="lg:flex  lg:space-x-10 my-10">
             <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
@@ -104,24 +132,19 @@ const PlayerNameBanner = () => {
   );
 };
 
-const VideoPlayerLive = () => {
+const VideoPlayerLive = ({ active, handle }: { active: string, handle: React.Dispatch<React.SetStateAction<string>> }) => {
   return (
-    <div className="flex w-screen video-card">
-      <div className="w-1/4 p-6 h-screen">
-        {" "}
-        <h1 className="font-dinCondensed text-center text-white text-4xl">
-          Highlights
-        </h1>
+    <div className="flex w-screen video-card h-[540px]">
+      <div className="w-1/4 p-6">
         <VideoSelector
-          videoLinks={
-            "https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU/low.mp4"
-          }
+          videoLinks={videoHighlights}
           title="Highlights"
+          handleChange={handle}
         />
       </div>
       <div className="w-3/4 p-6">
         {" "}
-        <VideoPlayer videoLink="https://skillteck-v2.s3.us-west-1.amazonaws.com/videos/2527/library/2527_4841.mp4" />
+        <VideoPlayer videoLink={active} />
       </div>
     </div>
   );
