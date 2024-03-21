@@ -1,4 +1,21 @@
 -- CreateTable
+CREATE TABLE `Game_INFO` (
+    `Game_ID` INTEGER NOT NULL AUTO_INCREMENT,
+    `Game_Date` DATE NULL,
+    `Team1` VARCHAR(255) NULL,
+    `Team1LogoPic` VARCHAR(255) NULL,
+    `Team1ShotChartUrl` VARCHAR(255) NULL,
+    `Team2` VARCHAR(255) NULL,
+    `Team2LogoPic` VARCHAR(255) NULL,
+    `Team2ShotChartUrl` VARCHAR(255) NULL,
+    `GameName` VARCHAR(255) NULL,
+    `FinalScores` VARCHAR(255) NULL,
+    `VideoLinkUrl` VARCHAR(255) NULL,
+
+    PRIMARY KEY (`Game_ID`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Match_Table_Phase1` (
     `Team1Team2Scores` VARCHAR(255) NULL,
     `Date` DATE NULL,
@@ -14,8 +31,8 @@ CREATE TABLE `Match_Table_Phase1` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Player_Roster_Phase1` (
-    `SchoolNamePlayerJerseyNo` VARCHAR(255) NOT NULL,
+CREATE TABLE `Player_INFO` (
+    `Player_ID` INTEGER NOT NULL AUTO_INCREMENT,
     `SchoolName` VARCHAR(255) NULL,
     `PlayerJerseyNo` INTEGER NULL,
     `PlayerFirstName` VARCHAR(255) NULL,
@@ -25,7 +42,7 @@ CREATE TABLE `Player_Roster_Phase1` (
     `Position` VARCHAR(50) NULL,
     `PlayerPictureURL` VARCHAR(255) NULL,
 
-    PRIMARY KEY (`SchoolNamePlayerJerseyNo`)
+    PRIMARY KEY (`Player_ID`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

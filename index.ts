@@ -2,18 +2,17 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-async function getFirstFiveRows() {
-  const rows = await prisma.Player_Roster_Phase1.findMany({
-    take: 5,
-  });
-  console.log(rows);
-  return rows;
+async function main() {
+  const firstPlayer = await prisma.player_INFO.findMany();
+  console.log(firstPlayer);
 }
 
-getFirstFiveRows()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
+main()
+  .then(async () => {
     await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });

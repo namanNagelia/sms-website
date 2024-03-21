@@ -7,6 +7,20 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Game_INFO {
+  Game_ID           Int       @id @default(autoincrement())
+  Game_Date         DateTime? @db.Date
+  Team1             String?   @db.VarChar(255)
+  Team1LogoPic      String?   @db.VarChar(255)
+  Team1ShotChartUrl String?   @db.VarChar(255)
+  Team2             String?   @db.VarChar(255)
+  Team2LogoPic      String?   @db.VarChar(255)
+  Team2ShotChartUrl String?   @db.VarChar(255)
+  GameName          String?   @db.VarChar(255)
+  FinalScores       String?   @db.VarChar(255)
+  VideoLinkUrl      String?   @db.VarChar(255)
+}
+
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
 model Match_Table_Phase1 {
   Team1Team2Scores  String?   @db.VarChar(255)
@@ -24,16 +38,16 @@ model Match_Table_Phase1 {
   @@ignore
 }
 
-model Player_Roster_Phase1 {
-  SchoolNamePlayerJerseyNo String   @id @db.VarChar(255)
-  SchoolName               String?  @db.VarChar(255)
-  PlayerJerseyNo           Int?
-  PlayerFirstName          String?  @db.VarChar(255)
-  PlayerLastName           String?  @db.VarChar(255)
-  Height                   Decimal? @db.Decimal(5, 2)
-  YearOfGraduation         Int?     @db.Year
-  Position                 String?  @db.VarChar(50)
-  PlayerPictureURL         String?  @db.VarChar(255)
+model Player_INFO {
+  Player_ID        Int      @id @default(autoincrement())
+  SchoolName       String?  @db.VarChar(255)
+  PlayerJerseyNo   Int?
+  PlayerFirstName  String?  @db.VarChar(255)
+  PlayerLastName   String?  @db.VarChar(255)
+  Height           Decimal? @db.Decimal(5, 2)
+  YearOfGraduation Int?     @db.Year
+  Position         String?  @db.VarChar(50)
+  PlayerPictureURL String?  @db.VarChar(255)
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
