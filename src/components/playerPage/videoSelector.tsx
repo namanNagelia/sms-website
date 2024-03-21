@@ -36,7 +36,7 @@ const HighlightCard = (
       className="bg-brandBlack w-4/5 rounded-2xl flex flex-row p-4 text-brandWhite items-center space-x-2 font-dinCondensed"
       onClick={() => { handleChange(video.link) }}
     >
-      <div className="h-16 w-16 bg-brandWhite rounded-full"></div>
+      <div className="h-12 w-12 bg-brandWhite rounded-full"></div>
       <div className="flex flex-col items-start">
         <div className=" text-xl">{video.title}</div>
         <div className=" text-brandGrey">Timestamp</div>
