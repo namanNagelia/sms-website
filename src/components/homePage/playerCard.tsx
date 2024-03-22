@@ -27,7 +27,7 @@ const PlayerCard = (props: playerProps) => {
   const height = props.Height;
   return (
     <div
-      className="w-[370px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative"
+      className="w-[360px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative"
       style={{ borderRadius: "60px" }}
     >
       {/* Using an img tag for simplicity and alignment */}
@@ -36,27 +36,27 @@ const PlayerCard = (props: playerProps) => {
           <img src={imageURL} alt={name} width="200" height="200" />
         </div>
 
-        <div className="mt-3 text-left">
+        <div className="mt-6 text-left pl-2">
           <div className="flex justify-between">
             <h1 className="lg:text-lg xl:text-2xl text-white font-dinAlternate mb-3">
               {name}
             </h1>
           </div>
           {/* Position */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">Position</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">Position</p>
             <p className="mr-auto">|</p>
             <p>{position}</p>
           </div>
           {/* Number */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">Number</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">Number</p>
             <p className="mr-auto">|</p>
             <p>{number}</p>
           </div>
           {/* School */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">School</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">School</p>
             <p className="mr-auto">|</p>
             <p>{school}</p>
           </div>
