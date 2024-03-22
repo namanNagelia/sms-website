@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-
+import defaultImage from "../../../public/Male Unknown.svg";
 type playerProps = {
   Player_ID: number;
   SchoolName: string;
@@ -23,17 +23,24 @@ const PlayerCard = (props: playerProps) => {
   const position = props.Position;
   const ranking = props.ranking;
   const change = props.change;
-  const imageURL = props.PlayerPictureURL;
+  var imageURL = props.PlayerPictureURL;
+  if (imageURL === "|") {
+    imageURL = defaultImage;
+  }
   const height = props.Height;
   return (
     <div
-      className="w-[360px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative"
+      className="w-[360px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative hover:z-30 
+      hover:scale-110 
+      transition 
+      duration-150 mt-5 mb-10 hover:cursor-pointer
+"
       style={{ borderRadius: "60px" }}
     >
       {/* Using an img tag for simplicity and alignment */}
       <div className="flex flex-row justify-between">
         <div className="flex items-end justify-start lg:w-[150px] xl:w-[200px]">
-          <img src={imageURL} alt={name} width="200" height="200" />
+          <Image src={imageURL} alt={name} width="200" height="200" />
         </div>
 
         <div className="mt-6 text-left pl-2">

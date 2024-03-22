@@ -24,7 +24,7 @@ const fetchAllGames = async () => {
 export default async function Home() {
   const playerData = await fetchPlayer();
   const gameInfo = await fetchAllGames();
-  console.log(gameInfo);
+  console.log(playerData);
   console.log("Games");
   return <HomeUI playerData={playerData} gameInfo={gameInfo} />;
 }
