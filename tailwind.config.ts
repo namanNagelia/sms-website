@@ -22,6 +22,7 @@ const config: Config = {
         graphGreen: "#10B981",
         graphRed: "#CE2828",
         buttonBlue: "#5A8087",
+
         ...colors,
       },
       backgroundImage: {
