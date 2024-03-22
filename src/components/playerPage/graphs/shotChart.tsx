@@ -53,7 +53,7 @@ export const ShotChart = (props: ScatterplotProps) => {
     : []; // Return an empty array if props.data is undefined
 
   return (
-    <div style={{ position: "relative", width: "50%" }}>
+    <div style={{ position: "relative", width: "90%" }}>
       <svg
         preserveAspectRatio="xMinYMin meet"
         width="90%"

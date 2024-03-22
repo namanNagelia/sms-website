@@ -4,7 +4,25 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "../homePage/button";
 import RadarChart from "./graphs/radarChart";
-
+import { ShotChart } from "./graphs/shotChart";
+const shotData = [
+  { x: 29.69, y: 26.18, shotType: "ThreePointMiss" },
+  { x: 8.37, y: 6.25, shotType: "TwoPointMake" },
+  { x: 18.34, y: 16.65, shotType: "TwoPointMake" },
+  { x: 20.36, y: 17.67, shotType: "TwoPointMake" },
+  { x: 23.74, y: 6.4, shotType: "TwoPointMake" },
+  { x: 24.57, y: 6.71, shotType: "TwoPointMake" },
+  { x: 26.52, y: 5.56, shotType: "TwoPointMake" },
+  { x: 27.54, y: 5.45, shotType: "TwoPointMake" },
+  { x: 13.17, y: 16.19, shotType: "TwoPointMiss" },
+  { x: 22.2, y: 5.34, shotType: "TwoPointMiss" },
+  { x: 22.4, y: 6.58, shotType: "TwoPointMiss" },
+  { x: 22.98, y: 7.77, shotType: "TwoPointMiss" },
+  { x: 22.98, y: 5.93, shotType: "TwoPointMiss" },
+  { x: 23.11, y: 6.03, shotType: "TwoPointMiss" },
+  { x: 23.39, y: 6.47, shotType: "TwoPointMiss" },
+  { x: 34.31, y: 5.84, shotType: "TwoPointMiss" },
+];
 //Props with calculated individual ratings, shot chart URL, and hustle stats i can display
 const GraphsBox = () => {
   const data = [
@@ -124,6 +142,9 @@ const GraphsBox = () => {
           bgColor={hexToRgbA("#CF6C57", 0.9)}
           borderColor={hexToRgbA("#CF6C57", 1)}
         />
+      )}
+      {shotChart && (
+        <ShotChart data={shotData} width={"500px"} height={"100px"} />
       )}
     </div>
   );
