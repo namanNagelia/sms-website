@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import Image from "next/image";
 import defaultImage from "@/../public/Male Unknown.svg";
 import TeamStatsCard from "@/components/playerPage/teamStats";
+import { RosterCard } from "@/components/playerPage/rosterCard";
+import EmblaCarousel from "@/components/homePage/carousel";
 
 const seasonStats = {
   stats: {
@@ -34,7 +36,15 @@ export default function TeamUI() {
           <TeamStatsCard seasonStats={seasonStats} />
         </div>
         <div className="lg:flex items-center"></div>
-        <div className="lg:flex  lg:space-x-10 my-10"></div>
+        <div className="lg:flex  lg:space-x-10 my-10">
+          <RosterCard
+            name="LeBron James"
+            picture="|"
+            id={1}
+            graduation="2023"
+            position="Forward"
+          />
+        </div>
       </div>
     </div>
   );
