@@ -1,24 +1,30 @@
 import React from "react";
 import Image from "next/image";
 
-interface playerProps {
-  name: string;
-  position: string;
-  number: number;
-  school: string;
-  imageURL: string;
+type playerProps = {
+  Player_ID: number;
+  SchoolName: string;
+  PlayerJerseyNo: number;
+  PlayerFirstName: string;
+  PlayerLastName: string;
+  Height: string;
+  YearOfGraduation: number;
+  Position: string;
+  PlayerPictureURL: string;
   ranking: number;
   change: number;
-}
+};
 
 const PlayerCard = (props: playerProps) => {
-  const name = props.name;
-  const position = props.position;
-  const number = props.number;
-  const school = props.school;
-  const imageURL = props.imageURL;
+  const Player_ID = props.Player_ID;
+  const school = props.SchoolName;
+  const number = props.PlayerJerseyNo;
+  const name = `${props.PlayerFirstName} ${props.PlayerLastName}`;
+  const position = props.Position;
   const ranking = props.ranking;
   const change = props.change;
+  const imageURL = props.PlayerPictureURL;
+  const height = props.Height;
   return (
     <div
       className="w-[370px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative"
@@ -27,7 +33,7 @@ const PlayerCard = (props: playerProps) => {
       {/* Using an img tag for simplicity and alignment */}
       <div className="flex flex-row justify-between">
         <div className="flex items-end justify-start lg:w-[150px] xl:w-[200px]">
-          <img src={props.imageURL} alt={props.name} width="200" height="200" />
+          <img src={imageURL} alt={name} width="200" height="200" />
         </div>
 
         <div className="mt-3 text-left">

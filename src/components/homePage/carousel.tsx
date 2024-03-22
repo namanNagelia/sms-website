@@ -5,11 +5,15 @@ import PlayerCard from "./playerCard";
 import "./embla.css";
 
 type PlayerType = {
-  name: string;
-  position: string;
-  number: number;
-  school: string;
-  imageURL: string;
+  Player_ID: number;
+  SchoolName: string;
+  PlayerJerseyNo: number;
+  PlayerFirstName: string;
+  PlayerLastName: string;
+  Height: string;
+  YearOfGraduation: number;
+  Position: string;
+  PlayerPictureURL: string;
   ranking: number;
   change: number;
 };

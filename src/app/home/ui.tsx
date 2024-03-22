@@ -67,68 +67,7 @@ export default function HomeUI(props: Props) {
         "https://www.latimes.com/sports/highschool/story/2023-11-21/bryce-james-leaves-sherman-oaks-notre-dame-returns-to-sierra-canyon",
     },
   ];
-  const playerDataDefault = [
-    {
-      name: "Zach Edey",
-      position: "Center",
-      number: 15,
-      school: "Purdue",
-      imageURL:
-        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4600663.png&w=350&h=254",
-      ranking: 1,
-      change: 1,
-    },
-    {
-      name: "Tyler Kolek",
-      position: "Guard",
-      number: 11,
-      school: "Marquette",
-      imageURL:
-        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433225.png&w=350&h=254",
-      ranking: 2,
-      change: -1,
-    },
-    {
-      name: "Aaliyah Edwards",
-      position: "Forward",
-      number: 3,
-      school: "UConn",
-      imageURL:
-        "https://a.espncdn.com/combiner/i?img=/i/headshots/womens-college-basketball/players/full/4433408.png",
-      ranking: 20,
-      change: 0,
-    },
-    {
-      name: "Ryan Nembhard",
-      position: "Guard",
-      number: 2,
-      school: "Gonzaga",
-      imageURL:
-        "https://gocreighton.com/images/2022/6/9/Ryan_Nembhard_2023mug_cropped.jpg",
-      ranking: 19,
-      change: 4,
-    },
-    {
-      name: "Hunter Dickinson",
-      position: "Forward",
-      number: 1,
-      school: "Kansas",
-      imageURL:
-        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4432180.png&w=350&h=254",
-      ranking: 15,
-      change: 0,
-    },
-    {
-      name: "DaRon Holmes II",
-      position: "Forward",
-      number: 35,
-      school: "Dayton",
-      imageURL:
-        "https://a.espncdn.com/combiner/i?img=/i/headshots/mens-college-basketball/players/full/4433607.png&w=350&h=254",
-      ranking: 75,
-      change: -2,
-    },
-  ];
+
   const gameDataDefault = [
     {
       gameId: 0,
@@ -192,7 +131,7 @@ export default function HomeUI(props: Props) {
     <>
       <NewsLetter newsData={newsDataDefault} />
       <Games gameData={gameDataDefault} />
-      <TopPlayers playerData={playerDataDefault} />
+      <TopPlayers playerData={playerData} />
       <div id="Padding" className="h-24"></div>
     </>
   );
