@@ -11,9 +11,20 @@ const fetchPlayer = async () => {
   }
 };
 
+const fetchAllGames = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/gameInfo");
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default async function Home() {
   const playerData = await fetchPlayer();
-  console.log(playerData);
-  console.log(typeof playerData);
-  return <HomeUI playerData={playerData} />;
+  const gameInfo = await fetchAllGames();
+  console.log(gameInfo);
+  console.log("Games");
+  return <HomeUI playerData={playerData} gameInfo={gameInfo} />;
 }

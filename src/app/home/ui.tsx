@@ -23,12 +23,16 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 interface Props {
   playerData: {
-    firstPlayer: any[]
+    firstPlayer: any[];
+  };
+  gameInfo: {
+    games: any[];
   };
 }
 
 export default function HomeUI(props: Props) {
   const playerData = props.playerData.firstPlayer;
+  const gameInfo = props.gameInfo.games;
   // this will be changed to a State
   const newsDataDefault = [
     {
@@ -70,69 +74,12 @@ export default function HomeUI(props: Props) {
     },
   ];
 
-  const gameDataDefault = [
-    {
-      gameId: 0,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
-      gameId: 1,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
-      gameId: 2,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
-      gameId: 3,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
-      gameId: 4,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-    {
-      gameId: 5,
-      leftTeamScore: 0,
-      rightTeamScore: 0,
-      leftTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-      rightTeamURL:
-        "https://ssl.gstatic.com/onebox/media/sports/logos/0nQXN6OF7wnLY3hJz8lZJQ_96x96.png",
-    },
-  ];
-
   // console.log(playerData);
 
   return (
     <>
       <NewsLetter newsData={newsDataDefault} />
-      <Games gameData={gameDataDefault} />
+      <Games gameData={gameInfo} />
       <TopPlayers playerData={playerData} />
       <div id="Padding" className="h-24"></div>
     </>
