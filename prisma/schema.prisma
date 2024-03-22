@@ -21,23 +21,6 @@ model Game_INFO {
   VideoLinkUrl      String?   @db.VarChar(255)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model Match_Table_Phase1 {
-  Team1Team2Scores  String?   @db.VarChar(255)
-  Date              DateTime? @db.Date
-  Team1             String?   @db.VarChar(255)
-  Team1LogoPic      String?   @db.VarChar(255)
-  Team1ShotChartUrl String?   @db.VarChar(255)
-  Team2             String?   @db.VarChar(255)
-  Team2LogoPic      String?   @db.VarChar(255)
-  Team2ShotChartUrl String?   @db.VarChar(255)
-  GameName          String?   @db.VarChar(255)
-  FinalScores       String?   @db.VarChar(255)
-  VideoLinkUrl      String?   @db.VarChar(255)
-
-  @@ignore
-}
-
 model Player_INFO {
   Player_ID        Int      @id @default(autoincrement())
   SchoolName       String?  @db.VarChar(255)
@@ -50,18 +33,26 @@ model Player_INFO {
   PlayerPictureURL String?  @db.VarChar(255)
 }
 
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model Player_Stats_Phase1 {
-  Team1Team1PlayerJerseyNumber String?  @db.VarChar(255)
-  Team1                        String?  @db.VarChar(255)
-  Team1PlayerJerseyNumber      Int?
-  Team2                        String?  @db.VarChar(255)
-  Stats                        String?  @db.Text
-  Action_Flag                  String?  @db.VarChar(50)
-  Court_Position_X             Decimal? @db.Decimal(10, 2)
-  Court_Position_Y             Decimal? @db.Decimal(10, 2)
+model Player_Stats_Info {
+  Playerstats_ID          Int      @id @default(autoincrement())
+  Team1                   String?  @db.VarChar(255)
+  Team1PlayerJerseyNumber Int?
+  Team2                   String?  @db.VarChar(255)
+  Stats                   String?  @db.Text
+  Action_Flag             Int?
+  Court_Position_X        Decimal? @db.Decimal(10, 2)
+  Court_Position_Y        Decimal? @db.Decimal(10, 2)
+}
 
-  @@ignore
+model Player_Stats_Info_Phase1 {
+  Playerstats_ID          Int      @id @default(autoincrement())
+  Team1                   String?  @db.VarChar(255)
+  Team1PlayerJerseyNumber Int?
+  Team2                   String?  @db.VarChar(255)
+  Stats                   String?  @db.Text
+  Action_Flag             Int?
+  Court_Position_X        Decimal? @db.Decimal(10, 2)
+  Court_Position_Y        Decimal? @db.Decimal(10, 2)
 }
 
 model access_tokens {

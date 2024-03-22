@@ -32,6 +32,7 @@ interface Props {
 
 export default function HomeUI(props: Props) {
   const playerData = props.playerData.firstPlayer;
+  console.log(props)
   const gameInfo = props.gameInfo.games;
   // this will be changed to a State
   const newsDataDefault = [

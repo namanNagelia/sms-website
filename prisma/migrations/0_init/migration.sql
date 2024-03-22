@@ -16,21 +16,6 @@ CREATE TABLE `Game_INFO` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Match_Table_Phase1` (
-    `Team1Team2Scores` VARCHAR(255) NULL,
-    `Date` DATE NULL,
-    `Team1` VARCHAR(255) NULL,
-    `Team1LogoPic` VARCHAR(255) NULL,
-    `Team1ShotChartUrl` VARCHAR(255) NULL,
-    `Team2` VARCHAR(255) NULL,
-    `Team2LogoPic` VARCHAR(255) NULL,
-    `Team2ShotChartUrl` VARCHAR(255) NULL,
-    `GameName` VARCHAR(255) NULL,
-    `FinalScores` VARCHAR(255) NULL,
-    `VideoLinkUrl` VARCHAR(255) NULL
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
 CREATE TABLE `Player_INFO` (
     `Player_ID` INTEGER NOT NULL AUTO_INCREMENT,
     `SchoolName` VARCHAR(255) NULL,
@@ -46,15 +31,31 @@ CREATE TABLE `Player_INFO` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `Player_Stats_Phase1` (
-    `Team1Team1PlayerJerseyNumber` VARCHAR(255) NULL,
+CREATE TABLE `Player_Stats_Info` (
+    `Playerstats_ID` INTEGER NOT NULL AUTO_INCREMENT,
     `Team1` VARCHAR(255) NULL,
     `Team1PlayerJerseyNumber` INTEGER NULL,
     `Team2` VARCHAR(255) NULL,
     `Stats` TEXT NULL,
-    `Action_Flag` VARCHAR(50) NULL,
+    `Action_Flag` INTEGER NULL,
     `Court_Position_X` DECIMAL(10, 2) NULL,
-    `Court_Position_Y` DECIMAL(10, 2) NULL
+    `Court_Position_Y` DECIMAL(10, 2) NULL,
+
+    PRIMARY KEY (`Playerstats_ID`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `Player_Stats_Info_Phase1` (
+    `Playerstats_ID` INTEGER NOT NULL AUTO_INCREMENT,
+    `Team1` VARCHAR(255) NULL,
+    `Team1PlayerJerseyNumber` INTEGER NULL,
+    `Team2` VARCHAR(255) NULL,
+    `Stats` TEXT NULL,
+    `Action_Flag` INTEGER NULL,
+    `Court_Position_X` DECIMAL(10, 2) NULL,
+    `Court_Position_Y` DECIMAL(10, 2) NULL,
+
+    PRIMARY KEY (`Playerstats_ID`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
