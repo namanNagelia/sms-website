@@ -28,14 +28,20 @@ const PlayerCard = (props: playerProps) => {
     imageURL = defaultImage;
   }
   const height = props.Height;
+
+  const handleClicked = (id: number) => {
+    window.location.href = `/player/${id}`;
+  };
+
   return (
     <div
       className="w-[360px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative hover:z-30 
-      hover:scale-110 
+      hover:scale-105 
       transition 
       duration-150 mt-5 mb-10 hover:cursor-pointer
 "
       style={{ borderRadius: "60px" }}
+      onClick={() => handleClicked(Player_ID)}
     >
       {/* Using an img tag for simplicity and alignment */}
       <div className="flex flex-row justify-between">

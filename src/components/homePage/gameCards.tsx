@@ -5,11 +5,12 @@ export type GameCardProps = {
   Team1LogoPic: string;
   Team2LogoPic: string;
   FinalScores: string;
+  Game_ID: number;
 };
 
 const GameCard = (props: GameCardProps) => {
-  const handleClick = () => {
-    //Do Stuff to naivgate to the correct page
+  const handleClick = (id: number) => {
+    window.location.href = `/game/${id}`;
   };
 
   return (
@@ -37,6 +38,7 @@ const GameCard = (props: GameCardProps) => {
                 transition 
                 duration-150
             "
+      onClick={() => handleClick(props.Game_ID)}
     >
       <text
         className="
