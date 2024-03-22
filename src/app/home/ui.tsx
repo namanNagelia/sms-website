@@ -26,7 +26,7 @@ interface Props {
 }
 
 export default function HomeUI(props: Props) {
-  const playerData = props.playerData;
+  const playerCardData = props.playerData;
   // this will be changed to a State
   const newsDataDefault = [
     {
@@ -131,7 +131,7 @@ export default function HomeUI(props: Props) {
     <>
       <NewsLetter newsData={newsDataDefault} />
       <Games gameData={gameDataDefault} />
-      <TopPlayers playerData={playerData} />
+      <TopPlayers playerData={playerCardData} />
       <div id="Padding" className="h-24"></div>
     </>
   );
