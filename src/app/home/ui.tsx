@@ -22,11 +22,13 @@ const SLIDE_COUNT = 5;
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 interface Props {
-  playerData: any[];
+  playerData: {
+    firstPlayer: any[]
+  };
 }
 
 export default function HomeUI(props: Props) {
-  const playerData = props.playerData;
+  const playerData = props.playerData.firstPlayer;
   // this will be changed to a State
   const newsDataDefault = [
     {

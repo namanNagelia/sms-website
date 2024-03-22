@@ -14,5 +14,6 @@ const fetchPlayer = async () => {
 export default async function Home() {
   const playerData = await fetchPlayer();
   console.log(playerData);
+  console.log(typeof playerData);
   return <HomeUI playerData={playerData} />;
 }
