@@ -12,6 +12,7 @@ import { useMediaQuery } from "react-responsive";
 import { active } from "d3";
 const { PrismaClient } = require("@prisma/client");
 import { ShotChart } from "@/components/playerPage/graphs/shotChart";
+import ScoutingReport from "@/components/playerPage/scoutReport";
 
 const prisma = new PrismaClient();
 
@@ -89,6 +90,12 @@ const videoHighlights = [
   },
 ];
 
+const defaultScoutingReport ={
+  report: `Jamal Dequaviour, a high school basketball standout, has shown exceptional promise through his recent performances. Standing at 6'5" with a wingspan of 6'8", Jamal possesses the physical attributes that make him a versatile threat on both ends of the court. His agility and speed, combined with his size, allow him to guard multiple positions effectively. Offensively, Jamal demonstrates a keen ability to drive to the basket with strength and finesse, drawing defenders and creating opportunities for his teammates. His court vision is advanced for his age, showcasing his potential as a playmaker. Despite his clear talent, areas for improvement include his outside shooting consistency and decision-making under pressure, which, if addressed, could elevate his game significantly.`,
+  weaknesses: ["Bad", "Bad2"],
+  strengths: ["Good", "Good2"]
+}
+
 //What weneed: Player details (unchanging)
 //Videos: Put a default video for them, then in the same page make a state variable for current video, and that state changes if a video on the side is selected
 export default function PlayerPage() {
@@ -119,6 +126,11 @@ export default function PlayerPage() {
             <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
             <GraphsBox />
           </div>
+          <ScoutingReport 
+            report={defaultScoutingReport.report} //accepts a string
+            strengths={defaultScoutingReport.strengths} // accepts a string[]
+            weaknesses={defaultScoutingReport.weaknesses} // accepts a string[]
+           />
         </div>
       </div>
     </div>
