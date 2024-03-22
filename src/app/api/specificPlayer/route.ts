@@ -8,10 +8,10 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const game = await prisma.player_INFO.findFirst({
+  const playerProfile = await prisma.player_INFO.findFirst({
     where: {
       Player_ID: Number(id),
     },
   });
-  return NextResponse.json({ game });
+  return NextResponse.json({ playerProfile });
 }

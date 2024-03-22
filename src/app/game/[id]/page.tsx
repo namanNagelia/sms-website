@@ -191,8 +191,8 @@ const BoxScore: React.FC<BoxProp> = ({ players }) => {
           >
             <Image src={Logo} alt="asdakl" width={36} height={36} />
             <div className="flex flex-col items-start mr-auto ml-4">
-              <text className="text-2xl">{player.name}</text>
-              <text className="text-lg">{player.position}</text>
+              <text className="text-xl">{player.name}</text>
+              <text className="text-bs">{player.position}</text>
             </div>
             <div className="flex-row flex space-x-2">
               <PointCard color="indigo-500" type="PTS" number={player.pts} />
