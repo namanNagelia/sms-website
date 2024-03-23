@@ -12,9 +12,9 @@ interface ShotLog {
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const playerGameLogs = await prisma.GAME_STATS_FOR_PLAYERS.findMany({
+  const playerGameLogs = await prisma.sms_player_stat_new.findMany({
     where: {
-      game_stat_player_id: Number(id),
+      player_information_id: Number(id),
     },
   });
   let returnable: ShotLog[] = []; // Correct initialization of an array

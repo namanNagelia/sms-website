@@ -9,9 +9,9 @@ export async function GET(request: NextRequest) {
   const id = searchParams.get("id");
 
   // Fetch player game logs
-  const playerGameLogs = await prisma.GAME_STATS_FOR_PLAYERS.findMany({
+  const playerGameLogs = await prisma.sms_player_stat_new.findMany({
     where: {
-      game_stat_player_id: Number(id),
+      player_information_id: Number(id),
     },
   });
 
@@ -32,7 +32,7 @@ export async function GET(request: NextRequest) {
 
   // Process each game log for statistics
   playerGameLogs.forEach((log: any) => {
-    uniqueOpponentTeams.add(log.game_stat_opponent_team_name);
+    uniqueOpponentTeams.add(log.game_info_id);
 
     switch (log.game_stat_stat_count) {
       case "OnePointFG":

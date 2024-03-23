@@ -6,4 +6,13 @@ module.exports = {
       "sparkmysport.me",
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/home",
+        permanent: true,
+      },
+    ];
+  },
 };

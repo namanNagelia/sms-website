@@ -2,10 +2,10 @@ import React from "react";
 import Image from "next/image";
 
 export type GameCardProps = {
-  Team1LogoPic: string;
-  Team2LogoPic: string;
-  FinalScores: string;
-  Game_ID: number;
+  player_team_name_pic: string;
+  player_opponent_team_pic: string;
+  game_score: string;
+  game_id: number;
 };
 
 const GameCard = (props: GameCardProps) => {
@@ -38,7 +38,7 @@ const GameCard = (props: GameCardProps) => {
                 transition 
                 duration-150
             "
-      onClick={() => handleClick(props.Game_ID)}
+      onClick={() => handleClick(props.game_id)}
     >
       <text
         className="
@@ -65,7 +65,7 @@ const GameCard = (props: GameCardProps) => {
             "
       >
         <Image
-          src={props.Team1LogoPic}
+          src={props.player_team_name_pic}
           alt="Team Image"
           className="bg-white rounded-full md:w-12 md:h-12"
           width={64}
@@ -80,10 +80,10 @@ const GameCard = (props: GameCardProps) => {
                     md:text-xl
                 "
         >
-          {props.FinalScores}
+          {props.game_score}
         </text>
         <Image
-          src={props.Team2LogoPic}
+          src={props.player_opponent_team_pic}
           alt="Team Image"
           className="bg-white rounded-full md:w-12 md:h-12"
           width={64}

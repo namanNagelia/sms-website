@@ -14,7 +14,7 @@ export default function PlayerGrade(props: Props) {
   const coachability = props.coachability;
   const performance = props.performance;
   const intangibles = props.intangibles;
-  const grade = 90;
+  const grade = props.grade;
 
   return (
     <div className="default-card bg-layerTwoGrey rounded-3xl flex flex-col items-center py-8 h-full">
@@ -24,16 +24,20 @@ export default function PlayerGrade(props: Props) {
         Grade
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md mb-4" />
-      <div className="text-5xl text-brandWhite font-dinCondensed rounded-full border-brandWhite px-2 mb-2 bg-buttonBlue w-20 h-20 flex flex-col text-center justify-center p-2 -mb-5">{grade}</div>
+      <div className="text-5xl text-brandWhite font-dinCondensed rounded-full border-brandWhite px-2 mb-2 bg-buttonBlue w-20 h-20 flex flex-col text-center justify-center p-2 -mb-5">
+        {grade}
+      </div>
       <div className=" w-4/5 relative translate-y-10">
         {/* values range from 0% to 90% */}
-        <div style={{ marginLeft: `${((grade) * .970)}%` }} className="w-4  bg-[#FFFFFF80] flex items-center justify-center ">
+        <div
+          style={{ marginLeft: `${grade * 0.97}%` }}
+          className="w-4  bg-[#FFFFFF80] flex items-center justify-center "
+        >
           <div className="w-2 h-10 bg-brandWhite" />
         </div>
       </div>
       <div className="grade w-4/5 h-10 mb-10 border-2 border-brandWhite">
         <div className="translate-y-7 flex justify-between w-full text-brandWhite text-xl">
-
           <div className="-ml-[.21rem] flex-row flex items-end w-10">
             <p className="text-2xl">|</p>0
           </div>

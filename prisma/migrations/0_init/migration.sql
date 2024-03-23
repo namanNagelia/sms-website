@@ -40,12 +40,10 @@ CREATE TABLE `GAME_STATS_FOR_PLAYERS_ORIGINAL` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
-CREATE TABLE `GAME_STATS_FOR_PLAYERS_TEMP` (
+CREATE TABLE `GAME_STATS_FOR_PLAYERS_TEMP1` (
     `game_stat_id` INTEGER NOT NULL DEFAULT 0,
-    `game_stat_player_id` INTEGER NOT NULL DEFAULT 0,
-    `game_stat_player_jersey_number` INTEGER NULL,
-    `game_stat_player_team_name` VARCHAR(255) NULL,
-    `game_stat_opponent_team_name` VARCHAR(255) NULL,
+    `game_info_id` INTEGER NOT NULL DEFAULT 0,
+    `player_information_id` INTEGER NOT NULL DEFAULT 0,
     `game_stat_stat_count` VARCHAR(255) NULL,
     `game_stat_court_position_X` FLOAT NULL,
     `game_stat_court_Position_Y` FLOAT NULL
@@ -557,6 +555,73 @@ CREATE TABLE `showcases` (
     INDEX `showcases_eventid_index`(`eventId`),
     INDEX `showcases_userid_index`(`userId`),
     PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `sms_game_info` (
+    `game_id` INTEGER NOT NULL DEFAULT 0,
+    `game_date` DATE NULL,
+    `player_team_name` VARCHAR(255) NULL,
+    `player_team_name_pic` VARCHAR(255) NULL,
+    `player_team_shotchart_url` VARCHAR(255) NULL,
+    `player_opponent_team_name` VARCHAR(255) NULL,
+    `player_opponent_team_pic` VARCHAR(255) NULL,
+    `player_opponent_team_shotchart_url` VARCHAR(255) NULL,
+    `gamename` VARCHAR(255) NULL,
+    `game_score` VARCHAR(255) NULL,
+    `game_video_url` VARCHAR(255) NULL,
+
+    PRIMARY KEY (`game_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `sms_game_statistics` (
+    `game_stat_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `game_info_id` INTEGER NULL,
+    `player_information_id` INTEGER NULL,
+    `game_stat_stat_count` INTEGER NULL,
+    `game_stat_court_position_X` FLOAT NULL,
+    `game_stat_court_Position_Y` FLOAT NULL,
+
+    PRIMARY KEY (`game_stat_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `sms_player_info` (
+    `id` INTEGER NOT NULL DEFAULT 0,
+    `School_Name` VARCHAR(255) NULL,
+    `Player_Jersey_No` INTEGER NULL,
+    `Player_First_Name` VARCHAR(255) NULL,
+    `Player_Last_Name` VARCHAR(255) NULL,
+    `Height` DECIMAL(3, 1) NULL,
+    `Year_of_Graduation` INTEGER NULL,
+    `Position` VARCHAR(255) NULL,
+    `Player_Picture_URL` VARCHAR(500) NULL,
+    `unique_id` INTEGER NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `sms_player_stat` (
+    `game_stat_id` INTEGER NOT NULL DEFAULT 0,
+    `game_info_id` INTEGER NOT NULL DEFAULT 0,
+    `player_information_id` INTEGER NOT NULL DEFAULT 0,
+    `game_stat_stat_count` VARCHAR(255) NULL,
+    `game_stat_court_position_X` FLOAT NULL,
+    `game_stat_court_Position_Y` FLOAT NULL
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `sms_player_stat_new` (
+    `game_stat_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `game_info_id` INTEGER NULL,
+    `player_information_id` INTEGER NULL,
+    `game_stat_stat_count` TEXT NULL,
+    `game_stat_court_position_X` FLOAT NULL,
+    `game_stat_court_Position_Y` FLOAT NULL,
+
+    PRIMARY KEY (`game_stat_id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

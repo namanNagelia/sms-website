@@ -8,9 +8,9 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const date = searchParams.get("date");
-  const game = await prisma.game_INFO.findFirst({
+  const game = await prisma.sms_game_info.findFirst({
     where: {
-      Game_Date: Number(date),
+      game_date: Number(date),
     },
   });
   return NextResponse.json({ game });

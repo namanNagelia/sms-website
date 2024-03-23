@@ -89,17 +89,17 @@ const GamePageUI = (props: GamePageProps) => {
   return (
     <>
       <GameScore
-        Team1={gamedetails.Team1}
-        Team2={gamedetails.Team2}
-        Team1Logo={gamedetails.Team1LogoPic}
-        Team2Logo={gamedetails.Team2LogoPic}
-        FinalScores={gamedetails.FinalScores}
+        Team1={gamedetails.player_team_name}
+        Team2={gamedetails.player_opponent_team_name}
+        Team1Logo={gamedetails.player_team_name_pic}
+        Team2Logo={gamedetails.player_opponent_team_pic}
+        FinalScores={gamedetails.game_score}
       />
       <div className="w-full text-center">
         <div className="flex flex-row space-x-4 mx-8">
           <BoxScore players={defaultBoxScores.players} />
           <div className="mt-36">
-            <VideoPlayer videoLink={gamedetails.VideoLinkUrl} />
+            <VideoPlayer videoLink={gamedetails.game_video_url} />
           </div>
           <BoxScore players={defaultBoxScores.players} />
         </div>

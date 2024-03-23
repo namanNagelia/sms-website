@@ -45,15 +45,13 @@ model GAME_STATS_FOR_PLAYERS_ORIGINAL {
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model GAME_STATS_FOR_PLAYERS_TEMP {
-  game_stat_id                   Int     @default(0)
-  game_stat_player_id            Int     @default(0)
-  game_stat_player_jersey_number Int?
-  game_stat_player_team_name     String? @db.VarChar(255)
-  game_stat_opponent_team_name   String? @db.VarChar(255)
-  game_stat_stat_count           String? @db.VarChar(255)
-  game_stat_court_position_X     Float?  @db.Float
-  game_stat_court_Position_Y     Float?  @db.Float
+model GAME_STATS_FOR_PLAYERS_TEMP1 {
+  game_stat_id               Int     @default(0)
+  game_info_id               Int     @default(0)
+  player_information_id      Int     @default(0)
+  game_stat_stat_count       String? @db.VarChar(255)
+  game_stat_court_position_X Float?  @db.Float
+  game_stat_court_Position_Y Float?  @db.Float
 
   @@ignore
 }
@@ -552,6 +550,63 @@ model showcases {
 
   @@index([eventId], map: "showcases_eventid_index")
   @@index([userId], map: "showcases_userid_index")
+}
+
+model sms_game_info {
+  game_id                            Int       @id @default(0)
+  game_date                          DateTime? @db.Date
+  player_team_name                   String?   @db.VarChar(255)
+  player_team_name_pic               String?   @db.VarChar(255)
+  player_team_shotchart_url          String?   @db.VarChar(255)
+  player_opponent_team_name          String?   @db.VarChar(255)
+  player_opponent_team_pic           String?   @db.VarChar(255)
+  player_opponent_team_shotchart_url String?   @db.VarChar(255)
+  gamename                           String?   @db.VarChar(255)
+  game_score                         String?   @db.VarChar(255)
+  game_video_url                     String?   @db.VarChar(255)
+}
+
+model sms_game_statistics {
+  game_stat_id               Int    @id @default(autoincrement())
+  game_info_id               Int?
+  player_information_id      Int?
+  game_stat_stat_count       Int?
+  game_stat_court_position_X Float? @db.Float
+  game_stat_court_Position_Y Float? @db.Float
+}
+
+model sms_player_info {
+  id                 Int      @id @default(0)
+  School_Name        String?  @db.VarChar(255)
+  Player_Jersey_No   Int?
+  Player_First_Name  String?  @db.VarChar(255)
+  Player_Last_Name   String?  @db.VarChar(255)
+  Height             Decimal? @db.Decimal(3, 1)
+  Year_of_Graduation Int?
+  Position           String?  @db.VarChar(255)
+  Player_Picture_URL String?  @db.VarChar(500)
+  unique_id          Int?
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model sms_player_stat {
+  game_stat_id               Int     @default(0)
+  game_info_id               Int     @default(0)
+  player_information_id      Int     @default(0)
+  game_stat_stat_count       String? @db.VarChar(255)
+  game_stat_court_position_X Float?  @db.Float
+  game_stat_court_Position_Y Float?  @db.Float
+
+  @@ignore
+}
+
+model sms_player_stat_new {
+  game_stat_id               Int     @id @default(autoincrement())
+  game_info_id               Int?
+  player_information_id      Int?
+  game_stat_stat_count       String? @db.Text
+  game_stat_court_position_X Float?  @db.Float
+  game_stat_court_Position_Y Float?  @db.Float
 }
 
 model stitch_hist {

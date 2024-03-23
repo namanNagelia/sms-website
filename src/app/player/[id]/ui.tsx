@@ -16,6 +16,8 @@ import ScoutingReport from "@/components/playerPage/scoutReport";
 import defaultImage from "@/../public/Male Unknown.svg";
 import PlayerRatingsCalculator from "@/app/math/playerRatings";
 import { truncate } from "fs";
+import { calculateOverallPerformanceRating } from "@/app/math/prospectGrade";
+import { PlayerRatingsCalculatorV2 } from "@/app/math/playerRatings";
 const prisma = new PrismaClient();
 
 // Example JSON data for season and game stats
@@ -103,8 +105,9 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const shotTypes = props.shotTypesData.shotTypes;
   // console.log(seasonAverages);
   const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
+  const performance = calculateOverallPerformanceRating(seasonAverages);
+  console.log(performance);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
-  console.log(playerProfileData.Year_of_Graduation);
   return (
     <div>
       <PlayerNameBanner
@@ -129,7 +132,12 @@ export default function PlayerPageUI(props: PlayerPageProps) {
         <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
           <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0">
             <BiometricCard height={playerProfileData.Height} />
-            <PlayerGrade coachability={34} performance={91} intangibles={0} />
+            <PlayerGrade
+              coachability={0}
+              performance={performance}
+              intangibles={0}
+              grade={performance}
+            />
           </div>
           <div className="lg:flex items-center">
             <VideoPlayerLive active={activeVideo} handle={setVideo} />
