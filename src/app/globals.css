@@ -126,6 +126,13 @@ text {
   background: rgba(19, 31, 33, 0.66);
 }
 
+.grade{
+  /* Rectangle 4471 */
+
+  background: linear-gradient(90deg, #F43F5E 0%, #10B981 100%);
+
+}
+
 .default-card {
   /* Player Grade */
 

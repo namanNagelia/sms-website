@@ -14,6 +14,7 @@ const { PrismaClient } = require("@prisma/client");
 import { ShotChart } from "@/components/playerPage/graphs/shotChart";
 import ScoutingReport from "@/components/playerPage/scoutReport";
 import defaultImage from "@/../public/Male Unknown.svg";
+import { truncate } from "fs";
 const prisma = new PrismaClient();
 
 // Example JSON data for season and game stats
@@ -107,6 +108,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const playerProfileData = props.profileStats.playerProfile;
   console.log(playerProfileData);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
+  console.log(playerProfileData.Year_of_Graduation)
   return (
     <div>
       <PlayerNameBanner
@@ -130,7 +132,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
 
         <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
           <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0">
-            <BiometricCard />
+            <BiometricCard height={playerProfileData.Height} />
             <PlayerGrade coachability={34} performance={91} intangibles={0} />
           </div>
           <div className="lg:flex items-center">
@@ -156,7 +158,7 @@ interface PlayerNameBannerProps {
   JerseyNumber: number;
   Position: string;
   school: string;
-  graduation: string;
+  graduation: number;
 }
 
 const PlayerNameBanner: React.FC<PlayerNameBannerProps> = ({
@@ -170,6 +172,7 @@ const PlayerNameBanner: React.FC<PlayerNameBannerProps> = ({
   if (ImageURL === "|") {
     ImageURL = defaultImage;
   }
+  console.log(graduation);
   return (
     <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
       <Image
@@ -220,7 +223,27 @@ const VideoPlayerLive = ({
   );
 };
 
-const BiometricCard = () => {
+interface BioProps {
+  homeTown: string
+  height: string
+  bench: number
+  weight: number
+  wingspan: string
+  vertical: string
+}
+
+const BiometricCard: React.FC<BioProps> = (props) => {
+  if (props.height != undefined) {
+    const newHeight = props.height.split('.')
+    var heightF = parseInt(newHeight[0])
+    var heightI = parseInt(newHeight[1])
+    console.log(heightI)
+    props = {
+      ...props,
+      height: `${heightF}'${heightI}`
+    }
+  }
+
   return (
     <div className="default-card flex flex-col items-center py-8 space-y-3">
       <div className=" font-dinCondensed text-brandWhite text-5xl bold">
@@ -228,33 +251,43 @@ const BiometricCard = () => {
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
       <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
-        Selesian, Los Angeles
+        {(props.homeTown == undefined ? "Undefined" : props.homeTown)}
       </div>
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2 text-end">Height</div>
-          <div className="text-brandWhite">6'2"</div>
+          <div className="text-brandWhite">
+            {(props.height == undefined ? "Unlisted" : props.height)}
+          </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Bench Press</div>
-          <div className="text-brandWhite">135lbs</div>
+          <div className="text-brandWhite">
+            {(props.bench == undefined ? "Unlisted" : props.bench)}
+          </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Weight</div>
-          <div className="text-brandWhite">160lbs</div>
+          <div className="text-brandWhite">
+            {(props.weight == undefined ? "Unlisted" : props.weight)}
+          </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Wing Span</div>
-          <div className="text-brandWhite">6'8"</div>
+          <div className="text-brandWhite">
+            {(props.wingspan == undefined ? "Unlisted" : props.wingspan)}
+          </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Vertical</div>
-          <div className="text-brandWhite">33"</div>
+          <div className="text-brandWhite">
+            {(props.vertical == undefined ? "Unlisted" : props.vertical)}
+          </div>
         </div>
       </div>
     </div>
