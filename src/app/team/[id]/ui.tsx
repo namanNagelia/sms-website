@@ -5,6 +5,8 @@ import defaultImage from "@/../public/Male Unknown.svg";
 import TeamStatsCard from "@/components/playerPage/teamStats";
 import { RosterCard } from "@/components/playerPage/rosterCard";
 import EmblaCarousel from "@/components/homePage/carousel";
+import { EmblaOptionsType } from "embla-carousel";
+const OPTIONS: EmblaOptionsType = { dragFree: true };
 
 const seasonStats = {
   stats: {
@@ -37,12 +39,18 @@ export default function TeamUI() {
         </div>
         <div className="lg:flex items-center"></div>
         <div className="lg:flex  lg:space-x-10 my-10">
-          <RosterCard
+          {/* <RosterCard
             name="LeBron James"
             picture="|"
             id={1}
             graduation="2023"
             position="Forward"
+          /> */}
+          <EmblaCarousel
+            items={seasonStats}
+            options={OPTIONS}
+            cardType={RosterCard}
+            spacing={4}
           />
         </div>
       </div>

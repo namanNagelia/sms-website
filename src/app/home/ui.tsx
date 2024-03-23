@@ -18,8 +18,6 @@ type newsProp = {
   redirectURL: string;
 };
 const OPTIONS: EmblaOptionsType = { dragFree: true };
-const SLIDE_COUNT = 5;
-const SLIDES = Array.from(Array(SLIDE_COUNT).keys());
 
 interface Props {
   playerData: {
@@ -32,7 +30,7 @@ interface Props {
 
 export default function HomeUI(props: Props) {
   const playerData = props.playerData.firstPlayer;
-  console.log(props)
+  console.log(props);
   const gameInfo = props.gameInfo.games;
   // this will be changed to a State
   const newsDataDefault = [
