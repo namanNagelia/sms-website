@@ -75,12 +75,13 @@ export default async function PlayerPage({
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
   console.log(playerProfile);
-  return (
-    <PlayerPageUI
-      profileStats={playerProfile}
-      seasonAverages={seasonAverages}
-      shotChartData={shotChartData}
-      shotTypesData={shotLocations}
-    />
-  );
+  // return (
+  //   <PlayerPageUI
+  //     profileStats={playerProfile}
+  //     seasonAverages={seasonAverages}
+  //     shotChartData={shotChartData}
+  //     shotTypesData={shotLocations}
+  //   />
+  // );
+  return <div>Test</div>;
 }

@@ -20,5 +20,6 @@ const fetchGameDetails = async (id: string) => {
 export default async function GamePage({ params }: { params: { id: string } }) {
   const gameDetails = await fetchGameDetails(params.id);
   console.log(gameDetails);
-  return <GamePageUI gameDetailsStats={gameDetails} />;
+  // return <GamePageUI gameDetailsStats={gameDetails} />;
+  return <div>Test</div>;
 }
