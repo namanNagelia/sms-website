@@ -156,26 +156,26 @@ const CoachCard = (props: CoachCardProps) => {
       style={{ borderRadius: "60px" }}
     >
       {/* Using an img tag for simplicity and alignment */}
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row space-x-4">
         <div className="flex items-end justify-start lg:w-[150px] xl:w-[200px]">
           <Image src={imageURL} alt={name} width="200" height="200" />
         </div>
 
-        <div className="mt-6 text-left pl-2">
+        <div className="mt-auto text-left pl-2 mb-14">
           {/* Position */}
-          <div className="lg:text-lg xl:text-xl text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:text-lg xl:text-xl text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Coach</p>
             <p className="mr-auto">|</p>
             <p>{name}</p>
           </div>
           {/* Number */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Phone</p>
             <p className="mr-auto">|</p>
             <p>{phoneNumber}</p>
           </div>
           {/* School */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Email</p>
             <p className="mr-auto">|</p>
             <p>{email}</p>
