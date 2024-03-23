@@ -17,22 +17,6 @@ import defaultImage from "@/../public/Male Unknown.svg";
 const prisma = new PrismaClient();
 
 // Example JSON data for season and game stats
-const seasonStats = {
-  archetype: "Slasher",
-  stats: {
-    PTS: "22.3",
-    REB: "5.4",
-    AST: "7.1",
-    STL: "1.5",
-    BLK: "0.4",
-    FG: "47%",
-    TP: "38%",
-    FT: "82%",
-    TO: "3.1",
-    PER: "21.2",
-  },
-};
-
 const gameStats = [
   {
     date: "2023-03-15",
@@ -103,12 +87,14 @@ interface PlayerPageProps {
   seasonAverages: {
     seasonAverages: any;
   };
+  shotChartData: any[];
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
   const [activeVideo, setVideo] = useState<string>(videoHighlights[0].link);
   const playerProfileData = props.profileStats.playerProfile;
   const seasonAverages = props.seasonAverages.seasonAverages;
+  const shotChartData = props.shotChartData;
   // console.log(seasonAverages);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
   return (
@@ -146,7 +132,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
               gameStats={gameStats}
               archetype={"Not Implemented Yet"}
             />
-            <GraphsBox />
+            <GraphsBox shotsData={shotChartData} />
           </div>
           <ScoutingReport
             report={defaultScoutingReport.report} //accepts a string

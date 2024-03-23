@@ -68,14 +68,14 @@ export const ShotChart = (props: ScatterplotProps) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <g clip-path="url(#clip0_404_134)">
-            <g mask="url(#mask0_404_134)">
+          <g clip-path="url(#clip0_791_430)">
+            <g mask="url(#mask0_791_430)">
               <path
                 d="M499.878 0.501953H0.123047V361.499H499.878V0.501953Z"
                 fill="#06121A"
               />
               <path
-                d="M433.626 291.228C420.358 207.909 344.257 135.523 248.31 137.023C155.76 138.469 80.4397 205.659 66 291.228V361.478H433.626V291.228Z"
+                d="M456.5 291.228C456.5 245.072 425.9 197.096 377 168C339.843 145.892 289.737 136.375 248.31 137.023C205.884 137.686 159.295 148.269 124.105 172C82.5289 200.037 55.3203 244.885 47.5 291.228V326.353V361.478H456.5V326.353V291.228Z"
                 fill="#282828"
                 stroke="#696969"
                 stroke-width="1.17306"
@@ -108,7 +108,7 @@ export const ShotChart = (props: ScatterplotProps) => {
             </g>
           </g>
           <defs>
-            <clipPath id="clip0_404_134">
+            <clipPath id="clip0_791_430">
               <rect width="500" height="362" fill="white" />
             </clipPath>
           </defs>
