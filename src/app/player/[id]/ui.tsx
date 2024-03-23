@@ -14,6 +14,7 @@ const { PrismaClient } = require("@prisma/client");
 import { ShotChart } from "@/components/playerPage/graphs/shotChart";
 import ScoutingReport from "@/components/playerPage/scoutReport";
 import defaultImage from "@/../public/Male Unknown.svg";
+import PlayerRatingsCalculator from "@/app/math/playerRatings";
 import { truncate } from "fs";
 const prisma = new PrismaClient();
 
@@ -89,6 +90,9 @@ interface PlayerPageProps {
     seasonAverages: any;
   };
   shotChartData: any[];
+  shotTypesData: {
+    shotTypes: any;
+  };
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
@@ -96,9 +100,11 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const playerProfileData = props.profileStats.playerProfile;
   const seasonAverages = props.seasonAverages.seasonAverages;
   const shotChartData = props.shotChartData;
+  const shotTypes = props.shotTypesData.shotTypes;
   // console.log(seasonAverages);
+  const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
-  console.log(playerProfileData.Year_of_Graduation)
+  console.log(playerProfileData.Year_of_Graduation);
   return (
     <div>
       <PlayerNameBanner
@@ -134,7 +140,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
               gameStats={gameStats}
               archetype={"Not Implemented Yet"}
             />
-            <GraphsBox shotsData={shotChartData} />
+            <GraphsBox shotsData={shotChartData} ratingsData={ratingsData} />
           </div>
           <ScoutingReport
             report={defaultScoutingReport.report} //accepts a string
@@ -218,24 +224,24 @@ const VideoPlayerLive = ({
 };
 
 interface BioProps {
-  homeTown: string
-  height: string
-  bench: number
-  weight: number
-  wingspan: string
-  vertical: string
+  homeTown: string;
+  height: string;
+  bench: number;
+  weight: number;
+  wingspan: string;
+  vertical: string;
 }
 
 const BiometricCard: React.FC<BioProps> = (props) => {
   if (props.height != undefined) {
-    const newHeight = props.height.split('.')
-    var heightF = parseInt(newHeight[0])
-    var heightI = parseInt(newHeight[1])
-    console.log(heightI)
+    const newHeight = props.height.split(".");
+    var heightF = parseInt(newHeight[0]);
+    var heightI = parseInt(newHeight[1]);
+    console.log(heightI);
     props = {
       ...props,
-      height: `${heightF}'${heightI}`
-    }
+      height: `${heightF}'${heightI}`,
+    };
   }
 
   return (
@@ -245,42 +251,42 @@ const BiometricCard: React.FC<BioProps> = (props) => {
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
       <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
-        {(props.homeTown == undefined ? "Undefined" : props.homeTown)}
+        {props.homeTown == undefined ? "Undefined" : props.homeTown}
       </div>
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2 text-end">Height</div>
           <div className="text-brandWhite">
-            {(props.height == undefined ? "Unlisted" : props.height)}
+            {props.height == undefined ? "Unlisted" : props.height}
           </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Bench Press</div>
           <div className="text-brandWhite">
-            {(props.bench == undefined ? "Unlisted" : props.bench)}
+            {props.bench == undefined ? "Unlisted" : props.bench}
           </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Weight</div>
           <div className="text-brandWhite">
-            {(props.weight == undefined ? "Unlisted" : props.weight)}
+            {props.weight == undefined ? "Unlisted" : props.weight}
           </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Wing Span</div>
           <div className="text-brandWhite">
-            {(props.wingspan == undefined ? "Unlisted" : props.wingspan)}
+            {props.wingspan == undefined ? "Unlisted" : props.wingspan}
           </div>
         </div>
 
         <div className=" w-full flex flex-row text-3xl">
           <div className="text-brandGrey mr-auto px-2">Vertical</div>
           <div className="text-brandWhite">
-            {(props.vertical == undefined ? "Unlisted" : props.vertical)}
+            {props.vertical == undefined ? "Unlisted" : props.vertical}
           </div>
         </div>
       </div>

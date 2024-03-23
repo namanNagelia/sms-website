@@ -8,32 +8,12 @@ import { ShotChart } from "./graphs/shotChart";
 
 interface GraphsBoxProps {
   shotsData: any[];
+  ratingsData: any[];
 }
 
 const GraphsBox = (props: GraphsBoxProps) => {
   const shotData = props.shotsData;
-  const data = [
-    {
-      label: "Inside Scoring",
-      value: 43,
-    },
-    {
-      label: "Outside Scoring",
-      value: 88,
-    },
-    {
-      label: "Playmaking",
-      value: 63,
-    },
-    {
-      label: "Rebounding",
-      value: 44,
-    },
-    {
-      label: "Defense",
-      value: 71,
-    },
-  ];
+
   const hustleData = [
     {
       label: "Deflections",
@@ -118,7 +98,7 @@ const GraphsBox = (props: GraphsBoxProps) => {
       </div>
       {ratingsChart && (
         <RadarChart
-          data={data}
+          data={props.ratingsData}
           bgColor={hexToRgbA("#CF6C57", 0.9)}
           borderColor={hexToRgbA("#CF6C57", 1)}
         />
