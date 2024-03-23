@@ -1,5 +1,4 @@
 import React from "react";
-import HomeUI from "./ui";
 
 const fetchPlayer = async () => {
   try {
