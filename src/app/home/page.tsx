@@ -3,7 +3,11 @@ import HomeUI from "./ui";
 
 const fetchPlayer = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/allPlayers", {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/allPlayers"
+        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/allPlayers";
+    const res = await fetch(url, {
       next: { revalidate: 1 },
     });
     const data = await res.json();
@@ -15,7 +19,11 @@ const fetchPlayer = async () => {
 
 const fetchAllGames = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/gameInfo", {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/gameInfo"
+        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/gameInfo";
+    const res = await fetch(url, {
       next: { revalidate: 1 },
     });
     const data = await res.json();
@@ -24,7 +32,6 @@ const fetchAllGames = async () => {
     console.log(error);
   }
 };
-
 export default async function Home() {
   const playerData = await fetchPlayer();
   const gameInfo = await fetchAllGames();

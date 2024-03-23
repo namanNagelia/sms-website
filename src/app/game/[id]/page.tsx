@@ -3,12 +3,13 @@ import GamePageUI from "./ui";
 
 const fetchGameDetails = async (id: string) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/specificGameID?id=${id}`,
-      {
-        next: { revalidate: 1 },
-      }
-    );
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/specificGameID?id=${id}`
+        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/specificGameID?id=${id}`;
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {

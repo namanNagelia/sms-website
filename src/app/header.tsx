@@ -2,7 +2,11 @@ import React from "react";
 import HeaderUI from "./headerui";
 const fetchPlayer = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/allPlayers", {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/allPlayers"
+        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/allPlayers";
+    const res = await fetch(url, {
       next: { revalidate: 1 },
     });
     const data = await res.json();

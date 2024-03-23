@@ -3,12 +3,13 @@ import PlayerPageUI from "./ui";
 
 const fetchPlayerProfile = async (id: string) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/specificPlayer?id=${id}`,
-      {
-        next: { revalidate: 1 },
-      }
-    );
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/specificPlayer?id=${id}`
+        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/specificPlayer?id=${id}`;
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {
@@ -18,12 +19,13 @@ const fetchPlayerProfile = async (id: string) => {
 
 const fetchAverages = async (id: string) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/playerStatsSeason?id=${id}`,
-      {
-        next: { revalidate: 1 },
-      }
-    );
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/playerStatsSeason?id=${id}`
+        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/playerStatsSeason?id=${id}`;
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {
@@ -33,12 +35,13 @@ const fetchAverages = async (id: string) => {
 
 const fetchShotChartData = async (id: string) => {
   try {
-    const res = await fetch(
-      `http://localhost:3000/api/seasonShotLocations?id=${id}`,
-      {
-        next: { revalidate: 1 },
-      }
-    );
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/seasonShotLocations?id=${id}`
+        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/seasonShotLocations?id=${id}`;
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {
@@ -48,7 +51,11 @@ const fetchShotChartData = async (id: string) => {
 
 const fetchShotLocations = async (id: string) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/shotTypes?id=${id}`, {
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/shotTypes?id=${id}`
+        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/shotTypes?id=${id}`;
+    const res = await fetch(url, {
       next: { revalidate: 1 },
     });
     const data = await res.json();
