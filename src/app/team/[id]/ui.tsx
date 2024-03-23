@@ -8,8 +8,8 @@ import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 const OPTIONS: EmblaOptionsType = { dragFree: true };
 
-const seasonStats = {
-  stats: {
+const seasonStats = 
+  {
     PTS: "22.3",
     REB: "5.4",
     AST: "7.1",
@@ -20,8 +20,9 @@ const seasonStats = {
     FT: "82%",
     TO: "3.1",
     PER: "21.2",
-  },
-};
+  }
+
+;
 
 export default function TeamUI() {
   return (
