@@ -31,9 +31,9 @@ const ScoutingReport: React.FC<ScoutProps> = ({ report, strengths, weaknesses })
                 <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
                 <div className="w-full flex-col flex justify-start text-start px-4 space-y-2">
                     {
-                        list.map((item)=>{
+                        list.map((item, index)=>{
                             return(
-                                <li>{item}</li>
+                                <li key={index}>{item}</li>
                             )
                         })
                     }
