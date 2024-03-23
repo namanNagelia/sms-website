@@ -44,7 +44,8 @@ export default function TeamUI() {
             picture="|"
             id={1}
             graduation="2023"
-            position="Forward"
+            position=
+            "Forward"
           /> */}
           <EmblaCarousel
             items={seasonStats}
