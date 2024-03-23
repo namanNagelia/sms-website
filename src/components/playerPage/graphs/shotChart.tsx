@@ -1,8 +1,6 @@
 "use client";
-import * as D3 from "d3";
+import * as d3 from "d3";
 import { useState } from "react";
-
-declare let d3: any;
 
 interface ScatterplotProps {
   data: any[];
@@ -19,8 +17,8 @@ interface DataType {
 }
 
 export const ShotChart = (props: ScatterplotProps) => {
-  const xScale = D3.scaleLinear().domain([0, 50]).range([500, 0]);
-  const yScale = D3.scaleLinear().domain([0, 42]).range([360, 0]);
+  const xScale = d3.scaleLinear().domain([0, 50]).range([500, 0]);
+  const yScale = d3.scaleLinear().domain([0, 42]).range([360, 0]);
   const [tooltipData, setTooltipData] = useState<DataType | null>(null);
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
