@@ -7,6 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model BI_ORG {
+  BI_Org_Id                  Int     @id @default(autoincrement())
+  BI_Org_Type                String? @db.VarChar(255)
+  BI_Org_name                String? @db.VarChar(255)
+  BI_Org_Address             String? @db.VarChar(255)
+  BI_Org_City                String? @db.VarChar(255)
+  BI_Org_State               String? @db.Char(2)
+  BI_Org_Zip                 String? @db.VarChar(10)
+  BI_Org_Phone_Number        String? @db.VarChar(15)
+  BI_Org_Director_First_Name String? @db.VarChar(255)
+  BI_Org_Director_Last_Name  String? @db.VarChar(255)
+}
+
+model GAME_STATS_FOR_PLAYERS {
+  game_stat_id                   Int     @id @default(0)
+  game_stat_player_id            Int     @default(0)
+  game_stat_player_jersey_number Int?
+  game_stat_player_team_name     String? @db.VarChar(255)
+  game_stat_opponent_team_name   String? @db.VarChar(255)
+  game_stat_stat_count           String? @db.VarChar(255)
+  game_stat_court_position_X     Float?  @db.Float
+  game_stat_court_Position_Y     Float?  @db.Float
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model GAME_STATS_FOR_PLAYERS_ORIGINAL {
+  id                   Int     @default(0)
+  Player_Jersey_Number Int?
+  Player_Team_Name     String? @db.VarChar(255)
+  Opponent_Team_Name   String? @db.VarChar(255)
+  Stats_Count          String? @db.VarChar(255)
+  Court_Position_X     Float?  @db.Float
+  Court_Position_Y     Float?  @db.Float
+
+  @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model GAME_STATS_FOR_PLAYERS_TEMP {
+  game_stat_id                   Int     @default(0)
+  game_stat_player_id            Int     @default(0)
+  game_stat_player_jersey_number Int?
+  game_stat_player_team_name     String? @db.VarChar(255)
+  game_stat_opponent_team_name   String? @db.VarChar(255)
+  game_stat_stat_count           String? @db.VarChar(255)
+  game_stat_court_position_X     Float?  @db.Float
+  game_stat_court_Position_Y     Float?  @db.Float
+
+  @@ignore
+}
+
 model Game_INFO {
   Game_ID           Int       @id @default(autoincrement())
   Game_Date         DateTime? @db.Date
@@ -34,17 +85,6 @@ model Player_INFO {
 }
 
 model Player_Stats_Info {
-  Playerstats_ID          Int      @id @default(autoincrement())
-  Team1                   String?  @db.VarChar(255)
-  Team1PlayerJerseyNumber Int?
-  Team2                   String?  @db.VarChar(255)
-  Stats                   String?  @db.Text
-  Action_Flag             Int?
-  Court_Position_X        Decimal? @db.Decimal(10, 2)
-  Court_Position_Y        Decimal? @db.Decimal(10, 2)
-}
-
-model Player_Stats_Info_Phase1 {
   Playerstats_ID          Int      @id @default(autoincrement())
   Team1                   String?  @db.VarChar(255)
   Team1PlayerJerseyNumber Int?
@@ -158,6 +198,16 @@ model basketball_scoreboard {
 
   @@index([matchId], map: "basketball_scoreboard_matchid_index")
   @@index([userId], map: "basketball_scoreboard_userid_index")
+}
+
+model basketball_stats {
+  id                   Int     @id @default(autoincrement())
+  Player_Jersey_Number Int?
+  Player_Team_Name     String? @db.VarChar(255)
+  Opponent_Team_Name   String? @db.VarChar(255)
+  Stats_Count          String? @db.VarChar(255)
+  Court_Position_X     Float?  @db.Float
+  Court_Position_Y     Float?  @db.Float
 }
 
 model basketball_teams {
@@ -381,6 +431,18 @@ model password_resets {
   @@ignore
 }
 
+model player_information {
+  id                 Int      @id @default(autoincrement())
+  School_Name        String?  @db.VarChar(255)
+  Player_Jersey_No   Int?
+  Player_First_Name  String?  @db.VarChar(255)
+  Player_Last_Name   String?  @db.VarChar(255)
+  Height             Decimal? @db.Decimal(3, 1)
+  Year_of_Graduation Int?
+  Position           String?  @db.VarChar(255)
+  Player_Picture_URL String?  @db.VarChar(500)
+}
+
 model playlist_tags {
   id         Int        @id @default(autoincrement()) @db.UnsignedInt
   playlistId Int?       @db.UnsignedInt
@@ -509,6 +571,27 @@ model tags {
   name          String?         @db.VarChar(255)
   library_tags  library_tags[]
   playlist_tags playlist_tags[]
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model test {
+  player            String? @db.Text
+  user_team         String? @db.Text
+  opp_team          String? @db.Text
+  stat              String? @db.Text
+  created_at        String? @db.Text
+  lineup            String? @db.Text
+  lineup_created_at String? @db.Text
+  time_period       Int?
+  is_opp            Int?
+  player_id         String? @db.Text
+  game_id           String? @db.Text
+  team_id           String? @db.Text
+  opp_id            String? @db.Text
+  court_pos_x       String? @db.Text
+  court_pos_y       String? @db.Text
+
+  @@ignore
 }
 
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments

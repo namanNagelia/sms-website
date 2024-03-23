@@ -1,4 +1,57 @@
 -- CreateTable
+CREATE TABLE `BI_ORG` (
+    `BI_Org_Id` INTEGER NOT NULL AUTO_INCREMENT,
+    `BI_Org_Type` VARCHAR(255) NULL,
+    `BI_Org_name` VARCHAR(255) NULL,
+    `BI_Org_Address` VARCHAR(255) NULL,
+    `BI_Org_City` VARCHAR(255) NULL,
+    `BI_Org_State` CHAR(2) NULL,
+    `BI_Org_Zip` VARCHAR(10) NULL,
+    `BI_Org_Phone_Number` VARCHAR(15) NULL,
+    `BI_Org_Director_First_Name` VARCHAR(255) NULL,
+    `BI_Org_Director_Last_Name` VARCHAR(255) NULL,
+
+    PRIMARY KEY (`BI_Org_Id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GAME_STATS_FOR_PLAYERS` (
+    `game_stat_id` INTEGER NOT NULL DEFAULT 0,
+    `game_stat_player_id` INTEGER NOT NULL DEFAULT 0,
+    `game_stat_player_jersey_number` INTEGER NULL,
+    `game_stat_player_team_name` VARCHAR(255) NULL,
+    `game_stat_opponent_team_name` VARCHAR(255) NULL,
+    `game_stat_stat_count` VARCHAR(255) NULL,
+    `game_stat_court_position_X` FLOAT NULL,
+    `game_stat_court_Position_Y` FLOAT NULL,
+
+    PRIMARY KEY (`game_stat_id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GAME_STATS_FOR_PLAYERS_ORIGINAL` (
+    `id` INTEGER NOT NULL DEFAULT 0,
+    `Player_Jersey_Number` INTEGER NULL,
+    `Player_Team_Name` VARCHAR(255) NULL,
+    `Opponent_Team_Name` VARCHAR(255) NULL,
+    `Stats_Count` VARCHAR(255) NULL,
+    `Court_Position_X` FLOAT NULL,
+    `Court_Position_Y` FLOAT NULL
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `GAME_STATS_FOR_PLAYERS_TEMP` (
+    `game_stat_id` INTEGER NOT NULL DEFAULT 0,
+    `game_stat_player_id` INTEGER NOT NULL DEFAULT 0,
+    `game_stat_player_jersey_number` INTEGER NULL,
+    `game_stat_player_team_name` VARCHAR(255) NULL,
+    `game_stat_opponent_team_name` VARCHAR(255) NULL,
+    `game_stat_stat_count` VARCHAR(255) NULL,
+    `game_stat_court_position_X` FLOAT NULL,
+    `game_stat_court_Position_Y` FLOAT NULL
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `Game_INFO` (
     `Game_ID` INTEGER NOT NULL AUTO_INCREMENT,
     `Game_Date` DATE NULL,
@@ -32,20 +85,6 @@ CREATE TABLE `Player_INFO` (
 
 -- CreateTable
 CREATE TABLE `Player_Stats_Info` (
-    `Playerstats_ID` INTEGER NOT NULL AUTO_INCREMENT,
-    `Team1` VARCHAR(255) NULL,
-    `Team1PlayerJerseyNumber` INTEGER NULL,
-    `Team2` VARCHAR(255) NULL,
-    `Stats` TEXT NULL,
-    `Action_Flag` INTEGER NULL,
-    `Court_Position_X` DECIMAL(10, 2) NULL,
-    `Court_Position_Y` DECIMAL(10, 2) NULL,
-
-    PRIMARY KEY (`Playerstats_ID`)
-) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
--- CreateTable
-CREATE TABLE `Player_Stats_Info_Phase1` (
     `Playerstats_ID` INTEGER NOT NULL AUTO_INCREMENT,
     `Team1` VARCHAR(255) NULL,
     `Team1PlayerJerseyNumber` INTEGER NULL,
@@ -160,6 +199,19 @@ CREATE TABLE `basketball_scoreboard` (
 
     INDEX `basketball_scoreboard_matchid_index`(`matchId`),
     INDEX `basketball_scoreboard_userid_index`(`userId`),
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `basketball_stats` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `Player_Jersey_Number` INTEGER NULL,
+    `Player_Team_Name` VARCHAR(255) NULL,
+    `Opponent_Team_Name` VARCHAR(255) NULL,
+    `Stats_Count` VARCHAR(255) NULL,
+    `Court_Position_X` FLOAT NULL,
+    `Court_Position_Y` FLOAT NULL,
+
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -384,6 +436,21 @@ CREATE TABLE `password_resets` (
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
+CREATE TABLE `player_information` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `School_Name` VARCHAR(255) NULL,
+    `Player_Jersey_No` INTEGER NULL,
+    `Player_First_Name` VARCHAR(255) NULL,
+    `Player_Last_Name` VARCHAR(255) NULL,
+    `Height` DECIMAL(3, 1) NULL,
+    `Year_of_Graduation` INTEGER NULL,
+    `Position` VARCHAR(255) NULL,
+    `Player_Picture_URL` VARCHAR(500) NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
 CREATE TABLE `playlist_tags` (
     `id` INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
     `playlistId` INTEGER UNSIGNED NULL,
@@ -512,6 +579,25 @@ CREATE TABLE `tags` (
     `name` VARCHAR(255) NULL,
 
     PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `test` (
+    `player` TEXT NULL,
+    `user_team` TEXT NULL,
+    `opp_team` TEXT NULL,
+    `stat` TEXT NULL,
+    `created_at` TEXT NULL,
+    `lineup` TEXT NULL,
+    `lineup_created_at` TEXT NULL,
+    `time_period` INTEGER NULL,
+    `is_opp` INTEGER NULL,
+    `player_id` TEXT NULL,
+    `game_id` TEXT NULL,
+    `team_id` TEXT NULL,
+    `opp_id` TEXT NULL,
+    `court_pos_x` TEXT NULL,
+    `court_pos_y` TEXT NULL
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable

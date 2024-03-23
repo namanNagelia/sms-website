@@ -4,7 +4,10 @@ import GamePageUI from "./ui";
 const fetchGameDetails = async (id: string) => {
   try {
     const res = await fetch(
-      `http://localhost:3000/api/specificGameID?id=${id}`
+      `http://localhost:3000/api/specificGameID?id=${id}`,
+      {
+        next: { revalidate: 1 },
+      }
     );
     const data = await res.json();
     return data;

@@ -2,28 +2,28 @@ import React from "react";
 import Image from "next/image";
 import defaultImage from "../../../public/Male Unknown.svg";
 type playerProps = {
-  Player_ID: number;
-  SchoolName: string;
-  PlayerJerseyNo: number;
-  PlayerFirstName: string;
-  PlayerLastName: string;
+  id: number;
+  School_Name: string;
+  Player_Jersey_No: number;
+  Player_First_Name: string;
+  Player_Last_Name: string;
   Height: string;
-  YearOfGraduation: number;
+  Year_of_Graduation: number;
   Position: string;
-  PlayerPictureURL: string;
+  Player_Picture_URL: string;
   ranking: number;
   change: number;
 };
 
 const PlayerCard = (props: playerProps) => {
-  const Player_ID = props.Player_ID;
-  const school = props.SchoolName;
-  const number = props.PlayerJerseyNo;
-  const name = `${props.PlayerFirstName} ${props.PlayerLastName}`;
+  const Player_ID = props.id;
+  const school = props.School_Name;
+  const number = props.Player_Jersey_No;
+  const name = `${props.Player_First_Name} ${props.Player_Last_Name}`;
   const position = props.Position;
   const ranking = props.ranking;
   const change = props.change;
-  var imageURL = props.PlayerPictureURL;
+  var imageURL = props.Player_Picture_URL;
   if (imageURL === "|") {
     imageURL = defaultImage;
   }

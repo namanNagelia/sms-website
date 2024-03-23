@@ -73,7 +73,7 @@ export default function HomeUI(props: Props) {
     },
   ];
 
-  // console.log(playerData);
+  // console.log("data", playerData);
 
   return (
     <>

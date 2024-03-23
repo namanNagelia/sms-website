@@ -3,7 +3,9 @@ import HomeUI from "./ui";
 
 const fetchPlayer = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/allPlayers");
+    const res = await fetch("http://localhost:3000/api/allPlayers", {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {
@@ -13,7 +15,9 @@ const fetchPlayer = async () => {
 
 const fetchAllGames = async () => {
   try {
-    const res = await fetch("http://localhost:3000/api/gameInfo");
+    const res = await fetch("http://localhost:3000/api/gameInfo", {
+      next: { revalidate: 1 },
+    });
     const data = await res.json();
     return data;
   } catch (error) {

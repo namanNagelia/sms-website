@@ -106,16 +106,16 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const [activeVideo, setVideo] = useState<string>(videoHighlights[0].link);
   const playerProfileData = props.profileStats.playerProfile;
   console.log(playerProfileData);
-  const name = `${playerProfileData.PlayerFirstName} ${playerProfileData.PlayerLastName}`;
+  const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
   return (
     <div>
       <PlayerNameBanner
         Name={name}
-        ImageURL={playerProfileData.PlayerPictureURL}
-        JerseyNumber={playerProfileData.PlayerJerseyNo}
+        ImageURL={playerProfileData.Player_Picture_URL}
+        JerseyNumber={playerProfileData.Player_Jersey_No}
         Position={playerProfileData.Position}
-        school={playerProfileData.SchoolName}
-        graduation={playerProfileData.YearOfGraduation}
+        school={playerProfileData.School_Name}
+        graduation={playerProfileData.Year_of_Graduation}
       />
 
       <div className="-translate-y-32">
