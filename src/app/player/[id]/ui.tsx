@@ -100,12 +100,16 @@ interface PlayerPageProps {
   profileStats: {
     playerProfile: any;
   };
+  seasonAverages: {
+    seasonAverages: any;
+  };
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
   const [activeVideo, setVideo] = useState<string>(videoHighlights[0].link);
   const playerProfileData = props.profileStats.playerProfile;
-  console.log(playerProfileData);
+  const seasonAverages = props.seasonAverages.seasonAverages;
+  // console.log(seasonAverages);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
   return (
     <div>
@@ -137,7 +141,11 @@ export default function PlayerPageUI(props: PlayerPageProps) {
             <VideoPlayerLive active={activeVideo} handle={setVideo} />
           </div>
           <div className="lg:flex  lg:space-x-10 my-10">
-            <StatsCard seasonStats={seasonStats} gameStats={gameStats} />
+            <StatsCard
+              seasonStats={seasonAverages}
+              gameStats={gameStats}
+              archetype={"Not Implemented Yet"}
+            />
             <GraphsBox />
           </div>
           <ScoutingReport

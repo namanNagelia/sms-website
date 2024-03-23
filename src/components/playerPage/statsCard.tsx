@@ -9,9 +9,14 @@ import "./stats.css";
 interface StatsCardProps {
   seasonStats: any; // Replace 'any' with the type of your season stats
   gameStats: any; // Replace 'any' with the type of your game stats
+  archetype: any; // Replace 'any' with the type of your archetype
 }
 
-const StatsCard: React.FC<StatsCardProps> = ({ seasonStats, gameStats }) => {
+const StatsCard: React.FC<StatsCardProps> = ({
+  seasonStats,
+  gameStats,
+  archetype,
+}) => {
   const [mode, setMode] = useState("Season");
   const [gameIndex, setGameIndex] = useState(0);
 
@@ -33,8 +38,8 @@ const StatsCard: React.FC<StatsCardProps> = ({ seasonStats, gameStats }) => {
 
   // Choose the right data based on the mode
   const currentStats =
-    mode === "Season" ? seasonStats.stats : gameStats[gameIndex].details;
-  const archetype = "slasher";
+    mode === "Season" ? seasonStats : gameStats[gameIndex].details;
+  const archetypes = archetype;
 
   return (
     <div className="default-card flex flex-col items-center py-8 space-y-3 mt-8">
