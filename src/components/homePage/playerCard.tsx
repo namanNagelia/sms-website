@@ -1,56 +1,75 @@
 import React from "react";
 import Image from "next/image";
-
-interface playerProps {
-  name: string;
-  position: string;
-  number: number;
-  school: string;
-  imageURL: string;
+import defaultImage from "../../../public/Male Unknown.svg";
+type playerProps = {
+  id: number;
+  School_Name: string;
+  Player_Jersey_No: number;
+  Player_First_Name: string;
+  Player_Last_Name: string;
+  Height: string;
+  Year_of_Graduation: number;
+  Position: string;
+  Player_Picture_URL: string;
   ranking: number;
   change: number;
-}
+};
 
 const PlayerCard = (props: playerProps) => {
-  const name = props.name;
-  const position = props.position;
-  const number = props.number;
-  const school = props.school;
-  const imageURL = props.imageURL;
+  const Player_ID = props.id;
+  const school = props.School_Name;
+  const number = props.Player_Jersey_No;
+  const name = `${props.Player_First_Name} ${props.Player_Last_Name}`;
+  const position = props.Position;
   const ranking = props.ranking;
   const change = props.change;
+  var imageURL = props.Player_Picture_URL;
+  if (imageURL === "|") {
+    imageURL = defaultImage;
+  }
+  const height = props.Height;
+
+  const handleClicked = (id: number) => {
+    window.location.href = `/player/${id}`;
+  };
+
   return (
     <div
-      className="w-[370px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative"
+      className="w-[360px] lg:w-[350px] xl:w-[400px] h-[230px] border-2 border-white bg-black flex overflow-hidden relative hover:z-30 
+      hover:scale-105 
+      transition 
+      duration-150 mt-5 mb-10 hover:cursor-pointer
+"
       style={{ borderRadius: "60px" }}
+      onClick={() => handleClicked(Player_ID)}
     >
       {/* Using an img tag for simplicity and alignment */}
       <div className="flex flex-row justify-between">
         <div className="flex items-end justify-start lg:w-[150px] xl:w-[200px]">
-          <img src={props.imageURL} alt={props.name} width="200" height="200" />
+          <Image src={imageURL} alt={name} width="200" height="200" />
         </div>
 
-        <div className="mt-3 text-left">
+        <div className="mt-6 text-left pl-2">
           <div className="flex justify-between">
             <h1 className="lg:text-lg xl:text-2xl text-white font-dinAlternate mb-3">
               {name}
             </h1>
           </div>
           {/* Position */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">Position</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">Position</p>
             <p className="mr-auto">|</p>
             <p>{position}</p>
           </div>
           {/* Number */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">Number</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">Number</p>
             <p className="mr-auto">|</p>
             <p>{number}</p>
           </div>
           {/* School */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row w-32">
-            <p className="w-14 text-brandGrey">School</p>
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+            <p className="w-12 lg:w-14 text-brandGrey">School</p>
             <p className="mr-auto">|</p>
             <p>{school}</p>
           </div>

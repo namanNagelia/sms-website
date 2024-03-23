@@ -4,31 +4,16 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Button from "../homePage/button";
 import RadarChart from "./graphs/radarChart";
+import { ShotChart } from "./graphs/shotChart";
 
-//Props with calculated individual ratings, shot chart URL, and hustle stats i can display
-const GraphsBox = () => {
-  const data = [
-    {
-      label: "Inside Scoring",
-      value: 43,
-    },
-    {
-      label: "Outside Scoring",
-      value: 88,
-    },
-    {
-      label: "Playmaking",
-      value: 63,
-    },
-    {
-      label: "Rebounding",
-      value: 44,
-    },
-    {
-      label: "Defense",
-      value: 71,
-    },
-  ];
+interface GraphsBoxProps {
+  shotsData: any[];
+  ratingsData: any[];
+}
+
+const GraphsBox = (props: GraphsBoxProps) => {
+  const shotData = props.shotsData;
+
   const hustleData = [
     {
       label: "Deflections",
@@ -113,7 +98,7 @@ const GraphsBox = () => {
       </div>
       {ratingsChart && (
         <RadarChart
-          data={data}
+          data={props.ratingsData}
           bgColor={hexToRgbA("#CF6C57", 0.9)}
           borderColor={hexToRgbA("#CF6C57", 1)}
         />
@@ -124,6 +109,9 @@ const GraphsBox = () => {
           bgColor={hexToRgbA("#CF6C57", 0.9)}
           borderColor={hexToRgbA("#CF6C57", 1)}
         />
+      )}
+      {shotChart && (
+        <ShotChart data={shotData} width={"500px"} height={"100px"} />
       )}
     </div>
   );

@@ -3,18 +3,16 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  const row = await prisma.showcases.findUnique({
-    where: {
-      id: 30,
-    },
-  });
-  console.log(row);
+  const firstPlayer = await prisma.player_INFO.findMany();
+  console.log(firstPlayer);
 }
 
 main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
+  .then(async () => {
     await prisma.$disconnect();
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
   });
