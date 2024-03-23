@@ -232,19 +232,25 @@ const VideoPlayerLive = ({
 };
 
 interface BioProps {
-  homeTown: string;
-  height: string;
-  bench: number;
-  weight: number;
-  wingspan: string;
-  vertical: string;
+  homeTown?: string;
+  height?: string;
+  bench?: number;
+  weight?: number;
+  wingspan?: string;
+  vertical?: string;
 }
 
 const BiometricCard: React.FC<BioProps> = (props) => {
+  console.log(props.height);
   if (props.height != undefined) {
     const newHeight = props.height.split(".");
     var heightF = parseInt(newHeight[0]);
     var heightI = parseInt(newHeight[1]);
+
+    // If heightF or heightI is NaN, replace with 0
+    heightF = isNaN(heightF) ? 0 : heightF;
+    heightI = isNaN(heightI) ? 0 : heightI;
+
     console.log(heightI);
     props = {
       ...props,
@@ -258,9 +264,9 @@ const BiometricCard: React.FC<BioProps> = (props) => {
         Biometerics
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
-      <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
+      {/* <div className="text-brandGrey font-dinCondensed text-2xl mb-4">
         {props.homeTown == undefined ? "Undefined" : props.homeTown}
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         <div className=" w-full flex flex-row text-3xl">

@@ -137,19 +137,34 @@ export function PlayerRatingsCalculatorV2(boxStats: any[], shotStats: any[]) {
   const data = {
     InsideScoring: isNaN(calculateInsideScoringRating(boxStats, shotStats))
       ? 0
-      : calculateInsideScoringRating(boxStats, shotStats).toFixed(0),
+      : Math.min(
+          99,
+          Number(calculateInsideScoringRating(boxStats, shotStats).toFixed(0))
+        ),
     OutsideScoring: isNaN(calculateOutsideScoringRating(boxStats, shotStats))
       ? 0
-      : calculateOutsideScoringRating(boxStats, shotStats).toFixed(0),
+      : Math.min(
+          99,
+          Number(calculateOutsideScoringRating(boxStats, shotStats).toFixed(0))
+        ),
     Playmaking: isNaN(calculatePlaymakingRating(boxStats, shotStats))
       ? 0
-      : calculatePlaymakingRating(boxStats, shotStats).toFixed(0),
+      : Math.min(
+          99,
+          Number(calculatePlaymakingRating(boxStats, shotStats).toFixed(0))
+        ),
     Rebounding: isNaN(calculateReboundingRating(boxStats, shotStats))
       ? 0
-      : calculateReboundingRating(boxStats, shotStats).toFixed(0),
+      : Math.min(
+          99,
+          Number(calculateReboundingRating(boxStats, shotStats).toFixed(0))
+        ),
     Defense: isNaN(calculateDefenseRating(boxStats, shotStats))
       ? 0
-      : calculateDefenseRating(boxStats, shotStats).toFixed(0),
+      : Math.min(
+          99,
+          Number(calculateDefenseRating(boxStats, shotStats).toFixed(0))
+        ),
   };
   return data;
 }

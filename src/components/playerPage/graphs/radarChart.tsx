@@ -63,9 +63,14 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 const RadarChart = (props: Props) => {
+  const data = props.data.map((item) => ({
+    ...item,
+    value: Math.min(99, item.value),
+  }));
+
   return (
     <ResponsiveContainer width="80%" height="80%">
-      <_RadarChart outerRadius="80%" data={props.data}>
+      <_RadarChart outerRadius="80%" data={data}>
         <PolarGrid />
         <PolarAngleAxis
           dataKey="label"
