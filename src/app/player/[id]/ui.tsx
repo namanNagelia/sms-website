@@ -14,6 +14,7 @@ const { PrismaClient } = require("@prisma/client");
 import { ShotChart } from "@/components/playerPage/graphs/shotChart";
 import ScoutingReport from "@/components/playerPage/scoutReport";
 import defaultImage from "@/../public/Male Unknown.svg";
+import PlayerRatingsCalculator from "@/app/math/playerRatings";
 const prisma = new PrismaClient();
 
 // Example JSON data for season and game stats
@@ -88,6 +89,9 @@ interface PlayerPageProps {
     seasonAverages: any;
   };
   shotChartData: any[];
+  shotTypesData: {
+    shotTypes: any;
+  };
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
@@ -95,7 +99,9 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const playerProfileData = props.profileStats.playerProfile;
   const seasonAverages = props.seasonAverages.seasonAverages;
   const shotChartData = props.shotChartData;
+  const shotTypes = props.shotTypesData.shotTypes;
   // console.log(seasonAverages);
+  const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
   const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
   return (
     <div>
@@ -132,7 +138,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
               gameStats={gameStats}
               archetype={"Not Implemented Yet"}
             />
-            <GraphsBox shotsData={shotChartData} />
+            <GraphsBox shotsData={shotChartData} ratingsData={ratingsData} />
           </div>
           <ScoutingReport
             report={defaultScoutingReport.report} //accepts a string

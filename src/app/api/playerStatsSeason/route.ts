@@ -37,13 +37,10 @@ export async function GET(request: NextRequest) {
     switch (log.game_stat_stat_count) {
       case "OnePointFG":
         pts += 1;
-        fgMakes += 1;
-        fgAttempts += 1;
         ftMakes += 1;
         ftAttempts += 1;
         break;
       case "OnePointFGMiss":
-        fgAttempts += 1;
         ftAttempts += 1;
         break;
       case "TwoPointFG":
