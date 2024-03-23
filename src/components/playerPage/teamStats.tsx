@@ -7,12 +7,24 @@ import rightArrowIcon from "@/app/images/icons/swaps.svg";
 import "./stats.css";
 
 interface StatsCardProps {
-  seasonStats: any; // Replace 'any' with the type of your season stats
+  seasonStats: {
+    PTS: string,
+    REB: string,
+    AST: string,
+    STL: string,
+    BLK: string,
+    FG: string,
+    TP: string,
+    FT: string,
+    TO: string,
+    PER: string
+  }// Replace 'any' with the type of your season stats
 }
 
-const TeamStatsCard: React.FC<StatsCardProps> = ({ seasonStats }) => {
+const TeamStatsCard: React.FC<StatsCardProps> = ( {seasonStats} ) => {
   // Choose the right data based on the mode
-  const currentStats = seasonStats.stats;
+
+  console.log(seasonStats);
 
   return (
     <div className="default-card flex flex-col items-center py-8 space-y-3 mt-8">
@@ -22,11 +34,11 @@ const TeamStatsCard: React.FC<StatsCardProps> = ({ seasonStats }) => {
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
-        {Object.keys(currentStats).length > 0 ? (
-          Object.entries(currentStats).map(([key, value]) => (
+        {seasonStats != undefined ? (
+          Object.keys(seasonStats).map(key => (
             <div key={key} className="w-full flex flex-row text-3xl">
               <div className="text-brandGrey mr-auto px-2">{key}</div>
-              <div className="text-brandWhite">{String(value)}</div>
+              <div className="text-brandWhite">{(seasonStats[key as keyof (typeof seasonStats)])}</div>
             </div>
           ))
         ) : (

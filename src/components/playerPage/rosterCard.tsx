@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import defaultImage from "@/../public/Male Unknown.svg";
 
-interface Props {
+interface RosterProps {
   picture: string;
   id: number;
   graduation: string;
@@ -10,7 +10,7 @@ interface Props {
   position: string;
 }
 
-export const RosterCard: React.FC<Props> = ({
+export const RosterCard: React.FC<RosterProps> = ({
   picture,
   id,
   graduation,

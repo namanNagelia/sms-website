@@ -8,27 +8,71 @@ import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 const OPTIONS: EmblaOptionsType = { dragFree: true };
 
-const seasonStats = {
-  stats: {
-    PTS: "22.3",
-    REB: "5.4",
-    AST: "7.1",
-    STL: "1.5",
-    BLK: "0.4",
-    FG: "47%",
-    TP: "38%",
-    FT: "82%",
-    TO: "3.1",
-    PER: "21.2",
+const seasonStats =
+{
+  PTS: "22.3",
+  REB: "5.4",
+  AST: "7.1",
+  STL: "1.5",
+  BLK: "0.4",
+  FG: "47%",
+  TP: "38%",
+  FT: "82%",
+  TO: "3.1",
+  PER: "21.2",
+}
+// interface RosterProps {
+//   picture: string;
+//   id: number;
+//   graduation: string;
+//   name: string;
+//   position: string;
+// }
+const defaultTeamStats = [
+  {
+    picture: "|",
+    id: 1,
+    graduation: "2025",
+    name: "Prasad Gupta",
+    position: "Guard"
   },
-};
+  {
+    picture: "|",
+    id: 2,
+    graduation: "2025",
+    name: "Prasad Gupta",
+    position: "Guard"
+  },
+  {
+    picture: "|",
+    id: 3,
+    graduation: "2025",
+    name: "Prasad Gupta",
+    position: "Guard"
+  },
+  {
+    picture: "|",
+    id: 4,
+    graduation: "2025",
+    name: "Prasad Gupta",
+    position: "Guard"
+  },
+  {
+    picture: "|",
+    id: 5,
+    graduation: "2025",
+    name: "Prasad Gupta",
+    position: "Guard"
+  },
+]
+
 
 export default function TeamUI() {
   return (
     <div>
       <TeamNameBanner Name="Lakers" ImageURL="|" record="0-0" />
       <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
-        <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0">
+        <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0 items-center">
           <CoachCard
             name="Erick Spoelstra"
             phoneNumber="123-456-7890"
@@ -38,7 +82,7 @@ export default function TeamUI() {
           <TeamStatsCard seasonStats={seasonStats} />
         </div>
         <div className="lg:flex items-center"></div>
-        <div className="lg:flex  lg:space-x-10 my-10">
+        <div className="lg:flex  lg:space-x-10 my-10 w-5/6">
           {/* <RosterCard
             name="LeBron James"
             picture="|"
@@ -48,7 +92,7 @@ export default function TeamUI() {
             "Forward"
           /> */}
           <EmblaCarousel
-            items={seasonStats}
+            items={defaultTeamStats}
             options={OPTIONS}
             cardType={RosterCard}
             spacing={4}
@@ -112,26 +156,26 @@ const CoachCard = (props: CoachCardProps) => {
       style={{ borderRadius: "60px" }}
     >
       {/* Using an img tag for simplicity and alignment */}
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row space-x-4">
         <div className="flex items-end justify-start lg:w-[150px] xl:w-[200px]">
           <Image src={imageURL} alt={name} width="200" height="200" />
         </div>
 
-        <div className="mt-6 text-left pl-2">
+        <div className="mt-auto text-left pl-2 mb-14">
           {/* Position */}
-          <div className="lg:text-lg xl:text-xl text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:text-lg xl:text-xl text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Coach</p>
             <p className="mr-auto">|</p>
             <p>{name}</p>
           </div>
           {/* Number */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Phone</p>
             <p className="mr-auto">|</p>
             <p>{phoneNumber}</p>
           </div>
           {/* School */}
-          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-40 w-[8.5rem]">
+          <div className="lg:bs xl:text-lg text-white font-dinCondensed mb-2 flex flex-row lg:w-48 w-[8.5rem]">
             <p className="w-12 lg:w-14 text-brandGrey">Email</p>
             <p className="mr-auto">|</p>
             <p>{email}</p>
