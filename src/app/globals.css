@@ -144,6 +144,9 @@ text {
   background: rgba(90, 128, 135, 0.39);
   border-radius: 25px;
 }
+.hide-scroll::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
+}
 
 @media screen and (max-width: 1024px) {
   .default-card {
