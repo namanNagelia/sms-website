@@ -5,7 +5,7 @@ const fetchPlayer = async () => {
     const url =
       process.env.DEV === "0"
         ? "http://localhost:3000/api/allPlayers"
-        : "https://sms-website-sigma.vercel.app/api/allPlayers";
+        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/allPlayers";
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
