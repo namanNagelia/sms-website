@@ -6,7 +6,7 @@ const fetchGameDetails = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/specificGameID?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/specificGameID/?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/specificGameID/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
