@@ -6,13 +6,25 @@ export type GameCardProps = {
   player_opponent_team_pic: string;
   game_score: string;
   game_id: number;
+  game_team1_id: number;
+  game_team2_id: number;
+  teamData: any[];
 };
 
 const GameCard = (props: GameCardProps) => {
   const handleClick = (id: number) => {
     window.location.href = `/game/${id}`;
   };
-
+  const team1 = props.teamData.find(
+    (team) => team.team_id === props.game_team1_id
+  );
+  const team1Pic = team1 ? team1.team_log_url : "";
+  const team1Name = team1 ? team1.team_name : "";
+  const team2 = props.teamData.find(
+    (team) => team.team_id === props.game_team2_id
+  );
+  const team2Pic = team2 ? team2.team_log_url : "";
+  const team2Name = team2 ? team2.team_name : "";
   return (
     <button
       className="
@@ -65,7 +77,7 @@ const GameCard = (props: GameCardProps) => {
             "
       >
         <Image
-          src={props.player_team_name_pic}
+          src={team1Pic}
           alt="Team Image"
           className="bg-white rounded-full md:w-12 md:h-12"
           width={64}
@@ -83,7 +95,7 @@ const GameCard = (props: GameCardProps) => {
           {props.game_score}
         </text>
         <Image
-          src={props.player_opponent_team_pic}
+          src={team2Pic}
           alt="Team Image"
           className="bg-white rounded-full md:w-12 md:h-12"
           width={64}

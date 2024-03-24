@@ -38,9 +38,6 @@ const PlayerCarousel: React.FC<PlayerCarouselProps> = ({
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
           {items.map((item, index) => {
-            console.log(item);
-            console.log("items:");
-            // const schoolName = schoolNames[index];
             return (
               <div
                 className="embla__slide"

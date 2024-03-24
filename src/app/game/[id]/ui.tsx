@@ -79,20 +79,32 @@ interface GamePageProps {
   gameDetailsStats: {
     game: any;
   };
+  teamInfo: {
+    teams: any;
+  };
 }
 
 const GamePageUI = (props: GamePageProps) => {
   const gamedetails = props.gameDetailsStats.game;
-  console.log("Details");
-  console.log(gamedetails);
+  const teamInfo = props.teamInfo.teams;
+  const team1 = teamInfo.find(
+    (team: any) => team.team_id === gamedetails.game_team1_id
+  );
+  const team1Pic = team1 ? team1.team_log_url : "";
+  const team2 = teamInfo.find(
+    (team: any) => team.team_id === gamedetails.game_team2_id
+  );
+  const team2Pic = team2 ? team2.team_log_url : "";
+  const team1Name = team1 ? team1.team_name : "";
+  const team2Name = team2 ? team2.team_name : "";
 
   return (
     <>
       <GameScore
-        Team1={gamedetails.player_team_name}
-        Team2={gamedetails.player_opponent_team_name}
-        Team1Logo={gamedetails.player_team_name_pic}
-        Team2Logo={gamedetails.player_opponent_team_pic}
+        Team1={team1Name}
+        Team2={team2Name}
+        Team1Logo={team1Pic}
+        Team2Logo={team2Pic}
         FinalScores={gamedetails.game_score}
       />
       <div className="w-full text-center">
@@ -182,7 +194,7 @@ const GameScore: React.FC<GameProp> = ({
   return (
     <header className="sticky top-24 h-20 w-full z-50 flex-row justify-between px-10 text-brandWhite font-dinCondensed">
       <div className="flex flex-row h-fit">
-        <Image src={Team1Logo} alt="sda" width={48} height={48} />
+        <Image src={Team1Logo} alt="Team 1 Pic" width={48} height={48} />
         <div className="flex flex-col justify-center items-start mx-4">
           <text className="text-xl">{Team1}</text>
           <text>{/* {leftTeam.record.wins} - {leftTeam.record.losses} */}</text>
@@ -196,7 +208,7 @@ const GameScore: React.FC<GameProp> = ({
         <div className="text-3xl">{FinalScores}</div>
       </div>
       <div className="flex flex-row-reverse h-fit">
-        <Image src={Team2Logo} alt="sda" width={48} height={48} />
+        <Image src={Team2Logo} alt="Team 2 pic" width={48} height={48} />
         <div className="flex flex-col justify-center items-start mx-4">
           <text className="text-xl">{Team2}</text>
           <text>
