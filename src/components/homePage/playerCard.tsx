@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import defaultImage from "../../../public/Male Unknown.svg";
-import { useEffect, useState } from "react";
 
 type playerProps = {
   data: {
@@ -18,21 +17,6 @@ type playerProps = {
   };
   grade?: number;
 };
-const fetchSchool = async (id: string) => {
-  try {
-    const url =
-      process.env.DEV === "0"
-        ? `http://localhost:3000/api/getSchoolPlayer?id=${id}`
-        : `https://sms-website-sigma.vercel.app/api/getSchoolPlayer/?id=${id}`;
-    const res = await fetch(url, {
-      next: { revalidate: 1 },
-    });
-    const data = await res.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 const PlayerCard = (props: playerProps) => {
   const Player_ID = props.data.user_id;
@@ -43,7 +27,6 @@ const PlayerCard = (props: playerProps) => {
   const change = props.data.change;
   const graduation = props.data.user_year_of_graduation;
   var imageURL = props.data.user_pic_url;
-  const [school, setSchool] = useState(null);
   if (imageURL === "|" || imageURL === "" || imageURL === null) {
     imageURL = defaultImage;
   }
