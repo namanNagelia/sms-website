@@ -4,8 +4,8 @@ const fetchPlayer = async () => {
   try {
     const url =
       process.env.DEV === "0"
-        ? "http://localhost:3000/api/allPlayers"
-        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/allPlayers";
+        ? "http://localhost:3000/api/getPlayers"
+        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/getPlayers";
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
