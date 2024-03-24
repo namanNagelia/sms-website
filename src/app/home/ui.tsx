@@ -9,6 +9,7 @@ import { EmblaOptionsType } from "embla-carousel";
 import "../../components/homePage/embla.css";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useMediaQuery } from "react-responsive";
+import PlayerCarousel from "@/components/homePage/playerCarousel";
 
 type newsProp = {
   title: string;
@@ -30,7 +31,6 @@ interface Props {
 
 export default function HomeUI(props: Props) {
   const playerData = props.playerData.firstPlayer;
-  console.log(props);
   const gameInfo = props.gameInfo.games;
   // this will be changed to a State
   const newsDataDefault = [
@@ -156,6 +156,8 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
   useEffect(() => {
     setSpacing(isLargeScreen ? 2 : 3);
   }, [isLargeScreen]);
+  console.log(playerData);
+  console.log("Top Players");
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -163,7 +165,7 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
       <div className="divider"></div>
       <div className="mt-8 w-[90%]">
         {/* Pass the playerDataDefault array to EmblaCarousel */}
-        <EmblaCarousel
+        <PlayerCarousel
           key={isLargeScreen ? "large" : "small"}
           items={playerData}
           options={OPTIONS}
