@@ -6,7 +6,7 @@ const fetchPlayerProfile = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/specificPlayer?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/specificPlayer?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/specificPlayer/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -22,7 +22,7 @@ const fetchAverages = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/playerStatsSeason?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/playerStatsSeason?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/playerStatsSeason/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -38,7 +38,7 @@ const fetchShotChartData = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/seasonShotLocations?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/seasonShotLocations?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/seasonShotLocations/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -54,7 +54,7 @@ const fetchShotLocations = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/shotTypes?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/shotTypes?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/shotTypes/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -74,7 +74,6 @@ export default async function PlayerPage({
   const seasonAverages = await fetchAverages(params.id);
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
-  console.log(playerProfile);
   return (
     <PlayerPageUI
       profileStats={playerProfile}

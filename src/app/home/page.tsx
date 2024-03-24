@@ -6,7 +6,7 @@ const fetchPlayer = async () => {
     const url =
       process.env.DEV === "0"
         ? "http://localhost:3000/api/allPlayers"
-        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/allPlayers";
+        : "https://sms-website-sigma.vercel.app/api/allPlayers";
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -22,7 +22,7 @@ const fetchAllGames = async () => {
     const url =
       process.env.DEV === "0"
         ? "http://localhost:3000/api/gameInfo"
-        : "https://main.d1ad0hew81s5fh.amplifyapp.com/api/gameInfo";
+        : "https://sms-website-sigma.vercel.app/api/gameInfo";
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -35,7 +35,5 @@ const fetchAllGames = async () => {
 export default async function Home() {
   const playerData = await fetchPlayer();
   const gameInfo = await fetchAllGames();
-  console.log(playerData);
-  console.log("Games");
   return <HomeUI playerData={playerData} gameInfo={gameInfo} />;
 }

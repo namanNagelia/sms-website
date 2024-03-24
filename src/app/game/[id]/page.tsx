@@ -6,7 +6,7 @@ const fetchGameDetails = async (id: string) => {
     const url =
       process.env.DEV === "0"
         ? `http://localhost:3000/api/specificGameID?id=${id}`
-        : `https://main.d1ad0hew81s5fh.amplifyapp.com/api/specificGameID?id=${id}`;
+        : `https://sms-website-sigma.vercel.app/api/specificGameID/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1 },
     });
@@ -19,6 +19,5 @@ const fetchGameDetails = async (id: string) => {
 
 export default async function GamePage({ params }: { params: { id: string } }) {
   const gameDetails = await fetchGameDetails(params.id);
-  console.log(gameDetails);
   return <GamePageUI gameDetailsStats={gameDetails} />;
 }
