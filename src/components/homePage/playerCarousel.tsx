@@ -18,21 +18,18 @@ type PlayerType = {
   change: number;
 };
 
-type PropType = {
-  players: PlayerType[];
+type PlayerCarouselProps = {
+  items: PlayerType[];
   options?: EmblaOptionsType;
+  cardType: (props: any) => React.JSX.Element;
+  spacing: number;
 };
 
-const EmblaCarousel: React.FC<any> = ({
+const PlayerCarousel: React.FC<PlayerCarouselProps> = ({
   items,
   options,
   cardType,
   spacing,
-}: {
-  items: Object[];
-  options?: EmblaOptionsType;
-  cardType: (props: any) => React.JSX.Element;
-  spacing: number;
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
@@ -40,16 +37,17 @@ const EmblaCarousel: React.FC<any> = ({
     <section className="embla">
       <div className="embla__viewport" ref={emblaRef}>
         <div className="embla__container">
-          {Object.keys(items).map((item, index) => {
-            // console.log(Object.keys(items))
-            // console.log(items[parseInt(item)])
+          {items.map((item, index) => {
+            console.log(item);
+            console.log("items:");
+            // const schoolName = schoolNames[index];
             return (
               <div
                 className="embla__slide"
                 key={index}
                 style={{ flex: `0 0 calc(100%/${spacing})` }}
               >
-                {cardType({ ...items[index] })}
+                <PlayerCard data={item} />
               </div>
             );
           })}
@@ -60,4 +58,4 @@ const EmblaCarousel: React.FC<any> = ({
   );
 };
 
-export default EmblaCarousel;
+export default PlayerCarousel;
