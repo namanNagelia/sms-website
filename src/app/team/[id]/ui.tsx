@@ -86,21 +86,34 @@ export default function TeamUI(props: teamProps) {
   const coach = coachData.find(
     (coach: any) => coach.player_coach_xref_team_id == props.id
   );
-  console.log(coach);
   const roster = props.roster.roster;
-  const orgInfo = props.organizationDetail.school;
+  const orgInfo = props.organizationDetail.school[0];
   const teamInfo = props.teamInfo.school;
+  var ImageURL = coach.coach_photo;
+
+  if (
+    ImageURL === "|" ||
+    ImageURL === "" ||
+    ImageURL === null ||
+    ImageURL === undefined
+  ) {
+    ImageURL = defaultImage;
+  }
 
   return (
     <div>
-      <TeamNameBanner Name="Lakers" ImageURL="|" record="0-0" />
+      <TeamNameBanner
+        Name={teamInfo.team_name}
+        ImageURL={teamInfo.team_log_url}
+        schoolName={orgInfo.org_name}
+      />
       <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
         <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0 items-center">
           <CoachCard
-            name="Erick Spoelstra"
-            phoneNumber="123-456-7890"
-            email="Spo@heat.com"
-            imageURL="|"
+            name={coach.user_first_name + " " + coach.user_last_name}
+            phoneNumber="Not Given"
+            email="Not Given"
+            imageURL={ImageURL}
           />
           <TeamStatsCard seasonStats={seasonStats} />
         </div>
@@ -115,7 +128,7 @@ export default function TeamUI(props: teamProps) {
             "Forward"
           /> */}
           <EmblaCarousel
-            items={defaultTeamStats}
+            items={roster}
             options={OPTIONS}
             cardType={RosterCard}
             spacing={4}
@@ -129,29 +142,29 @@ export default function TeamUI(props: teamProps) {
 interface TeamNameBannerProps {
   Name: string;
   ImageURL: string;
-  record: string;
+  schoolName: string;
 }
 
 const TeamNameBanner: React.FC<TeamNameBannerProps> = ({
   Name,
   ImageURL,
-  record,
+  schoolName,
 }) => {
-  if (ImageURL === "|") {
+  if (ImageURL === "|" || ImageURL === "" || ImageURL === null) {
     ImageURL = defaultImage;
   }
   return (
     <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
       <Image
         src={ImageURL}
-        alt={"Broski"}
+        alt={"Team"}
         width={80}
         height={80}
         className="rounded-full"
       />
       <div className="flex flex-col mb-5 items-start text-brandWhite">
         <div className="font-dinCondensed text-3xl">{Name}</div>
-        <div className="font-dinCondensed text-lg">{record}</div>
+        <div className="font-dinCondensed text-lg">{schoolName}</div>
       </div>
     </div>
   );

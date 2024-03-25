@@ -8,37 +8,39 @@ import "./stats.css";
 
 interface StatsCardProps {
   seasonStats: {
-    PTS: string,
-    REB: string,
-    AST: string,
-    STL: string,
-    BLK: string,
-    FG: string,
-    TP: string,
-    FT: string,
-    TO: string,
-    PER: string
-  }// Replace 'any' with the type of your season stats
+    PTS: string;
+    REB: string;
+    AST: string;
+    STL: string;
+    BLK: string;
+    FG: string;
+    TP: string;
+    FT: string;
+    TO: string;
+    PER: string;
+  }; // Replace 'any' with the type of your season stats
 }
 
-const TeamStatsCard: React.FC<StatsCardProps> = ( {seasonStats} ) => {
+const TeamStatsCard: React.FC<StatsCardProps> = ({ seasonStats }) => {
   // Choose the right data based on the mode
 
   console.log(seasonStats);
 
   return (
     <div className="default-card flex flex-col items-center py-8 space-y-3 mt-8">
-      <div className="font-dinCondensed text-brandWhite text-5xl bold">
-        Stats
+      <div className="font-dinCondensed text-brandWhite text-3xl bold">
+        Team Stats
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
 
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         {seasonStats != undefined ? (
-          Object.keys(seasonStats).map(key => (
+          Object.keys(seasonStats).map((key) => (
             <div key={key} className="w-full flex flex-row text-3xl">
               <div className="text-brandGrey mr-auto px-2">{key}</div>
-              <div className="text-brandWhite">{(seasonStats[key as keyof (typeof seasonStats)])}</div>
+              <div className="text-brandWhite">
+                {seasonStats[key as keyof typeof seasonStats]}
+              </div>
             </div>
           ))
         ) : (
