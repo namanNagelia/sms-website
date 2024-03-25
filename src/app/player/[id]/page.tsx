@@ -91,7 +91,6 @@ export default async function PlayerPage({
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
   const school = await fetchSchool(params.id);
-  console.log(school.org_name);
   return (
     <PlayerPageUI
       profileStats={playerProfile}

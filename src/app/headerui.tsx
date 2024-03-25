@@ -15,7 +15,7 @@ interface Props {
       user_pic_url: string; //URL to be specfic
       user_position: string;
       user_year_of_graduation: number;
-      id: number;
+      user_id: number;
       unique_id: number;
     }[];
   };
@@ -47,11 +47,21 @@ function HeaderUI(props: Props) {
         player.user_last_name.toLowerCase().includes(searchTerm.toLowerCase())
       ) {
         list.push(
-          <button className="text-brandWhite flex flex-row items-center text-2x space-x-2" 
-            onClick={() => handlePlayerClicked(player.id)}
+          <button
+            className="text-brandWhite flex flex-row items-center text-2x space-x-2"
+            onClick={() => handlePlayerClicked(player.user_id)}
           >
-            <Image src={player.user_pic_url} alt="" width={24} height={24} className="rounded-full"/>
-            <text> {player.user_first_name} {player.user_last_name}</text>
+            <Image
+              src={player.user_pic_url}
+              alt=""
+              width={24}
+              height={24}
+              className="rounded-full"
+            />
+            <text>
+              {" "}
+              {player.user_first_name} {player.user_last_name}
+            </text>
           </button>
         );
       }
@@ -88,14 +98,17 @@ function HeaderUI(props: Props) {
               onChange={(e) => handleNewQuery(e)}
             />
 
-            {(names.length != 0 ? 
+            {names.length != 0 ? (
               <div className="absolute w-72 max-h-28 hit-fit overflow-y-scroll bg-brandBlack rounded-2xl px-4 hide-scroll flex flex-col items-start space-y-2 p-2">
-
                 {names}
               </div>
-            : <></>)}
+            ) : (
+              <></>
+            )}
           </div>
-        ): <></>}
+        ) : (
+          <></>
+        )}
         <SearchButton search={search} setSearch={setSearch} />
         <LoginButton />
       </div>
