@@ -6,61 +6,62 @@ import Search from "@/../public/search.svg";
 import { setServers } from "dns";
 
 interface Props {
-  playerData:{
+  playerData: {
     firstPlayer: {
-      Height: string
-      Player_First_Name: string
-      Player_Jersey_No: number
-      Player_Last_Name: string
-      Player_Picture_URL: string //URL to be specfic 
-      Position: string
-      School_Name: string
-      Year_of_Graduation: number
-      id: number
-      unique_id: number
-    }[]
+      user_height: string;
+      user_first_name: string;
+      user_jersey_no: number;
+      user_last_name: string;
+      user_pic_url: string; //URL to be specfic
+      user_position: string;
+      user_year_of_graduation: number;
+      id: number;
+      unique_id: number;
+    }[];
   };
 }
 function HeaderUI(props: Props) {
   const [search, setSearch] = useState<boolean>(true);
   const [searchQuery, setQuery] = useState<string>("");
-  const [names, setNames] = useState<JSX.Element[]>([])
+  const [names, setNames] = useState<JSX.Element[]>([]);
   const handleClick = () => {
     window.location.href = "/";
   };
 
-
   const handleNewQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSearch = e.target.value;
     setQuery(newSearch);
-    if(newSearch.length == 0){
-      setNames([])
-    }else{
+    if (newSearch.length == 0) {
+      setNames([]);
+    } else {
       playerSearch(newSearch);
     }
-  }
-  const playerSearch = (searchTerm : string) =>{
-    var list : JSX.Element[] = []
-    players.map(player => {
-      if(
-        player.Player_First_Name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-        player.Player_Last_Name.toLowerCase().includes(searchTerm.toLowerCase())
-      ){
+  };
+  const playerSearch = (searchTerm: string) => {
+    var list: JSX.Element[] = [];
+    players.map((player) => {
+      if (
+        player.user_first_name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase()) ||
+        player.user_last_name.toLowerCase().includes(searchTerm.toLowerCase())
+      ) {
         list.push(
-          <button className="text-brandWhite flex flex-row items-center text-2x space-x-2" onClick={() => handlePlayerClicked(player.id)}>
+          <button className="text-brandWhite flex flex-row items-center text-2x space-x-2" 
+            onClick={() => handlePlayerClicked(player.id)}
+          >
             <Image src={player.Player_Picture_URL} alt="" width={24} height={24} className="rounded-full"/>
             <text> {player.Player_First_Name} {player.Player_Last_Name}</text>
           </button>
-        )
+        );
       }
-    })
-    setNames(list)
-  }
+    });
+    setNames(list);
+  };
   const handlePlayerClicked = (id: number) => {
     window.location.href = `/player/${id}`;
   };
   const players = props.playerData.firstPlayer;
-
 
   return (
     <header className="w-screen p-6 space-x-10 sticky top-0 items-center z-50">
@@ -78,24 +79,22 @@ function HeaderUI(props: Props) {
       </div>
 
       <div id="Buttons" className="flex space-x-6 flex-row items-center">
-        {(search ?
+        {search ? (
           <div className="relative">
             <input
               className="rounded-xl bg-brandBlack border-2 border-buttonBlue w-72 h-12 text-brandWhite px-4 font-dinCondensed text-xl"
               type="text"
               value={searchQuery}
-              onChange={e => handleNewQuery(e)}
+              onChange={(e) => handleNewQuery(e)}
             />
 
             {(names.length != 0 ? 
               <div className="absolute w-72 max-h-28 hit-fit overflow-y-scroll bg-brandBlack rounded-2xl px-4 hide-scroll flex flex-col items-start space-y-2 p-2">
 
                 {names}
-
               </div>
             : <></>)}
-          </div> :
-          <></>
+          </div>
         )}
         <SearchButton search={search} setSearch={setSearch} />
         <LoginButton />
@@ -103,7 +102,13 @@ function HeaderUI(props: Props) {
     </header>
   );
 }
-export function SearchButton({search, setSearch} : {search:boolean, setSearch: React.Dispatch<React.SetStateAction<boolean>>}) {
+export function SearchButton({
+  search,
+  setSearch,
+}: {
+  search: boolean;
+  setSearch: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   return (
     <button className="hover:scale-110 " onClick={() => setSearch(!search)}>
       <Image src={Search} alt="" />
@@ -120,11 +125,10 @@ export function LoginButton() {
 }
 
 interface SearchProps {
-  shownPlayers: string[]
+  shownPlayers: string[];
 }
 
 export const playerSearchModal: React.FC<SearchProps> = ({ shownPlayers }) => {
-
   return (
     <>
       <input
@@ -141,6 +145,6 @@ export const playerSearchModal: React.FC<SearchProps> = ({ shownPlayers }) => {
       </div>
     </>
   );
-}
+};
 
 export default HeaderUI;

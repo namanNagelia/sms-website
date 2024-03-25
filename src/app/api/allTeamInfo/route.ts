@@ -5,6 +5,6 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 export async function GET(request: Request) {
-  const games = await prisma.sms_game_detail.findMany();
-  return NextResponse.json({ games });
+  const teams = await prisma.sms_team.findMany();
+  return NextResponse.json({ teams });
 }

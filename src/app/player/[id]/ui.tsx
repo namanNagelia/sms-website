@@ -95,6 +95,7 @@ interface PlayerPageProps {
   shotTypesData: {
     shotTypes: any;
   };
+  school: string;
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
@@ -107,16 +108,16 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
   const performance = calculateOverallPerformanceRating(seasonAverages);
   console.log(performance);
-  const name = `${playerProfileData.Player_First_Name} ${playerProfileData.Player_Last_Name}`;
+  const name = `${playerProfileData.user_first_name} ${playerProfileData.user_last_name}`;
   return (
     <div>
       <PlayerNameBanner
         Name={name}
-        ImageURL={playerProfileData.Player_Picture_URL}
-        JerseyNumber={playerProfileData.Player_Jersey_No}
-        Position={playerProfileData.Position}
-        school={playerProfileData.School_Name}
-        graduation={playerProfileData.Year_of_Graduation}
+        ImageURL={playerProfileData.user_pic_url}
+        JerseyNumber={playerProfileData.user_jersey_no}
+        Position={playerProfileData.user_position}
+        school={props.school}
+        graduation={playerProfileData.user_year_of_graduation}
       />
 
       <div className="-translate-y-32">
@@ -131,7 +132,10 @@ export default function PlayerPageUI(props: PlayerPageProps) {
 
         <div className="h-full w-full flex flex-col text-center items-center sm:mb-10 lg:mb-0">
           <div className="flex flex-col lg:flex-row lg:space-x-10 my-10 space-y-5 lg:space-y-0">
-            <BiometricCard height={playerProfileData.Height} />
+            <BiometricCard
+              height={playerProfileData.user_height}
+              weight={playerProfileData.user_weight}
+            />
             <PlayerGrade
               coachability={0}
               performance={performance}
@@ -177,15 +181,15 @@ const PlayerNameBanner: React.FC<PlayerNameBannerProps> = ({
   school,
   graduation,
 }) => {
-  if (ImageURL === "|") {
+  if (ImageURL === "|" || ImageURL === "" || ImageURL === null) {
     ImageURL = defaultImage;
   }
   console.log(graduation);
   return (
     <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
-      <Image
+      <img
         src={ImageURL}
-        alt={"Broski"}
+        alt={"Image"}
         width={108}
         height={108}
         className="rounded-full"

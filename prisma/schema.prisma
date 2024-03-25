@@ -719,6 +719,159 @@ model users {
   user_subscriptions                            user_subscriptions[]
 }
 
+model org_type {
+  org_type_obj_id Int    @id @default(autoincrement())
+  org_type_id     Int
+  org_type_name   String @db.VarChar(255)
+}
+
+model sms_event {
+  event_id                 Int       @id @default(autoincrement())
+  event_org_id             Int?
+  event_name               String?   @db.VarChar(255)
+  event_url                String?   @db.VarChar(500)
+  event_start_date         DateTime? @db.DateTime(0)
+  event_end_date           DateTime? @db.DateTime(0)
+  event_manager_first_name String?   @db.VarChar(255)
+  event_manager_last_name  String?   @db.VarChar(255)
+  event_manager_email      String?   @db.VarChar(255)
+  event_instagram          String?   @db.VarChar(255)
+  event_twitter            String?   @db.VarChar(255)
+  event_youtube            String?   @db.VarChar(255)
+  event_facebook           String?   @db.VarChar(255)
+  event_affiliation_flag   String?   @db.Text
+}
+
+model sms_game_detail {
+  game_id        Int       @id @default(autoincrement())
+  game_event_id  Int?
+  game_team1_id  Int?
+  game_team2_id  Int?
+  game_date      DateTime? @db.Date
+  game_time      DateTime? @db.Time(0)
+  game_name_cal  String?   @db.VarChar(255)
+  game_score     String?   @db.VarChar(255)
+  game_video_url String?   @db.VarChar(255)
+}
+
+model sms_news {
+  news_id          Int     @id @default(autoincrement())
+  news_game_id     Int?
+  news_team_id     Int?
+  news_user_id     Int?
+  news_title       String? @db.VarChar(255)
+  news_description String? @db.Text
+  news_web_article String? @db.VarChar(255)
+  news_pic         String? @db.VarChar(255)
+  news_video_link  String? @db.VarChar(255)
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model sms_org_type {
+  org_type_id   Int?
+  org_type_name String? @db.Text
+
+  @@ignore
+}
+
+model sms_organizations {
+  Org_id               Int     @id @default(autoincrement())
+  org_org_type_id      Int?
+  org_name             String? @db.VarChar(255)
+  org_logo_pic         Bytes?  @db.Blob
+  org_address          String? @db.VarChar(255)
+  org_city             String? @db.VarChar(255)
+  org_state            String? @db.VarChar(255)
+  org_zip              String? @db.VarChar(20)
+  org_phone_number     String? @db.VarChar(20)
+  org_owner_first_name String? @db.VarChar(255)
+  org_owner_last_name  String? @db.VarChar(255)
+}
+
+model sms_player {
+  player_id                 Int      @id @default(autoincrement())
+  player_SMS_APP_user_id    Int?
+  player_first_name         String?  @db.VarChar(255)
+  player_last_name          String?  @db.VarChar(255)
+  player_pic_url            String?  @db.VarChar(500)
+  player_jersey_no          String?  @db.VarChar(50)
+  player_year_of_graduation Int?     @db.Year
+  player_height             Decimal? @db.Decimal(5, 2)
+  player_weight             Decimal? @db.Decimal(5, 2)
+  player_position           String?  @db.VarChar(50)
+  player_gpa                Decimal? @db.Decimal(3, 2)
+}
+
+model sms_player_coach_xref {
+  player_coach_xref_id       Int  @id @default(autoincrement())
+  player_coach_xref_team_id  Int?
+  player_coach_xref_user_id1 Int?
+  player_coach_xref_user_id3 Int?
+}
+
+model sms_report {
+  report_id                   Int     @id @default(autoincrement())
+  report_game_id              Int?
+  report_team_id              Int?
+  report_user_id              Int?
+  report_summary              String? @db.Text
+  report_strength             String? @db.Text
+  report_areas_of_improvement String? @db.Text
+}
+
+model sms_tag {
+  tag_id          Int     @id @default(autoincrement())
+  tag_sms_user_id Int?
+  tag_title       String? @db.VarChar(255)
+  tag_description String? @db.Text
+}
+
+model sms_team {
+  team_id              Int     @id @default(autoincrement())
+  team_organisation_id Int?
+  team_name            String? @db.VarChar(255)
+  team_log_url         String? @db.VarChar(500)
+  team_instagram       String? @db.VarChar(255)
+  team_twitter         String? @db.VarChar(255)
+  team_youtube         String? @db.VarChar(255)
+  team_facebook        String? @db.VarChar(255)
+  team_affiliation     String? @db.Text
+}
+
+model sms_user {
+  user_id                 Int      @id @default(autoincrement())
+  user_APP_user_id        Int?
+  user_user_type_id       Int?
+  user_first_name         String?  @db.VarChar(255)
+  user_last_name          String?  @db.VarChar(255)
+  user_pic_url            String?  @db.VarChar(500)
+  user_about_me           String?  @db.Text
+  user_name               String?  @db.VarChar(255)
+  user_password           String?  @db.VarChar(255)
+  user_emailverified_flag Boolean?
+  user_address1           String?  @db.VarChar(255)
+  user_address2           String?  @db.VarChar(255)
+  user_city               String?  @db.VarChar(255)
+  user_state              String?  @db.VarChar(255)
+  user_zip                String?  @db.VarChar(20)
+  user_phone_number       String?  @db.VarChar(20)
+  user_instagram          String?  @db.VarChar(255)
+  user_twitter            String?  @db.VarChar(255)
+  user_youTube            String?  @db.VarChar(255)
+  user_facebook           String?  @db.VarChar(255)
+  user_jersey_no          String?  @db.VarChar(50)
+  user_year_of_graduation Int?     @db.Year
+  user_height             Decimal? @db.Decimal(5, 2)
+  user_weight             Decimal? @db.Decimal(5, 2)
+  user_position           String?  @db.VarChar(255)
+  user_gpa                Decimal? @db.Decimal(3, 2)
+}
+
+model sms_user_type {
+  user_type_id   Int     @id @default(autoincrement())
+  user_type_name String? @db.VarChar(20)
+}
+
 enum showcases_type {
   stats
   video
