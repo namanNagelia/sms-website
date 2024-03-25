@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import StyledInput from "./inputContainer";
 import { auth } from "../lib/firebaseConfig";
-import { NavLink, useNavigate } from "react-router-dom";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
