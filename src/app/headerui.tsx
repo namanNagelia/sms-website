@@ -22,7 +22,7 @@ interface Props {
   };
 }
 function HeaderUI(props: Props) {
-  const [search, setSearch] = useState<boolean>(false);
+  const [search, setSearch] = useState<boolean>(true);
   const [searchQuery, setQuery] = useState<string>("");
   const [names, setNames] = useState<JSX.Element[]>([])
   const handleClick = () => {
@@ -47,8 +47,9 @@ function HeaderUI(props: Props) {
         player.Player_Last_Name.toLowerCase().includes(searchTerm.toLowerCase())
       ){
         list.push(
-          <button className="text-brandWhite" onClick={() => handlePlayerClicked(player.id)}>
-            {player.Player_First_Name} {player.Player_Last_Name}
+          <button className="text-brandWhite flex flex-row items-center text-2x space-x-2" onClick={() => handlePlayerClicked(player.id)}>
+            <Image src={player.Player_Picture_URL} alt="" width={24} height={24} className="rounded-full"/>
+            <text> {player.Player_First_Name} {player.Player_Last_Name}</text>
           </button>
         )
       }
@@ -80,19 +81,19 @@ function HeaderUI(props: Props) {
         {(search ?
           <div className="relative">
             <input
-              className="rounded-full bg-brandBlack border-2 border-buttonBlue w-72 text-brandWhite px-4 font-dinCondensed"
+              className="rounded-xl bg-brandBlack border-2 border-buttonBlue w-72 h-12 text-brandWhite px-4 font-dinCondensed text-xl"
               type="text"
               value={searchQuery}
               onChange={e => handleNewQuery(e)}
             />
 
-            {
-              <div className="absolute w-72 h-24 overflow-y-scroll bg-brandBlack rounded-2xl px-4 hide-scroll flex flex-col items-start">
+            {(names.length != 0 ? 
+              <div className="absolute w-72 max-h-28 hit-fit overflow-y-scroll bg-brandBlack rounded-2xl px-4 hide-scroll flex flex-col items-start space-y-2 p-2">
 
                 {names}
 
               </div>
-            }
+            : <></>)}
           </div> :
           <></>
         )}

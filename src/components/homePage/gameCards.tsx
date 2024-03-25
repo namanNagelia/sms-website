@@ -12,7 +12,6 @@ const GameCard = (props: GameCardProps) => {
   const handleClick = (id: number) => {
     window.location.href = `/game/${id}`;
   };
-
   return (
     <button
       className="
