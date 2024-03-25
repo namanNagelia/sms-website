@@ -3,6 +3,7 @@ import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import VideoPlayer from "@/components/playerPage/videoPlayer";
 import Button from "@/components/homePage/button";
+import noHighlights from "@/app/images/icons/DefaultIcons/NoHighlights.svg";
 
 interface BoxProp {
   players: {
@@ -111,7 +112,21 @@ const GamePageUI = (props: GamePageProps) => {
         <div className="flex flex-row space-x-4 mx-8">
           <BoxScore players={defaultBoxScores.players} />
           <div className="mt-36">
-            <VideoPlayer videoLink={gamedetails.game_video_url} />
+            {gamedetails.game_video_url == null ||
+            gamedetails.game_video_url == "Not Available" ? (
+              <div className="flex flex-col items-center w-[1/3]">
+                <Image
+                  src={noHighlights}
+                  alt="No Highlights"
+                  layout="contain"
+                />
+                <text className="text-brandWhite font-dinCondensed text-3xl mt-8">
+                  No Highlights Available
+                </text>
+              </div>
+            ) : (
+              <VideoPlayer videoLink={gamedetails.game_video_url} />
+            )}
           </div>
           <BoxScore players={defaultBoxScores.players} />
         </div>

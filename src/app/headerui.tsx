@@ -4,6 +4,7 @@ import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import Search from "@/../public/search.svg";
 import { setServers } from "dns";
+import defaultPic from "@/../public/Male Unknown.svg";
 
 interface Props {
   playerData: {
@@ -28,6 +29,8 @@ function HeaderUI(props: Props) {
     window.location.href = "/";
   };
 
+  let imageURL = "";
+
   const handleNewQuery = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newSearch = e.target.value;
     setQuery(newSearch);
@@ -40,6 +43,11 @@ function HeaderUI(props: Props) {
   const playerSearch = (searchTerm: string) => {
     var list: JSX.Element[] = [];
     players.map((player) => {
+      imageURL = player.user_pic_url;
+      if (imageURL == "" || imageURL == null || imageURL == "|") {
+        imageURL = defaultPic;
+      }
+
       if (
         player.user_first_name
           .toLowerCase()
@@ -52,7 +60,7 @@ function HeaderUI(props: Props) {
             onClick={() => handlePlayerClicked(player.user_id)}
           >
             <Image
-              src={player.user_pic_url}
+              src={imageURL}
               alt=""
               width={24}
               height={24}
