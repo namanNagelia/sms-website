@@ -72,6 +72,12 @@ interface teamProps {
   roster: {
     roster: any;
   };
+  organizationDetail: {
+    school: any;
+  };
+  teamInfo: {
+    school: any;
+  };
   id: any;
 }
 
@@ -82,6 +88,9 @@ export default function TeamUI(props: teamProps) {
   );
   console.log(coach);
   const roster = props.roster.roster;
+  const orgInfo = props.organizationDetail.school;
+  const teamInfo = props.teamInfo.school;
+
   return (
     <div>
       <TeamNameBanner Name="Lakers" ImageURL="|" record="0-0" />
