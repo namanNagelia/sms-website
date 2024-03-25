@@ -27,11 +27,15 @@ interface Props {
   gameInfo: {
     games: any[];
   };
+  teamData: {
+    teams: any[];
+  };
 }
 
 export default function HomeUI(props: Props) {
   const playerData = props.playerData.firstPlayer;
   const gameInfo = props.gameInfo.games;
+  const teamData = props.teamData.teams;
   // this will be changed to a State
   const newsDataDefault = [
     {
@@ -78,7 +82,7 @@ export default function HomeUI(props: Props) {
   return (
     <>
       <NewsLetter newsData={newsDataDefault} />
-      <Games gameData={gameInfo} />
+      <Games gameData={gameInfo} teamData={teamData} />
       <TopPlayers playerData={playerData} />
       <div id="Padding" className="h-24"></div>
     </>
@@ -114,7 +118,13 @@ export function NewsLetter({ newsData }: { newsData: newsProp[] }) {
   );
 }
 
-export function Games({ gameData }: { gameData: any[] }) {
+export function Games({
+  gameData,
+  teamData,
+}: {
+  gameData: any[];
+  teamData: any[];
+}) {
   const [date, setdate] = useState({
     startDate: null,
     endDate: null,
@@ -140,6 +150,7 @@ export function Games({ gameData }: { gameData: any[] }) {
       <div className="mt-8 w-[90%]">
         <EmblaCarousel
           items={gameData}
+          images={teamData}
           options={OPTIONS}
           cardType={GameCard}
           spacing={4}
@@ -156,8 +167,6 @@ export function TopPlayers({ playerData }: { playerData: any[] }) {
   useEffect(() => {
     setSpacing(isLargeScreen ? 2 : 3);
   }, [isLargeScreen]);
-  console.log(playerData);
-  console.log("Top Players");
 
   return (
     <div className="flex flex-col items-center justify-center">

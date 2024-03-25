@@ -872,6 +872,59 @@ model sms_user_type {
   user_type_name String? @db.VarChar(20)
 }
 
+model sms_game_chart {
+  game_chart_id             Int       @id @default(autoincrement())
+  game_stats_event_id       Int?
+  game_stats_game_id        Int?
+  game_stats_team_id        Int?
+  team_user_id              Int?
+  game_stats_miss           Int?
+  game_stats_make           Int?
+  game_stats_1point         Int?
+  game_stats_2point         Int?
+  game_stats_3point         Int?
+  game_stats_xposition      Float?    @db.Float
+  game_stats_yposition      Float?    @db.Float
+  game_stats_video_link     String?   @db.VarChar(255)
+  game_stats_shot_chart_Url String?   @db.VarChar(255)
+  game_stats_scoretime      DateTime? @db.Time(0)
+  game_stats_create_date    DateTime? @db.Date
+  game_stats_update_date    DateTime? @db.Date
+  game_stats_dev_type       String?   @db.VarChar(50)
+  game_stats_user_Id        Int?
+}
+
+model sms_game_stats {
+  game_stats_id                Int       @id @default(autoincrement())
+  game_stats_event_id          Int?
+  game_stats_game_id           Int?
+  game_stats_team_id           Int?
+  team_user_id                 Int?
+  game_stats_video_url         String?   @db.VarChar(255)
+  game_stats_def_rebounds_dreb Int?
+  game_stats_off_rebounds_oreb Int?
+  game_stats_rebounds          Int?
+  game_stats_turnover_to       Int?
+  game_stats_assist_asst       Int?
+  game_stats_foul              Int?
+  game_stats_steals_stl        Int?
+  game_stats_blocks_blk        Int?
+  game_stats_plusminus         Int?
+  game_stats_minutes           Int?
+  game_stats_pts               Int?
+  game_stats_fg                Int?
+  game_stats_fg_percentage     Float?    @db.Float
+  game_stats_3pt               Int?
+  game_stats_3p_percentage     Float?    @db.Float
+  game_stats_ft                Int?
+  game_stats_ft_percentage     Float?    @db.Float
+  game_stats_scoretime         DateTime? @db.Time(0)
+  game_stats_create_date       DateTime? @db.Date
+  game_stats_update_date       DateTime? @db.Date
+  game_stats_dev_type          String?   @db.VarChar(50)
+  game_stats_user_Id           Int?
+}
+
 enum showcases_type {
   stats
   video

@@ -17,7 +17,24 @@ const fetchGameDetails = async (id: string) => {
   }
 };
 
+const teamInfo = async () => {
+  try {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/allTeamInfo"
+        : "https://sms-website-sigma.vercel.app/api/allTeamInfo";
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export default async function GamePage({ params }: { params: { id: string } }) {
   const gameDetails = await fetchGameDetails(params.id);
-  return <GamePageUI gameDetailsStats={gameDetails} />;
+  const teamInfoData = await teamInfo();
+  return <GamePageUI gameDetailsStats={gameDetails} teamInfo={teamInfoData} />;
 }

@@ -26,11 +26,13 @@ type PropType = {
 const EmblaCarousel: React.FC<any> = ({
   items,
   options,
+  images,
   cardType,
   spacing,
 }: {
   items: Object[];
   options?: EmblaOptionsType;
+  images: Object[];
   cardType: (props: any) => React.JSX.Element;
   spacing: number;
 }) => {
@@ -49,7 +51,7 @@ const EmblaCarousel: React.FC<any> = ({
                 key={index}
                 style={{ flex: `0 0 calc(100%/${spacing})` }}
               >
-                {cardType({ ...items[index] })}
+                {cardType({ ...items[index], teamData: images })}
               </div>
             );
           })}
