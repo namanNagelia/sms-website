@@ -8,7 +8,7 @@ const fetchPlayer = async () => {
         ? "http://localhost:3000/api/getPlayers"
         : "https://sms-website-sigma.vercel.app/api/getPlayers";
     const res = await fetch(url, {
-      next: { revalidate: 1 },
+      next: { revalidate: 1000 * 60 * 60 },
     });
     const data = await res.json();
     return data;
@@ -24,7 +24,7 @@ const fetchAllGames = async () => {
         ? "http://localhost:3000/api/gameInfo"
         : "https://sms-website-sigma.vercel.app/api/gameInfo";
     const res = await fetch(url, {
-      next: { revalidate: 1 },
+      next: { revalidate: 1000 * 60 * 60 },
     });
     const data = await res.json();
     return data;
@@ -40,7 +40,7 @@ const teamInfo = async () => {
         ? "http://localhost:3000/api/allTeamInfo"
         : "https://sms-website-sigma.vercel.app/api/allTeamInfo";
     const res = await fetch(url, {
-      next: { revalidate: 1 },
+      next: { revalidate: 1000 * 60 * 60 },
     });
     const data = await res.json();
     return data;
