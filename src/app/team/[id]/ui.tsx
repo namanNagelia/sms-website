@@ -8,8 +8,7 @@ import EmblaCarousel from "@/components/homePage/carousel";
 import { EmblaOptionsType } from "embla-carousel";
 const OPTIONS: EmblaOptionsType = { dragFree: true };
 
-const seasonStats =
-{
+const seasonStats = {
   PTS: "22.3",
   REB: "5.4",
   AST: "7.1",
@@ -20,7 +19,7 @@ const seasonStats =
   FT: "82%",
   TO: "3.1",
   PER: "21.2",
-}
+};
 // interface RosterProps {
 //   picture: string;
 //   id: number;
@@ -34,40 +33,55 @@ const defaultTeamStats = [
     id: 1,
     graduation: "2025",
     name: "Prasad Gupta",
-    position: "Guard"
+    position: "Guard",
   },
   {
     picture: "|",
     id: 2,
     graduation: "2025",
     name: "Prasad Gupta",
-    position: "Guard"
+    position: "Guard",
   },
   {
     picture: "|",
     id: 3,
     graduation: "2025",
     name: "Prasad Gupta",
-    position: "Guard"
+    position: "Guard",
   },
   {
     picture: "|",
     id: 4,
     graduation: "2025",
     name: "Prasad Gupta",
-    position: "Guard"
+    position: "Guard",
   },
   {
     picture: "|",
     id: 5,
     graduation: "2025",
     name: "Prasad Gupta",
-    position: "Guard"
+    position: "Guard",
   },
-]
+];
 
+interface teamProps {
+  coach: {
+    coachesDetails: any;
+  };
+  roster: {
+    roster: any;
+  };
+  id: any;
+}
 
-export default function TeamUI() {
+export default function TeamUI(props: teamProps) {
+  const coachData = props.coach.coachesDetails;
+  const coach = coachData.find(
+    (coach: any) => coach.player_coach_xref_team_id == props.id
+  );
+  console.log(coach);
+  const roster = props.roster.roster;
   return (
     <div>
       <TeamNameBanner Name="Lakers" ImageURL="|" record="0-0" />

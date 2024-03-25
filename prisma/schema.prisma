@@ -778,7 +778,7 @@ model sms_organizations {
   Org_id               Int     @id @default(autoincrement())
   org_org_type_id      Int?
   org_name             String? @db.VarChar(255)
-  org_logo_pic         Bytes?  @db.Blob
+  org_logo_pic         String? @db.VarChar(255)
   org_address          String? @db.VarChar(255)
   org_city             String? @db.VarChar(255)
   org_state            String? @db.VarChar(255)

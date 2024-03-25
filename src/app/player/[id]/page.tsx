@@ -40,7 +40,7 @@ const fetchShotChartData = async (id: string) => {
         ? `http://localhost:3000/api/seasonShotLocations?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/seasonShotLocations/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1 },
+      next: { revalidate: 1000 * 60 * 60 },
     });
     const data = await res.json();
     return data;
