@@ -50,8 +50,8 @@ function HeaderUI(props: Props) {
           <button className="text-brandWhite flex flex-row items-center text-2x space-x-2" 
             onClick={() => handlePlayerClicked(player.id)}
           >
-            <Image src={player.Player_Picture_URL} alt="" width={24} height={24} className="rounded-full"/>
-            <text> {player.Player_First_Name} {player.Player_Last_Name}</text>
+            <Image src={player.user_pic_url} alt="" width={24} height={24} className="rounded-full"/>
+            <text> {player.user_first_name} {player.user_last_name}</text>
           </button>
         );
       }
@@ -95,7 +95,7 @@ function HeaderUI(props: Props) {
               </div>
             : <></>)}
           </div>
-        )}
+        ): <></>}
         <SearchButton search={search} setSearch={setSearch} />
         <LoginButton />
       </div>
