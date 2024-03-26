@@ -67,6 +67,7 @@ const fetchTeamDetails = async (id: string) => {
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const coach = await fetchCoach();
   const roster = await fetchRoster(params.id);
+  console.log(roster)
   const orgDetails = await fetchOrgDetails(params.id);
   const teamDetails = await fetchTeamDetails(params.id);
   return (
