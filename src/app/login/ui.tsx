@@ -12,7 +12,7 @@ const LoginUI = () => {
     e.preventDefault();
     setError(""); // Reset error message
     signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         if (!user.emailVerified) {
@@ -22,9 +22,20 @@ const LoginUI = () => {
           );
           // Optionally, offer to resend the verification email or redirect them to a verification notice page
         } else {
-          // Email is verified, redirect to home
-          window.location.href = "/home";
-          console.log(user);
+          // Email is verified, redirect
+          const dataType = await fetch(
+            `http://localhost:3000/api/fetchProfileType?id=${user.uid}`
+          )
+            .then((response) => response.json())
+            .then((data) => data.user_user_type_id);
+
+          console.log(dataType);
+          console.log(dataType);
+          if (dataType == null || dataType == undefined) {
+            window.location.href = "/completeProfile";
+          } else {
+            window.location.href = "/home";
+          }
         }
       })
       .catch((error) => {
