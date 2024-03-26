@@ -21,6 +21,7 @@ interface Props {
     }[];
   };
 }
+
 function HeaderUI(props: Props) {
   const [search, setSearch] = useState<boolean>(true);
   const [searchQuery, setQuery] = useState<string>("");

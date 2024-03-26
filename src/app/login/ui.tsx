@@ -36,9 +36,9 @@ const LoginUI = () => {
       });
   };
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="auth-card flex flex-col items-center py-8 space-y-3 mt-8">
-        <div className="font-dinCondensed text-brandWhite text-5xl bold">
+    <div className="flex justify-center items-center basolute mt-36">
+      <div className="auth-card flex flex-col items-center py-8 space-y-4 mt-8">
+        <div className="font-dinCondensed text-brandWhite text-6xl bold p-2">
           Log In
         </div>
         <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
@@ -51,7 +51,7 @@ const LoginUI = () => {
           </p>
         )}
 
-        <form className="flex flex-col space-y-4" onSubmit={onSubmit}>
+        <form className="flex flex-col space-y-5 w-full px-24" onSubmit={onSubmit}>
           <StyledInput
             label="Email:"
             type="email"
