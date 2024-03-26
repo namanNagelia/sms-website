@@ -21,6 +21,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/archive/allPlayers/route.ts", "src/app/api/seasonShotLocations/route.ts", "src/app/math/prospectGrade.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/api/archive/allPlayers/route.ts", "src/app/api/seasonShotLocations/route.ts", "src/app/math/prospectGrade.js", "src/app/api/postAccountInfo/route.js", "src/app/api/postAccountInfo/route.js"],
   "exclude": ["node_modules"]
 }

@@ -47,6 +47,18 @@ const SignupUI = () => {
         email,
         password
       );
+      const response = await fetch("localhost:3000/api/postAccountInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user_first_name: firstName,
+          user_last_name: lastName,
+          user_email: email,
+          user_firebase_id: userCredential.user.uid,
+        }),
+      });
       // Send verification email
       sendEmailVerification(userCredential.user)
         .then(() => {

@@ -3,10 +3,13 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 async function main() {
-  const firstPlayer = await prisma.player_INFO.findMany();
-  console.log(firstPlayer);
+  const users = await prisma.sms_user.create({
+    data: {
+      user_first_name: "John Doe",
+    },
+  });
+  console.log(users);
 }
-
 main()
   .then(async () => {
     await prisma.$disconnect();
