@@ -8,14 +8,14 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const coach = await prisma.sms_player_coach_xref.findFirst({
+  const teamRoster = await prisma.sms_team_roster.findFirst({
     where: {
-      player_coach_xref_user_id1: Number(id),
+      team_roster_user_id: Number(id),
     },
   });
   const team = await prisma.sms_team.findFirst({
     where: {
-      team_id: coach.player_coach_xref_team_id,
+      team_id: teamRoster.team_roster_team_id,
     },
   });
   const school = await prisma.sms_organizations.findFirst({

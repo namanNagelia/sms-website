@@ -24,7 +24,7 @@ const fetchRoster = async (id: string) => {
         ? `http://localhost:3000/api/getRosterTeams?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/getRosterTeams/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1 },
     });
     const data = await res.json();
     return data;
