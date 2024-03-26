@@ -24,7 +24,7 @@ export default function PlayerGrade(props: Props) {
         Grade
       </div>
       <div className="h-1 bg-brandGrey w-3/4 rounded-md mb-4" />
-      <div className="text-5xl text-brandWhite font-dinCondensed rounded-full border-brandWhite px-2 mb-2 bg-buttonBlue w-20 h-20 flex flex-col text-center justify-center p-2 -mb-5">
+      <div className="text-5xl text-brandWhite font-dinCondensed rounded-full border-brandWhite px-2 bg-buttonBlue w-20 h-20 flex flex-col text-center justify-center p-2 -mb-5">
         {grade}
       </div>
       <div className=" w-4/5 relative translate-y-10">
