@@ -6,6 +6,7 @@ import Search from "@/../public/search.svg";
 import { setServers } from "dns";
 import defaultPic from "@/../public/Male Unknown.svg";
 import { useUser } from "./userContext";
+import { ProfileButton } from "@/components/header/ProfileButton";
 
 interface Props {
   playerData: {
@@ -36,12 +37,8 @@ function HeaderUI(props: Props) {
   useEffect(() => {
     if (user == null) {
       setLogin(true);
-      console.log(user);
-      console.log(login);
     } else {
       setLogin(false);
-      console.log(user);
-      console.log(login);
     }
   }, [user]);
 
@@ -163,19 +160,6 @@ export function LoginButton() {
       onClick={loginClick}
     >
       Login
-    </button>
-  );
-}
-export function ProfileButton() {
-  const profileClick = () => {
-    window.location.href = "/login";
-  };
-  return (
-    <button
-      className="login font-dinCondensed text-brandWhite text-2xl justify-center hover:scale-110"
-      onClick={profileClick}
-    >
-      Profile
     </button>
   );
 }

@@ -62,7 +62,10 @@ const LoginUI = () => {
           </p>
         )}
 
-        <form className="flex flex-col space-y-5 w-full px-24" onSubmit={onSubmit}>
+        <form
+          className="flex flex-col space-y-5 w-full px-24"
+          onSubmit={onSubmit}
+        >
           <StyledInput
             label="Email:"
             type="email"
