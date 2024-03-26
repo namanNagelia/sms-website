@@ -1,5 +1,6 @@
 import React from "react";
+import LoginUI from "./ui";
 
 export default function LoginPage() {
-  return <div>Login Page</div>;
+  return <LoginUI />;
 }
