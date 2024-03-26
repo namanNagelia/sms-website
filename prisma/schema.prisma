@@ -566,40 +566,6 @@ model sms_game_info {
   game_video_url                     String?   @db.VarChar(255)
 }
 
-model sms_game_statistics {
-  game_stat_id               Int    @id @default(autoincrement())
-  game_info_id               Int?
-  player_information_id      Int?
-  game_stat_stat_count       Int?
-  game_stat_court_position_X Float? @db.Float
-  game_stat_court_Position_Y Float? @db.Float
-}
-
-model sms_player_info {
-  id                 Int      @id @default(0)
-  School_Name        String?  @db.VarChar(255)
-  Player_Jersey_No   Int?
-  Player_First_Name  String?  @db.VarChar(255)
-  Player_Last_Name   String?  @db.VarChar(255)
-  Height             Decimal? @db.Decimal(3, 1)
-  Year_of_Graduation Int?
-  Position           String?  @db.VarChar(255)
-  Player_Picture_URL String?  @db.VarChar(500)
-  unique_id          Int?
-}
-
-/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
-model sms_player_stat {
-  game_stat_id               Int     @default(0)
-  game_info_id               Int     @default(0)
-  player_information_id      Int     @default(0)
-  game_stat_stat_count       String? @db.VarChar(255)
-  game_stat_court_position_X Float?  @db.Float
-  game_stat_court_Position_Y Float?  @db.Float
-
-  @@ignore
-}
-
 model sms_player_stat_new {
   game_stat_id               Int     @id @default(autoincrement())
   game_info_id               Int?
@@ -788,27 +754,6 @@ model sms_organizations {
   org_owner_last_name  String? @db.VarChar(255)
 }
 
-model sms_player {
-  player_id                 Int      @id @default(autoincrement())
-  player_SMS_APP_user_id    Int?
-  player_first_name         String?  @db.VarChar(255)
-  player_last_name          String?  @db.VarChar(255)
-  player_pic_url            String?  @db.VarChar(500)
-  player_jersey_no          String?  @db.VarChar(50)
-  player_year_of_graduation Int?     @db.Year
-  player_height             Decimal? @db.Decimal(5, 2)
-  player_weight             Decimal? @db.Decimal(5, 2)
-  player_position           String?  @db.VarChar(50)
-  player_gpa                Decimal? @db.Decimal(3, 2)
-}
-
-model sms_player_coach_xref {
-  player_coach_xref_id       Int  @id @default(autoincrement())
-  player_coach_xref_team_id  Int?
-  player_coach_xref_user_id1 Int?
-  player_coach_xref_user_id3 Int?
-}
-
 model sms_report {
   report_id                   Int     @id @default(autoincrement())
   report_game_id              Int?
@@ -824,18 +769,6 @@ model sms_tag {
   tag_sms_user_id Int?
   tag_title       String? @db.VarChar(255)
   tag_description String? @db.Text
-}
-
-model sms_team {
-  team_id              Int     @id @default(autoincrement())
-  team_organisation_id Int?
-  team_name            String? @db.VarChar(255)
-  team_log_url         String? @db.VarChar(500)
-  team_instagram       String? @db.VarChar(255)
-  team_twitter         String? @db.VarChar(255)
-  team_youtube         String? @db.VarChar(255)
-  team_facebook        String? @db.VarChar(255)
-  team_affiliation     String? @db.Text
 }
 
 model sms_user {
@@ -874,60 +807,7 @@ model sms_user_type {
   user_type_name String? @db.VarChar(20)
 }
 
-model sms_game_chart {
-  game_chart_id             Int       @id @default(autoincrement())
-  game_stats_event_id       Int?
-  game_stats_game_id        Int?
-  game_stats_team_id        Int?
-  team_user_id              Int?
-  game_stats_miss           Int?
-  game_stats_make           Int?
-  game_stats_1point         Int?
-  game_stats_2point         Int?
-  game_stats_3point         Int?
-  game_stats_xposition      Float?    @db.Float
-  game_stats_yposition      Float?    @db.Float
-  game_stats_video_link     String?   @db.VarChar(255)
-  game_stats_shot_chart_Url String?   @db.VarChar(255)
-  game_stats_scoretime      DateTime? @db.Time(0)
-  game_stats_create_date    DateTime? @db.Date
-  game_stats_update_date    DateTime? @db.Date
-  game_stats_dev_type       String?   @db.VarChar(50)
-  game_stats_user_Id        Int?
-}
-
 model sms_game_stats {
-  game_stats_id                Int       @id @default(autoincrement())
-  game_stats_event_id          Int?
-  game_stats_game_id           Int?
-  game_stats_team_id           Int?
-  team_user_id                 Int?
-  game_stats_video_url         String?   @db.VarChar(255)
-  game_stats_def_rebounds_dreb Int?
-  game_stats_off_rebounds_oreb Int?
-  game_stats_rebounds          Int?
-  game_stats_turnover_to       Int?
-  game_stats_assist_asst       Int?
-  game_stats_foul              Int?
-  game_stats_steals_stl        Int?
-  game_stats_blocks_blk        Int?
-  game_stats_plusminus         Int?
-  game_stats_minutes           Int?
-  game_stats_pts               Int?
-  game_stats_fg                Int?
-  game_stats_fg_percentage     Float?    @db.Float
-  game_stats_3pt               Int?
-  game_stats_3p_percentage     Float?    @db.Float
-  game_stats_ft                Int?
-  game_stats_ft_percentage     Float?    @db.Float
-  game_stats_scoretime         DateTime? @db.Time(0)
-  game_stats_create_date       DateTime? @db.Date
-  game_stats_update_date       DateTime? @db.Date
-  game_stats_dev_type          String?   @db.VarChar(50)
-  game_stats_user_Id           Int?
-}
-
-model sms_stats {
   game_stats_id               Int     @id @default(autoincrement())
   game_stats_event_id         Int?    @default(4)
   game_stats_game_id          Int?
@@ -953,8 +833,45 @@ model sms_stats {
 
 model sms_team_roster {
   team_roster_id      Int @id @default(autoincrement())
-  team_roster_team_id Int
   team_roster_user_id Int
+  team_roster_team_id Int
+}
+
+model sms_player_stats {
+  player_stats_id               Int     @id @default(autoincrement())
+  player_stats_event_id         Int?
+  player_stats_game_id          Int?
+  player_stats_team_id          Int?
+  player_stats_user_id          Int?
+  player_stats_video_url        String? @db.VarChar(255)
+  player_stats_fg               Int?
+  player_stats_fg_percentage    Float?  @db.Float
+  player_stats_3pt              Int?
+  player_stats_3p_percentage    Float?  @db.Float
+  player_stats_ft               Int?
+  player_stats_ft_percentage    Float?  @db.Float
+  player_stats_def_rebound_dreb Int?
+  player_stats_off_rebound_oreb Int?
+  player_stats_foul             Int?
+  player_stats_steal_stl        Int?
+  player_stats_turnover_to      Int?
+  player_stats_block_blk        Int?
+  player_stats_assist_asst      Int?
+  player_stats_plusminus        Int?
+  player_stats_minutes          Int?
+  player_stats_total_points     Int?
+}
+
+model sms_team {
+  team_id              Int     @id @default(autoincrement())
+  team_organisation_id Int?
+  team_name            String? @db.VarChar(255)
+  team_log_url         String? @db.VarChar(500)
+  team_instagram       String? @db.VarChar(255)
+  team_twitter         String? @db.VarChar(255)
+  team_youtube         String? @db.VarChar(255)
+  team_facebook        String? @db.VarChar(255)
+  team_affiliation     String? @db.Text
 }
 
 enum showcases_type {

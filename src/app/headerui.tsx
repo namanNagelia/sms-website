@@ -1,10 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Logo from "@/../public/SMSLogo.png";
 import Search from "@/../public/search.svg";
 import { setServers } from "dns";
 import defaultPic from "@/../public/Male Unknown.svg";
+import { useUser } from "./userContext";
 
 interface Props {
   playerData: {
@@ -28,6 +29,14 @@ function HeaderUI(props: Props) {
   const handleClick = () => {
     window.location.href = "/";
   };
+  const { user } = useUser();
+  const [login, setLogin] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (user == null) {
+      setLogin(true);
+    }
+  }, [user]);
 
   let imageURL = "";
 
@@ -138,8 +147,14 @@ export function SearchButton({
 }
 
 export function LoginButton() {
+  const loginClick = () => {
+    window.location.href = "/login";
+  };
   return (
-    <button className="login font-dinCondensed text-brandWhite text-2xl justify-center hover:scale-110">
+    <button
+      className="login font-dinCondensed text-brandWhite text-2xl justify-center hover:scale-110"
+      onClick={loginClick}
+    >
       Login
     </button>
   );

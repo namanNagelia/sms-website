@@ -82,8 +82,6 @@ export default function HomeUI(props: Props) {
 
   useEffect(() => {
     // This will log the user object every time the user state changes
-    console.log("user");
-    console.log(user);
   }, [user]); // Depend on the user state to re-run this effect
 
   // console.log("data", playerData);
