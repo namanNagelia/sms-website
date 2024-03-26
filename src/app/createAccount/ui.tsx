@@ -84,9 +84,9 @@ const SignupUI = () => {
   console.log("First Name: ", firstName, "Last Name: ", lastName);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="auth-card flex flex-col items-center py-8 space-y-3 mt-8">
-        <div className="font-dinCondensed text-brandWhite text-5xl bold">
+    <div className="flex justify-center items-center absoulte mt-36">
+      <div className="auth-card flex flex-col items-center py-8 space-y-4 mt-8 ">
+        <div className="font-dinCondensed text-brandWhite text-6xl bold p-2">
           Create Account
         </div>
         <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
@@ -95,8 +95,8 @@ const SignupUI = () => {
           <p style={{ color: "green" }}>{confirmationMessage}</p>
         )}
 
-        <form className="flex flex-col space-y-4" onSubmit={onSubmit}>
-          <div className="flex space-x-4">
+        <form className="flex flex-col space-y-5 pt-2" onSubmit={onSubmit}>
+          <div className="flex space-x-4 ">
             <StyledInput
               label="First Name:"
               onChange={(e) => setFirstName(e.target.value)}
@@ -111,7 +111,7 @@ const SignupUI = () => {
             type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
-          <div className="flex space-x-4">
+          <div className="flex space-x-4 pb-4">
             <StyledInput
               label="Password:"
               type="password"
@@ -123,9 +123,13 @@ const SignupUI = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
+          <div className="text-brandGrey font-dinAlternate">
+            <text>Password must be:</text>
+            <li>At least 8 characters long</li>
+          </div>
           <button
             type="submit"
-            className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 hover:opacity-65"
+            className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 hover:opacity-65 shadow-md text-lg"
           >
             Create Account
           </button>

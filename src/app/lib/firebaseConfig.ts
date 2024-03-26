@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth";
 const firebaseConfig = {
   apiKey: "AIzaSyCZ4Mg3z2MrxzI68Rtu9Zs46RpwHYef6s8",
   authDomain: "sparkmysportweb.firebaseapp.com",
-  projectId: "sparkmysportweb",
+  rojectId: "sparkmysportweb",
   storageBucket: "sparkmysportweb.appspot.com",
   messagingSenderId: "222298782295",
   appId: "1:222298782295:web:c43b18129a62d3ea0a4112",
