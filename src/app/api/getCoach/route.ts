@@ -23,6 +23,7 @@ export async function GET(request: Request) {
     if (team) {
       coachesDetails.push({
         user_id: coach.user_id,
+        coach_photo: coach.user_pic_url,
         user_first_name: coach.user_first_name,
         user_last_name: coach.user_last_name,
         user_phone_number: coach.user_phone_number,

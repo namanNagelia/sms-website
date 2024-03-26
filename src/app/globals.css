@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer base {
-  input[type="range"]{
+  input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     margin: 0;
@@ -126,11 +126,10 @@ text {
   background: rgba(19, 31, 33, 0.66);
 }
 
-.grade{
+.grade {
   /* Rectangle 4471 */
 
-  background: linear-gradient(90deg, #F43F5E 0%, #10B981 100%);
-
+  background: linear-gradient(90deg, #f43f5e 0%, #10b981 100%);
 }
 
 .default-card {
@@ -144,8 +143,17 @@ text {
   background: rgba(90, 128, 135, 0.39);
   border-radius: 25px;
 }
-.hide-scroll::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+.auth-card {
+  width: 60vw;
+  height: auto;
+  left: 2413px;
+  top: 191px;
+
+  background: rgba(90, 128, 135, 0.39);
+  border-radius: 25px;
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
 
 @media screen and (max-width: 1024px) {
@@ -205,85 +213,83 @@ text {
   }
 }
 
-
-
 input[type="range"].data {
-	color: #ef233c;
-	--thumb-height: 1.125em;
-	--track-height: 1.125em;
-	--track-color: rgb(200, 255, 0);
-	--brightness-hover: 180%;
-	--brightness-down: 80%;
-	--clip-edges: 0.125em;
+  color: #ef233c;
+  --thumb-height: 1.125em;
+  --track-height: 1.125em;
+  --track-color: rgb(200, 255, 0);
+  --brightness-hover: 180%;
+  --brightness-down: 80%;
+  --clip-edges: 0.125em;
 }
 input[type="range"] {
-	position: relative;
-	background: #fff0;
-	overflow: hidden;
+  position: relative;
+  background: #fff0;
+  overflow: hidden;
 }
 
 input[type="range"]:active {
-	cursor: grabbing;
+  cursor: grabbing;
 }
 
 input[type="range"]:disabled {
-	filter: grayscale(1);
-	opacity: 0.3;
-	cursor: not-allowed;
+  filter: grayscale(1);
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 /* === WebKit specific styles === */
 input[type="range"],
-input[type="range"]::-webkit-slider-runnable-track{
-	-webkit-appearance: none;
-	transition: all ease 100ms;
-	height: var(--thumb-height);
+input[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  transition: all ease 100ms;
+  height: var(--thumb-height);
 }
 input[type="range"]::-webkit-slider-thumb {
-	-webkit-appearance: none;
+  -webkit-appearance: none;
 }
 
 input[type="range"]::-webkit-slider-runnable-track,
 input[type="range"]::-webkit-slider-thumb {
-	position: relative;
+  position: relative;
 }
 
 input[type="range"]::-webkit-slider-thumb {
-	--thumb-radius: calc((var(--thumb-height) * 0) - 1px);
-	--clip-top: calc((var(--thumb-height) - var(--track-height)) * 0.5 - 0.5px);
-	--clip-bottom: calc(var(--thumb-height) - var(--clip-top));
-	--clip-further: calc(100% + 1px);
-	--box-fill: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
-		100vmax currentColor;
+  --thumb-radius: calc((var(--thumb-height) * 0) - 1px);
+  --clip-top: calc((var(--thumb-height) - var(--track-height)) * 0.5 - 0.5px);
+  --clip-bottom: calc(var(--thumb-height) - var(--clip-top));
+  --clip-further: calc(100% + 1px);
+  --box-fill: calc(-100vmax - var(--thumb-width, var(--thumb-height))) 0 0
+    100vmax currentColor;
 
-	width: var(--thumb-width, var(--thumb-height));
-	background: linear-gradient(currentColor 0 0) scroll no-repeat left center /
-		50% calc(var(--track-height) + 1px);
-	background-color: currentColor;
-	box-shadow: var(--box-fill);
-	border-radius: var(--thumb-width, var(--thumb-height));
+  width: var(--thumb-width, var(--thumb-height));
+  background: linear-gradient(currentColor 0 0) scroll no-repeat left center /
+    50% calc(var(--track-height) + 1px);
+  background-color: currentColor;
+  box-shadow: var(--box-fill);
+  border-radius: var(--thumb-width, var(--thumb-height));
 
-	filter: brightness(100%);
-	clip-path: polygon(
-		100% -1px,
-		var(--clip-edges) -1px,
-		0 var(--clip-top),
-		-100vmax var(--clip-top),
-		-100vmax var(--clip-bottom),
-		0 var(--clip-bottom),
-		var(--clip-edges) 100%,
-		var(--clip-further) var(--clip-further)
-	);
+  filter: brightness(100%);
+  clip-path: polygon(
+    100% -1px,
+    var(--clip-edges) -1px,
+    0 var(--clip-top),
+    -100vmax var(--clip-top),
+    -100vmax var(--clip-bottom),
+    0 var(--clip-bottom),
+    var(--clip-edges) 100%,
+    var(--clip-further) var(--clip-further)
+  );
 }
 
 input[type="range"]:hover::-webkit-slider-thumb {
-	filter: brightness(var(--brightness-hover));
-	cursor: grab;
+  filter: brightness(var(--brightness-hover));
+  cursor: grab;
 }
 
 input[type="range"]:active::-webkit-slider-thumb {
-	filter: brightness(var(--brightness-down));
-	cursor: grabbing;
+  filter: brightness(var(--brightness-down));
+  cursor: grabbing;
 }
 
 /* input[type="range"]::-webkit-slider-runnable-track {
@@ -292,5 +298,5 @@ input[type="range"]:active::-webkit-slider-thumb {
 } */
 
 input[type="range"]:disabled::-webkit-slider-thumb {
-	cursor: not-allowed;
+  cursor: not-allowed;
 }

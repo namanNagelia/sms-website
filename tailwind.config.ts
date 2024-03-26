@@ -22,6 +22,8 @@ const config: Config = {
         graphGreen: "#10B981",
         graphRed: "#CE2828",
         buttonBlue: "#5A8087",
+        inputBlue: "#80AEBD",
+        darkBlue: "#134149",
 
         ...colors,
       },
