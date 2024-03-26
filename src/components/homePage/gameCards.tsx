@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import defaultImage from "./image-not-found-icon.svg";
 
 export type GameCardProps = {
   player_team_name_pic: string;
@@ -18,12 +19,12 @@ const GameCard = (props: GameCardProps) => {
   const team1 = props.teamData.find(
     (team) => team.team_id === props.game_team1_id
   );
-  const team1Pic = team1 ? team1.team_log_url : "";
+  const team1Pic = team1 ? team1.team_log_url : defaultImage;
   const team1Name = team1 ? team1.team_name : "";
   const team2 = props.teamData.find(
     (team) => team.team_id === props.game_team2_id
   );
-  const team2Pic = team2 ? team2.team_log_url : "";
+  const team2Pic = team2 ? team2.team_log_url : defaultImage;
   const team2Name = team2 ? team2.team_name : "";
   return (
     <button

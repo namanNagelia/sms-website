@@ -36,6 +36,12 @@ function HeaderUI(props: Props) {
   useEffect(() => {
     if (user == null) {
       setLogin(true);
+      console.log(user);
+      console.log(login);
+    } else {
+      setLogin(false);
+      console.log(user);
+      console.log(login);
     }
   }, [user]);
 
@@ -128,7 +134,7 @@ function HeaderUI(props: Props) {
           <></>
         )}
         <SearchButton search={search} setSearch={setSearch} />
-        <LoginButton />
+        {login ? <LoginButton /> : <ProfileButton />}
       </div>
     </header>
   );
@@ -157,6 +163,19 @@ export function LoginButton() {
       onClick={loginClick}
     >
       Login
+    </button>
+  );
+}
+export function ProfileButton() {
+  const profileClick = () => {
+    window.location.href = "/login";
+  };
+  return (
+    <button
+      className="login font-dinCondensed text-brandWhite text-2xl justify-center hover:scale-110"
+      onClick={profileClick}
+    >
+      Profile
     </button>
   );
 }
