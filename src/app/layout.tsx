@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "./header";
 import Decor from "../components/decor";
 import localFont from "next/font/local";
+import { useUser } from "./userContext";
+import { UserProvider } from "./userContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,15 +44,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="relative">
-      <body
-        className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-full h-full`}
-      >
-        <Header />
-        {children}
+    <UserProvider>
+      <html lang="en" className="relative">
+        <body
+          className={`${DinAlternate.variable} ${DinCondensed.variable} ${DinBold.variable} w-full h-full`}
+        >
+          <Header />
+          {children}
 
-        <Decor />
-      </body>
-    </html>
+          <Decor />
+        </body>
+      </html>
+    </UserProvider>
   );
 }

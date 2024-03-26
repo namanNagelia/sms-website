@@ -10,6 +10,7 @@ import "../../components/homePage/embla.css";
 import Datepicker from "react-tailwindcss-datepicker";
 import { useMediaQuery } from "react-responsive";
 import PlayerCarousel from "@/components/homePage/playerCarousel";
+import { useUser } from "../userContext";
 
 type newsProp = {
   title: string;
@@ -76,6 +77,14 @@ export default function HomeUI(props: Props) {
         "https://www.latimes.com/sports/highschool/story/2023-11-21/bryce-james-leaves-sherman-oaks-notre-dame-returns-to-sierra-canyon",
     },
   ];
+
+  const { user } = useUser(); // Destructure the user from the context
+
+  useEffect(() => {
+    // This will log the user object every time the user state changes
+    console.log("user");
+    console.log(user);
+  }, [user]); // Depend on the user state to re-run this effect
 
   // console.log("data", playerData);
 
