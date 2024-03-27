@@ -1,6 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { useUser } from "@/app/userContext";
+import "./profile.css";
+import { auth } from "@/app/lib/firebaseConfig";
+import { signOut } from "firebase/auth";
 
 export function ProfileButton() {
   const [isHovering, setIsHovering] = useState(false);
@@ -20,8 +23,10 @@ export function ProfileButton() {
   };
 
   const signOutClick = () => {
-    // Implement the sign-out functionality here
-    console.log("Sign out clicked");
+    signOut(auth).then(() => {
+      window.location.href = "/";
+      console.log(user);
+    });
   };
 
   return (
@@ -35,10 +40,16 @@ export function ProfileButton() {
       </button>
       {isHovering && (
         <div className="dropdown-menu">
-          <button className="dropdown-item" onClick={profileClick}>
+          <button
+            className="dropdown-item font-dinAlternate"
+            onClick={profileClick}
+          >
             Profile
           </button>
-          <button className="dropdown-item" onClick={signOutClick}>
+          <button
+            className="dropdown-item font-dinAlternate"
+            onClick={signOutClick}
+          >
             Sign out
           </button>
         </div>

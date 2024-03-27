@@ -799,7 +799,7 @@ model sms_user {
   user_position           String?  @db.VarChar(255)
   user_gpa                Decimal? @db.Decimal(3, 2)
   user_email              String?  @db.VarChar(255)
-  user_firebase_id        String?  @db.VarChar(255)
+  user_firebase_id        String?  @unique @db.VarChar(255)
 }
 
 model sms_user_type {

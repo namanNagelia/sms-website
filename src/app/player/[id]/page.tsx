@@ -8,7 +8,7 @@ const fetchPlayerProfile = async (id: string) => {
         ? `http://localhost:3000/api/specificPlayer?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/specificPlayer/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1000 },
     });
     const data = await res.json();
     return data;
@@ -24,7 +24,7 @@ const fetchAverages = async (id: string) => {
         ? `http://localhost:3000/api/playerStatsSeason?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/playerStatsSeason/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1000 },
     });
     const data = await res.json();
     return data;
@@ -40,7 +40,7 @@ const fetchShotChartData = async (id: string) => {
         ? `http://localhost:3000/api/seasonShotLocations?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/seasonShotLocations/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1000 },
     });
     const data = await res.json();
     return data;
@@ -56,7 +56,7 @@ const fetchShotLocations = async (id: string) => {
         ? `http://localhost:3000/api/shotTypes?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/shotTypes/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1000 },
     });
     const data = await res.json();
     return data;
@@ -72,7 +72,7 @@ const fetchSchool = async (id: string) => {
         ? `http://localhost:3000/api/getSchoolPlayer?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/getSchoolPlayer/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1000 },
     });
     const data = await res.json();
     return data;

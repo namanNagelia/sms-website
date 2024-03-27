@@ -3,13 +3,10 @@ import React from "react";
 
 type StyledInputProps = {
   label?: string; // The label is optional
-  type?: string; // number/text/other input type
+  type?: "text"; // number/text/other input type
 } & React.InputHTMLAttributes<HTMLInputElement>; // Includes all standard input attributes
 
 const StyledInput: React.FC<StyledInputProps> = ({ label, type, ...props }) => {
-  if (type) {
-    type = "text";
-  }
   return (
     <div className="flex flex-col grow justify">
       {label && (
