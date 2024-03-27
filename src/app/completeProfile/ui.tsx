@@ -7,6 +7,7 @@ import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
 import SelectSearch from "react-select-search";
 import { useUser } from "../userContext";
+import Background from "@/components/background";
 interface Props {
   schoolOptions: {
     school: any;
@@ -126,7 +127,7 @@ const CompleteProfilePageUI = (props: Props) => {
           {step == 0 ? "Lets Get to Know You!" : summary[page - 1]}
         </div>
         <form
-          className="w-full px-24 flex flex-col items-center space-y-4"
+          className="w-full px-14 flex flex-col items-center space-y-4"
           onSubmit={onSubmit}
         >
           {step == 0 ? (
@@ -204,34 +205,67 @@ const AccountDetails: React.FC<DetailsProps> = ({
       firstName: "Dequan 2",
     },
   ];
+
+  const [query, setQuery] = useState("");
+
   // This is going to give me a brain hemorrage to code
   const schoolOptions = schools.map((school) => {
-    return { name: school.org_name, value: school.org_name };
+    if ((school.org_name as string).toLowerCase().includes(query.toLowerCase())) {
+      return { name: school.org_name, value: school.org_name };
+    }
   });
+
+
+  const handleOnFocus = (focus: boolean) => {
+    return (focus ? 'h-8' : 'h-20')
+  }
 
   return (
     <>
       {type == 1 ? (
         <>
-          {/* <SelectSearch 
-            options={schoolOptions} 
-            value={response?.user_school} 
-            placeholder="Select" 
-            onChange={e => {changeResp("user_school", e.toString())}} 
-            className="rounded-full h-5 clip"
-          /> */}
+          <div className="flex flex-row space-x-4">
+            <div className='h-30 overflow-y-clip w-2/3'>
+              <div className="relative">
+                <StyledInput
+                  label="Search For School..."
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                  }}
+                />
+                <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
+                  {schoolOptions.map((school, index) => {
+                    return (school ?
+                      <button
+                        onClick={
+                          (e) => {
+                            changeResp("user_school", school?.value)
+                            setQuery(school?.value)
+                          }
+                        }
+                        value={school?.value}
+                        className="h-6 w-full text-white"
+                      >{school?.value}</button> : <></>)
+                  })}
+                </div>
+              </div>
+            </div>
+            <text className="text-white self-start pt-10 text-xl"> : </text>
 
-          <StyledDropDown
-            label="Which Team do you play for?"
-            value={response?.user_school}
-            onChange={(e) => {
-              changeResp("user_school", e.currentTarget.value);
-            }}
-          >
-            {schools.map((team, index) => {
-              return <option key={index}>{team.org_name}</option>;
-            })}
-          </StyledDropDown>
+            <StyledDropDown
+              label="Team Selected:"
+              disabled
+              value={response?.user_school}
+              onChange={(e) => {
+                changeResp("user_school", e.currentTarget.value);
+              }}
+            >
+              {schools.map((team, index) => {
+                return <option key={index}>{team.org_name}</option>;
+              })}
+            </StyledDropDown>
+          </div>
 
           <div className="flex flex-row space-x-4">
             <StyledInput
