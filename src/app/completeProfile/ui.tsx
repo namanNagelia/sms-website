@@ -234,7 +234,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
               label="Jersey No."
               placeholder="Ex. 0, 1, 60"
               value={response?.user_jersey_no}
-              onChange={(e) => changeResp("user_jersey_no", e.target.value)}
+              onChange={(e) => {
+                const jerseyNo = parseInt(e.target.value);
+
+                changeResp("user_jersey_no", e.target.value);
+              }}
               type="number"
             />
 
@@ -242,7 +246,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
               label="Height"
               placeholder={"Ex. 6'0\""}
               value={response?.user_height}
-              onChange={(e) => changeResp("user_height", e.target.value)}
+              onChange={(e) => {
+                const height = parseFloat(e.target.value);
+
+                changeResp("user_height", height);
+              }}
               type="number"
             />
 
@@ -250,7 +258,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
               label="Weight"
               placeholder="Ex. 175lbs"
               value={response?.user_weight}
-              onChange={(e) => changeResp("user_weight", e.target.value)}
+              onChange={(e) => {
+                const weight = parseFloat(e.target.value);
+
+                changeResp("user_weight", weight);
+              }}
               type="number"
             />
           </div>
@@ -272,9 +284,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
                 label="Year of Grad."
                 placeholder="Ex. 2027"
                 value={response?.user_year_of_graduation}
-                onChange={(e) =>
-                  changeResp("user_year_of_graduation", e.target.value)
-                }
+                onChange={(e) => {
+                  const year = parseInt(e.target.value);
+
+                  changeResp("user_year_of_graduation", year);
+                }}
                 type="number"
               />
 

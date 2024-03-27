@@ -7,8 +7,13 @@ const prisma = new PrismaClient();
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const id = searchParams.get("id");
-  const gameDetails = await prisma.sms_player_stat_new.findMany();
+  const game_id = searchParams.get("id");
+  const gameDetails = await prisma.sms_player_stats.findMany({
+    where: {
+      player_stats_game_id: Number(game_id),
+    },
+  });
+  return NextResponse.json({ gameDetails });
 
   //   let playerBoxScore: {
   //     [key: number]: { PTS: number; REB: number; AST: number };

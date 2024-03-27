@@ -796,8 +796,8 @@ model sms_user {
   user_twitter            String?  @db.VarChar(255)
   user_youTube            String?  @db.VarChar(255)
   user_facebook           String?  @db.VarChar(255)
-  user_jersey_no          String?  @db.VarChar(50)
-  user_year_of_graduation Int?     @db.Year
+  user_jersey_no          Decimal? @db.Decimal(10, 0)
+  user_year_of_graduation Decimal? @db.Decimal(10, 0)
   user_height             Decimal? @db.Decimal(5, 2)
   user_weight             Decimal? @db.Decimal(5, 2)
   user_position           String?  @db.VarChar(255)

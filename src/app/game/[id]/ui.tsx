@@ -89,12 +89,15 @@ const GamePageUI = (props: GamePageProps) => {
   const gamedetails = props.gameDetailsStats.game;
   const teamInfo = props.teamInfo.teams;
   const team1 = teamInfo.find(
-    (team: any) => team.team_id === gamedetails.game_team1_id
+    (team: any) => team.team_organisation_id === gamedetails.game_team1_id
   );
   const team1Pic = team1 ? team1.team_log_url : "";
   const team2 = teamInfo.find(
-    (team: any) => team.team_id === gamedetails.game_team2_id
+    (team: any) => team.team_organisation_id === gamedetails.game_team2_id
   );
+  console.log(gamedetails);
+  console.log("Team 2");
+  console.log(team2);
   const team2Pic = team2 ? team2.team_log_url : "";
   const team1Name = team1 ? team1.team_name : "";
   const team2Name = team2 ? team2.team_name : "";
