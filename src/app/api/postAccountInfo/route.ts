@@ -11,15 +11,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
       user_last_name: data.user_last_name,
       user_email: data.user_email,
       user_firebase_id: data.user_firebase_id,
-      
     },
   });
   console.log(data);
 
-  return NextResponse.json(data);
-  // const users = await prisma.sms_user.create({
-  //   data: {
-  //     user_first_name: first_name,
-  //   },
-  // });
+  return new NextResponse("", {
+    status: 200,
+    headers: { "Access-Control-Allow-Origin": "*" },
+  });
 }

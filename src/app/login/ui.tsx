@@ -23,8 +23,13 @@ const LoginUI = () => {
           // Optionally, offer to resend the verification email or redirect them to a verification notice page
         } else {
           // Email is verified, redirect
+          const url =
+            process.env.DEV === "1"
+              ? "https://sms-website-sigma.vercel.app/api/fetchProfileType"
+              : "http://localhost:3000/api/fetchProfileType";
+
           const dataType = await fetch(
-            `http://localhost:3000/api/fetchProfileType?id=${user.uid}`
+            `https://sms-website-sigma.vercel.app/api/fetchProfileType?id=${user.uid}`
           )
             .then((response) => response.json())
             .then((data) => data.user_user_type_id);
