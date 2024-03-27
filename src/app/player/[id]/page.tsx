@@ -21,8 +21,8 @@ const fetchAverages = async (id: string) => {
   try {
     const url =
       process.env.DEV === "0"
-        ? `http://localhost:3000/api/playerStatsSeason?id=${id}`
-        : `https://sms-website-sigma.vercel.app/api/playerStatsSeason/?id=${id}`;
+        ? `http://localhost:3000/api/playerAverages?id=${id}`
+        : `https://sms-website-sigma.vercel.app/api/playerAverages/?id=${id}`;
     const res = await fetch(url, {
       next: { revalidate: 1000 },
     });

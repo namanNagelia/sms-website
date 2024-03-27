@@ -101,6 +101,8 @@ const GamePageUI = (props: GamePageProps) => {
   const team2Pic = team2 ? team2.team_log_url : "";
   const team1Name = team1 ? team1.team_name : "";
   const team2Name = team2 ? team2.team_name : "";
+  console.log("Game Video URL");
+  console.log(gamedetails.game_video_url);
 
   return (
     <>
@@ -115,7 +117,9 @@ const GamePageUI = (props: GamePageProps) => {
         <div className="flex flex-row space-x-4 mx-8">
           <BoxScore players={defaultBoxScores.players} />
           <div className="mt-36">
-            {gamedetails.game_video_url == null ||
+            {gamedetails.game_video_url == "" ||
+            gamedetails.game_video_url == undefined ||
+            gamedetails.game_video_url == null ||
             gamedetails.game_video_url == "Not Available" ? (
               <div className="flex flex-col items-center w-[1/3]">
                 <Image
