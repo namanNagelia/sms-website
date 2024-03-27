@@ -108,7 +108,7 @@ const SignupUI = () => {
           </div>
           <StyledInput
             label="Email:"
-            type="email"
+            type="text"
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex space-x-4 pb-4">
