@@ -68,7 +68,6 @@ const LoginUI = () => {
         >
           <StyledInput
             label="Email:"
-            type="email"
             onChange={(e) => setEmail(e.target.value)}
           />
           <div className="flex space-x-4">
