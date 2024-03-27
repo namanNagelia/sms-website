@@ -24,6 +24,8 @@ interface ResponseType {
   user_school?: string;
   user_firebase_id: string;
   user_user_type_id?: number; // Add this line
+  user_phone_number?: number;
+  user_student_name?: string;
 }
 
 const CompleteProfilePageUI = (props: Props) => {
@@ -43,6 +45,8 @@ const CompleteProfilePageUI = (props: Props) => {
     user_school: "",
     user_firebase_id: user?.uid || "",
     user_user_type_id: 1,
+    user_phone_number: 0,
+    user_student_name: "",
   });
   console.log(response);
   const url =
@@ -193,7 +197,6 @@ const AccountDetails: React.FC<DetailsProps> = ({
     "Power Forward",
     "Center",
   ];
-
   const defaultPlayer = [
     {
       id: 1,
@@ -215,10 +218,6 @@ const AccountDetails: React.FC<DetailsProps> = ({
       return { name: school.org_name, value: school.org_name };
     }
   });
-
-  const handleOnFocus = (focus: boolean) => {
-    return focus ? "h-8" : "h-20";
-  };
 
   return (
     <>
@@ -346,7 +345,7 @@ const AccountDetails: React.FC<DetailsProps> = ({
       ) : type == 2 ? (
         <>
           {/* Phone number */}
-          <StyledInput label="Phone Number" />
+          <StyledInput label="Phone Number" type="number" value={response?.user_phone_number} />
 
           <StyledDropDown label="Who is your student athlete?">
             {defaultPlayer.map((player, index) => {
