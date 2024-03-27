@@ -131,8 +131,14 @@ const AccountDetails: React.FC<DetailsProps> = ({ type, schools, response, chang
     { teamName: "team1" },
     { teamName: "team2" },
     { teamName: "team3" },
+  ]
+  const positions = [
+    "Point Guard",
+    "Shooting Guard",
+    "Small Forward",
+    "Power Forward",
+    "Center",
   ];
-  const positions = ["Point Guard", "Shooting Guard", "Forward", "Center"];
 
   const defaultPlayer = [
     {
