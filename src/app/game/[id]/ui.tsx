@@ -6,6 +6,9 @@ import Button from "@/components/homePage/button";
 import noHighlights from "@/app/images/icons/DefaultIcons/NoHighlights.svg";
 import noBoxScore from "./NoBoxScore.svg";
 import defaultImage from "@/app/../../public/Male Unknown.svg";
+import { Stats } from "fs";
+import StatsScore from "./components/StatsScore";
+
 interface BoxProp {
   players: {
     name: string;
@@ -33,6 +36,9 @@ interface GamePageProps {
   };
   boxScore: {
     returnable: any;
+  };
+  teamStats: {
+    gameDetails: any;
   };
 }
 
@@ -124,7 +130,7 @@ const GamePageUI = (props: GamePageProps) => {
             )}
           </div>
         </div>
-        <StatsScore />
+        <StatsScore teamStats={props.teamStats} />
         {/* <Plays /> */}
         <div className="h-96"></div>
       </div>
@@ -236,79 +242,5 @@ const GameScore: React.FC<GameProp> = ({
         </div>
       </div>
     </header>
-  );
-};
-
-const StatsScore = () => {
-  const leftTeamColor = "#000000";
-  const rightRaw = "#FFFFFF";
-  const rightTeamColor =
-    "linear-gradient(" +
-    rightRaw +
-    " 0 0) scroll no-repeat center / 100% calc(var(--track-height) + 1px)";
-  const leftScore = 60;
-  const rightScore = 20;
-
-  return (
-    <div className="flex flex-col w-full items-center space-y-4">
-      <div className="flex flex-row space-x-2 text-center">
-        <Button active={true}> Stats </Button>
-        <Button active={false}> Shot Chart </Button>
-      </div>
-
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-    </div>
-  );
-};
-interface TeamColors {
-  leftTeam: {
-    color: string;
-    score: number;
-  };
-  rightTeam: {
-    color: string;
-    score: number;
-  };
-  type: string;
-}
-const Slider: React.FC<TeamColors> = ({ leftTeam, rightTeam, type }) => {
-  return (
-    <div>
-      <div className="flex flex-row justify-between text-brandWhite">
-        <text>{leftTeam.score}</text>
-        <text>{type}</text>
-        <text>{rightTeam.score}</text>
-      </div>
-      <input
-        min="0"
-        max="100"
-        value={(leftTeam.score / (leftTeam.score + rightTeam.score)) * 100}
-        type="range"
-        className="data w-[600px] rounded-full"
-        style={{
-          color: leftTeam.color,
-          background: rightTeam.color,
-        }}
-      />
-    </div>
   );
 };
