@@ -6,13 +6,13 @@ import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
 import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
 
-// interface Props {
-//   schoolOptions: {
-//     school: any;
-//   };
-// }
-const CompleteProfilePageUI = () => {
-  // const schools = props.schoolOptions.school;
+interface Props {
+  schoolOptions: {
+    school: any;
+  };
+}
+const CompleteProfilePageUI = (props: Props) => {
+  const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
 
@@ -71,8 +71,7 @@ const CompleteProfilePageUI = () => {
               </button>
             </>
           ) : (
-            // <AccountDetails type={page} schools={schools} />
-            <></>
+            <AccountDetails type={page} schools={schools} />
           )}
         </form>
       </div>
@@ -82,77 +81,77 @@ const CompleteProfilePageUI = () => {
 
 export default CompleteProfilePageUI;
 
-// interface DetailsProps {
-//   type: number;
-//   schools: any[];
-// }
-// const AccountDetails: React.FC<DetailsProps> = ({ type, schools }) => {
-//   const defaultTeams = [
-//     { teamName: "team1" },
-//     { teamName: "team2" },
-//     { teamName: "team3" },
-//   ];
-//   const positions = ["Point Guard", "Shooting Guard", "Forward", "Center"];
+interface DetailsProps {
+  type: number;
+  schools: any[];
+}
+const AccountDetails: React.FC<DetailsProps> = ({ type, schools }) => {
+  const defaultTeams = [
+    { teamName: "team1" },
+    { teamName: "team2" },
+    { teamName: "team3" },
+  ];
+  const positions = ["Point Guard", "Shooting Guard", "Forward", "Center"];
 
-//   const defaultPlayer = [
-//     {
-//       id: 1,
-//       firstName: "Dequan",
-//     },
-//     {
-//       id: 2,
-//       firstName: "Dequan 2",
-//     },
-//   ];
-//   // This is going to give me a brain hemorrage to code
-//   return (
-//     <>
-//       {type == 1 ? (
-//         <>
-//           <StyledDropDown label="Which Team do you play for?">
-//             {schools.map((team, index) => {
-//               return <option key={index}>{team.org_name}</option>;
-//             })}
-//           </StyledDropDown>
+  const defaultPlayer = [
+    {
+      id: 1,
+      firstName: "Dequan",
+    },
+    {
+      id: 2,
+      firstName: "Dequan 2",
+    },
+  ];
+  // This is going to give me a brain hemorrage to code
+  return (
+    <>
+      {type == 1 ? (
+        <>
+          <StyledDropDown label="Which Team do you play for?">
+            {schools.map((team, index) => {
+              return <option key={index}>{team.org_name}</option>;
+            })}
+          </StyledDropDown>
 
-//           <div className="flex flex-row space-x-4">
-//             <StyledInput label="Jersey No." placeholder="Ex. 0, 1, 60" />
-//             <StyledInput label="Height" placeholder={"Ex. 6'0\""} />
-//             <StyledInput label="Weight" placeholder="Ex. 175lbs " />
-//           </div>
+          <div className="flex flex-row space-x-4">
+            <StyledInput label="Jersey No." placeholder="Ex. 0, 1, 60" />
+            <StyledInput label="Height" placeholder={"Ex. 6'0\""} />
+            <StyledInput label="Weight" placeholder="Ex. 175lbs " />
+          </div>
 
-//           <div className="flex flex-row space-x-4">
-//             <StyledDropDown label="Position">
-//               {positions.map((position, index) => {
-//                 return <option key={index}> {position} </option>;
-//               })}
-//             </StyledDropDown>
-//             <div className="flex flex-row w-2/3 space-x-4">
-//               <StyledInput label="Year of Grad." placeholder="Ex. 2027" />
-//               <StyledInput label="GPA" placeholder="Ex. 3.9" />
-//             </div>
-//           </div>
-//         </>
-//       ) : type == 2 ? (
-//         <>
-//           {/* Phone number */}
-//           <StyledInput label="Phone Number" />
+          <div className="flex flex-row space-x-4">
+            <StyledDropDown label="Position">
+              {positions.map((position, index) => {
+                return <option key={index}> {position} </option>;
+              })}
+            </StyledDropDown>
+            <div className="flex flex-row w-2/3 space-x-4">
+              <StyledInput label="Year of Grad." placeholder="Ex. 2027" />
+              <StyledInput label="GPA" placeholder="Ex. 3.9" />
+            </div>
+          </div>
+        </>
+      ) : type == 2 ? (
+        <>
+          {/* Phone number */}
+          <StyledInput label="Phone Number" />
 
-//           <StyledDropDown label="Who is your student athlete?">
-//             {defaultPlayer.map((player, index) => {
-//               return <option key={index}>{player.firstName}</option>;
-//             })}
-//           </StyledDropDown>
-//         </>
-//       ) : (
-//         <></>
-//       )}
-//       <button
-//         type="submit"
-//         className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 px-6 hover:opacity-65 shadow-md text-lg w-fit"
-//       >
-//         Finalize Acccount
-//       </button>
-//     </>
-//   );
-// };
+          <StyledDropDown label="Who is your student athlete?">
+            {defaultPlayer.map((player, index) => {
+              return <option key={index}>{player.firstName}</option>;
+            })}
+          </StyledDropDown>
+        </>
+      ) : (
+        <></>
+      )}
+      <button
+        type="submit"
+        className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 px-6 hover:opacity-65 shadow-md text-lg w-fit"
+      >
+        Finalize Acccount
+      </button>
+    </>
+  );
+};
