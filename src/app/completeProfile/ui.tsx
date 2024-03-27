@@ -5,17 +5,40 @@ import { FormEvent } from "react";
 import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
 import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
+import SelectSearch from "react-select-search";
 
 interface Props {
   schoolOptions: {
     school: any;
   };
 }
+
+interface ResponseType {
+  user_height: number,
+  user_weight: number,
+  user_position: string,
+  user_year_of_graduation: number,
+  user_gpa: number,
+  user_jersey_no: number,
+  user_school: string
+}
+
 const CompleteProfilePageUI = (props: Props) => {
+  
   const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
+  
+  const [response, setResponse] = useState<ResponseType>({
+    user_height: 5.10,
+    user_weight: 175,
+    user_position: "",
+    user_year_of_graduation: 2024,
+    user_gpa: 3.9,
+    user_jersey_no: 6,
+    user_school: ""
 
+  })
   const userRoles = [
     "Athlete",
     "Guardian",
@@ -24,6 +47,22 @@ const CompleteProfilePageUI = (props: Props) => {
     "Event Operator",
     "Fan",
   ];
+  const summary = [
+    "Boost your game and scouting prospects by filling in the details below!",
+    "Welcome",
+    "Welcome",
+    "Welcome",
+    "Welcome",
+    "Welcome",
+  ]
+
+  const handleChangeResponse = (field : string, newValue: number | string) => {
+    setResponse(prevResp => ({
+      ...prevResp,
+      [field]: newValue
+    }))
+    console.log(newValue)
+  }
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -43,7 +82,7 @@ const CompleteProfilePageUI = (props: Props) => {
         <div className=" text-brandWhite text-2xl italic">
           {step == 0
             ? "Lets Get to Know You!"
-            : `Welcome ${userRoles[page - 1]}!`}
+            : summary[page - 1] }
         </div>
         <form
           className="w-full px-24 flex flex-col items-center space-y-4"
@@ -71,7 +110,7 @@ const CompleteProfilePageUI = (props: Props) => {
               </button>
             </>
           ) : (
-            <AccountDetails type={page} schools={schools} />
+            <AccountDetails type={page} schools={schools} response={response} changeResp={handleChangeResponse} />
           )}
         </form>
       </div>
@@ -84,8 +123,10 @@ export default CompleteProfilePageUI;
 interface DetailsProps {
   type: number;
   schools: any[];
+  response?: ResponseType,
+  changeResp: (field: string, newValue: number | string) => void
 }
-const AccountDetails: React.FC<DetailsProps> = ({ type, schools }) => {
+const AccountDetails: React.FC<DetailsProps> = ({ type, schools, response, changeResp }) => {
   const defaultTeams = [
     { teamName: "team1" },
     { teamName: "team2" },
@@ -104,31 +145,77 @@ const AccountDetails: React.FC<DetailsProps> = ({ type, schools }) => {
     },
   ];
   // This is going to give me a brain hemorrage to code
+  const schoolOptions = schools.map(school => {
+    return {name: school.org_name, value:school.org_name}
+  })
+
   return (
     <>
       {type == 1 ? (
         <>
-          <StyledDropDown label="Which Team do you play for?">
+          {/* <SelectSearch 
+            options={schoolOptions} 
+            value={response?.user_school} 
+            placeholder="Select" 
+            onChange={e => {changeResp("user_school", e.toString())}} 
+            className="rounded-full h-5 clip"
+          /> */}
+
+          <StyledDropDown label="Which Team do you play for?" value={response?.user_school} onChange={e => {changeResp("user_school", e.currentTarget.value)}}>
             {schools.map((team, index) => {
               return <option key={index}>{team.org_name}</option>;
             })}
           </StyledDropDown>
 
           <div className="flex flex-row space-x-4">
-            <StyledInput label="Jersey No." placeholder="Ex. 0, 1, 60" />
-            <StyledInput label="Height" placeholder={"Ex. 6'0\""} />
-            <StyledInput label="Weight" placeholder="Ex. 175lbs " />
+            <StyledInput 
+              label="Jersey No." 
+              placeholder="Ex. 0, 1, 60" 
+              value={response?.user_jersey_no} 
+              onChange={e => changeResp("user_jersey_no", e.target.value)}
+              type="number"
+            />
+
+            <StyledInput 
+              label="Height" 
+              placeholder={"Ex. 6'0\""} 
+              value={response?.user_height} 
+              onChange={e => changeResp("user_height", e.target.value)}
+              type="number" 
+            />
+
+            <StyledInput 
+              label="Weight" 
+              placeholder="Ex. 175lbs" 
+              value={response?.user_weight} 
+              onChange={e => changeResp("user_weight", e.target.value)}
+              type="number"
+            />
+            
           </div>
 
           <div className="flex flex-row space-x-4">
-            <StyledDropDown label="Position">
+            <StyledDropDown label="Position" value={response?.user_position} onChange={e => changeResp("user_position", e.currentTarget.value)}>
               {positions.map((position, index) => {
                 return <option key={index}> {position} </option>;
               })}
             </StyledDropDown>
             <div className="flex flex-row w-2/3 space-x-4">
-              <StyledInput label="Year of Grad." placeholder="Ex. 2027" />
-              <StyledInput label="GPA" placeholder="Ex. 3.9" />
+              <StyledInput 
+                label="Year of Grad." 
+                placeholder="Ex. 2027" 
+                value={response?.user_year_of_graduation} 
+                onChange={e => changeResp("user_year_of_graduation", e.target.value)}
+                type="number"
+              />
+
+              <StyledInput 
+                label="GPA" 
+                placeholder="Ex. 3.9" 
+                value={response?.user_gpa} 
+                onChange={e => changeResp("user_gpa", e.target.value)} 
+                type="number"
+              />
             </div>
           </div>
         </>
