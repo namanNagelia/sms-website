@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export async function POST(req: NextRequest, res: NextResponse) {
   const data = await req.json();
+
   const users = await prisma.sms_user.update({
     where: { user_firebase_id: data.user_firebase_id },
     data: {

@@ -3,7 +3,7 @@ import React from "react";
 
 type StyledInputProps = {
   label?: string; // The label is optional
-  type?: "text" | "password";
+  type?: "text" | "password" | "number";
 } & React.InputHTMLAttributes<HTMLInputElement>; // Includes all standard input attributes
 
 const StyledInput: React.FC<StyledInputProps> = ({ label, type, ...props }) => {
@@ -11,7 +11,7 @@ const StyledInput: React.FC<StyledInputProps> = ({ label, type, ...props }) => {
     <div className="flex flex-col grow justify">
       {label && (
         <label
-          className="text-brandGrey text-lg mb-1 font-dinAlternate ml-4 tracking-wider"
+          className="text-brandGrey text-lg mb-1 font-dinAlternate ml-4 tracking-wider num"
           htmlFor={props.id}
         >
           {label}

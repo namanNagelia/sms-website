@@ -153,6 +153,7 @@ model basketball_match {
   basketball_teams_basketball_match_team1Tobasketball_teams basketball_teams?          @relation("basketball_match_team1Tobasketball_teams", fields: [team1], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_team1_foreign")
   basketball_teams_basketball_match_team2Tobasketball_teams basketball_teams?          @relation("basketball_match_team2Tobasketball_teams", fields: [team2], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_team2_foreign")
   users                                                     users?                     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_match_userid_foreign")
+  game_stats_table                                          game_stats_table[]
 
   @@index([team1], map: "basketball_match_team1_index")
   @@index([team2], map: "basketball_match_team2_index")
@@ -172,6 +173,7 @@ model basketball_players {
   priority                 String?                    @db.VarChar(255)
   basketball_active_player basketball_active_player[]
   basketball_teams         basketball_teams?          @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_players_teamid_foreign")
+  game_stats_table         game_stats_table[]
 
   @@index([teamId], map: "basketball_players_teamid_index")
 }
@@ -220,6 +222,7 @@ model basketball_teams {
   basketball_match_basketball_match_team2Tobasketball_teams basketball_match[]         @relation("basketball_match_team2Tobasketball_teams")
   basketball_players                                        basketball_players[]
   users                                                     users?                     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "basketball_teams_userid_foreign")
+  game_stats_table                                          game_stats_table[]
 
   @@index([userId], map: "basketball_teams_userid_index")
 }
@@ -671,6 +674,7 @@ model users {
   connections_connections_userIdTousers         connections[]                            @relation("connections_userIdTousers")
   delete_account_after_subscription_ends        delete_account_after_subscription_ends[]
   fcm_tokens                                    fcm_tokens[]
+  game_stats_table                              game_stats_table[]
   group_members                                 group_members[]
   groups                                        groups[]
   library_media_comments                        library_media_comments[]
@@ -792,14 +796,14 @@ model sms_user {
   user_twitter            String?  @db.VarChar(255)
   user_youTube            String?  @db.VarChar(255)
   user_facebook           String?  @db.VarChar(255)
-  user_jersey_no          String?  @db.VarChar(50)
-  user_year_of_graduation Int?     @db.Year
+  user_jersey_no          Decimal? @db.Decimal(10, 0)
+  user_year_of_graduation Decimal? @db.Decimal(10, 0)
   user_height             Decimal? @db.Decimal(5, 2)
   user_weight             Decimal? @db.Decimal(5, 2)
   user_position           String?  @db.VarChar(255)
   user_gpa                Decimal? @db.Decimal(3, 2)
   user_email              String?  @db.VarChar(255)
-  user_firebase_id        String?  @unique @db.VarChar(255)
+  user_firebase_id        String?  @unique(map: "user_firebase_id") @db.VarChar(255)
 }
 
 model sms_user_type {
@@ -832,9 +836,10 @@ model sms_game_stats {
 }
 
 model sms_team_roster {
-  team_roster_id      Int @id @default(autoincrement())
+  team_roster_id      Int  @id @default(autoincrement())
   team_roster_user_id Int
   team_roster_team_id Int
+  team_roster_org_id  Int?
 }
 
 model sms_player_stats {
@@ -872,6 +877,40 @@ model sms_team {
   team_youtube         String? @db.VarChar(255)
   team_facebook        String? @db.VarChar(255)
   team_affiliation     String? @db.Text
+}
+
+model game_stats_table {
+  game_stats_id                BigInt              @id @default(autoincrement()) @db.UnsignedBigInt
+  game_stats_user_Id           Int?                @db.UnsignedInt
+  game_stats_game_id           BigInt?             @db.UnsignedBigInt
+  game_stats_team_id           BigInt?             @db.UnsignedBigInt
+  team_user_id                 BigInt?             @db.UnsignedBigInt
+  game_stats_dev_type          String?             @db.VarChar(255)
+  game_stats_xposition         Decimal?            @db.Decimal(8, 2)
+  game_stats_yposition         Decimal?            @db.Decimal(8, 2)
+  game_stats_scoretime         BigInt?
+  game_stats_def_rebounds_dreb Boolean?
+  game_stats_turnover_to       Boolean?
+  game_stats_assist_asst       Boolean?
+  game_stats_foul              Boolean?
+  game_stats_steals_stl        Boolean?
+  game_stats_blocks_blk        Boolean?
+  game_stats_miss              Boolean?
+  game_stats_make              Boolean?
+  game_stats_1point            Boolean?
+  game_stats_2point            Boolean?
+  game_stats_3point            Boolean?
+  game_stats_create_date       DateTime?           @default(now()) @db.Timestamp(0)
+  game_stats_update_date       DateTime?           @default(now()) @db.Timestamp(0)
+  basketball_match             basketball_match?   @relation(fields: [game_stats_game_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "game_stats_table_game_stats_game_id_foreign")
+  basketball_teams             basketball_teams?   @relation(fields: [game_stats_team_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "game_stats_table_game_stats_team_id_foreign")
+  users                        users?              @relation(fields: [game_stats_user_Id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "game_stats_table_game_stats_user_id_foreign")
+  basketball_players           basketball_players? @relation(fields: [team_user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "game_stats_table_team_user_id_foreign")
+
+  @@index([game_stats_game_id], map: "game_stats_table_game_stats_game_id_index")
+  @@index([game_stats_team_id], map: "game_stats_table_game_stats_team_id_index")
+  @@index([game_stats_user_Id], map: "game_stats_table_game_stats_user_id_index")
+  @@index([team_user_id], map: "game_stats_table_team_user_id_index")
 }
 
 enum showcases_type {

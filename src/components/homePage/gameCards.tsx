@@ -17,12 +17,12 @@ const GameCard = (props: GameCardProps) => {
     window.location.href = `/game/${id}`;
   };
   const team1 = props.teamData.find(
-    (team) => team.team_id === props.game_team1_id
+    (team) => team.team_organisation_id === props.game_team1_id
   );
   const team1Pic = team1 ? team1.team_log_url : defaultImage;
   const team1Name = team1 ? team1.team_name : "";
   const team2 = props.teamData.find(
-    (team) => team.team_id === props.game_team2_id
+    (team) => team.team_organisation_id === props.game_team2_id
   );
   const team2Pic = team2 ? team2.team_log_url : defaultImage;
   const team2Name = team2 ? team2.team_name : "";
