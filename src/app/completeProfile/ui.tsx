@@ -68,11 +68,10 @@ const CompleteProfilePageUI = (props: Props) => {
     });
     if (res.ok) {
       // Handle success response
-      const jsonResponse = await res.json();
-      console.log("Success:", jsonResponse);
+      console.log("Success:");
     } else {
       // Handle error response
-      console.error("Error:", res.statusText);
+      console.error("Error:");
     }
   };
 
