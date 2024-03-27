@@ -86,12 +86,13 @@ interface DetailsProps {
   schools: any[];
 }
 const AccountDetails: React.FC<DetailsProps> = ({ type, schools }) => {
-  const defaultTeams = [
-    { teamName: "team1" },
-    { teamName: "team2" },
-    { teamName: "team3" },
+  const positions = [
+    "Point Guard",
+    "Shooting Guard",
+    "Small Forward",
+    "Power Forward",
+    "Center",
   ];
-  const positions = ["Point Guard", "Shooting Guard", "Forward", "Center"];
 
   const defaultPlayer = [
     {
