@@ -7,12 +7,13 @@ import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
 
 interface Props {
-  schoolOptions: {
+  schoolOptions?: {
+    //remove question
     school: any;
   };
 }
 const CompleteProfilePageUI = (props: Props) => {
-  const schools = props.schoolOptions.school;
+  // const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
 
@@ -71,7 +72,8 @@ const CompleteProfilePageUI = (props: Props) => {
               </button>
             </>
           ) : (
-            <AccountDetails type={page} schools={schools} />
+            // <AccountDetails type={page} schools={schools} />
+            <></>
           )}
         </form>
       </div>
