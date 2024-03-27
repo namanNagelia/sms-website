@@ -51,25 +51,22 @@ const CompleteProfilePageUI = (props: Props) => {
       : "http://localhost:3000/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch(
-      "https://sms-website-sigma.vercel.app/api/updateAccountInfo",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-          user_user_type_id: response.user_user_type_id,
-          user_year_of_graduation: response.user_year_of_graduation,
-          user_height: response.user_height,
-          user_weight: response.user_weight,
-          user_position: response.user_position,
-          user_jersey_no: response.user_jersey_no,
-          user_gpa: response.user_gpa,
-        }),
-      }
-    );
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+        user_user_type_id: response.user_user_type_id,
+        user_year_of_graduation: response.user_year_of_graduation,
+        user_height: response.user_height,
+        user_weight: response.user_weight,
+        user_position: response.user_position,
+        user_jersey_no: response.user_jersey_no,
+        user_gpa: response.user_gpa,
+      }),
+    });
     if (res.ok) {
       // Handle success response
       console.log("Success:");
@@ -212,22 +209,23 @@ const AccountDetails: React.FC<DetailsProps> = ({
 
   // This is going to give me a brain hemorrage to code
   const schoolOptions = schools.map((school) => {
-    if ((school.org_name as string).toLowerCase().includes(query.toLowerCase())) {
+    if (
+      (school.org_name as string).toLowerCase().includes(query.toLowerCase())
+    ) {
       return { name: school.org_name, value: school.org_name };
     }
   });
 
-
   const handleOnFocus = (focus: boolean) => {
-    return (focus ? 'h-8' : 'h-20')
-  }
+    return focus ? "h-8" : "h-20";
+  };
 
   return (
     <>
       {type == 1 ? (
         <>
           <div className="flex flex-row space-x-4">
-            <div className='h-30 overflow-y-clip w-2/3'>
+            <div className="h-30 overflow-y-clip w-2/3">
               <div className="relative">
                 <StyledInput
                   label="Search For School..."
@@ -238,17 +236,20 @@ const AccountDetails: React.FC<DetailsProps> = ({
                 />
                 <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
                   {schoolOptions.map((school, index) => {
-                    return (school ?
+                    return school ? (
                       <button
-                        onClick={
-                          (e) => {
-                            changeResp("user_school", school?.value)
-                            setQuery(school?.value)
-                          }
-                        }
+                        onClick={(e) => {
+                          changeResp("user_school", school?.value);
+                          setQuery(school?.value);
+                        }}
                         value={school?.value}
                         className="h-6 w-full text-white"
-                      >{school?.value}</button> : <></>)
+                      >
+                        {school?.value}
+                      </button>
+                    ) : (
+                      <></>
+                    );
                   })}
                 </div>
               </div>
