@@ -44,9 +44,13 @@ const CompleteProfilePageUI = (props: Props) => {
     user_user_type_id: 1,
   });
   console.log(response);
+  const url =
+    process.env.DEV === "1"
+      ? "https://sms-website-sigma.vercel.app/api/updateAccountInfo"
+      : "http://localhost:3000/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch("http://localhost:3000/api/updateAccountInfo", {
+    const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
