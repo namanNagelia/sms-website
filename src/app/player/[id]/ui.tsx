@@ -109,6 +109,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const performance = calculateOverallPerformanceRating(seasonAverages);
   console.log(performance);
   const name = `${playerProfileData.user_first_name} ${playerProfileData.user_last_name}`;
+
   return (
     <div>
       <PlayerNameBanner
@@ -181,17 +182,22 @@ const PlayerNameBanner: React.FC<PlayerNameBannerProps> = ({
   school,
   graduation,
 }) => {
-  if (ImageURL === "|" || ImageURL === "" || ImageURL === null) {
+  if (
+    ImageURL === "|" ||
+    ImageURL === "" ||
+    ImageURL === null ||
+    ImageURL === undefined
+  ) {
     ImageURL = defaultImage;
   }
-  console.log(graduation);
+  console.log("IMage", ImageURL);
   return (
     <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
-      <img
+      <Image
         src={ImageURL}
         alt={"Image"}
-        width={108}
-        height={108}
+        width={94}
+        height={94}
         className="rounded-full"
       />
       <div className="flex flex-col mb-5 items-start text-brandWhite">

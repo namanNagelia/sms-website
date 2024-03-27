@@ -1,11 +1,22 @@
 import React from "react";
+import CompleteProfilePageUI from "./ui";
 
-const CompleteProfilePage = () => {
-  return (
-    <div>
-      <h1>Complete Profile Page</h1>
-    </div>
-  );
+const fetchAllTeams = async () => {
+  try {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/getAllTeams"
+        : "https://sms-website-sigma.vercel.app/api/getAllTeams";
+    const res = await fetch(url, {
+      next: { revalidate: 1000 * 60 * 60 },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
 };
-
-export default CompleteProfilePage;
+export default async function CompleteProfilePage() {
+  const teams = await fetchAllTeams();
+  return <CompleteProfilePageUI schoolOptions={teams} />;
+}

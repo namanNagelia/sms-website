@@ -18,3 +18,6 @@ npx prisma migrate resolve --applied 0_init
 
 
 5. npx prisma generate
+
+
+all collegs: https://public.opendatasoft.com/api/records/1.0/search/?dataset=us-colleges-and-universities&rows=10000&fields=name,address,city,state,zip,telephone
