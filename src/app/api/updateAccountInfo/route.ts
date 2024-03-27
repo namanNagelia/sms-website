@@ -20,10 +20,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
   });
   console.log(data);
 
-  return NextResponse.json(data);
-  // const users = await prisma.sms_user.create({
-  //   data: {
-  //     user_first_name: first_name,
-  //   },
-  // });
+  return new NextResponse("", {
+    status: 200,
+  });
 }
