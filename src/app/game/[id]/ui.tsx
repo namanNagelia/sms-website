@@ -4,7 +4,8 @@ import Logo from "@/../public/SMSLogo.png";
 import VideoPlayer from "@/components/playerPage/videoPlayer";
 import Button from "@/components/homePage/button";
 import noHighlights from "@/app/images/icons/DefaultIcons/NoHighlights.svg";
-
+import noBoxScore from "./NoBoxScore.svg";
+import defaultImage from "@/app/../../public/Male Unknown.svg";
 interface BoxProp {
   players: {
     name: string;
@@ -12,6 +13,7 @@ interface BoxProp {
     pts: number;
     reb: number;
     ast: number;
+    pic_url: string;
   }[];
 }
 interface GameProp {
@@ -22,60 +24,6 @@ interface GameProp {
   FinalScores: string;
 }
 
-const defaultBoxScores: BoxProp = {
-  players: [
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-  ],
-};
-
 interface GamePageProps {
   gameDetailsStats: {
     game: any;
@@ -83,11 +31,15 @@ interface GamePageProps {
   teamInfo: {
     teams: any;
   };
+  boxScore: {
+    returnable: any;
+  };
 }
 
 const GamePageUI = (props: GamePageProps) => {
   const gamedetails = props.gameDetailsStats.game;
   const teamInfo = props.teamInfo.teams;
+  const boxScore = props.boxScore.returnable;
   const team1 = teamInfo.find(
     (team: any) => team.team_organisation_id === gamedetails.game_team1_id
   );
@@ -95,14 +47,17 @@ const GamePageUI = (props: GamePageProps) => {
   const team2 = teamInfo.find(
     (team: any) => team.team_organisation_id === gamedetails.game_team2_id
   );
-  console.log(gamedetails);
-  console.log("Team 2");
-  console.log(team2);
   const team2Pic = team2 ? team2.team_log_url : "";
   const team1Name = team1 ? team1.team_name : "";
   const team2Name = team2 ? team2.team_name : "";
-  console.log("Game Video URL");
-  console.log(gamedetails.game_video_url);
+  const boxScore2: {
+    name: string;
+    position: string;
+    pts: number;
+    reb: number;
+    ast: number;
+    pic_url: string;
+  }[] = [];
 
   return (
     <>
@@ -115,7 +70,23 @@ const GamePageUI = (props: GamePageProps) => {
       />
       <div className="w-full text-center">
         <div className="flex flex-row space-x-4 mx-8">
-          <BoxScore players={defaultBoxScores.players} />
+          {boxScore.length === 0 ? (
+            <>
+              <div className="flex-col">
+                <h1 className="text-white text-3xl font-dinAlternate mb-3">
+                  No Box Score Data
+                </h1>
+                <Image
+                  src={noBoxScore}
+                  alt="No Box Score"
+                  layout="contain"
+                  width={450}
+                />
+              </div>
+            </>
+          ) : (
+            <BoxScore players={boxScore} />
+          )}
           <div className="mt-36">
             {gamedetails.game_video_url == "" ||
             gamedetails.game_video_url == undefined ||
@@ -135,7 +106,23 @@ const GamePageUI = (props: GamePageProps) => {
               <VideoPlayer videoLink={gamedetails.game_video_url} />
             )}
           </div>
-          <BoxScore players={defaultBoxScores.players} />
+          <div>
+            {boxScore2.length === 0 ? (
+              <div className="flex-col">
+                <h1 className="text-white text-3xl font-dinAlternate mb-3">
+                  No Box Score Data
+                </h1>
+                <Image
+                  src={noBoxScore}
+                  alt="No Box Score"
+                  layout="contain"
+                  width={450}
+                />
+              </div>
+            ) : (
+              <BoxScore players={boxScore2} />
+            )}
+          </div>
         </div>
         <StatsScore />
         {/* <Plays /> */}
@@ -174,6 +161,10 @@ const BoxScore: React.FC<BoxProp> = ({ players }) => {
         Box Score
       </div>
       {players.map((player, index) => {
+        let picURL = player.pic_url;
+        if (picURL === "" || picURL === null || picURL === undefined) {
+          picURL = defaultImage;
+        }
         return (
           <div
             key={index}
@@ -189,7 +180,13 @@ const BoxScore: React.FC<BoxProp> = ({ players }) => {
                         text-brandWhite 
                     "
           >
-            <Image src={Logo} alt="asdakl" width={36} height={36} />
+            <Image
+              src={picURL}
+              alt="picture"
+              width={40}
+              height={40}
+              className="rounded-full bg-gray-200"
+            />{" "}
             <div className="flex flex-col items-start mr-auto ml-4">
               <text className="xl:text-xl lg:text-lg">{player.name}</text>
               <text className="xl:text-bs">{player.position}</text>

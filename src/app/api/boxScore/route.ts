@@ -9,7 +9,7 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const game_id = searchParams.get("id");
-  const gameDetails = await prisma.sms_player_stats_upd.findMany({
+  const gameDetails = await prisma.sms_player_stats.findMany({
     where: {
       player_stats_game_id: Number(game_id),
     },
@@ -48,6 +48,7 @@ export async function GET(request: NextRequest) {
       ast: log.player_stats_assist_asst,
       team_id: log.player_stats_team_id,
       user_id: log.player_stats_user_id,
+      pic_url: playerDetails[0].user_pic_url,
     });
   }
   return NextResponse.json({ returnable });
