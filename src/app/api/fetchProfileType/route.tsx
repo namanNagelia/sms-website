@@ -13,5 +13,7 @@ export async function GET(request: NextRequest) {
       user_firebase_id: id,
     },
   });
-  return NextResponse.json({ user });
+  return new NextResponse(JSON.stringify({ user }), {
+    headers: { "Access-Control-Allow-Origin": "*" },
+  });
 }

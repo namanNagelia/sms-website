@@ -28,7 +28,9 @@ const LoginUI = () => {
               ? "https://sms-website-sigma.vercel.app/api/fetchProfileType"
               : "http://localhost:3000/api/fetchProfileType";
 
-          const dataType = await fetch(`${url}?id=${user.uid}`)
+          const dataType = await fetch(
+            `https://sms-website-sigma.vercel.app/api/fetchProfileType?id=${user.uid}`
+          )
             .then((response) => response.json())
             .then((data) => data.user_user_type_id);
 
