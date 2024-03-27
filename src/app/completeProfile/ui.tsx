@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormEvent } from "react";
 import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
 import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
 import SelectSearch from "react-select-search";
-
+import { useUser } from "../userContext";
 interface Props {
   schoolOptions: {
     school: any;
@@ -14,31 +14,69 @@ interface Props {
 }
 
 interface ResponseType {
-  user_height: number,
-  user_weight: number,
-  user_position: string,
-  user_year_of_graduation: number,
-  user_gpa: number,
-  user_jersey_no: number,
-  user_school: string
+  user_height?: number;
+  user_weight?: number;
+  user_position?: string;
+  user_year_of_graduation?: number;
+  user_gpa?: number;
+  user_jersey_no?: number;
+  user_school?: string;
+  user_firebase_id: string;
+  user_user_type_id?: number; // Add this line
 }
 
 const CompleteProfilePageUI = (props: Props) => {
-  
   const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
-  
+  const { user } = useUser();
+  console.log(user);
+
   const [response, setResponse] = useState<ResponseType>({
-    user_height: 5.10,
+    user_height: 5.1,
     user_weight: 175,
     user_position: "",
     user_year_of_graduation: 2024,
     user_gpa: 3.9,
     user_jersey_no: 6,
-    user_school: ""
+    user_school: "",
+    user_firebase_id: user?.uid || "",
+    user_user_type_id: 1,
+  });
+  console.log(response);
 
-  })
+  const handleFinalizeAccount = async () => {
+    const res = await fetch("http://localhost:3000/api/updateAccountInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+        user_user_type_id: response.user_user_type_id,
+        user_year_of_graduation: response.user_year_of_graduation,
+        user_height: response.user_height,
+        user_weight: response.user_weight,
+        user_position: response.user_position,
+        user_jersey_no: response.user_jersey_no,
+        user_gpa: response.user_gpa,
+      }),
+    });
+    if (res.ok) {
+      // Handle success response
+      const jsonResponse = await res.json();
+      console.log("Success:", jsonResponse);
+    } else {
+      // Handle error response
+      console.error("Error:", res.statusText);
+    }
+  };
+
+  useEffect(() => {
+    console.log("ID", user?.uid);
+    handleChangeResponse("user_firebase_id", user?.uid || "");
+  }, [user]); // Depend on the user state to re-run this effect
+
   const userRoles = [
     "Athlete",
     "Guardian",
@@ -54,18 +92,19 @@ const CompleteProfilePageUI = (props: Props) => {
     "Welcome",
     "Welcome",
     "Welcome",
-  ]
+  ];
 
-  const handleChangeResponse = (field : string, newValue: number | string) => {
-    setResponse(prevResp => ({
+  const handleChangeResponse = (field: string, newValue: number | string) => {
+    setResponse((prevResp) => ({
       ...prevResp,
-      [field]: newValue
-    }))
-    console.log(newValue)
-  }
+      [field]: newValue,
+    }));
+    console.log(newValue);
+  };
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+    await handleFinalizeAccount();
     if (step == 0) {
       console.log(page);
       setStep(step + 1);
@@ -80,9 +119,7 @@ const CompleteProfilePageUI = (props: Props) => {
         </div>
         <div className="h-1 bg-brandGrey w-3/4 rounded-md" />
         <div className=" text-brandWhite text-2xl italic">
-          {step == 0
-            ? "Lets Get to Know You!"
-            : summary[page - 1] }
+          {step == 0 ? "Lets Get to Know You!" : summary[page - 1]}
         </div>
         <form
           className="w-full px-24 flex flex-col items-center space-y-4"
@@ -92,7 +129,10 @@ const CompleteProfilePageUI = (props: Props) => {
             <>
               <StyledDropDown
                 onChange={(e) => {
-                  setPage(parseInt(e.target.value));
+                  const userType = parseInt(e.target.value);
+
+                  setPage(userType);
+                  handleChangeResponse("user_user_type_id", userType); // Update the response state
                 }}
               >
                 <option value={1}>Athlete</option>
@@ -110,7 +150,12 @@ const CompleteProfilePageUI = (props: Props) => {
               </button>
             </>
           ) : (
-            <AccountDetails type={page} schools={schools} response={response} changeResp={handleChangeResponse} />
+            <AccountDetails
+              type={page}
+              schools={schools}
+              response={response}
+              changeResp={handleChangeResponse}
+            />
           )}
         </form>
       </div>
@@ -123,15 +168,20 @@ export default CompleteProfilePageUI;
 interface DetailsProps {
   type: number;
   schools: any[];
-  response?: ResponseType,
-  changeResp: (field: string, newValue: number | string) => void
+  response?: ResponseType;
+  changeResp: (field: string, newValue: number | string) => void;
 }
-const AccountDetails: React.FC<DetailsProps> = ({ type, schools, response, changeResp }) => {
+const AccountDetails: React.FC<DetailsProps> = ({
+  type,
+  schools,
+  response,
+  changeResp,
+}) => {
   const defaultTeams = [
     { teamName: "team1" },
     { teamName: "team2" },
     { teamName: "team3" },
-  ]
+  ];
   const positions = [
     "Point Guard",
     "Shooting Guard",
@@ -151,9 +201,9 @@ const AccountDetails: React.FC<DetailsProps> = ({ type, schools, response, chang
     },
   ];
   // This is going to give me a brain hemorrage to code
-  const schoolOptions = schools.map(school => {
-    return {name: school.org_name, value:school.org_name}
-  })
+  const schoolOptions = schools.map((school) => {
+    return { name: school.org_name, value: school.org_name };
+  });
 
   return (
     <>
@@ -167,59 +217,72 @@ const AccountDetails: React.FC<DetailsProps> = ({ type, schools, response, chang
             className="rounded-full h-5 clip"
           /> */}
 
-          <StyledDropDown label="Which Team do you play for?" value={response?.user_school} onChange={e => {changeResp("user_school", e.currentTarget.value)}}>
+          <StyledDropDown
+            label="Which Team do you play for?"
+            value={response?.user_school}
+            onChange={(e) => {
+              changeResp("user_school", e.currentTarget.value);
+            }}
+          >
             {schools.map((team, index) => {
               return <option key={index}>{team.org_name}</option>;
             })}
           </StyledDropDown>
 
           <div className="flex flex-row space-x-4">
-            <StyledInput 
-              label="Jersey No." 
-              placeholder="Ex. 0, 1, 60" 
-              value={response?.user_jersey_no} 
-              onChange={e => changeResp("user_jersey_no", e.target.value)}
+            <StyledInput
+              label="Jersey No."
+              placeholder="Ex. 0, 1, 60"
+              value={response?.user_jersey_no}
+              onChange={(e) => changeResp("user_jersey_no", e.target.value)}
               type="number"
             />
 
-            <StyledInput 
-              label="Height" 
-              placeholder={"Ex. 6'0\""} 
-              value={response?.user_height} 
-              onChange={e => changeResp("user_height", e.target.value)}
-              type="number" 
-            />
-
-            <StyledInput 
-              label="Weight" 
-              placeholder="Ex. 175lbs" 
-              value={response?.user_weight} 
-              onChange={e => changeResp("user_weight", e.target.value)}
+            <StyledInput
+              label="Height"
+              placeholder={"Ex. 6'0\""}
+              value={response?.user_height}
+              onChange={(e) => changeResp("user_height", e.target.value)}
               type="number"
             />
-            
+
+            <StyledInput
+              label="Weight"
+              placeholder="Ex. 175lbs"
+              value={response?.user_weight}
+              onChange={(e) => changeResp("user_weight", e.target.value)}
+              type="number"
+            />
           </div>
 
           <div className="flex flex-row space-x-4">
-            <StyledDropDown label="Position" value={response?.user_position} onChange={e => changeResp("user_position", e.currentTarget.value)}>
+            <StyledDropDown
+              label="Position"
+              value={response?.user_position}
+              onChange={(e) =>
+                changeResp("user_position", e.currentTarget.value)
+              }
+            >
               {positions.map((position, index) => {
                 return <option key={index}> {position} </option>;
               })}
             </StyledDropDown>
             <div className="flex flex-row w-2/3 space-x-4">
-              <StyledInput 
-                label="Year of Grad." 
-                placeholder="Ex. 2027" 
-                value={response?.user_year_of_graduation} 
-                onChange={e => changeResp("user_year_of_graduation", e.target.value)}
+              <StyledInput
+                label="Year of Grad."
+                placeholder="Ex. 2027"
+                value={response?.user_year_of_graduation}
+                onChange={(e) =>
+                  changeResp("user_year_of_graduation", e.target.value)
+                }
                 type="number"
               />
 
-              <StyledInput 
-                label="GPA" 
-                placeholder="Ex. 3.9" 
-                value={response?.user_gpa} 
-                onChange={e => changeResp("user_gpa", e.target.value)} 
+              <StyledInput
+                label="GPA"
+                placeholder="Ex. 3.9"
+                value={response?.user_gpa}
+                onChange={(e) => changeResp("user_gpa", e.target.value)}
                 type="number"
               />
             </div>
