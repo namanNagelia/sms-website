@@ -5,7 +5,6 @@ import { FormEvent } from "react";
 import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
 import StyledDropDown from "../createAccount/styledDropdown";
 import StyledInput from "../createAccount/inputContainer";
-import SelectSearch from "react-select-search";
 import { useUser } from "../userContext";
 import Background from "@/components/background";
 interface Props {
@@ -24,7 +23,7 @@ interface ResponseType {
   user_school?: string;
   user_firebase_id: string;
   user_user_type_id?: number; // Add this line
-  user_phone_number?: number;
+  user_phone_number?: string;
   user_student_name?: string;
 }
 
@@ -45,7 +44,7 @@ const CompleteProfilePageUI = (props: Props) => {
     user_school: "",
     user_firebase_id: user?.uid || "",
     user_user_type_id: 1,
-    user_phone_number: 0,
+    user_phone_number: "000-000-0000",
     user_student_name: "",
   });
   console.log(response);
@@ -223,51 +222,7 @@ const AccountDetails: React.FC<DetailsProps> = ({
     <>
       {type == 1 ? (
         <>
-          <div className="flex flex-row space-x-4">
-            <div className="h-30 overflow-y-clip w-2/3">
-              <div className="relative">
-                <StyledInput
-                  label="Search For School..."
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
-                  }}
-                />
-                <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
-                  {schoolOptions.map((school, index) => {
-                    return school ? (
-                      <button
-                        onClick={(e) => {
-                          changeResp("user_school", school?.value);
-                          setQuery(school?.value);
-                        }}
-                        value={school?.value}
-                        className="h-6 w-full text-white"
-                      >
-                        {school?.value}
-                      </button>
-                    ) : (
-                      <></>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <text className="text-white self-start pt-10 text-xl"> : </text>
-
-            <StyledDropDown
-              label="Team Selected:"
-              disabled
-              value={response?.user_school}
-              onChange={(e) => {
-                changeResp("user_school", e.currentTarget.value);
-              }}
-            >
-              {schools.map((team, index) => {
-                return <option key={index}>{team.org_name}</option>;
-              })}
-            </StyledDropDown>
-          </div>
+          <SearchSelect options={schools} resp={response} changeResp={changeResp} />
 
           <div className="flex flex-row space-x-4">
             <StyledInput
@@ -345,17 +300,66 @@ const AccountDetails: React.FC<DetailsProps> = ({
       ) : type == 2 ? (
         <>
           {/* Phone number */}
-          <StyledInput label="Phone Number" type="number" value={response?.user_phone_number} />
+          <StyledInput 
+            label="Phone Number" 
+            type="tel" 
+            value={response?.user_phone_number} 
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={e => {changeResp("user_phone_number", e.target.value)}} 
+          />
 
-          <StyledDropDown label="Who is your student athlete?">
+          <StyledDropDown label="Who is your student athlete?" value={response?.user_student_name} 
+          onChange={e => {
+            changeResp("user_student_name", e.currentTarget.value)
+          }}>
             {defaultPlayer.map((player, index) => {
               return <option key={index}>{player.firstName}</option>;
             })}
           </StyledDropDown>
         </>
-      ) : (
-        <></>
-      )}
+      ) : type == 3 ? (
+        <>
+        <StyledInput 
+            label="Phone Number" 
+            type="tel" 
+            value={response?.user_phone_number} 
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={e => {changeResp("user_phone_number", e.target.value)}} 
+          />
+          <div className="h-30 overflow-y-clip w-2/3">
+            <div className="relative">
+              <StyledInput
+                label="Search For Team..."
+                value={query}
+                onChange={(e) => {
+                  setQuery(e.target.value);
+                }}
+              />
+              <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
+                {schoolOptions.map((school, index) => {
+                  return school ? (
+                    <button
+                      onClick={(e) => {
+                        changeResp("user_school", school?.value);
+                        setQuery(school?.value);
+                      }}
+                      value={school?.value}
+                      className="h-6 w-full text-white"
+                    >
+                      {school?.value}
+                    </button>
+                  ) : (
+                    <></>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </>
+      ) : <></>
+      }
       <button
         type="submit"
         className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 px-6 hover:opacity-65 shadow-md text-lg w-fit"
@@ -365,3 +369,61 @@ const AccountDetails: React.FC<DetailsProps> = ({
     </>
   );
 };
+
+interface SelectSearchProps{
+  options: any[],
+  resp?: ResponseType,
+  changeResp: (field: string, newValue: number | string) => void;
+}
+
+const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp}) => {
+  const [query, setQuery] = useState("");
+
+  return(
+    <div className="flex flex-row space-x-4">
+            <div className="h-30 overflow-y-clip w-2/3">
+              <div className="relative">
+                <StyledInput
+                  label="Search For School..."
+                  value={query}
+                  onChange={(e) => {
+                    setQuery(e.target.value);
+                  }}
+                />
+                <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
+                  {options.map((option, index) => {
+                    return option ? (
+                      <button
+                        onClick={(e) => {
+                          changeResp("user_school", option?.value);
+                          setQuery(option?.value);
+                        }}
+                        value={option?.value}
+                        className="h-6 w-full text-white"
+                      >
+                        {option?.value}
+                      </button>
+                    ) : (
+                      <></>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+            <text className="text-white self-start pt-10 text-xl"> : </text>
+
+            <StyledDropDown
+              label="Team Selected:"
+              disabled
+              value={resp?.user_school}
+              onChange={(e) => {
+                changeResp("user_school", e.currentTarget.value);
+              }}
+            >
+              {options.map((option, index) => {
+                return <option key={index}>{option.org_name}</option>;
+              })}
+            </StyledDropDown>
+          </div>
+  )
+}

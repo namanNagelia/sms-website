@@ -3,7 +3,7 @@ import React from "react";
 
 type StyledInputProps = {
   label?: string; // The label is optional
-  type?: "text" | "password" | "number";
+  type?: "text" | "password" | "number" | "tel";
 } & React.InputHTMLAttributes<HTMLInputElement>; // Includes all standard input attributes
 
 const StyledInput: React.FC<StyledInputProps> = ({ label, type, ...props }) => {
