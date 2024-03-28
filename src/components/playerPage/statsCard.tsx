@@ -5,6 +5,7 @@ import leftArrowIcon from "@/app/images/icons/Left Arrow.svg";
 import swapsIcon from "@/app/images/icons/right arrow.svg";
 import rightArrowIcon from "@/app/images/icons/swaps.svg";
 import "./stats.css";
+import { index } from "d3";
 
 interface StatsCardProps {
   seasonStats: any; // Replace 'any' with the type of your season stats
@@ -35,10 +36,10 @@ const StatsCard: React.FC<StatsCardProps> = ({
       setGameIndex((prevGame) => prevGame - 1);
     }
   };
+  console.log(gameStats);
 
   // Choose the right data based on the mode
-  const currentStats =
-    mode === "Season" ? seasonStats : gameStats[gameIndex].details;
+  const currentStats = mode === "Season" ? seasonStats : gameStats[gameIndex];
   const archetypes = archetype;
 
   return (
@@ -76,7 +77,7 @@ const StatsCard: React.FC<StatsCardProps> = ({
               />
             </button>
             <p className="mx-2 font-dinCondensed text-brandWhite hover:text-brandGrey text-lg">
-              Game {gameIndex + 1}: {gameStats[gameIndex].date}
+              {gameStats[gameIndex].game}
             </p>
             <button onClick={incrementGame}>
               <Image
@@ -91,12 +92,18 @@ const StatsCard: React.FC<StatsCardProps> = ({
       </div>
       <div className="grid grid-cols-2 w-full gap-8 p-8 font-dinCondensed">
         {Object.keys(currentStats).length > 0 ? (
-          Object.entries(currentStats).map(([key, value]) => (
-            <div key={key} className="w-full flex flex-row text-3xl">
-              <div className="text-brandGrey mr-auto px-2">{key}</div>
-              <div className="text-brandWhite">{String(value)}</div>
-            </div>
-          ))
+          Object.entries(currentStats).map(([key, value]) => {
+            // Skip rendering the "Games" stat if currentStats is from gameStats
+            if (mode === "Game" && key === "game") {
+              return null;
+            }
+            return (
+              <div key={key} className="w-full flex flex-row text-3xl">
+                <div className="text-brandGrey mr-auto px-2">{key}</div>
+                <div className="text-brandWhite">{String(value)}</div>
+              </div>
+            );
+          })
         ) : (
           <div className="w-full flex justify-center items-center text-3xl text-brandGrey">
             No stats available
