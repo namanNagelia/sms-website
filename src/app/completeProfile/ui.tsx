@@ -11,6 +11,9 @@ interface Props {
   schoolOptions: {
     school: any;
   };
+  players: {
+    firstPlayer: any;
+  };
 }
 
 interface ResponseType {

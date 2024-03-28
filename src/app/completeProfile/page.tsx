@@ -16,7 +16,24 @@ const fetchAllTeams = async () => {
     console.log(error);
   }
 };
+
+const fetchPlayers = async () => {
+  try {
+    const url =
+      process.env.DEV === "0"
+        ? "http://localhost:3000/api/getPlayers"
+        : "https://sms-website-sigma.vercel.app/api/getPlayers";
+    const res = await fetch(url, {
+      next: { revalidate: 1000 * 60 * 60 },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 export default async function CompleteProfilePage() {
   const teams = await fetchAllTeams();
-  return <CompleteProfilePageUI schoolOptions={teams} />;
+  const players = await fetchPlayers();
+  return <CompleteProfilePageUI schoolOptions={teams} players={players} />;
 }
