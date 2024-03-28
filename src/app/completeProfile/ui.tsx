@@ -11,6 +11,9 @@ interface Props {
   schoolOptions: {
     school: any;
   };
+  players: {
+    firstPlayer: any;
+  };
 }
 
 interface ResponseType {
@@ -52,9 +55,9 @@ const CompleteProfilePageUI = (props: Props) => {
   });
   console.log(response);
   const url =
-    process.env.DEV === "1"
-      ? "https://sms-website-sigma.vercel.app/api/updateAccountInfo"
-      : "http://localhost:3000/api/updateAccountInfo";
+    process.env.DEV === "0"
+      ? "http://localhost:3000/api/updateAccountInfo"
+      : "https://sms-website-sigma.vercel.app/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
     setError(false)
@@ -373,16 +376,21 @@ interface SelectSearchProps {
   options: any[];
   resp?: ResponseType;
   changeResp: (field: string, newValue: number | string) => void;
-  query: string,
-  setQuery: React.Dispatch<React.SetStateAction<string>>
-  label: [string, string]
-
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  label: [string, string];
 }
 
-const SearchSelect: React.FC<SelectSearchProps> = ({ options, resp, changeResp, query, setQuery, label }) => {
-
+const SearchSelect: React.FC<SelectSearchProps> = ({
+  options,
+  resp,
+  changeResp,
+  query,
+  setQuery,
+  label,
+}) => {
   return (
-    <div className="flex flex-row space-x-4 w-3/4">
+    <div className="flex flex-row space-x-4">
       <div className="h-30 overflow-y-clip w-2/3">
         <div className="relative">
           <StyledInput
@@ -428,6 +436,5 @@ const SearchSelect: React.FC<SelectSearchProps> = ({ options, resp, changeResp, 
         })}
       </StyledDropDown>
     </div>
-
   );
 };
