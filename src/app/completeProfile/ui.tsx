@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { FormEvent } from "react";
 import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
@@ -34,6 +34,9 @@ const CompleteProfilePageUI = (props: Props) => {
   const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
   const { user } = useUser();
   console.log(user);
 
@@ -57,26 +60,32 @@ const CompleteProfilePageUI = (props: Props) => {
       : "https://sms-website-sigma.vercel.app/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(response),
-      // body: JSON.stringify({
-      //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-      //   user_user_type_id: response.user_user_type_id,
-      //   user_year_of_graduation: response.user_year_of_graduation,
-      //   user_height: response.user_height,
-      //   user_weight: response.user_weight,
-      //   user_position: response.user_position,
-      //   user_jersey_no: response.user_jersey_no,
-      //   user_gpa: response.user_gpa,
-      // }),
-    });
+    setError(false)
+    setSuccess(false)
+    const res = await fetch(
+      url,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(response),
+        // body: JSON.stringify({
+        //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+        //   user_user_type_id: response.user_user_type_id,
+        //   user_year_of_graduation: response.user_year_of_graduation,
+        //   user_height: response.user_height,
+        //   user_weight: response.user_weight,
+        //   user_position: response.user_position,
+        //   user_jersey_no: response.user_jersey_no,
+        //   user_gpa: response.user_gpa,
+        // }),
+      }
+    );
     if (res.ok) {
       // Handle success response
       console.log("Success:");
+
     } else {
       // Handle error response
       console.error("Error:");
@@ -112,15 +121,17 @@ const CompleteProfilePageUI = (props: Props) => {
     }));
     console.log(newValue);
   };
-  const [success, setSuccess] = useState(false);
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await handleFinalizeAccount();
-    setSuccess(true);
 
     if (step == 0) {
       console.log(page);
       setStep(step + 1);
+    } else {
+
+      setSuccess(true);
+
     }
   };
 
@@ -171,6 +182,7 @@ const CompleteProfilePageUI = (props: Props) => {
             />
           )}
         </form>
+        {(success ? <text className="text-green-400">Success</text> : error ? <text className="text-red-400">Error</text> : <></>)}
       </div>
     </div>
   );
@@ -393,6 +405,7 @@ const SearchSelect: React.FC<SelectSearchProps> = ({
               return option ? (
                 <button
                   onClick={(e) => {
+                    e.preventDefault()
                     changeResp("user_school", option?.value);
                     setQuery(option?.value);
                   }}
