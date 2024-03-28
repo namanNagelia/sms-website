@@ -54,23 +54,26 @@ const CompleteProfilePageUI = (props: Props) => {
       : "http://localhost:3000/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(response),
-      // body: JSON.stringify({
-      //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-      //   user_user_type_id: response.user_user_type_id,
-      //   user_year_of_graduation: response.user_year_of_graduation,
-      //   user_height: response.user_height,
-      //   user_weight: response.user_weight,
-      //   user_position: response.user_position,
-      //   user_jersey_no: response.user_jersey_no,
-      //   user_gpa: response.user_gpa,
-      // }),
-    });
+    const res = await fetch(
+      "https://sms-website-sigma.vercel.app/api/updateAccountInfo",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(response),
+        // body: JSON.stringify({
+        //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+        //   user_user_type_id: response.user_user_type_id,
+        //   user_year_of_graduation: response.user_year_of_graduation,
+        //   user_height: response.user_height,
+        //   user_weight: response.user_weight,
+        //   user_position: response.user_position,
+        //   user_jersey_no: response.user_jersey_no,
+        //   user_gpa: response.user_gpa,
+        // }),
+      }
+    );
     if (res.ok) {
       // Handle success response
       console.log("Success:");
