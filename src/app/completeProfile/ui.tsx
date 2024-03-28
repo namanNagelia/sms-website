@@ -60,16 +60,17 @@ const CompleteProfilePageUI = (props: Props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-        user_user_type_id: response.user_user_type_id,
-        user_year_of_graduation: response.user_year_of_graduation,
-        user_height: response.user_height,
-        user_weight: response.user_weight,
-        user_position: response.user_position,
-        user_jersey_no: response.user_jersey_no,
-        user_gpa: response.user_gpa,
-      }),
+      body: JSON.stringify(response),
+      // body: JSON.stringify({
+      //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+      //   user_user_type_id: response.user_user_type_id,
+      //   user_year_of_graduation: response.user_year_of_graduation,
+      //   user_height: response.user_height,
+      //   user_weight: response.user_weight,
+      //   user_position: response.user_position,
+      //   user_jersey_no: response.user_jersey_no,
+      //   user_gpa: response.user_gpa,
+      // }),
     });
     if (res.ok) {
       // Handle success response
@@ -345,7 +346,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
       ) : type == 2 ? (
         <>
           {/* Phone number */}
-          <StyledInput label="Phone Number" type="number" value={response?.user_phone_number} />
+          <StyledInput
+            label="Phone Number"
+            type="number"
+            value={response?.user_phone_number}
+          />
 
           <StyledDropDown label="Who is your student athlete?">
             {defaultPlayer.map((player, index) => {
