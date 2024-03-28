@@ -90,7 +90,6 @@ export default async function PlayerPage({
   const seasonAverages = await fetchAverages(params.id);
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
-  console.log(shotChartData);
   const school = await fetchSchool(params.id);
   return (
     <PlayerPageUI

@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
       team_id: teamRoster.team_roster_team_id,
     },
   });
+  //org change
   const school = await prisma.sms_organizations.findFirst({
     where: {
       Org_id: team.team_organisation_id,
