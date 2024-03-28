@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { use } from "react";
 import { useState, useEffect } from "react";
 import { FormEvent } from "react";
 import { V } from "@vidstack/react/dist/types/vidstack-framework.js";
@@ -31,6 +31,9 @@ const CompleteProfilePageUI = (props: Props) => {
   const schools = props.schoolOptions.school;
   const [page, setPage] = useState<number>(1);
   const [step, setStep] = useState<number>(0);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
+
   const { user } = useUser();
   console.log(user);
 
@@ -54,8 +57,10 @@ const CompleteProfilePageUI = (props: Props) => {
       : "http://localhost:3000/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
+    setError(false)
+    setSuccess(false)
     const res = await fetch(
-     url,
+      url,
       {
         method: "POST",
         headers: {
@@ -77,6 +82,7 @@ const CompleteProfilePageUI = (props: Props) => {
     if (res.ok) {
       // Handle success response
       console.log("Success:");
+
     } else {
       // Handle error response
       console.error("Error:");
@@ -112,15 +118,17 @@ const CompleteProfilePageUI = (props: Props) => {
     }));
     console.log(newValue);
   };
-  const [success, setSuccess] = useState(false);
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await handleFinalizeAccount();
-    setSuccess(true);
 
     if (step == 0) {
       console.log(page);
       setStep(step + 1);
+    } else {
+
+      setSuccess(true);
+
     }
   };
 
@@ -171,6 +179,7 @@ const CompleteProfilePageUI = (props: Props) => {
             />
           )}
         </form>
+        {(success ? <text className="text-green-400">Success</text> : error ? <text className="text-red-400">Error</text> : <></>)}
       </div>
     </div>
   );
@@ -228,10 +237,10 @@ const AccountDetails: React.FC<DetailsProps> = ({
     <>
       {type == 1 ? (
         <>
-          <SearchSelect 
-            options={schoolOptions} 
-            resp={response} 
-            changeResp={changeResp} 
+          <SearchSelect
+            options={schoolOptions}
+            resp={response}
+            changeResp={changeResp}
             query={query}
             setQuery={setQuery}
             label={["Searching for School...", "Selected School:"]}
@@ -338,10 +347,10 @@ const AccountDetails: React.FC<DetailsProps> = ({
         </>
       ) : type == 3 ? (
         <>
-          <SearchSelect 
-            options={schoolOptions} 
-            resp={response} 
-            changeResp={changeResp} 
+          <SearchSelect
+            options={schoolOptions}
+            resp={response}
+            changeResp={changeResp}
             query={query}
             setQuery={setQuery}
             label={["Searching for Team...", "Selected Team:"]}
@@ -367,57 +376,58 @@ interface SelectSearchProps {
   query: string,
   setQuery: React.Dispatch<React.SetStateAction<string>>
   label: [string, string]
-  
+
 }
 
-const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp, query, setQuery, label}) => {
+const SearchSelect: React.FC<SelectSearchProps> = ({ options, resp, changeResp, query, setQuery, label }) => {
 
   return (
-    <div className="flex flex-row space-x-4">
-            <div className="h-30 overflow-y-clip w-2/3">
-              <div className="relative">
-                <StyledInput
-                  label={label[0]}
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
+    <div className="flex flex-row space-x-4 w-3/4">
+      <div className="h-30 overflow-y-clip w-2/3">
+        <div className="relative">
+          <StyledInput
+            label={label[0]}
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+          />
+          <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
+            {options.map((option, index) => {
+              return option ? (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    changeResp("user_school", option?.value);
+                    setQuery(option?.value);
                   }}
-                />
-                <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
-                  {options.map((option, index) => {
-                    return option ? (
-                      <button
-                        onClick={(e) => {
-                          changeResp("user_school", option?.value);
-                          setQuery(option?.value);
-                        }}
-                        value={option?.value}
-                        className="h-6 w-full text-white"
-                      >
-                        {option?.value}
-                      </button>
-                    ) : (
-                      <></>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <text className="text-white self-start pt-10 text-xl"> : </text>
-
-            <StyledDropDown
-              label={label[1]}
-              disabled
-              value={resp?.user_school}
-              onChange={(e) => {
-                changeResp("user_school", e.currentTarget.value);
-              }}
-            >
-              {options.map((option, index) => {
-                return <option key={index}>{option?.value}</option>;
-              })}
-            </StyledDropDown>
+                  value={option?.value}
+                  className="h-6 w-full text-white"
+                >
+                  {option?.value}
+                </button>
+              ) : (
+                <></>
+              );
+            })}
           </div>
-        
+        </div>
+      </div>
+      <text className="text-white self-start pt-10 text-xl"> : </text>
+
+      <StyledDropDown
+        label={label[1]}
+        disabled
+        value={resp?.user_school}
+        onChange={(e) => {
+          changeResp("user_school", e.currentTarget.value);
+        }}
+      >
+        {options.map((option, index) => {
+          return <option key={index}>{option?.value}</option>;
+        })}
+      </StyledDropDown>
+    </div>
+
   );
 };
