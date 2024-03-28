@@ -8,7 +8,6 @@ type BoxStats = {
   "FG%": number;
   "3P%": number;
   "FT%": number;
-  PER: number;
 };
 
 const averages: BoxStats = {
@@ -21,7 +20,6 @@ const averages: BoxStats = {
   "FG%": 45, // field goal percentage
   "3P%": 33, // three-point percentage
   "FT%": 70, // free throw percentage
-  PER: 15, // player efficiency rating
 };
 
 const standardDeviations: BoxStats = {
@@ -34,7 +32,6 @@ const standardDeviations: BoxStats = {
   "FG%": 5,
   "3P%": 10,
   "FT%": 10,
-  PER: 5,
 };
 
 const weights: BoxStats = {
@@ -47,26 +44,32 @@ const weights: BoxStats = {
   "FG%": 0.1, // Shooting efficiency is important
   "3P%": 0.1, // Three-point shooting is increasingly valued
   "FT%": 0.1, // Free throw shooting reflects shooting skill
-  PER: 0.2, // Overall efficiency is very important
 };
-
-export function calculateOverallPerformanceRating(boxStats: BoxStats): number {
+export function calculateOverallPerformanceRating(
+  boxStats: Record<string, string | number>
+): number {
   function zScore(stat: number, mean: number, sd: number): number {
     return (stat - mean) / sd;
   }
 
   let score = 0;
   for (const key in boxStats) {
-    const stat = boxStats[key as keyof BoxStats];
-    const avg = averages[key as keyof BoxStats];
-    const sd = standardDeviations[key as keyof BoxStats];
-    const weight = weights[key as keyof BoxStats];
-    const z = zScore(stat, avg, sd);
+    if (key in weights && boxStats.hasOwnProperty(key)) {
+      const rawStat = boxStats[key];
+      const stat = typeof rawStat === "string" ? parseFloat(rawStat) : rawStat;
+      if (!isNaN(stat)) {
+        const avg = averages[key as keyof BoxStats];
+        const sd = standardDeviations[key as keyof BoxStats];
+        const weight = weights[key as keyof BoxStats];
+        const z = zScore(stat, avg, sd);
 
-    score += z * weight;
+        score += z * weight;
+      }
+    }
   }
 
   const normalizedScore = ((score + 3) / 6) * 100;
   const truncatedScore = Math.floor(normalizedScore * 10) / 10; // Truncate to 1 decimal place
-  return Math.max(0, Math.min(100, truncatedScore)); // Ensure the score is between 0 and 100}
+  console.log(truncatedScore);
+  return Math.max(0, Math.min(100, truncatedScore)); // Ensure the score is between 0 and 100
 }

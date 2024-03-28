@@ -66,30 +66,33 @@ export async function GET(request: NextRequest) {
     totalFreeThrowsAttempted += ftAttempted;
   });
 
-  const statsSummary = {
+  const seasonAverages = {
     Games: totalGames,
-    PTS: totalPoints / totalGames,
-    REB: totalRebounds / totalGames,
-    AST: totalAssists / totalGames,
-    STL: totalSteals / totalGames,
-    BLK: totalBlocks / totalGames,
-    TOV: totalTurnovers / totalGames,
+    PTS: (totalPoints / totalGames || 0).toFixed(1),
+    REB: (totalRebounds / totalGames || 0).toFixed(1),
+    AST: (totalAssists / totalGames || 0).toFixed(1),
+    STL: (totalSteals / totalGames || 0).toFixed(1),
+    BLK: (totalBlocks / totalGames || 0).toFixed(1),
+    TO: (totalTurnovers / totalGames || 0).toFixed(1),
     "FG%":
       totalFieldGoalsAttempted > 0
-        ? ((totalFieldGoalsMade / totalFieldGoalsAttempted) * 100).toFixed(2)
-        : 0,
+        ? ((totalFieldGoalsMade / totalFieldGoalsAttempted) * 100 || 0).toFixed(
+            1
+          )
+        : "0.0",
     "3P%":
       totalThreePointersAttempted > 0
         ? (
-            (totalThreePointersMade / totalThreePointersAttempted) *
-            100
-          ).toFixed(2)
-        : 0,
+            (totalThreePointersMade / totalThreePointersAttempted) * 100 || 0
+          ).toFixed(1)
+        : "0.0",
     "FT%":
       totalFreeThrowsAttempted > 0
-        ? ((totalFreeThrowsMade / totalFreeThrowsAttempted) * 100).toFixed(2)
-        : 0,
+        ? ((totalFreeThrowsMade / totalFreeThrowsAttempted) * 100 || 0).toFixed(
+            1
+          )
+        : "0.0",
   };
 
-  return NextResponse.json({ statsSummary });
+  return NextResponse.json({ seasonAverages });
 }

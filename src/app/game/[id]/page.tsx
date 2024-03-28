@@ -69,6 +69,7 @@ export default async function GamePage({ params }: { params: { id: string } }) {
   const teamInfoData = await teamInfo();
   const boxScore = await fetchboxScore(params.id);
   const teamStats = await fetchTeamStats(params.id);
+  console.log(gameDetails);
   return (
     <GamePageUI
       gameDetailsStats={gameDetails}
@@ -76,5 +77,6 @@ export default async function GamePage({ params }: { params: { id: string } }) {
       boxScore={boxScore}
       teamStats={teamStats}
     />
+    // <div>Test</div>
   );
 }
