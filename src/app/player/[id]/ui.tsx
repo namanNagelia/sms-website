@@ -21,39 +21,6 @@ import { PlayerRatingsCalculatorV2 } from "@/app/math/playerRatings";
 const prisma = new PrismaClient();
 
 // Example JSON data for season and game stats
-const gameStats = [
-  {
-    date: "2023-03-15",
-    details: {
-      PTS: "30",
-      REB: "7",
-      AST: "9",
-      STL: "2",
-      BLK: "0",
-      FG: "50%",
-      TP: "40%",
-      FT: "85%",
-      TO: "2",
-      PER: "25",
-    },
-  },
-  // More game entries could be added here
-  {
-    date: "2023-03-17",
-    details: {
-      PTS: "33",
-      REB: "7",
-      AST: "9",
-      STL: "2",
-      BLK: "0",
-      FG: "50%",
-      TP: "40%",
-      FT: "85%",
-      TO: "2",
-      PER: "25",
-    },
-  },
-];
 
 const videoHighlights = [
   {
@@ -96,6 +63,9 @@ interface PlayerPageProps {
     shotTypes: any;
   };
   school: string;
+  gameLogs: {
+    gameLogs: any;
+  };
 }
 
 export default function PlayerPageUI(props: PlayerPageProps) {
@@ -107,6 +77,7 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
   const performance = calculateOverallPerformanceRating(seasonAverages);
   const name = `${playerProfileData.user_first_name} ${playerProfileData.user_last_name}`;
+  const gameStats = props.gameLogs.gameLogs;
 
   return (
     <div>

@@ -80,6 +80,21 @@ const fetchSchool = async (id: string) => {
     console.log(error);
   }
 };
+const fetchGameLogs = async (id: string) => {
+  try {
+    const url =
+      process.env.DEV === "0"
+        ? `http://localhost:3000/api/playerGameLogs?id=${id}`
+        : `https://sms-website-sigma.vercel.app/api/playerGameLogs/?id=${id}`;
+    const res = await fetch(url, {
+      next: { revalidate: 1 },
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export default async function PlayerPage({
   params,
@@ -90,8 +105,9 @@ export default async function PlayerPage({
   const seasonAverages = await fetchAverages(params.id);
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
-  console.log(shotChartData);
   const school = await fetchSchool(params.id);
+  const gameLogs = await fetchGameLogs(params.id);
+
   return (
     <PlayerPageUI
       profileStats={playerProfile}
@@ -99,6 +115,7 @@ export default async function PlayerPage({
       shotChartData={shotChartData}
       shotTypesData={shotLocations}
       school={school.org_name}
+      gameLogs={gameLogs}
     />
   );
 }
