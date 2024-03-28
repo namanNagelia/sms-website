@@ -13,77 +13,83 @@ export async function GET(request: NextRequest) {
       player_stats_user_id: Number(player_id),
     },
   });
-
   const totalGames = playerDetails.length;
-  let totalPts = 0,
-    totalReb = 0,
-    totalAst = 0,
-    totalStl = 0,
-    totalBlk = 0,
-    totalTo = 0;
-  let totalFgMade = 0,
-    totalFgAttempted = 0,
-    total3pMade = 0,
-    total3pAttempted = 0,
-    totalFtMade = 0,
-    totalFtAttempted = 0;
-  let fgAttempts = 0;
-  let ThreepAttempts = 0;
-  let ftAttempts = 0;
 
-  playerDetails.forEach((game: any) => {
-    fgAttempts = 0;
-    ThreepAttempts = 0;
-    ftAttempts = 0;
-    totalPts += game.player_stats_total_points;
-    totalReb +=
-      game.player_stats_def_rebound_dreb + game.player_stats_off_rebound_oreb;
-    totalAst += game.player_stats_assist_asst;
-    totalStl += game.player_stats_steal_stl;
-    totalBlk += game.player_stats_block_blk;
-    totalTo += game.player_stats_turnover_to;
-    totalFgMade += game.player_stats_fg;
-    fgAttempts += Math.round(
-      (100 * game.player_stats_fg) / game.player_stats_fg_percentage
-    );
-    fgAttempts = isNaN(fgAttempts) ? 1 : fgAttempts;
+  let totalPoints = 0;
+  let totalRebounds = 0;
+  let totalAssists = 0;
+  let totalSteals = 0;
+  let totalBlocks = 0;
+  let totalTurnovers = 0;
+  let totalFieldGoalsMade = 0;
+  let totalFieldGoalsAttempted = 0;
+  let totalThreePointersMade = 0;
+  let totalThreePointersAttempted = 0;
+  let totalFreeThrowsMade = 0;
+  let totalFreeThrowsAttempted = 0;
 
-    totalFgAttempted += fgAttempts;
-    total3pMade += game.player_stats_3pt;
-    ThreepAttempts = 0;
-    ThreepAttempts = Math.round(
-      (100 * game.player_stats_3pt) / game.player_stats_3p_percentage
-    );
-    ThreepAttempts = isNaN(ThreepAttempts) ? 0 : ThreepAttempts;
+  playerDetails.forEach((log: any) => {
+    totalPoints += log.player_stats_total_points;
+    totalRebounds +=
+      log.player_stats_off_rebound_oreb + log.player_stats_def_rebound_dreb;
+    totalAssists += log.player_stats_assist_asst;
+    totalSteals += log.player_stats_steal_stl;
+    totalBlocks += log.player_stats_block_blk;
+    totalTurnovers += log.player_stats_turnover_to;
+    totalAssists += log.player_stats_assist_asst;
+    totalSteals += log.player_stats_steal_stl;
+    totalBlocks += log.player_stats_block_blk;
+    totalTurnovers += log.player_stats_turnover_to;
+    let [fgMade, fgAttempted] = log.player_stats_fg.split("-").map(Number);
+    if (fgMade > fgAttempted) {
+      [fgMade, fgAttempted] = [fgAttempted, fgMade]; // Swap if made is greater than attempted
+    }
+    totalFieldGoalsMade += fgMade;
+    totalFieldGoalsAttempted += fgAttempted;
 
-    total3pAttempted += ThreepAttempts;
-    totalFtMade += game.player_stats_ft;
-    ftAttempts = 0;
-    ftAttempts = Math.round(
-      (100 * game.player_stats_ft) / game.player_stats_ft_percentage
-    );
-    ftAttempts = isNaN(ftAttempts) ? 0 : ftAttempts;
+    // Process Three Pointers
+    let [threePMade, threePAttempted] = log.player_stats_3pt
+      .split("-")
+      .map(Number);
+    if (threePMade > threePAttempted) {
+      [threePMade, threePAttempted] = [threePAttempted, threePMade]; // Swap if made is greater than attempted
+    }
+    totalThreePointersMade += threePMade;
+    totalThreePointersAttempted += threePAttempted;
 
-    totalFtAttempted += ftAttempts;
-    ftAttempts = 0;
-    // Assuming fields for FG attempted/made, 3P attempted/made, FT attempted/made are provided
-    // You would calculate the totals for FG%, 3P%, FT% calculations here
+    // Process Free Throws
+    let [ftMade, ftAttempted] = log.player_stats_ft.split("-").map(Number);
+    if (ftMade > ftAttempted) {
+      [ftMade, ftAttempted] = [ftAttempted, ftMade]; // Swap if made is greater than attempted
+    }
+    totalFreeThrowsMade += ftMade;
+    totalFreeThrowsAttempted += ftAttempted;
   });
-  const seasonAverages = {
-    PTS: (totalPts / totalGames).toFixed(1),
-    REB: (totalReb / totalGames).toFixed(1),
-    AST: (totalAst / totalGames).toFixed(1),
-    STL: (totalStl / totalGames).toFixed(1),
-    BLK: (totalBlk / totalGames).toFixed(1),
-    TO: (totalTo / totalGames).toFixed(1),
-    "FG%": ((totalFgMade / totalFgAttempted) * 100).toFixed(1),
-    "3P%": ((total3pMade / total3pAttempted) * 100).toFixed(1),
-    "FT%": ((totalFtMade / totalFtAttempted) * 100).toFixed(1),
-    "2P%": (
-      ((totalFgMade - total3pMade) / (totalFgAttempted - total3pAttempted)) *
-      100
-    ).toFixed(1),
+
+  const statsSummary = {
+    Games: totalGames,
+    PTS: totalPoints / totalGames,
+    REB: totalRebounds / totalGames,
+    AST: totalAssists / totalGames,
+    STL: totalSteals / totalGames,
+    BLK: totalBlocks / totalGames,
+    TOV: totalTurnovers / totalGames,
+    "FG%":
+      totalFieldGoalsAttempted > 0
+        ? ((totalFieldGoalsMade / totalFieldGoalsAttempted) * 100).toFixed(2)
+        : 0,
+    "3P%":
+      totalThreePointersAttempted > 0
+        ? (
+            (totalThreePointersMade / totalThreePointersAttempted) *
+            100
+          ).toFixed(2)
+        : 0,
+    "FT%":
+      totalFreeThrowsAttempted > 0
+        ? ((totalFreeThrowsMade / totalFreeThrowsAttempted) * 100).toFixed(2)
+        : 0,
   };
 
-  return NextResponse.json({ seasonAverages });
+  return NextResponse.json({ statsSummary });
 }
