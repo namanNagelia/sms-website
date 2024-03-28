@@ -222,7 +222,14 @@ const AccountDetails: React.FC<DetailsProps> = ({
     <>
       {type == 1 ? (
         <>
-          <SearchSelect options={schools} resp={response} changeResp={changeResp} />
+          <SearchSelect 
+            options={schoolOptions} 
+            resp={response} 
+            changeResp={changeResp} 
+            query={query}
+            setQuery={setQuery}
+            label={["Searching for School...", "Selected School:"]}
+          />
 
           <div className="flex flex-row space-x-4">
             <StyledInput
@@ -320,43 +327,14 @@ const AccountDetails: React.FC<DetailsProps> = ({
         </>
       ) : type == 3 ? (
         <>
-        <StyledInput 
-            label="Phone Number" 
-            type="tel" 
-            value={response?.user_phone_number} 
-            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-            placeholder="000-000-0000"
-            onChange={e => {changeResp("user_phone_number", e.target.value)}} 
+          <SearchSelect 
+            options={schoolOptions} 
+            resp={response} 
+            changeResp={changeResp} 
+            query={query}
+            setQuery={setQuery}
+            label={["Searching for Team...", "Selected Team:"]}
           />
-          <div className="h-30 overflow-y-clip w-2/3">
-            <div className="relative">
-              <StyledInput
-                label="Search For Team..."
-                value={query}
-                onChange={(e) => {
-                  setQuery(e.target.value);
-                }}
-              />
-              <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
-                {schoolOptions.map((school, index) => {
-                  return school ? (
-                    <button
-                      onClick={(e) => {
-                        changeResp("user_school", school?.value);
-                        setQuery(school?.value);
-                      }}
-                      value={school?.value}
-                      className="h-6 w-full text-white"
-                    >
-                      {school?.value}
-                    </button>
-                  ) : (
-                    <></>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
         </>
       ) : <></>
       }
@@ -374,17 +352,20 @@ interface SelectSearchProps{
   options: any[],
   resp?: ResponseType,
   changeResp: (field: string, newValue: number | string) => void;
+  query: string,
+  setQuery: React.Dispatch<React.SetStateAction<string>>
+  label: [string, string]
+  
 }
 
-const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp}) => {
-  const [query, setQuery] = useState("");
+const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp, query, setQuery, label}) => {
 
   return(
     <div className="flex flex-row space-x-4">
             <div className="h-30 overflow-y-clip w-2/3">
               <div className="relative">
                 <StyledInput
-                  label="Search For School..."
+                  label={label[0]}
                   value={query}
                   onChange={(e) => {
                     setQuery(e.target.value);
@@ -413,7 +394,7 @@ const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp})
             <text className="text-white self-start pt-10 text-xl"> : </text>
 
             <StyledDropDown
-              label="Team Selected:"
+              label={label[1]}
               disabled
               value={resp?.user_school}
               onChange={(e) => {
@@ -421,7 +402,7 @@ const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp})
               }}
             >
               {options.map((option, index) => {
-                return <option key={index}>{option.org_name}</option>;
+                return <option key={index}>{option?.value}</option>;
               })}
             </StyledDropDown>
           </div>
