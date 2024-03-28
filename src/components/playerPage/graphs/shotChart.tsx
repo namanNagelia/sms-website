@@ -26,8 +26,12 @@ export const ShotChart = (props: ScatterplotProps) => {
     ? props.data.map((d, i) => {
         // Check if x and y are not null and are numbers
         if (d.x !== null && !isNaN(d.x) && d.y !== null && !isNaN(d.y)) {
-          const color = d.shotType.includes("Miss") ? "none" : "#00A36C";
-          const strokeColor = d.shotType.includes("Miss") ? "red" : "#00A36C";
+          const color = d.shotType.toLowerCase().includes("miss")
+            ? "none"
+            : "#00A36C";
+          const strokeColor = d.shotType.toLowerCase().includes("miss")
+            ? "red"
+            : "#00A36C";
 
           return (
             <circle
