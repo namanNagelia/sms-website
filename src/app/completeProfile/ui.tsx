@@ -54,22 +54,26 @@ const CompleteProfilePageUI = (props: Props) => {
       : "http://localhost:3000/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-        user_user_type_id: response.user_user_type_id,
-        user_year_of_graduation: response.user_year_of_graduation,
-        user_height: response.user_height,
-        user_weight: response.user_weight,
-        user_position: response.user_position,
-        user_jersey_no: response.user_jersey_no,
-        user_gpa: response.user_gpa,
-      }),
-    });
+    const res = await fetch(
+      "https://sms-website-sigma.vercel.app/api/updateAccountInfo",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(response),
+        // body: JSON.stringify({
+        //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+        //   user_user_type_id: response.user_user_type_id,
+        //   user_year_of_graduation: response.user_year_of_graduation,
+        //   user_height: response.user_height,
+        //   user_weight: response.user_weight,
+        //   user_position: response.user_position,
+        //   user_jersey_no: response.user_jersey_no,
+        //   user_gpa: response.user_gpa,
+        // }),
+      }
+    );
     if (res.ok) {
       // Handle success response
       console.log("Success:");
@@ -307,19 +311,24 @@ const AccountDetails: React.FC<DetailsProps> = ({
       ) : type == 2 ? (
         <>
           {/* Phone number */}
-          <StyledInput 
-            label="Phone Number" 
-            type="tel" 
-            value={response?.user_phone_number} 
+          <StyledInput
+            label="Phone Number"
+            type="tel"
+            value={response?.user_phone_number}
             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
             placeholder="000-000-0000"
-            onChange={e => {changeResp("user_phone_number", e.target.value)}} 
+            onChange={(e) => {
+              changeResp("user_phone_number", e.target.value);
+            }}
           />
 
-          <StyledDropDown label="Who is your student athlete?" value={response?.user_student_name} 
-          onChange={e => {
-            changeResp("user_student_name", e.currentTarget.value)
-          }}>
+          <StyledDropDown
+            label="Who is your student athlete?"
+            value={response?.user_student_name}
+            onChange={(e) => {
+              changeResp("user_student_name", e.currentTarget.value);
+            }}
+          >
             {defaultPlayer.map((player, index) => {
               return <option key={index}>{player.firstName}</option>;
             })}
@@ -336,8 +345,9 @@ const AccountDetails: React.FC<DetailsProps> = ({
             label={["Searching for Team...", "Selected Team:"]}
           />
         </>
-      ) : <></>
-      }
+      ) : (
+        <></>
+      )}
       <button
         type="submit"
         className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 px-6 hover:opacity-65 shadow-md text-lg w-fit"
@@ -348,9 +358,9 @@ const AccountDetails: React.FC<DetailsProps> = ({
   );
 };
 
-interface SelectSearchProps{
-  options: any[],
-  resp?: ResponseType,
+interface SelectSearchProps {
+  options: any[];
+  resp?: ResponseType;
   changeResp: (field: string, newValue: number | string) => void;
   query: string,
   setQuery: React.Dispatch<React.SetStateAction<string>>
@@ -360,7 +370,7 @@ interface SelectSearchProps{
 
 const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp, query, setQuery, label}) => {
 
-  return(
+  return (
     <div className="flex flex-row space-x-4">
             <div className="h-30 overflow-y-clip w-2/3">
               <div className="relative">
@@ -406,5 +416,6 @@ const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp, 
               })}
             </StyledDropDown>
           </div>
-  )
-}
+        
+  );
+};
