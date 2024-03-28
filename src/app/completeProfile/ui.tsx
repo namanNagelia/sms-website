@@ -55,7 +55,7 @@ const CompleteProfilePageUI = (props: Props) => {
 
   const handleFinalizeAccount = async () => {
     const res = await fetch(
-      "https://sms-website-sigma.vercel.app/api/updateAccountInfo",
+     url,
       {
         method: "POST",
         headers: {
