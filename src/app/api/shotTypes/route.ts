@@ -8,69 +8,79 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const playerGameLogs = await prisma.sms_player_stat_new.findMany({
+  const playerDetails = await prisma.sms_player_stats.findMany({
     where: {
-      player_information_id: Number(id),
+      player_stats_user_id: Number(id),
     },
   });
-  let InsidefgMakes = 0;
-  let InsidefgAttempts = 0;
-  let threePtMakes = 0;
-  let threePtAttempts = 0;
-  let ftMakes = 0;
-  let ftAttempts = 0;
-  const uniqueOpponentTeams = new Set();
+  const length = playerDetails.length;
+  let totalFieldGoalsMade = 0;
+  let totalFieldGoalsAttempted = 0;
+  let totalThreePointersMade = 0;
+  let totalThreePointersAttempted = 0;
+  let totalFreeThrowsMade = 0;
+  let totalFreeThrowsAttempted = 0;
+  let totalInsideMade = 0;
+  let totalInsideAttempted = 0;
 
-  playerGameLogs.forEach((log: any) => {
-    uniqueOpponentTeams.add(log.game_info_id);
-    switch (log.game_stat_stat_count) {
-      case "OnePointFG":
-        ftMakes += 1;
-        ftAttempts += 1;
-        break;
-      case "OnePointFGMiss":
-        ftAttempts += 1;
-        break;
-      case "TwoPointFG":
-        InsidefgMakes += 1;
-        InsidefgAttempts += 1;
-        break;
-      case "TwoPointFGMiss":
-        InsidefgAttempts += 1;
-        break;
-      case "ThreePointFG":
-        threePtMakes += 1;
-        threePtAttempts += 1;
-        break;
-      case "ThreePointFGMiss":
-        threePtAttempts += 1;
-        break;
+  playerDetails.forEach((log: any) => {
+    let [fgMade, fgAttempted] = log.player_stats_fg.split("-").map(Number);
+    if (fgMade > fgAttempted) {
+      [fgMade, fgAttempted] = [fgAttempted, fgMade]; // Swap if made is greater than attempted
     }
+    totalFieldGoalsMade += fgMade;
+    totalFieldGoalsAttempted += fgAttempted;
+
+    // Process Three Pointers
+    let [threePMade, threePAttempted] = log.player_stats_3pt
+      .split("-")
+      .map(Number);
+    if (threePMade > threePAttempted) {
+      [threePMade, threePAttempted] = [threePAttempted, threePMade]; // Swap if made is greater than attempted
+    }
+    totalThreePointersMade += threePMade;
+    totalThreePointersAttempted += threePAttempted;
+
+    // Process Free Throws
+    let [ftMade, ftAttempted] = log.player_stats_ft.split("-").map(Number);
+    if (ftMade > ftAttempted) {
+      [ftMade, ftAttempted] = [ftAttempted, ftMade]; // Swap if made is greater than attempted
+    }
+    totalFreeThrowsMade += ftMade;
+    totalFreeThrowsAttempted += ftAttempted;
   });
-  const length = uniqueOpponentTeams.size;
-  const InsidefgPercent = InsidefgMakes / InsidefgAttempts;
-  const threePtPercent = threePtMakes / threePtAttempts;
-  const ftPercent = ftMakes / ftAttempts;
+  totalInsideAttempted = totalFieldGoalsAttempted - totalThreePointersAttempted;
+  totalInsideMade = totalFieldGoalsMade - totalThreePointersMade;
+
+  const InsidefgPercent = totalInsideMade / totalInsideAttempted;
+  const threePtPercent = totalThreePointersMade / totalThreePointersAttempted;
+  const ftPercent = totalFreeThrowsMade / totalFreeThrowsAttempted;
   const InsidefgTendency =
-    InsidefgAttempts / (InsidefgAttempts + threePtAttempts + ftAttempts);
+    totalInsideAttempted /
+    (totalInsideAttempted +
+      totalThreePointersAttempted +
+      totalFreeThrowsAttempted);
   const threePtTendency =
-    threePtAttempts / (InsidefgAttempts + threePtAttempts + ftAttempts);
+    totalThreePointersAttempted /
+    (totalInsideAttempted +
+      totalThreePointersAttempted +
+      totalFreeThrowsAttempted);
 
   const shotTypes = {
-    InsideFGM: InsidefgMakes,
-    AvgInsideFGM: (InsidefgMakes / length).toFixed(2),
-    InsideFGA: InsidefgAttempts,
-    AvgInsideFGA: (InsidefgAttempts / length).toFixed(2),
+    InsideFGM: totalInsideMade,
+    AvgInsideFGM: (totalInsideMade / length).toFixed(2),
+    InsideFGA: totalInsideAttempted,
+    AvgInsideFGA: (totalInsideAttempted / length).toFixed(2),
     InsideFGPercent: (InsidefgPercent * 100).toFixed(2),
     InsideFGTendency: (InsidefgTendency * 100).toFixed(2),
-    ThreePtFGM: threePtMakes,
-    AvgThreePtFGM: (threePtMakes / length).toFixed(2),
-    ThreePtFGA: threePtAttempts,
-    AvgThreePtFGA: (threePtAttempts / length).toFixed(2),
+    ThreePtFGM: totalThreePointersMade,
+    AvgThreePtFGM: (totalThreePointersMade / length).toFixed(2),
+    ThreePtFGA: totalThreePointersAttempted,
+    AvgThreePtFGA: (totalThreePointersAttempted / length).toFixed(2),
     ThreePtFGPercent: (threePtPercent * 100).toFixed(2),
     ThreePtFGTendency: (threePtTendency * 100).toFixed(2),
-    FTM: ftMakes,
-    FTA: ftAttempts,
+    FTM: totalFreeThrowsMade,
+    FTA: totalFreeThrowsAttempted,
     FTPercent: (ftPercent * 100).toFixed(2),
   };
 

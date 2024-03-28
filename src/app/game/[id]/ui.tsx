@@ -4,6 +4,10 @@ import Logo from "@/../public/SMSLogo.png";
 import VideoPlayer from "@/components/playerPage/videoPlayer";
 import Button from "@/components/homePage/button";
 import noHighlights from "@/app/images/icons/DefaultIcons/NoHighlights.svg";
+import noBoxScore from "./NoBoxScore.svg";
+import defaultImage from "@/app/../../public/Male Unknown.svg";
+import { Stats } from "fs";
+import StatsScore from "./components/StatsScore";
 
 interface BoxProp {
   players: {
@@ -12,6 +16,7 @@ interface BoxProp {
     pts: number;
     reb: number;
     ast: number;
+    pic_url: string;
   }[];
 }
 interface GameProp {
@@ -22,60 +27,6 @@ interface GameProp {
   FinalScores: string;
 }
 
-const defaultBoxScores: BoxProp = {
-  players: [
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-    {
-      name: "Marcus",
-      position: "SF",
-      pts: 10,
-      reb: 2,
-      ast: 3,
-    },
-  ],
-};
-
 interface GamePageProps {
   gameDetailsStats: {
     game: any;
@@ -83,11 +34,18 @@ interface GamePageProps {
   teamInfo: {
     teams: any;
   };
+  boxScore: {
+    returnable: any;
+  };
+  teamStats: {
+    game: any;
+  };
 }
 
 const GamePageUI = (props: GamePageProps) => {
   const gamedetails = props.gameDetailsStats.game;
   const teamInfo = props.teamInfo.teams;
+  const boxScore = props.boxScore.returnable;
   const team1 = teamInfo.find(
     (team: any) => team.team_organisation_id === gamedetails.game_team1_id
   );
@@ -95,12 +53,17 @@ const GamePageUI = (props: GamePageProps) => {
   const team2 = teamInfo.find(
     (team: any) => team.team_organisation_id === gamedetails.game_team2_id
   );
-  console.log(gamedetails);
-  console.log("Team 2");
-  console.log(team2);
   const team2Pic = team2 ? team2.team_log_url : "";
   const team1Name = team1 ? team1.team_name : "";
   const team2Name = team2 ? team2.team_name : "";
+  const boxScore2: {
+    name: string;
+    position: string;
+    pts: number;
+    reb: number;
+    ast: number;
+    pic_url: string;
+  }[] = [];
 
   return (
     <>
@@ -113,9 +76,27 @@ const GamePageUI = (props: GamePageProps) => {
       />
       <div className="w-full text-center">
         <div className="flex flex-row space-x-4 mx-8">
-          <BoxScore players={defaultBoxScores.players} />
+          {boxScore.length === 0 ? (
+            <>
+              <div className="flex-col">
+                <h1 className="text-white text-3xl font-dinAlternate mb-3">
+                  No Box Score Data
+                </h1>
+                <Image
+                  src={noBoxScore}
+                  alt="No Box Score"
+                  layout="contain"
+                  width={450}
+                />
+              </div>
+            </>
+          ) : (
+            <BoxScore players={boxScore} />
+          )}
           <div className="mt-36">
-            {gamedetails.game_video_url == null ||
+            {gamedetails.game_video_url == "" ||
+            gamedetails.game_video_url == undefined ||
+            gamedetails.game_video_url == null ||
             gamedetails.game_video_url == "Not Available" ? (
               <div className="flex flex-col items-center w-[1/3]">
                 <Image
@@ -131,9 +112,25 @@ const GamePageUI = (props: GamePageProps) => {
               <VideoPlayer videoLink={gamedetails.game_video_url} />
             )}
           </div>
-          <BoxScore players={defaultBoxScores.players} />
+          <div>
+            {boxScore2.length === 0 ? (
+              <div className="flex-col">
+                <h1 className="text-white text-3xl font-dinAlternate mb-3">
+                  No Box Score Data
+                </h1>
+                <Image
+                  src={noBoxScore}
+                  alt="No Box Score"
+                  layout="contain"
+                  width={450}
+                />
+              </div>
+            ) : (
+              <BoxScore players={boxScore2} />
+            )}
+          </div>
         </div>
-        <StatsScore />
+        <StatsScore teamStats={props.teamStats} />
         {/* <Plays /> */}
         <div className="h-96"></div>
       </div>
@@ -170,6 +167,10 @@ const BoxScore: React.FC<BoxProp> = ({ players }) => {
         Box Score
       </div>
       {players.map((player, index) => {
+        let picURL = player.pic_url;
+        if (picURL === "" || picURL === null || picURL === undefined) {
+          picURL = defaultImage;
+        }
         return (
           <div
             key={index}
@@ -185,7 +186,13 @@ const BoxScore: React.FC<BoxProp> = ({ players }) => {
                         text-brandWhite 
                     "
           >
-            <Image src={Logo} alt="asdakl" width={36} height={36} />
+            <Image
+              src={picURL}
+              alt="picture"
+              width={40}
+              height={40}
+              className="rounded-full bg-gray-200"
+            />{" "}
             <div className="flex flex-col items-start mr-auto ml-4">
               <text className="xl:text-xl lg:text-lg">{player.name}</text>
               <text className="xl:text-bs">{player.position}</text>
@@ -235,79 +242,5 @@ const GameScore: React.FC<GameProp> = ({
         </div>
       </div>
     </header>
-  );
-};
-
-const StatsScore = () => {
-  const leftTeamColor = "#000000";
-  const rightRaw = "#FFFFFF";
-  const rightTeamColor =
-    "linear-gradient(" +
-    rightRaw +
-    " 0 0) scroll no-repeat center / 100% calc(var(--track-height) + 1px)";
-  const leftScore = 60;
-  const rightScore = 20;
-
-  return (
-    <div className="flex flex-col w-full items-center space-y-4">
-      <div className="flex flex-row space-x-2 text-center">
-        <Button active={true}> Stats </Button>
-        <Button active={false}> Shot Chart </Button>
-      </div>
-
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-      <Slider
-        type={"Points"}
-        leftTeam={{ color: leftTeamColor, score: leftScore }}
-        rightTeam={{ color: rightTeamColor, score: rightScore }}
-      />
-    </div>
-  );
-};
-interface TeamColors {
-  leftTeam: {
-    color: string;
-    score: number;
-  };
-  rightTeam: {
-    color: string;
-    score: number;
-  };
-  type: string;
-}
-const Slider: React.FC<TeamColors> = ({ leftTeam, rightTeam, type }) => {
-  return (
-    <div>
-      <div className="flex flex-row justify-between text-brandWhite">
-        <text>{leftTeam.score}</text>
-        <text>{type}</text>
-        <text>{rightTeam.score}</text>
-      </div>
-      <input
-        min="0"
-        max="100"
-        value={(leftTeam.score / (leftTeam.score + rightTeam.score)) * 100}
-        type="range"
-        className="data w-[600px] rounded-full"
-        style={{
-          color: leftTeam.color,
-          background: rightTeam.color,
-        }}
-      />
-    </div>
   );
 };

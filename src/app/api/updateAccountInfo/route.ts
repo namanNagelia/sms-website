@@ -22,6 +22,10 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
   return new NextResponse("", {
     status: 200,
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    },
   });
 }

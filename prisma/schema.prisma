@@ -817,11 +817,11 @@ model sms_game_stats {
   game_stats_game_id          Int?
   game_stats_team_id          Int?    @default(1)
   game_stats_video_url        String? @db.VarChar(255)
-  game_stats_fg               Int?
+  game_stats_fg               String? @db.Text
   game_stats_fg_percentage    Float?  @db.Float
-  game_stats_3pt              Int?
+  game_stats_3pt              String? @db.Text
   game_stats_3p_percentage    Float?  @db.Float
-  game_stats_ft               Int?
+  game_stats_ft               String? @db.Text
   game_stats_ft_percentage    Float?  @db.Float
   game_stats_def_rebound_dreb Int?
   game_stats_off_rebound_oreb Int?
@@ -849,11 +849,11 @@ model sms_player_stats {
   player_stats_team_id          Int?
   player_stats_user_id          Int?
   player_stats_video_url        String? @db.VarChar(255)
-  player_stats_fg               Int?
+  player_stats_fg               String? @db.Text
   player_stats_fg_percentage    Float?  @db.Float
-  player_stats_3pt              Int?
+  player_stats_3pt              String? @db.Text
   player_stats_3p_percentage    Float?  @db.Float
-  player_stats_ft               Int?
+  player_stats_ft               String? @db.Text
   player_stats_ft_percentage    Float?  @db.Float
   player_stats_def_rebound_dreb Int?
   player_stats_off_rebound_oreb Int?
