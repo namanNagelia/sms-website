@@ -19,6 +19,8 @@ export async function POST(req: NextRequest, res: NextResponse) {
       user_phone_number: data.user_phone_number,
     },
   });
+
+  //Add new row to team table, add the team ID, map to org ID, update the on player first and last name, and add jersey number, grad, height, weight position and gpa
   console.log(data);
 
   return new NextResponse("", {

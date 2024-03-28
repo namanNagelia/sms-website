@@ -16,7 +16,7 @@ export async function GET(request: Request) {
     const id = coach.user_id;
     const team = await prisma.sms_team_roster.findFirst({
       where: {
-        team_roster_user_id: id,
+        team_roster_sms_user_app_user_id: id,
       },
     });
 
@@ -27,7 +27,7 @@ export async function GET(request: Request) {
         user_first_name: coach.user_first_name,
         user_last_name: coach.user_last_name,
         user_phone_number: coach.user_phone_number,
-        player_coach_xref_team_id: team.team_roster_user_id,
+        player_coach_xref_team_id: team.team_roster_sms_user_app_user_id,
       });
     }
   }

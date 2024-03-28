@@ -14,8 +14,12 @@ interface Props {
   players: {
     firstPlayer: any;
   };
+  colleges: {
+    schools: any;
+  };
 }
 
+//Note to self, add the no player yet option and tell them to make it
 interface ResponseType {
   user_height?: number;
   user_weight?: number;
@@ -36,6 +40,8 @@ const CompleteProfilePageUI = (props: Props) => {
   const [step, setStep] = useState<number>(0);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const players = props.players.firstPlayer;
+  const colleges = props.colleges.schools;
 
   const { user } = useUser();
   console.log(user);
@@ -60,32 +66,28 @@ const CompleteProfilePageUI = (props: Props) => {
       : "https://sms-website-sigma.vercel.app/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    setError(false)
-    setSuccess(false)
-    const res = await fetch(
-      url,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(response),
-        // body: JSON.stringify({
-        //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-        //   user_user_type_id: response.user_user_type_id,
-        //   user_year_of_graduation: response.user_year_of_graduation,
-        //   user_height: response.user_height,
-        //   user_weight: response.user_weight,
-        //   user_position: response.user_position,
-        //   user_jersey_no: response.user_jersey_no,
-        //   user_gpa: response.user_gpa,
-        // }),
-      }
-    );
+    setError(false);
+    setSuccess(false);
+    const res = await fetch("http://localhost:3000/api/updateAccountInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+      // body: JSON.stringify({
+      //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+      //   user_user_type_id: response.user_user_type_id,
+      //   user_year_of_graduation: response.user_year_of_graduation,
+      //   user_height: response.user_height,
+      //   user_weight: response.user_weight,
+      //   user_position: response.user_position,
+      //   user_jersey_no: response.user_jersey_no,
+      //   user_gpa: response.user_gpa,
+      // }),
+    });
     if (res.ok) {
       // Handle success response
       console.log("Success:");
-
     } else {
       // Handle error response
       console.error("Error:");
@@ -129,9 +131,7 @@ const CompleteProfilePageUI = (props: Props) => {
       console.log(page);
       setStep(step + 1);
     } else {
-
       setSuccess(true);
-
     }
   };
 
@@ -177,12 +177,20 @@ const CompleteProfilePageUI = (props: Props) => {
             <AccountDetails
               type={page}
               schools={schools}
+              colleges={colleges}
+              players={players}
               response={response}
               changeResp={handleChangeResponse}
             />
           )}
         </form>
-        {(success ? <text className="text-green-400">Success</text> : error ? <text className="text-red-400">Error</text> : <></>)}
+        {success ? (
+          <text className="text-green-400">Success</text>
+        ) : error ? (
+          <text className="text-red-400">Error</text>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
@@ -195,18 +203,17 @@ interface DetailsProps {
   schools: any[];
   response?: ResponseType;
   changeResp: (field: string, newValue: number | string) => void;
+  colleges: any[];
+  players: any[];
 }
 const AccountDetails: React.FC<DetailsProps> = ({
   type,
   schools,
   response,
   changeResp,
+  colleges,
+  players,
 }) => {
-  const defaultTeams = [
-    { teamName: "team1" },
-    { teamName: "team2" },
-    { teamName: "team3" },
-  ];
   const positions = [
     "Point Guard",
     "Shooting Guard",
@@ -214,20 +221,10 @@ const AccountDetails: React.FC<DetailsProps> = ({
     "Power Forward",
     "Center",
   ];
-  const defaultPlayer = [
-    {
-      id: 1,
-      firstName: "Dequan",
-    },
-    {
-      id: 2,
-      firstName: "Dequan 2",
-    },
-  ];
   const defaultColleges = [
-    { name: "College 1", value: "College 1"}, 
-    { name: "College 2", value: "College 2"}, 
-    { name: "College 3", value: "College 3"} 
+    { name: "College 1", value: "College 1" },
+    { name: "College 2", value: "College 2" },
+    { name: "College 3", value: "College 3" },
   ];
   const [query, setQuery] = useState("");
 
@@ -347,8 +344,12 @@ const AccountDetails: React.FC<DetailsProps> = ({
               changeResp("user_student_name", e.currentTarget.value);
             }}
           >
-            {defaultPlayer.map((player, index) => {
-              return <option key={index}>{player.firstName}</option>;
+            {players.map((player, index) => {
+              return (
+                <option key={index}>
+                  {player.user_first_name} {player.user_last_name}
+                </option>
+              );
             })}
           </StyledDropDown>
         </>
@@ -408,8 +409,8 @@ const AccountDetails: React.FC<DetailsProps> = ({
           />
         </>
       ) : type == 6 ? (
-          <>
-            <StyledInput
+        <>
+          <StyledInput
             label="Phone Number"
             type="tel"
             value={response?.user_phone_number}
@@ -419,7 +420,7 @@ const AccountDetails: React.FC<DetailsProps> = ({
               changeResp("user_phone_number", e.target.value);
             }}
           />
-          </>
+        </>
       ) : (
         <></>
       )}
@@ -466,7 +467,7 @@ const SearchSelect: React.FC<SelectSearchProps> = ({
               return option ? (
                 <button
                   onClick={(e) => {
-                    e.preventDefault()
+                    e.preventDefault();
                     changeResp("user_school", option?.value);
                     setQuery(option?.value);
                   }}

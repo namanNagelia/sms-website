@@ -7,19 +7,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model BI_ORG {
-  BI_Org_Id                  Int     @id @default(autoincrement())
-  BI_Org_Type                String? @db.VarChar(255)
-  BI_Org_name                String? @db.VarChar(255)
-  BI_Org_Address             String? @db.VarChar(255)
-  BI_Org_City                String? @db.VarChar(255)
-  BI_Org_State               String? @db.Char(2)
-  BI_Org_Zip                 String? @db.VarChar(10)
-  BI_Org_Phone_Number        String? @db.VarChar(15)
-  BI_Org_Director_First_Name String? @db.VarChar(255)
-  BI_Org_Director_Last_Name  String? @db.VarChar(255)
-}
-
 model GAME_STATS_FOR_PLAYERS {
   game_stat_id                   Int     @id @default(0)
   game_stat_player_id            Int     @default(0)
@@ -555,29 +542,6 @@ model showcases {
   @@index([userId], map: "showcases_userid_index")
 }
 
-model sms_game_info {
-  game_id                            Int       @id @default(0)
-  game_date                          DateTime? @db.Date
-  player_team_name                   String?   @db.VarChar(255)
-  player_team_name_pic               String?   @db.VarChar(255)
-  player_team_shotchart_url          String?   @db.VarChar(255)
-  player_opponent_team_name          String?   @db.VarChar(255)
-  player_opponent_team_pic           String?   @db.VarChar(255)
-  player_opponent_team_shotchart_url String?   @db.VarChar(255)
-  gamename                           String?   @db.VarChar(255)
-  game_score                         String?   @db.VarChar(255)
-  game_video_url                     String?   @db.VarChar(255)
-}
-
-model sms_player_stat_new {
-  game_stat_id               Int     @id @default(autoincrement())
-  game_info_id               Int?
-  player_information_id      Int?
-  game_stat_stat_count       String? @db.Text
-  game_stat_court_position_X Float?  @db.Float
-  game_stat_court_Position_Y Float?  @db.Float
-}
-
 model stitch_hist {
   id            Int       @id @default(autoincrement()) @db.UnsignedInt
   userId        Int?      @db.UnsignedInt
@@ -699,7 +663,7 @@ model sms_event {
   event_id                 Int       @id @default(autoincrement())
   event_org_id             Int?
   event_name               String?   @db.VarChar(255)
-  event_url                String?   @db.VarChar(500)
+  event_logo               String?   @db.VarChar(255)
   event_start_date         DateTime? @db.DateTime(0)
   event_end_date           DateTime? @db.DateTime(0)
   event_manager_first_name String?   @db.VarChar(255)
@@ -713,27 +677,15 @@ model sms_event {
 }
 
 model sms_game_detail {
-  game_id        Int       @id @default(autoincrement())
-  game_event_id  Int?
-  game_team1_id  Int?
-  game_team2_id  Int?
-  game_date      DateTime? @db.Date
-  game_time      DateTime? @db.Time(0)
-  game_name_cal  String?   @db.VarChar(255)
-  game_score     String?   @db.VarChar(255)
-  game_video_url String?   @db.VarChar(255)
-}
-
-model sms_news {
-  news_id          Int     @id @default(autoincrement())
-  news_game_id     Int?
-  news_team_id     Int?
-  news_user_id     Int?
-  news_title       String? @db.VarChar(255)
-  news_description String? @db.Text
-  news_web_article String? @db.VarChar(255)
-  news_pic         String? @db.VarChar(255)
-  news_video_link  String? @db.VarChar(255)
+  game_id               Int       @id @default(autoincrement())
+  game_event_id         Int?
+  game_team1_id         Int?
+  game_team2_id         Int?
+  game_date             DateTime? @db.Date
+  game_time             DateTime? @db.Time(0)
+  game_team1_vs_team2   String?   @db.VarChar(255)
+  game_score            String?   @db.VarChar(255)
+  game_library_media_id Int?
 }
 
 /// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
@@ -742,37 +694,6 @@ model sms_org_type {
   org_type_name String? @db.Text
 
   @@ignore
-}
-
-model sms_organizations {
-  Org_id               Int     @id @default(autoincrement())
-  org_org_type_id      Int?
-  org_name             String? @db.VarChar(255)
-  org_logo_pic         String? @db.VarChar(255)
-  org_address          String? @db.VarChar(255)
-  org_city             String? @db.VarChar(255)
-  org_state            String? @db.VarChar(255)
-  org_zip              String? @db.VarChar(20)
-  org_phone_number     String? @db.VarChar(20)
-  org_owner_first_name String? @db.VarChar(255)
-  org_owner_last_name  String? @db.VarChar(255)
-}
-
-model sms_report {
-  report_id                   Int     @id @default(autoincrement())
-  report_game_id              Int?
-  report_team_id              Int?
-  report_user_id              Int?
-  report_summary              String? @db.Text
-  report_strength             String? @db.Text
-  report_areas_of_improvement String? @db.Text
-}
-
-model sms_tag {
-  tag_id          Int     @id @default(autoincrement())
-  tag_sms_user_id Int?
-  tag_title       String? @db.VarChar(255)
-  tag_description String? @db.Text
 }
 
 model sms_user {
@@ -836,10 +757,31 @@ model sms_game_stats {
 }
 
 model sms_team_roster {
-  team_roster_id      Int  @id @default(autoincrement())
-  team_roster_user_id Int
-  team_roster_team_id Int
-  team_roster_org_id  Int?
+  team_roster_id                        Int     @id @default(autoincrement())
+  team_roster_sms_user_app_user_id      Int?
+  team_roster_team_id                   Int
+  team_roster_org_id                    Int?
+  team_roster_coach_first_name          String? @db.VarChar(255)
+  team_roster_coach_last_name           String? @db.VarChar(255)
+  team_roster_player_first_name         String? @db.VarChar(255)
+  team_roster_player_last_name          String? @db.VarChar(255)
+  team_roster_player_library_media_id   Int?
+  team_roster_player_about_me           String? @db.Text
+  team_roster_player_jersey_no          Int?
+  team_roster_player_year_of_graduation Float?  @db.Float
+  team_roster_player_height             Float?  @db.Float
+  team_roster_player_weight             Float?  @db.Float
+  team_roster_player_position           String? @db.VarChar(255)
+  team_roster_player_gpa                Float?  @db.Float
+  team_roster_player_instagram          Int?
+  team_roster_player_twitter            Int?
+  team_roster_player_youTube            Int?
+  team_roster_player_facebook           Int?
+  team_roster_event_id                  Int?
+  team_roster_player_tag_id             Int?
+  team_roster_player_eval_id            Int?
+  team_roster_player_news_id            Int?
+  team_roster_pic                       String? @db.VarChar(255)
 }
 
 model sms_player_stats {
@@ -868,15 +810,17 @@ model sms_player_stats {
 }
 
 model sms_team {
-  team_id              Int     @id @default(autoincrement())
-  team_organisation_id Int?
-  team_name            String? @db.VarChar(255)
-  team_log_url         String? @db.VarChar(500)
-  team_instagram       String? @db.VarChar(255)
-  team_twitter         String? @db.VarChar(255)
-  team_youtube         String? @db.VarChar(255)
-  team_facebook        String? @db.VarChar(255)
-  team_affiliation     String? @db.Text
+  team_id                 Int     @id @default(autoincrement())
+  team_org_id             Int?
+  team_name               String? @db.VarChar(255)
+  team_logo               String? @db.VarChar(255)
+  team_instagram          String? @db.VarChar(255)
+  team_twitter            String? @db.VarChar(255)
+  team_youtube            String? @db.VarChar(255)
+  team_facebook           String? @db.VarChar(255)
+  team_affiliation        String? @db.Text
+  team_manager_first_name String? @db.VarChar(255)
+  team_manager_last_name  String? @db.VarChar(255)
 }
 
 model game_stats_table {
@@ -893,6 +837,7 @@ model game_stats_table {
   game_stats_turnover_to       Boolean?
   game_stats_assist_asst       Boolean?
   game_stats_foul              Boolean?
+  game_stats_off_rebounds_oreb Boolean?
   game_stats_steals_stl        Boolean?
   game_stats_blocks_blk        Boolean?
   game_stats_miss              Boolean?
@@ -900,6 +845,8 @@ model game_stats_table {
   game_stats_1point            Boolean?
   game_stats_2point            Boolean?
   game_stats_3point            Boolean?
+  game_stats_player_in         Boolean?
+  game_stats_player_out        Boolean?
   game_stats_create_date       DateTime?           @default(now()) @db.Timestamp(0)
   game_stats_update_date       DateTime?           @default(now()) @db.Timestamp(0)
   basketball_match             basketball_match?   @relation(fields: [game_stats_game_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "game_stats_table_game_stats_game_id_foreign")
@@ -934,6 +881,50 @@ model sms_detail_stats {
   detail_stats_blk       Int?
   detail_stats_asst      Int?
   detail_stats_video_url String?  @db.VarChar(255)
+}
+
+model sms_org {
+  Org_id               Int     @id @default(autoincrement())
+  org_org_type_id      Int?
+  org_name             String? @db.VarChar(255)
+  org_logo_pic         String? @db.VarChar(255)
+  org_address          String? @db.VarChar(255)
+  org_city             String? @db.VarChar(255)
+  org_state            String? @db.VarChar(255)
+  org_zip              String? @db.VarChar(20)
+  org_phone_number     String? @db.VarChar(20)
+  org_owner_first_name String? @db.VarChar(255)
+  org_owner_last_name  String? @db.VarChar(255)
+}
+
+model sms_player_eval {
+  ply_eval_id               Int     @id @default(autoincrement())
+  ply_rep_user_type_id      Int?
+  ply_eval_summary_text     String? @db.Text
+  ply_eval_text1            String? @db.Text
+  ply_eval_text2            String? @db.Text
+  ply_eval_library_media_id Int?
+  plary_eval_url            String? @db.VarChar(2048)
+}
+
+model sms_player_news {
+  ply_news_id                Int     @id @default(autoincrement())
+  play_news_rep_user_type_id Int
+  ply_news_type              String? @db.VarChar(255)
+  ply_news_desc              String? @db.Text
+  ply_news_library_media_id  Int?
+  ply_news_weblink           String? @db.VarChar(2083)
+}
+
+model sms_player_tag {
+  ply_tag_id           Int    @id @default(autoincrement())
+  ply_tag_user_type_id Int
+  ply_tag_desc         String @db.Text
+}
+
+model sms_rep_user_type {
+  rep_user_type_id   Int    @id @default(autoincrement())
+  rep_user_type_name String @db.VarChar(255)
 }
 
 enum showcases_type {

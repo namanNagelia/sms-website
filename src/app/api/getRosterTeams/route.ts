@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
     console.log(player);
     const playerDetails = await prisma.sms_user.findFirst({
       where: {
-        user_id: player.team_roster_user_id,
+        user_id: player.team_roster_sms_user_app_user_id,
         user_user_type_id: 1,
       },
     });
