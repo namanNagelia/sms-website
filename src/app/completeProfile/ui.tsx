@@ -52,31 +52,28 @@ const CompleteProfilePageUI = (props: Props) => {
   });
   console.log(response);
   const url =
-    process.env.DEV === "1"
-      ? "https://sms-website-sigma.vercel.app/api/updateAccountInfo"
-      : "http://localhost:3000/api/updateAccountInfo";
+    process.env.DEV === "0"
+      ? "http://localhost:3000/api/updateAccountInfo"
+      : "https://sms-website-sigma.vercel.app/api/updateAccountInfo";
 
   const handleFinalizeAccount = async () => {
-    const res = await fetch(
-     url,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(response),
-        // body: JSON.stringify({
-        //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
-        //   user_user_type_id: response.user_user_type_id,
-        //   user_year_of_graduation: response.user_year_of_graduation,
-        //   user_height: response.user_height,
-        //   user_weight: response.user_weight,
-        //   user_position: response.user_position,
-        //   user_jersey_no: response.user_jersey_no,
-        //   user_gpa: response.user_gpa,
-        // }),
-      }
-    );
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+      // body: JSON.stringify({
+      //   user_firebase_id: user?.uid, // Include the user_firebase_id in the request body
+      //   user_user_type_id: response.user_user_type_id,
+      //   user_year_of_graduation: response.user_year_of_graduation,
+      //   user_height: response.user_height,
+      //   user_weight: response.user_weight,
+      //   user_position: response.user_position,
+      //   user_jersey_no: response.user_jersey_no,
+      //   user_gpa: response.user_gpa,
+      // }),
+    });
     if (res.ok) {
       // Handle success response
       console.log("Success:");
@@ -231,10 +228,10 @@ const AccountDetails: React.FC<DetailsProps> = ({
     <>
       {type == 1 ? (
         <>
-          <SearchSelect 
-            options={schoolOptions} 
-            resp={response} 
-            changeResp={changeResp} 
+          <SearchSelect
+            options={schoolOptions}
+            resp={response}
+            changeResp={changeResp}
             query={query}
             setQuery={setQuery}
             label={["Searching for School...", "Selected School:"]}
@@ -341,10 +338,10 @@ const AccountDetails: React.FC<DetailsProps> = ({
         </>
       ) : type == 3 ? (
         <>
-          <SearchSelect 
-            options={schoolOptions} 
-            resp={response} 
-            changeResp={changeResp} 
+          <SearchSelect
+            options={schoolOptions}
+            resp={response}
+            changeResp={changeResp}
             query={query}
             setQuery={setQuery}
             label={["Searching for Team...", "Selected Team:"]}
@@ -367,60 +364,64 @@ interface SelectSearchProps {
   options: any[];
   resp?: ResponseType;
   changeResp: (field: string, newValue: number | string) => void;
-  query: string,
-  setQuery: React.Dispatch<React.SetStateAction<string>>
-  label: [string, string]
-  
+  query: string;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  label: [string, string];
 }
 
-const SearchSelect : React.FC<SelectSearchProps> = ({options, resp, changeResp, query, setQuery, label}) => {
-
+const SearchSelect: React.FC<SelectSearchProps> = ({
+  options,
+  resp,
+  changeResp,
+  query,
+  setQuery,
+  label,
+}) => {
   return (
     <div className="flex flex-row space-x-4">
-            <div className="h-30 overflow-y-clip w-2/3">
-              <div className="relative">
-                <StyledInput
-                  label={label[0]}
-                  value={query}
-                  onChange={(e) => {
-                    setQuery(e.target.value);
+      <div className="h-30 overflow-y-clip w-2/3">
+        <div className="relative">
+          <StyledInput
+            label={label[0]}
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value);
+            }}
+          />
+          <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
+            {options.map((option, index) => {
+              return option ? (
+                <button
+                  onClick={(e) => {
+                    changeResp("user_school", option?.value);
+                    setQuery(option?.value);
                   }}
-                />
-                <div className="flex flex-col items-center bg-[#b0f9f433] w-full max-h-[4.5rem] z-10 overflow-hidden">
-                  {options.map((option, index) => {
-                    return option ? (
-                      <button
-                        onClick={(e) => {
-                          changeResp("user_school", option?.value);
-                          setQuery(option?.value);
-                        }}
-                        value={option?.value}
-                        className="h-6 w-full text-white"
-                      >
-                        {option?.value}
-                      </button>
-                    ) : (
-                      <></>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-            <text className="text-white self-start pt-10 text-xl"> : </text>
-
-            <StyledDropDown
-              label={label[1]}
-              disabled
-              value={resp?.user_school}
-              onChange={(e) => {
-                changeResp("user_school", e.currentTarget.value);
-              }}
-            >
-              {options.map((option, index) => {
-                return <option key={index}>{option?.value}</option>;
-              })}
-            </StyledDropDown>
+                  value={option?.value}
+                  className="h-6 w-full text-white"
+                >
+                  {option?.value}
+                </button>
+              ) : (
+                <></>
+              );
+            })}
           </div>
-        
+        </div>
+      </div>
+      <text className="text-white self-start pt-10 text-xl"> : </text>
+
+      <StyledDropDown
+        label={label[1]}
+        disabled
+        value={resp?.user_school}
+        onChange={(e) => {
+          changeResp("user_school", e.currentTarget.value);
+        }}
+      >
+        {options.map((option, index) => {
+          return <option key={index}>{option?.value}</option>;
+        })}
+      </StyledDropDown>
+    </div>
   );
 };
