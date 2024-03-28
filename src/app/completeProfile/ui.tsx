@@ -377,7 +377,7 @@ const AccountDetails: React.FC<DetailsProps> = ({
       ) : type == 4 ? (
         <>
           <SearchSelect
-            options={defaultColleges}
+            options={colleges}
             resp={response}
             changeResp={changeResp}
             query={query}

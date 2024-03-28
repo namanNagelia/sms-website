@@ -82,7 +82,7 @@ interface teamProps {
 }
 
 export default function TeamUI(props: teamProps) {
-  console.log(props)
+  console.log(props);
   const coachData = props.coach.coachesDetails;
   const coach = coachData.find(
     (coach: any) => coach.player_coach_xref_team_id == props.id

@@ -40,7 +40,7 @@ const fetchOrgDetails = async (id: string) => {
         ? `http://localhost:3000/api/getTeamInfo?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/getTeamInfo/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 * 60 * 60 },
+      next: { revalidate: 1 },
     });
     const data = await res.json();
     return data;
@@ -67,8 +67,8 @@ const fetchTeamDetails = async (id: string) => {
 export default async function TeamPage({ params }: { params: { id: string } }) {
   const coach = await fetchCoach();
   const roster = await fetchRoster(params.id);
-  console.log(roster)
   const orgDetails = await fetchOrgDetails(params.id);
+  console.log(orgDetails);
   const teamDetails = await fetchTeamDetails(params.id);
   return (
     <TeamUI

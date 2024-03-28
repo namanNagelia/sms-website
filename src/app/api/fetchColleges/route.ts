@@ -22,11 +22,11 @@ export async function GET(req: NextRequest, res: NextResponse) {
   // Extract the records array and only include specified fields for each school
   const schools = data.records.map(({ fields }: { fields: SchoolFields }) => ({
     name: fields.name,
-    address: fields.address,
-    city: fields.city,
-    state: fields.state,
-    zip: fields.zip,
-    telephone: fields.telephone,
+    // address: fields.address,
+    // city: fields.city,
+    // state: fields.state,
+    // zip: fields.zip,
+    // telephone: fields.telephone,
   }));
 
   // Return the simplified records

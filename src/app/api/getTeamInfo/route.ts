@@ -9,7 +9,7 @@ export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
   //change to org
-  const school = await prisma.sms_organizations.findMany({
+  const school = await prisma.sms_org.findMany({
     where: {
       Org_id: Number(id),
     },
