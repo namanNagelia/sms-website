@@ -16,6 +16,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       user_position: data.user_position,
       user_jersey_no: data.user_jersey_no,
       user_gpa: data.user_gpa,
+      user_phone_number: data.user_phone_number,
     },
   });
   console.log(data);
@@ -24,8 +25,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
     status: 200,
     headers: {
       "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
     },
   });
 }
