@@ -56,7 +56,7 @@ const fetchShotLocations = async (id: string) => {
         ? `http://localhost:3000/api/shotTypes?id=${id}`
         : `https://sms-website-sigma.vercel.app/api/shotTypes/?id=${id}`;
     const res = await fetch(url, {
-      next: { revalidate: 1000 },
+      next: { revalidate: 1 },
     });
     const data = await res.json();
     return data;
@@ -90,6 +90,7 @@ export default async function PlayerPage({
   const seasonAverages = await fetchAverages(params.id);
   const shotChartData = await fetchShotChartData(params.id);
   const shotLocations = await fetchShotLocations(params.id);
+  console.log(shotChartData);
   const school = await fetchSchool(params.id);
   return (
     <PlayerPageUI

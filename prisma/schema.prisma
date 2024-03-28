@@ -913,6 +913,29 @@ model game_stats_table {
   @@index([team_user_id], map: "game_stats_table_team_user_id_index")
 }
 
+model sms_detail_stats {
+  detail_stats_id        Int      @id @default(autoincrement())
+  detail_stats_event_id  Int?
+  detail_stats_game_id   Int?
+  detail_stats_team_id   Int?
+  detail_stats_user_id   Int?
+  detail_stats_miss      Int?
+  detail_stats_make      Int?
+  detail_stats_freethrow Int?
+  detail_stats_2pt       Int?
+  detail_stats_3pt       Int?
+  detail_stats_xcord     Decimal? @db.Decimal(10, 2)
+  detail_stats_ycord     Decimal? @db.Decimal(10, 2)
+  detail_stats_dreb      Int?
+  detail_stats_oreb      Int?
+  detail_stats_foul      Int?
+  detail_stats_stl       Int?
+  detail_stats_to        Int?
+  detail_stats_blk       Int?
+  detail_stats_asst      Int?
+  detail_stats_video_url String?  @db.VarChar(255)
+}
+
 enum showcases_type {
   stats
   video
