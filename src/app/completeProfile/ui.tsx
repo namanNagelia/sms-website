@@ -112,10 +112,12 @@ const CompleteProfilePageUI = (props: Props) => {
     }));
     console.log(newValue);
   };
-
+  const [success, setSuccess] = useState(false);
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     await handleFinalizeAccount();
+    setSuccess(true);
+
     if (step == 0) {
       console.log(page);
       setStep(step + 1);
