@@ -8,6 +8,12 @@ const LoginUI = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+  const handleMakeProfile = (e : React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    window.location.href = "/createAccount"
+  }
+
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setError(""); // Reset error message
@@ -82,6 +88,10 @@ const LoginUI = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          <button className="text-brandGrey self-end flex flex-row space-x-2" onClick={e => handleMakeProfile(e)}>
+            <p>Don't have an account?</p> 
+            <p className="bold"> Register here! </p>
+          </button>
           <button
             type="submit"
             className="submit-button bg-darkBlue text-white font-dinBold font-xl rounded-full p-3 hover:opacity-65"
@@ -90,6 +100,7 @@ const LoginUI = () => {
           </button>
         </form>
       </div>
+      
     </div>
   );
 };
