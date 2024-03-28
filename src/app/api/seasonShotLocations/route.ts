@@ -12,23 +12,47 @@ interface ShotLog {
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const id = searchParams.get("id");
-  const playerGameLogs = await prisma.sms_player_stat_new.findMany({
+  // Directly return JSON without needing to stringify manually
+
+  const playerGameLogs = await prisma.sms_detail_stats.findMany({
     where: {
-      player_information_id: Number(id),
+      detail_stats_user_id: Number(id),
+    },
+    select: {
+      detail_stats_xcord: true,
+      detail_stats_ycord: true,
+      detail_stats_make: true,
     },
   });
-  let returnable: ShotLog[] = []; // Correct initialization of an array
-
+  let returnable: ShotLog[] = [];
   playerGameLogs.forEach((log: any) => {
-    if (log.game_stat_court_Position_Y > 0) {
+    if (log.detail_stats_ycord > 0) {
       let adder: ShotLog = {
-        x: log.game_stat_court_position_X,
-        y: log.game_stat_court_Position_Y,
-        shotType: log.game_stat_stat_count,
+        x: log.detail_stats_xcord,
+        y: log.detail_stats_ycord,
+        shotType: log.detail_stats_make === 1 ? "make" : "Miss",
       };
       returnable.push(adder);
     }
   });
-  // Directly return JSON without needing to stringify manually
+
   return NextResponse.json(returnable);
 }
+
+// const playerGameLogs = await prisma.sms_player_stat_new.findMany({
+//   where: {
+//     player_information_id: Number(id),
+//   },
+// });
+// let returnable: ShotLog[] = []; // Correct initialization of an array
+
+// playerGameLogs.forEach((log: any) => {
+//   if (log.game_stat_court_Position_Y > 0) {
+//     let adder: ShotLog = {
+//       x: log.game_stat_court_position_X,
+//       y: log.game_stat_court_Position_Y,
+//       shotType: log.game_stat_stat_count,
+//     };
+//     returnable.push(adder);
+//   }
+// });
