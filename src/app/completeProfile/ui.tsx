@@ -224,7 +224,11 @@ const AccountDetails: React.FC<DetailsProps> = ({
       firstName: "Dequan 2",
     },
   ];
-
+  const defaultColleges = [
+    { name: "College 1", value: "College 1"}, 
+    { name: "College 2", value: "College 2"}, 
+    { name: "College 3", value: "College 3"} 
+  ];
   const [query, setQuery] = useState("");
 
   // This is going to give me a brain hemorrage to code
@@ -358,7 +362,64 @@ const AccountDetails: React.FC<DetailsProps> = ({
             setQuery={setQuery}
             label={["Searching for Team...", "Selected Team:"]}
           />
+          <StyledInput
+            label="Phone Number"
+            type="tel"
+            value={response?.user_phone_number}
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={(e) => {
+              changeResp("user_phone_number", e.target.value);
+            }}
+          />
         </>
+      ) : type == 4 ? (
+        <>
+          <SearchSelect
+            options={defaultColleges}
+            resp={response}
+            changeResp={changeResp}
+            query={query}
+            setQuery={setQuery}
+            label={["Searching for College...", "Selected College:"]}
+          />
+          <StyledInput
+            label="Phone Number"
+            type="tel"
+            value={response?.user_phone_number}
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={(e) => {
+              changeResp("user_phone_number", e.target.value);
+            }}
+          />
+        </>
+      ) : type == 5 ? (
+        <>
+          <StyledInput
+            label="Phone Number"
+            type="tel"
+            value={response?.user_phone_number}
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={(e) => {
+              changeResp("user_phone_number", e.target.value);
+            }}
+          />
+        </>
+      ) : type == 6 ? (
+          <>
+            <StyledInput
+            label="Phone Number"
+            type="tel"
+            value={response?.user_phone_number}
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            placeholder="000-000-0000"
+            onChange={(e) => {
+              changeResp("user_phone_number", e.target.value);
+            }}
+          />
+          </>
       ) : (
         <></>
       )}
@@ -411,6 +472,7 @@ const SearchSelect: React.FC<SelectSearchProps> = ({
                   }}
                   value={option?.value}
                   className="h-6 w-full text-white"
+                  key={index}
                 >
                   {option?.value}
                 </button>
@@ -421,7 +483,7 @@ const SearchSelect: React.FC<SelectSearchProps> = ({
           </div>
         </div>
       </div>
-      <text className="text-white self-start pt-10 text-xl"> : </text>
+      <p className="text-white self-start pt-10 text-xl"> : </p>
 
       <StyledDropDown
         label={label[1]}
