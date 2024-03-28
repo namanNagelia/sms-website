@@ -8,7 +8,7 @@ const prisma = new PrismaClient();
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const game_id = searchParams.get("id");
-  const gameDetails = await prisma.sms_game_stats.findMany({
+  const game = await prisma.sms_game_stats.findMany({
     where: {
       game_stats_game_id: Number(game_id),
     },
@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     },
   });
 
-  return NextResponse.json({ gameDetails });
+  return NextResponse.json({ game });
 }
 
 // const playerDetails = await prisma.sms_user.findMany({

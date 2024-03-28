@@ -104,10 +104,8 @@ export default function PlayerPageUI(props: PlayerPageProps) {
   const seasonAverages = props.seasonAverages.seasonAverages;
   const shotChartData = props.shotChartData;
   const shotTypes = props.shotTypesData.shotTypes;
-  // console.log(seasonAverages);
   const ratingsData = PlayerRatingsCalculator(seasonAverages, shotTypes);
   const performance = calculateOverallPerformanceRating(seasonAverages);
-  console.log(performance);
   const name = `${playerProfileData.user_first_name} ${playerProfileData.user_last_name}`;
 
   return (
@@ -190,7 +188,6 @@ const PlayerNameBanner: React.FC<PlayerNameBannerProps> = ({
   ) {
     ImageURL = defaultImage;
   }
-  console.log("IMage", ImageURL);
   return (
     <div className="flex player-header sticky top-0 flex-row bg-primary items-end space-x-4 player-card z-50 mt-6">
       <Image
@@ -251,7 +248,6 @@ interface BioProps {
 }
 
 const BiometricCard: React.FC<BioProps> = (props) => {
-  console.log(props.height);
   if (props.height != undefined) {
     const newHeight = props.height.split(".");
     var heightF = parseInt(newHeight[0]);
@@ -261,7 +257,6 @@ const BiometricCard: React.FC<BioProps> = (props) => {
     heightF = isNaN(heightF) ? 0 : heightF;
     heightI = isNaN(heightI) ? 0 : heightI;
 
-    console.log(heightI);
     props = {
       ...props,
       height: `${heightF}'${heightI}`,

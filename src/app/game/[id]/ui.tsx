@@ -38,7 +38,7 @@ interface GamePageProps {
     returnable: any;
   };
   teamStats: {
-    gameDetails: any;
+    game: any;
   };
 }
 
